@@ -1,0 +1,20 @@
+[
+    {
+        "text":"Home",
+        "href":"/",
+        "items":[
+            {
+                "text":"Page 1",
+                "href":"/page1"
+            },
+            {
+                "text":"Page 2",
+                "href":"/page2"
+            }
+        ]
+    },
+    {
+        "text":"About",
+        "href":"/about"
+    }
+]

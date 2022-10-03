@@ -1,0 +1,20 @@
+---
+import menu from "../config/menu.json"
+import { root_page } from "../components/utils";
+const page = root_page(Astro.url)
+let subpage_index = menu.map(item=>item.href).indexOf(page)
+if(subpage_index == -1){
+    subpage_index = 0
+}
+const visible = menu[subpage_index].items
+const submenu = visible?menu[subpage_index].items:[]
+---
+{visible &&
+    <ul>
+        {submenu.map((item)=>(
+            <li>
+                <a href={item.href}>{item.text}</a>
+            </li>
+        ))}
+    </ul>
+}

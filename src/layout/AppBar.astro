@@ -1,0 +1,11 @@
+---
+import menu from "../config/menu.json"
+---
+<ul>
+    {menu.map((item)=>(
+        <li>
+            <a href={item.href}>{item.text}</a>
+        </li>
+    ))}
+</ul>
+

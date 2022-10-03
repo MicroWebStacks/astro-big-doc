@@ -6,4 +6,7 @@ console.log("Hello from Server")
 <Layout title={title}>
 	<h1>Astro Nav Menus demo</h1>
 	<p>Home index</p>
+	{new Array(90).fill(0).map((id,index)=>(
+		<div>{index}</div>
+	))}
 </Layout>

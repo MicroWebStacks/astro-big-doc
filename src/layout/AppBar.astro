@@ -7,18 +7,25 @@ menu.forEach((item,index)=>{
     item.active_class = (index == active_page_index)?"active":""
 })
 ---
-<ul>
-    {menu.map((item)=>(
-        <li>
-            <a href={item.href} class={item.active_class}>{item.text}</a>
-        </li>
-    ))}
-</ul>
+<header>
+    <div class="topnav">
+        {menu.map((item)=>(
+                <a href={item.href} class={item.active_class}>{item.text}</a>
+        ))}
+    </div>
+</header>
 
 <style>
-    ul{
-        color: white;
+    .topnav{
+        overflow: hidden;
         background-color: #333;
+    }
+    a{
+        float:left;
+        font-size: 17px;
+        padding: 14px 16px;
+        text-align:center;
+        color: white;
     }
     a:hover{
         color:black;

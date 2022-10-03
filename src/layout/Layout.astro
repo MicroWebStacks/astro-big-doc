@@ -15,12 +15,20 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-        <header>
-            <AppBar/>
-        </header>
-        <nav>
-            <NavTree/>
-        </nav>
-		<slot/>
+        <AppBar/>
+        <NavTree/>
+		<div>
+			<slot/>
+		</div>
 	</body>
 </html>
+
+<style>
+body{
+	margin:0;
+	font-family: Arial, Helvetica, sans-serif;
+	}
+div{
+	margin-left:160px;
+}
+</style>

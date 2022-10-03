@@ -1,6 +1,7 @@
 ---
 import menu from "../config/menu.json"
 import { active_page,active_subpage } from "../components/utils";
+import Arrows from '../icons/arrows.astro';
 
 const active_page_index = active_page(Astro.url,menu)
 const visible = ("items" in menu[active_page_index])
@@ -12,7 +13,7 @@ submenu.forEach((item,index)=>{
 //console.log(`submenu : (${visible}) active_subpage_index (${active_subpage_index})`)
 ---
 {visible &&
-    <nav>
+    <nav data-width="15vw">
         {submenu.map((item)=>(
                 <a href={item.href} class={item.active_class}>{item.text}</a>
         ))}
@@ -24,11 +25,15 @@ nav{
     display:flex;
     flex-direction: column;
     overflow:auto;
+    transition: width 0.5s;
+    width:15vw;
 }
 a{
     text-decoration: none;
+    user-select: none;
     padding:10px;
     color:white;
+    min-width: 130px;
 }
 a:hover{
     color:black;

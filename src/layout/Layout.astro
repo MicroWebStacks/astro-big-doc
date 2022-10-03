@@ -17,7 +17,7 @@ const { title } = Astro.props;
 	<body>
         <AppBar/>
         <NavTree/>
-		<div>
+		<div class="main">
 			<slot/>
 		</div>
 	</body>
@@ -28,7 +28,9 @@ body{
 	margin:0;
 	font-family: Arial, Helvetica, sans-serif;
 	}
-div{
-	margin-left:160px;
+.main{
+	position:fixed;
+	margin-top:100px;
+	margin-left:200px;
 }
 </style>

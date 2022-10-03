@@ -12,7 +12,7 @@ submenu.forEach((item,index)=>{
 //console.log(`submenu : (${visible}) active_subpage_index (${active_subpage_index})`)
 ---
 {visible &&
-    <nav>
+    <nav class="leftnav">
         <ul>
             {submenu.map((item)=>(
                 <li>
@@ -23,17 +23,18 @@ submenu.forEach((item,index)=>{
     </nav>
 }
 <style>
-nav{
+.leftnav{
+    position:fixed;
+    top:50px;
     float:left;
     color: white;
     padding:10px;
-    min-width: 15%;
-    height:94vh;
-    position:fixed;
+    min-width: 10%;
+    height:100vh;
     overflow:auto;
     background: #555;
 }
-nav ul{
+.leftnav ul{
     list-style-type: none;
     padding: 0;
 }

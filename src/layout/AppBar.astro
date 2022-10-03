@@ -8,27 +8,26 @@ menu.forEach((item,index)=>{
 })
 ---
 <header>
-    <div class="topnav">
-        {menu.map((item)=>(
-                <a href={item.href} class={item.active_class}>{item.text}</a>
-        ))}
-    </div>
+    {menu.map((item)=>(
+            <a href={item.href} class={item.active_class}>{item.text}</a>
+    ))}
 </header>
 
 <style>
-.topnav{
-    position: fixed;
-    overflow: hidden;
-    background-color: #333;
+header{
+	background-color: rgb(144, 146, 30);
     width:100%;
-    height:50px;
+    height: 5vh;
 }
+
 a{
     float:left;
     font-size: 17px;
     padding: 14px 16px;
     text-align:center;
     color: white;
+	text-decoration: none;
+
 }
 a:hover{
     color:black;

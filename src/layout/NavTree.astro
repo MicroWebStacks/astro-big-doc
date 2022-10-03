@@ -12,31 +12,23 @@ submenu.forEach((item,index)=>{
 //console.log(`submenu : (${visible}) active_subpage_index (${active_subpage_index})`)
 ---
 {visible &&
-    <nav class="leftnav">
-        <ul>
-            {submenu.map((item)=>(
-                <li>
-                    <a href={item.href} class={item.active_class}>{item.text}</a>
-                </li>
-            ))}
-        </ul>
+    <nav>
+        {submenu.map((item)=>(
+                <a href={item.href} class={item.active_class}>{item.text}</a>
+        ))}
     </nav>
 }
 <style>
-.leftnav{
-    position:fixed;
-    top:50px;
-    float:left;
-    color: white;
-    padding:10px;
-    min-width: 10%;
-    height:100vh;
-    overflow:auto;
+nav{
     background: #555;
+    display:flex;
+    flex-direction: column;
+    overflow:auto;
 }
-.leftnav ul{
-    list-style-type: none;
-    padding: 0;
+a{
+    text-decoration: none;
+    padding:10px;
+    color:white;
 }
 a:hover{
     color:black;
@@ -46,4 +38,5 @@ a.active{
     color:white;
     background-color: #06ad70;
 }
+
 </style>

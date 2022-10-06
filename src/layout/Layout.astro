@@ -1,7 +1,6 @@
 ---
 import AppBar from './AppBar.astro';
 import NavTree from './NavTree.astro';
-import Hamburger from '../icons/hamburger.astro';
 import Arrows from '../icons/arrows.astro';
 
 export interface Props {
@@ -18,14 +17,12 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body >
-		<div class="fixed-nav">
-			<div style="width:10px; height:12px"/>
-			<Arrows/>
-		</div>
+		<div class="fixed-nav"/>
 		<div class="appbar-nav_content-footer">
 			<AppBar/>
 			<div class="nav-content">
 				<NavTree/>
+				<div class="nav-resize"/>
 	 			<div class="content">
 					<slot/>
 				</div>
@@ -53,9 +50,11 @@ body{
 	justify-content: start;
 	align-items: center;
 	overflow: hidden;
+	cursor:pointer;
 }
-.hamburger{
-	cursor: pointer;
+.fixed-nav:hover{
+	background-color: rgb(162, 162, 162);
+	transition: background-color 0.3s;
 }
 .appbar-nav_content-footer{
 	display:flex;
@@ -67,6 +66,15 @@ body{
 	flex-direction: row;
 	flex-grow:1;
 	max-height:92vh;
+}
+.nav-resize{
+	width:0.5rem;
+	cursor:col-resize;
+	background-color: rgb(142, 142, 142);
+}
+.nav-resize:hover{
+	background-color: aqua;
+	transition: background-color 0.5s;
 }
 .content{
 	background-color: aquamarine;
@@ -85,15 +93,74 @@ footer p{
 </style>
 
 <script is:inline>
-	const fixed_nav = document.getElementsByClassName("hamburger")[0]
+	const fixed_nav = document.getElementsByClassName("fixed-nav")[0]
 	fixed_nav?.addEventListener("click",(e)=>{
 		const nav = document.getElementsByTagName("nav")[0]
-		if((nav.style.width == "30vw")||(nav.style.width == "15vw")||(nav.style.width == "")){
+		const current_state = nav.getAttribute("data-state")
+		if(current_state == "open"){
+			nav.setAttribute("data-state","closed")
 			nav.style.width = "0vw"
-		}else{
+		}else if(current_state == "closed"){
+			nav.setAttribute("data-state","open")
 			nav.style.width = nav.getAttribute("data-width")
 		}
-		console.log(nav.style.width)
 		e.preventDefault()
 	})
+
+	
+	var global_resize_state = false
+	var x_down
+	var start_width
+	var resize_nav = document.getElementsByClassName("nav-resize")[0]
+
+	function finish_mouse(){
+		const nav = document.getElementsByTagName("nav")[0]
+		global_resize_state = false
+		nav.style.transition = "width 0.5s"
+		if(nav.clientWidth < 20){
+			nav.setAttribute("data-state","closed")
+			nav.setAttribute("data-width","15vw")
+		}else{
+			nav.setAttribute("data-state","open")
+		}
+		resize_nav.style.backgroundColor = "rgb(142, 142, 142)"
+	}
+
+	resize_nav?.addEventListener("mouseenter",(e)=>{
+		resize_nav.style.backgroundColor = "aqua"
+	})
+	resize_nav?.addEventListener("mouseleave",(e)=>{
+		resize_nav.style.backgroundColor = "rgb(142, 142, 142)"
+	})
+	resize_nav?.addEventListener("mousedown",(e)=>{
+		const nav = document.getElementsByTagName("nav")[0]
+		global_resize_state = true
+		x_down = e.x
+		start_width = nav.clientWidth
+		nav.style.transition = "none"
+	})
+	resize_nav?.addEventListener("mouseup",(e)=>{
+		finish_mouse()
+	})
+	document.addEventListener("mouseup",(e)=>{
+		if(global_resize_state == true){
+			finish_mouse()
+		}
+	})
+	document.addEventListener("mousemove",(e)=>{
+		if(global_resize_state == true){
+			const nav = document.getElementsByTagName("nav")[0]
+			const new_width = start_width + (e.x-x_down)
+			if(new_width < document.documentElement.clientWidth/2){
+				nav.style.width = new_width+"px"
+				nav.setAttribute("data-width",new_width+"px")
+				resize_nav.style.backgroundColor = "aqua"
+			}else{
+				resize_nav.style.backgroundColor = "red"
+			}
+			e.preventDefault()
+		}
+	})
+
+
 </script>

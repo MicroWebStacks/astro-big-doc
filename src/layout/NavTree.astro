@@ -13,7 +13,7 @@ submenu.forEach((item,index)=>{
 //console.log(`submenu : (${visible}) active_subpage_index (${active_subpage_index})`)
 ---
 {visible &&
-    <nav data-width="15vw">
+    <nav data-width="15vw" data-state="open">
         {submenu.map((item)=>(
                 <a href={item.href} class={item.active_class}>{item.text}</a>
         ))}

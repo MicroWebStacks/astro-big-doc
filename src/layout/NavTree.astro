@@ -6,7 +6,7 @@ const side_menu = process_menu_tree(Astro.url,raw_menu)
 ---
 {side_menu.visible &&
     <nav data-width="15vw" data-state="open">
-        <SubMenu items={side_menu.items} root={true}/>
+        <SubMenu items={side_menu.items} />
     </nav>
 }
 <style>

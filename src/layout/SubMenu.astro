@@ -4,7 +4,7 @@ export interface Props {
 	items: Array<Object>;
         root:boolean;
 }
-const { items,root } = Astro.props;
+const { items,root=true } = Astro.props;
 
 ---
 {items &&

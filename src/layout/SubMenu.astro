@@ -2,27 +2,62 @@
 import SubMenu from "./SubMenu.astro";
 export interface Props {
 	items: Array<Object>;
+        root:boolean;
 }
-const { items } = Astro.props;
+const { items,root } = Astro.props;
 
 ---
 {items &&
-    <ul>
+    <ul class={root?"":"nested"}>
         {items.map((item)=>(
             <li >
-                <a href={item.href} class={item.active_class}>{item.text}</a>
-                <SubMenu items={item.items}/>
+                <a href={item.href} class={item.active?"active":""}>
+                    <span class:list={[{ parent: item.parent, expanded: item.expanded }]} ></span>
+                    {item.text}
+                </a>
+                <SubMenu items={item.items} root={false}/>
             </li>
         ))}
     </ul>
 }
 <style>
+    span.parent{
+        cursor:pointer;
+    }
+    span.parent.expanded:before{
+        float:left;
+        content: '';
+        border: 8px solid transparent;
+        border-top: 8px solid white;
+        margin-top: 3px;
+        margin-right:10px;
+    }
+    span.parent:before{
+        float:left;
+        content: '';
+        border: 8px solid transparent;
+        border-left: 8px solid white;
+        margin-top: 3px;
+        margin-right:10px;
+    }
     ul{
         display:flex;
         flex-direction: column;
         list-style: none;
-        padding-left: 10px;
         margin:0px;
+        padding-left: 0px;
+    }
+    ul.nested{
+        padding-left: 3px;
+        border-top:   0px;
+        border-left:  2px solid rgb(122, 122, 122);
+        border-right: 0px;
+        border-bottom:0px;
+        margin-left: 4px;
+
+    }
+    ul.hidden{
+        display:none;
     }
     li{
         min-width: 130px;
@@ -43,3 +78,14 @@ const { items } = Astro.props;
         display:block;
     }
 </style>
+
+
+<script>
+let toggler = document.getElementsByClassName("parent");
+for (let i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function(e) {
+      this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
+      this.classList.toggle("expanded");
+      e.preventDefault()
+  });
+}</script>

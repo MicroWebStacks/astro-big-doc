@@ -59,7 +59,7 @@ function process_menu_list(url,raw_menu){
 
     const active_subpage_index = active_subpage(url,side_menu.items)
     side_menu.items.forEach((item,index)=>{
-        item.active_class = (index == active_subpage_index)?"active":""
+        item.classes = (index == active_subpage_index)?"active":""
         item.paddingLeft = item.level?item.level*10+10:10
     })
     
@@ -67,11 +67,13 @@ function process_menu_list(url,raw_menu){
     return side_menu
 }
 
-function set_active_class(url,items){
+function set_classes(url,items){
     items.forEach((item)=>{
-        item.active_class = (url_path(url) == item.href)?"active":""
+        item.active = (url_path(url) == item.href)
         if("items" in item){
-            set_active_class(url,item.items)
+            item.parent = true
+            item.expanded = true
+            set_classes(url,item.items)
         }
     })
 }
@@ -86,7 +88,7 @@ function process_menu_tree(url,raw_menu){
     }
     side_menu.items = raw_menu[active_section_index].items
 
-    set_active_class(url,side_menu.items)
+    set_classes(url,side_menu.items)
 
     return side_menu
 }

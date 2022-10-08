@@ -1,5 +1,5 @@
 name: Deploy
-on: [push] # toggle activation '[]' or '[push]'
+on: [] # toggle activation '[]' or '[push]'
 
 jobs:
   deploy:

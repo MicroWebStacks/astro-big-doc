@@ -1,9 +1,9 @@
 ---
 import AppBar from './AppBar.astro';
 import NavTree from './NavTree.astro';
-import Arrows from '../icons/arrows.astro';
+import NavList from './NavList.astro';
 import menu from "../config/menu.json"
-import { active_page,active_subpage } from "../components/utils";
+import { active_page } from "../components/utils";
 
 export interface Props {
 	title: string;
@@ -23,13 +23,13 @@ const menu_visible = ("items" in menu[active_page_index])
 	<body >
 		<div class={`fixed-nav ${menu_visible?"active":""}`}/>
 		<div class="appbar-nav_content-footer">
-			<AppBar/>
+			<AppBar/><!-- contain header -->
 			<div class="nav-content">
-				<NavTree/>
+				<NavTree/><!-- optional contains nav -->
 				<div class={`nav-resize ${menu_visible?"active":""}`}/>
-	 			<div class="content">
+	 			<main class="content">
 					<slot/>
-				</div>
+				</main>
 			</div>
 			<footer>
 				<p>footer</p>

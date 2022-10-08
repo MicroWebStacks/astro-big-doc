@@ -10,6 +10,43 @@
             {
                 "text":"Page 2",
                 "href":"/page2"
+            },
+            {
+                "text":"Domain 1",
+                "items":[
+                    {
+                        "text":"Sub Page 1",
+                        "href":"/domain1/subpage1"
+                    },
+                    {
+                        "text":"Sub Page 2",
+                        "href":"/domain1/subpage2"
+                    }
+                ]
+            },
+            {
+                "text":"Page 3",
+                "href":"/page3"
+            },
+            {
+                "text":"Domain 2 index",
+                "href":"/domain2/",
+                "items":[
+                    {
+                        "text":"Sub Page 4",
+                        "href":"/domain2/subpage4"
+                    },
+                    {
+                        "text":"Sub Domain 2 index",
+                        "href":"/domain2/subdomain2/",
+                        "items":[
+                            {
+                                "text":"s page5",
+                                "href":"/domain2/subdomain2/spage5"
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },

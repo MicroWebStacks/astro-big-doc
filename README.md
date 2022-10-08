@@ -20,3 +20,7 @@ pnpm astro add tailwind
 ```
  - add deno and server config to `astro.config.mjs`
  - prepare `.github/workflows/deploy.yml`
+
+# Todos
+- store nav menu width / prevent reset on same page reload
+- open close on nav-resize click

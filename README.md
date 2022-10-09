@@ -1,4 +1,7 @@
 # astro_nav_menus
+
+Live demo : https://astro-nav-menus.deno.dev/
+
 Astro Theme that can scale for big documentation websites. Includes a top appbar for sections navigation, left tree menu for section pages and right tree menu for a page table of content.
 
 Performance oriented, built with native astro components, no dependencies to any extenal framework, no virtual dom. Fully static with no client side rendering. Javascript is for minial manipulations connecting events and classes.
@@ -22,7 +25,6 @@ pnpm create astro@latest
 ```
 pnpm install
 pnpm astro add deno
-pnpm astro add tailwind
 ```
  - add deno and server config to `astro.config.mjs`
  - prepare `.github/workflows/deploy.yml`

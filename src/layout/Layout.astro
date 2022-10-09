@@ -82,7 +82,7 @@ body{
 		cursor:col-resize;
 	}
 	.active.nav-resize:hover{
-		background-color: aqua;
+		background-color: #007ACC;
 		transition: background-color 0.5s;
 	}
 .content{
@@ -94,7 +94,8 @@ body{
 }
 footer{
 	flex-grow:0;
-	background-color: rgb(175, 210, 165);
+	background-color: #007ACC;
+	color:white;
 	text-align: center;
 	overflow: hidden;
 }
@@ -131,7 +132,7 @@ footer p{
 			nav.style.transition = "width 0.5s"
 		if(nav.clientWidth < 20){
 			nav.setAttribute("data-state","closed")
-			nav.setAttribute("data-width","15vw")
+			nav.setAttribute("data-width","20vw")
 		}else{
 			nav.setAttribute("data-state","open")
 		}
@@ -139,7 +140,7 @@ footer p{
 		}
 		
 		resize_nav?.addEventListener("mouseenter",(e)=>{
-			resize_nav.style.backgroundColor = "aqua"
+			resize_nav.style.backgroundColor = "#007ACC"
 		})
 		resize_nav?.addEventListener("mouseleave",(e)=>{
 			resize_nav.style.backgroundColor = "rgb(142, 142, 142)"
@@ -166,7 +167,7 @@ footer p{
 				if(new_width < document.documentElement.clientWidth/2){
 					nav.style.width = new_width+"px"
 					nav.setAttribute("data-width",new_width+"px")
-					resize_nav.style.backgroundColor = "aqua"
+					resize_nav.style.backgroundColor = "#007ACC"
 				}else{
 					resize_nav.style.backgroundColor = "red"
 				}

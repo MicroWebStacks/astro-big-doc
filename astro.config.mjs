@@ -1,10 +1,7 @@
 import { defineConfig } from 'astro/config';
 import deno from "@astrojs/deno";
-import tailwind from "@astrojs/tailwind";
 
-// https://astro.build/config
-export default defineConfig({
-  //integrations: [tailwind()],
+let serverConfig = defineConfig({
   output: "server",
   server: { port: 3000, host: true},
   adapter: deno({
@@ -15,3 +12,19 @@ export default defineConfig({
   base: '',
   trailingSlash: 'ignore'
 });
+
+let staticConfig = defineConfig({
+  output: "static",
+  site: 'http://localhost',
+  base: '',
+  trailingSlash: 'ignore'
+});
+
+//select 'static'/'server' by uncommenting the corresponding default export
+//export default staticConfig
+export default serverConfig
+
+export {
+  serverConfig,
+  staticConfig
+}

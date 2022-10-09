@@ -76,7 +76,7 @@ body{
 }
 	.nav-resize{
 		width:0.5rem;
-		background-color: rgb(142, 142, 142);
+		background-color: #1E1E1E;
 	}
 	.active.nav-resize{
 		cursor:col-resize;
@@ -87,11 +87,24 @@ body{
 	}
 .content{
 	color:#CCCCCC;
-	background-color: #282728;
+	background-color: #1E1E1E;
 	width:100%;
 	overflow:auto;
 	padding:10px;
 }
+.content::-webkit-scrollbar {
+  width: 1rem;
+}
+.content::-webkit-scrollbar-track {
+  background: #252526; 
+}
+.content::-webkit-scrollbar-thumb {
+  background: #464647; 
+}
+.content::-webkit-scrollbar-thumb:hover {
+  background: #515151; 
+}
+
 footer{
 	flex-grow:0;
 	background-color: #007ACC;
@@ -136,14 +149,14 @@ footer p{
 		}else{
 			nav.setAttribute("data-state","open")
 		}
-		resize_nav.style.backgroundColor = "rgb(142, 142, 142)"
+		resize_nav.style.backgroundColor = "#1E1E1E"
 		}
 		
 		resize_nav?.addEventListener("mouseenter",(e)=>{
 			resize_nav.style.backgroundColor = "#007ACC"
 		})
 		resize_nav?.addEventListener("mouseleave",(e)=>{
-			resize_nav.style.backgroundColor = "rgb(142, 142, 142)"
+			resize_nav.style.backgroundColor = "#1E1E1E"
 		})
 		resize_nav?.addEventListener("mousedown",(e)=>{
 			const nav = document.getElementsByTagName("nav")[0]
@@ -164,7 +177,13 @@ footer p{
 			if(global_resize_state == true){
 				const nav = document.getElementsByTagName("nav")[0]
 				const new_width = start_width + (e.x-x_down)
-				if(new_width < document.documentElement.clientWidth/2){
+				if(new_width <= 60){//snap effect
+					nav.style.width = "0px"
+					nav.setAttribute("data-width","0px")
+					resize_nav.style.backgroundColor = "#007ACC"
+				}else if(new_width < 160){
+					//do nothing here
+				}else if(new_width < document.documentElement.clientWidth/2){
 					nav.style.width = new_width+"px"
 					nav.setAttribute("data-width",new_width+"px")
 					resize_nav.style.backgroundColor = "#007ACC"

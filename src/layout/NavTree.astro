@@ -12,10 +12,26 @@ const side_menu = process_menu_tree(Astro.url,raw_menu)
 <style>
 nav{
     background: #252526;
-    overflow:auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     transition: width 0.5s;
     width:20vw;
     flex-shrink: 0;
+    scrollbar-color: rebeccapurple  green;
 }
+nav::-webkit-scrollbar {
+  width: 1rem;
+}
+nav::-webkit-scrollbar-track {
+  background: #252526; 
+}
+nav::-webkit-scrollbar-thumb {
+  background: #464647; 
+}
+nav::-webkit-scrollbar-thumb:hover {
+  background: #515151; 
+}
+
+
 </style>
 

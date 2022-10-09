@@ -41,7 +41,7 @@ const { items,root=true } = Astro.props;
         rotate: 90deg;
     }
     span:hover.parent > svg > path{
-        stroke:rgb(38, 100, 56);
+        stroke:white;
     }
     ul{
         display:flex;
@@ -76,18 +76,17 @@ const { items,root=true } = Astro.props;
         padding-left:4px;
         text-decoration: none;
         user-select: none;    
-        color:white;
+        color:#CCCCCC;
         display:block;
     }
     a.active{
-        background-color: #06ad70;
+        background-color: #37373D;
     }
     a:hover{
-        color:black;
-        background-color: #ddd;
+        background-color: #2A2D2E;
     }
     a:hover > span > svg > path{
-        stroke:rgb(30, 30, 30);
+        stroke:#CCCCCC;
     }
     
 </style>

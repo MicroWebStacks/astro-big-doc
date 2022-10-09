@@ -28,22 +28,24 @@ pnpm astro add tailwind
  - prepare `.github/workflows/deploy.yml`
 
 ## Todos
-- store nav menu width / prevent reset on same page reload
-- open close on nav-resize click
+- auto adjust collapsed Tree menu items to fit page height (all level or nothins)
 - Arrow icon on fixed-nav when menu can be opened/collapsed
+- open close on nav-resize click
+- store nav menu width / prevent reset on same page reload
 - evaluate css resize if it can resolve resize mouse events usage
 
 ## issues
 adding interactive SVGs that can be styled with css is challenging
 - `svg.astro` uses the innerHTML fragment which breaks visibility of `style` tag no longer scoping imported SVG
  - import of `rightarrow.astro` still requires style to be either global or inline
- - ul transition :
+ - Tree menu collapse transition :
     - display block/none does not animate the height
     - scaleY does not bring the height down to 0 due to remaining padding margin
     - height can be animated but must be set initially
     - max-height can be animated but must be set to max value which breaks the transition timing
     - max-height adjusting with js requires high complexity depending on state of expanded children hierarchy
     - clip also needs defined start stop
+    - flex can also animate but then the flex container height must be set explicitely
 # survey
 Analysis of existing Themes for Astro, focus is on documentation
 ## astro docs

@@ -1,5 +1,6 @@
 ---
 import SubMenu from "./SubMenu.astro";
+import Rightarrow from "../svg/rightarrow.astro";
 export interface Props {
 	items: Array<Object>;
         root:boolean;
@@ -12,8 +13,14 @@ const { items,root=true } = Astro.props;
         {items.map((item)=>(
             <li >
                 <a href={item.href} class={item.active?"active":""}>
-                    <span class:list={[{ parent: item.parent, expanded: item.expanded }]} ></span>
-                    {item.text}
+                    {item.parent?
+                        <span class:list={[{ parent: true, expanded: item.expanded }]} >
+                            <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                    :<></>}
+                    <span>{item.text}</span>
                 </a>
                 <SubMenu items={item.items} root={false}/>
             </li>
@@ -24,28 +31,24 @@ const { items,root=true } = Astro.props;
     span.parent{
         cursor:pointer;
     }
-    span.parent.expanded:before{
-        float:left;
-        content: '';
-        border: 8px solid transparent;
-        border-top: 8px solid white;
-        margin-top: 3px;
-        margin-right:10px;
+    span.parent > svg{
+        width:16px;
+        height:16px;
+        rotate: 0deg;
+        transition: rotate .4s ease-in-out;
     }
-    span.parent:before{
-        float:left;
-        content: '';
-        border: 8px solid transparent;
-        border-left: 8px solid white;
-        margin-top: 3px;
-        margin-right:10px;
+    span.parent.expanded > svg{
+        rotate: 90deg;
+    }
+    span:hover.parent > svg > path{
+        stroke:rgb(38, 100, 56);
     }
     ul{
         display:flex;
         flex-direction: column;
         list-style: none;
         margin:0px;
-        padding-left: 0px;
+        padding: 0px;
     }
     ul.nested{
         padding-left: 3px;
@@ -54,10 +57,13 @@ const { items,root=true } = Astro.props;
         border-right: 0px;
         border-bottom:0px;
         margin-left: 4px;
-
+        overflow: hidden;
+        max-height: 200vh;
+        transition: max-height 1s;
     }
-    ul.hidden{
-        display:none;
+    ul.nested.hidden{
+        max-height: 0px;
+        transition: max-height 0.3s;
     }
     li{
         min-width: 130px;
@@ -65,6 +71,9 @@ const { items,root=true } = Astro.props;
     a:hover{
         color:black;
         background-color: #ddd;
+    }
+    a:hover > span > svg > path{
+        stroke:rgb(30, 30, 30);
     }
     a.active{
         background-color: #06ad70;

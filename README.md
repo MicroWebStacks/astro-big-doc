@@ -11,7 +11,8 @@ Performance oriented, built with native astro components, no dependencies to any
 - Menus can be opened, closed and resized by the user
 - Menus are built by astro and seen as read html by the client
 
-# creation
+# Dev
+## Creation
 ```
 pnpm create astro@latest
 ```
@@ -26,12 +27,22 @@ pnpm astro add tailwind
  - add deno and server config to `astro.config.mjs`
  - prepare `.github/workflows/deploy.yml`
 
-# Todos
+## Todos
 - store nav menu width / prevent reset on same page reload
 - open close on nav-resize click
 - Arrow icon on fixed-nav when menu can be opened/collapsed
 - evaluate css resize if it can resolve resize mouse events usage
 
+## issues
+adding interactive SVGs that can be styled with css is challenging
+- `svg.astro` uses the innerHTML fragment which breaks visibility of `style` tag no longer scoping imported SVG
+ - import of `rightarrow.astro` still requires style to be either global or inline
+ - ul transition :
+    - display block/none does not animate the height
+    - scaleY does not bring the height down to 0 due to remaining padding margin
+    - height can be animated but must be set initially
+    - max-height can be animated but must be set to max value which breaks the transition timing
+    - clip also needs defined start stop
 # survey
 Analysis of existing Themes for Astro, focus is on documentation
 ## astro docs
@@ -54,8 +65,8 @@ Limitations :
 
 https://github.com/hellotham/hello-astro
 
-built upon astro-docs but adds advantages :
+built upon astro-docs with differences :
  
- - right side ToC is not DOM client side like astro-docs but built with native astro component taking the `headings` Markdown Layout Prop https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props
+ - advantage : right side ToC is not DOM client side like astro-docs but built with native astro component taking the `headings` Markdown Layout Prop https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props
 
-
+ - limitation: all svg integrations are either hardcoded or wrapped in images through svgimg

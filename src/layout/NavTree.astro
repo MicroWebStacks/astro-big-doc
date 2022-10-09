@@ -5,7 +5,7 @@ import SubMenu from "./SubMenu.astro";
 const side_menu = process_menu_tree(Astro.url,raw_menu)
 ---
 {side_menu.visible &&
-    <nav data-width="15vw" data-state="open">
+    <nav data-width="20vw" data-state="open">
         <SubMenu items={side_menu.items} />
     </nav>
 }
@@ -14,6 +14,6 @@ nav{
     background: #555;
     overflow:auto;
     transition: width 0.5s;
-    width:15vw;
+    width:20vw;
 }
 </style>

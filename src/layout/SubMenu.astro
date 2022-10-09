@@ -56,17 +56,31 @@ const { items,root=true } = Astro.props;
         border-left:  2px solid rgb(122, 122, 122);
         border-right: 0px;
         border-bottom:0px;
-        margin-left: 4px;
+        margin-left: 8px;
         overflow: hidden;
         max-height: 200vh;
-        transition: max-height 1s;
+        transition-property: max-height;
+        transition-duration: 0.4s;
     }
     ul.nested.hidden{
         max-height: 0px;
-        transition: max-height 0.3s;
+        transition-property: max-height;
+        transition-duration: 0.4s;
     }
     li{
         min-width: 130px;
+    }
+
+    a{
+        padding:10px;
+        padding-left:4px;
+        text-decoration: none;
+        user-select: none;    
+        color:white;
+        display:block;
+    }
+    a.active{
+        background-color: #06ad70;
     }
     a:hover{
         color:black;
@@ -75,26 +89,18 @@ const { items,root=true } = Astro.props;
     a:hover > span > svg > path{
         stroke:rgb(30, 30, 30);
     }
-    a.active{
-        background-color: #06ad70;
-    }
     
-    a{
-        padding:10px;
-        text-decoration: none;
-        user-select: none;    
-        color:white;
-        display:block;
-    }
 </style>
 
 
 <script>
-let toggler = document.getElementsByClassName("parent");
-for (let i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function(e) {
-      this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
-      this.classList.toggle("expanded");
-      e.preventDefault()
-  });
-}</script>
+    //This script is here and not under Submenu to make it run only once
+    let toggler = document.getElementsByClassName("parent");
+    for (let i = 0; i < toggler.length; i++) {
+      toggler[i].addEventListener("click", function(e) {
+          this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
+          this.classList.toggle("expanded");
+          e.preventDefault()
+      });
+    }
+</script>

@@ -42,6 +42,7 @@ adding interactive SVGs that can be styled with css is challenging
     - scaleY does not bring the height down to 0 due to remaining padding margin
     - height can be animated but must be set initially
     - max-height can be animated but must be set to max value which breaks the transition timing
+    - max-height adjusting with js requires high complexity depending on state of expanded children hierarchy
     - clip also needs defined start stop
 # survey
 Analysis of existing Themes for Astro, focus is on documentation

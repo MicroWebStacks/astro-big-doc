@@ -1,23 +1,15 @@
 import { defineConfig } from 'astro/config';
-import deno from "@astrojs/deno";
 import mdx from "@astrojs/mdx";
 
 export default defineConfig({
-  output: "server",
-  server: {
-    port: 3000,
-    host: true
-  },
-  adapter: deno({
-    port: 3000,
-    hostname: 'localhost'
-  }),
+  output: "static",
   site: 'http://localhost',
   base: '',
   trailingSlash: 'ignore',
-  markdown: {
+  markdown:{
     // Can be 'shiki' (default), 'prism' or false to disable highlighting
     syntaxHighlight: 'shiki'
   },
   integrations: [mdx()]
-});
+}); //select 'static'/'server' by uncommenting the corresponding default export
+//export default staticConfig

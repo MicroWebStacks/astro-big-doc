@@ -51,6 +51,24 @@
         ]
     },
     {
+        "text":"Markdown",
+        "href":"/markdown",
+        "items"        :[
+            {
+                "text":"hello",
+                "href":"/markdown/hello"
+            },
+            {
+                "text":"Code Highlight",
+                "href":"/markdown/code"
+            },
+            {
+                "text":"MDX Components",
+                "href":"/markdown/components"
+            }
+        ]
+    },
+    {
         "text":"About",
         "href":"/about"
     }

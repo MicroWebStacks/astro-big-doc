@@ -8,9 +8,12 @@ import { active_page } from "../components/utils";
 export interface Props {
 	title: string;
 }
-const { title } = Astro.props;
+let { title, frontmatter } = Astro.props;
+title = title?title:frontmatter.title
+
 const active_page_index = active_page(Astro.url,menu)
 const menu_visible = ("items" in menu[active_page_index])
+//if(Astro.props.headings){	console.log(Astro.props.headings)}
 ---
 <html lang="en">
 	<head>

@@ -30,6 +30,12 @@ pnpm astro add deno
  - prepare `.github/workflows/deploy.yml`
 
 ## Todos
+- AppBar right float icons
+- ssr mode signin with github
+- markdown mdx
+- ToC
+- pages types and icons
+- left nav menu generation from getStaticPatshs
 - auto adjust collapsed Tree menu items to fit page height (all level or nothins)
 - Arrow icon on fixed-nav when menu can be opened/collapsed
 - open close on nav-resize click

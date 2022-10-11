@@ -30,6 +30,7 @@ pnpm astro add deno
  - prepare `.github/workflows/deploy.yml`
 
 ## Todos
+- left menu directory without index has action on full area
 - AppBar right float icons
 - ssr mode signin with github
 - markdown mdx

@@ -1,0 +1,46 @@
+---
+import { process_toc_list } from "../components/menu_utils";
+import SubMenu from "./SubMenu.astro";
+
+export interface Props {
+    headings: Array<Object>;
+}
+
+let { headings } = Astro.props;
+
+const side_menu = process_toc_list(headings)
+
+console.log(headings)
+
+---
+{side_menu.visible &&
+    <nav data-width="20vw" data-state="open">
+        <SubMenu items={side_menu.items} />
+    </nav>
+}
+<style>
+nav{
+    background: #252526;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: width 0.5s;
+    width:20vw;
+    flex-shrink: 0;
+    scrollbar-color: rebeccapurple  green;
+}
+nav::-webkit-scrollbar {
+  width: 1rem;
+}
+nav::-webkit-scrollbar-track {
+  background: #252526; 
+}
+nav::-webkit-scrollbar-thumb {
+  background: #464647; 
+}
+nav::-webkit-scrollbar-thumb:hover {
+  background: #515151; 
+}
+
+
+</style>
+

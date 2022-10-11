@@ -1,6 +1,12 @@
 ---
-import Layout from "@/layout/Layout.astro";
+import Layout from "../layout/Layout.astro";
+const title = "Astro Nav Menus"
+console.log("Hello from Server")
 ---
-<Layout title="Page 1">
-	<p>I'm in page 1</p>
+<Layout title={title}>
+	<h1>Demo Home</h1>
+	<p>index page</p>
+	{new Array(100).fill(0).map((id,index)=>(
+		<div>{index}</div>
+	))}
 </Layout>

@@ -1,19 +1,19 @@
 ---
 import AppBar from './AppBar.astro';
 import NavTree from './NavTree.astro';
-import NavList from './NavList.astro';
+import TocTree from './TocTree.astro';
 import menu from "../config/menu.json"
 import { active_page } from "../components/utils";
 
 export interface Props {
 	title: string;
 }
-let { title, frontmatter } = Astro.props;
+let { title, frontmatter, headings } = Astro.props;
 title = title?title:frontmatter.title
 
 const active_page_index = active_page(Astro.url,menu)
 const menu_visible = ("items" in menu[active_page_index])
-//if(Astro.props.headings){	console.log(Astro.props.headings)}
+console.log(headings)
 ---
 <html lang="en">
 	<head>
@@ -27,13 +27,14 @@ const menu_visible = ("items" in menu[active_page_index])
 		<div class={`fixed-nav ${menu_visible?"active":""}`}/>
 		<div class="appbar-nav_content-footer">
 			<AppBar/><!-- contain header -->
-			<div class="nav-content">
+			<main class="nav-content-toc">
 				<NavTree/><!-- optional contains nav -->
 				<div class={`nav-resize ${menu_visible?"active":""}`}/>
-	 			<main class="content">
+	 			<article class="content">
 					<slot/>
-				</main>
-			</div>
+				</article>
+				<TocTree headings={headings}/>
+			</main>
 			<footer>
 				<p>footer</p>
 			</footer>
@@ -71,7 +72,7 @@ body{
 	flex-direction: column;
 	height:100vh;
 }
-.nav-content{
+.nav-content-toc{
 	flex-grow:1;
 	display:flex;
 	flex-direction: row;

@@ -93,7 +93,14 @@ function process_menu_tree(url,raw_menu){
     return side_menu
 }
 
+function process_toc_list(headings){
+    let toc_menu = {items:[],visible:false}
+
+    return toc_menu
+}
+
 export{
     process_menu_list,
-    process_menu_tree
+    process_menu_tree,
+    process_toc_list
 }

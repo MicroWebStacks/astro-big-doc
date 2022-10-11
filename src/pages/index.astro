@@ -1,12 +1,21 @@
 ---
-import Layout from "../layout/Layout.astro";
-const title = "Astro Nav Menus"
-console.log("Hello from Server")
+import Layout from "@/layout/Layout.astro";
+import {Content  as Readme} from '../../readme.md';
 ---
-<Layout title={title}>
-	<h1>Demo Home</h1>
-	<p>index page</p>
-	{new Array(100).fill(0).map((id,index)=>(
-		<div>{index}</div>
-	))}
+<!-- how to get headings and pass them as props -->
+<Layout title="Readme" >
+	<div class="markdown">
+		<Readme/>
+	</div>
 </Layout>
+
+<style is:inline>
+	/* The Layout Style is not active on the slot
+	   The readme layout should be imported from the frontmatter
+	   This style would be optimized if not inline
+	   Special selector needed not to override all Layout anchors
+	 */
+	 .markdown * > a{
+		color:#3794FF;
+	 }
+</style>

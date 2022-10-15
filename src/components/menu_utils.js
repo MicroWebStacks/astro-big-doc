@@ -11,6 +11,11 @@ function root_page(url){
     return `/${str}`
 }
 
+function get_base(href){
+    const last_slash = href.lastIndexOf('/')
+    return href.substring(0,last_slash)
+}
+
 function url_path(url){
     let str = String(url)
     if(str.includes("//")){
@@ -27,7 +32,8 @@ function url_path(url){
 
 function active_page(url, raw_menu){
     const page = root_page(url)
-    let active_page_index = raw_menu.map(item=>item.href).indexOf(page)
+    raw_menu.forEach((item)=>{item.base = get_base(item.href)})
+    let active_page_index = raw_menu.map(item=>item.base).indexOf(page)
     //assumption is that the first page (index 0) is always the Home root '/'
     if(active_page_index == -1){
         active_page_index = 0
@@ -161,5 +167,6 @@ function process_toc_list(headings){
 export{
     process_menu_list,
     process_menu_tree,
-    process_toc_list
+    process_toc_list,
+    active_page
 }

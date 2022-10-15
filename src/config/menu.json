@@ -1,48 +1,68 @@
 [
     {
-        "text":"Home",
+        "text":"Markdown",
         "href":"/",
+        "items"        :[
+            {
+                "text":"Simple Markdown",
+                "href":"/"
+            },
+            {
+                "text":"MDX",
+                "href":"/components"
+            },
+            {
+                "text":"Code Highlight",
+                "href":"/code"
+            },
+            {
+                "text":"Readme",
+                "href":"/readme"
+            }
+        ]
+    },
+    {
+        "text":"Astro",
+        "href":"/astro/page1",
         "items":[
             {
                 "text":"Page 1",
-                "href":"/page1"
+                "href":"/astro/page1"
             },
             {
                 "text":"Page 2",
-                "href":"/page2"
+                "href":"/astro/page2"
             },
             {
                 "text":"Domain 1",
                 "items":[
                     {
                         "text":"Sub Page 1",
-                        "href":"/domain1/subpage1"
+                        "href":"/astro/domain1/subpage1"
                     },
                     {
                         "text":"Sub Page 2",
-                        "href":"/domain1/subpage2"
+                        "href":"/astro/domain1/subpage2"
                     }
                 ]
             },
             {
                 "text":"Page 3",
-                "href":"/page3"
+                "href":"/astro/page3"
             },
             {
-                "text":"Domain 2 index",
-                "href":"/domain2/",
+                "text":"Domain 2",
                 "items":[
                     {
                         "text":"Sub Page 4",
-                        "href":"/domain2/subpage4"
+                        "href":"/astro/domain2/subpage4"
                     },
                     {
-                        "text":"Sub Domain 2 index",
-                        "href":"/domain2/subdomain2/",
+                        "text":"Sub Domain 2",
                         "items":[
                             {
                                 "text":"s page5",
-                                "href":"/domain2/subdomain2/spage5"
+                                "href":"/astro/domain2/subdomain2/spage5"
                             }
                         ]
                     }
@@ -51,25 +71,7 @@
         ]
     },
     {
-        "text":"Markdown",
-        "href":"/markdown",
-        "items"        :[
-            {
-                "text":"hello",
-                "href":"/markdown/hello"
-            },
-            {
-                "text":"Code Highlight",
-                "href":"/markdown/code"
-            },
-            {
-                "text":"MDX Components",
-                "href":"/markdown/components"
-            }
-        ]
-    },
-    {
         "text":"About",
-        "href":"/about"
+        "href":"/about/"
     }
 ]

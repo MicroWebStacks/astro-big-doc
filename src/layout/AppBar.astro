@@ -1,6 +1,6 @@
 ---
 import menu from "../config/menu.json"
-import { active_page } from "../components/utils";
+import { active_page } from "@/components/menu_utils";
 
 const active_page_index = active_page(Astro.url,menu)
 menu.forEach((item,index)=>{

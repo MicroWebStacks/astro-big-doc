@@ -1,6 +1,6 @@
 ---
 layout: "@/layout/Layout.astro"
-title: "Simple Markdown!"
+title: "Simple Markdown"
 ---
 # Title 1
 ## Smaller Title

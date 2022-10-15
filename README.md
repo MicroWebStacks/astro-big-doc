@@ -17,6 +17,9 @@ Performance oriented, built with native astro components, no dependencies to any
   - Supports md and mdx
   - Right Menu ToC for src/pages markdown
   - Right Menu ToC for imported `import *` markdown
+- Top menu must have href from items
+- Submenu should not have href href to keep pages / directories distinction
+
 
 # Dev
 ## Creation
@@ -36,9 +39,8 @@ pnpm astro add deno
 ## Todos
 - panzoom component
 - gallery
-- add href links icons to markdown
 - menu auto depth adjust (all level or nothins)
-- menu depth slider
+- menu depth slider or depth selector
 - left menu, directory without index should have action on full area
 - AppBar right float icons
 - ssr mode signin with github
@@ -46,6 +48,7 @@ pnpm astro add deno
 - open close on nav-resize click
 - store nav menu width / prevent reset on same page reload
 - left nav menu generation from getStaticPaths
+- add href links icons to markdown
 
 ## Thoughts
 - allow index pages but do not use them to keep consistent nav menu of folders/items

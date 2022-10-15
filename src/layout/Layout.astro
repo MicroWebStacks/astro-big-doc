@@ -1,7 +1,6 @@
 ---
 import AppBar from './AppBar.astro';
-import NavTree from './NavTree.astro';
-import TocTree from './TocTree.astro';
+import TreeMenu from './TreeMenu.astro';
 import raw_menu from "../config/menu.json"
 import { process_menu_tree,process_toc_list } from "../components/menu_utils";
 
@@ -32,7 +31,7 @@ const right_toc_menu = process_toc_list(headings)
 			<main>
 				{left_nav_menu.visible &&
 				<>
-					<NavTree items={left_nav_menu.items}/>
+					<TreeMenu items={left_nav_menu.items}/>
 					<div id="resize-left" class="nav-resize active"/>
 				</>
 				}
@@ -42,7 +41,7 @@ const right_toc_menu = process_toc_list(headings)
 				{right_toc_menu.visible &&
 				<>
 					<div id="resize-right" class="nav-resize active"/>
-					<TocTree items={right_toc_menu.items}/>
+					<TreeMenu items={right_toc_menu.items}/>
 				</>
 				}
 			</main>

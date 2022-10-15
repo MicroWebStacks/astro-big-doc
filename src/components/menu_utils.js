@@ -47,6 +47,8 @@ function active_subpage(url,submenu){
     return res_index
 }
 
+/** bad idea - incomplete - due complexity of unlinked children management
+ */
 function process_menu_list(url,raw_menu){
     let side_menu = {items:[],visible:false}
 
@@ -110,6 +112,8 @@ function find_parent(index,headings){
     }
 }
 
+/* not recursive o(n²)
+*/
 function heading_list_to_tree(headings){
     for(let element of headings){
         element.items=[]

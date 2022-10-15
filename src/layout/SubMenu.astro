@@ -12,14 +12,14 @@ const { items,root=true } = Astro.props;
     <ul class={root?"":"nested"}>
         {items.map((item)=>(
             <li >
-                <a href={item.href} class={item.active?"active":""}>
-                    {item.parent?
-                        <span class:list={[{ parent: true, expanded: item.expanded }]} >
+                <a href={item.href} class:list={[{active:item.active, parent:item.parent, expanded:item.expanded}]}>
+                    {item.parent &&
+                        <span>
                             <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </span>
-                    :<></>}
+                    }
                     <span>{item.text}</span>
                 </a>
                 <SubMenu items={item.items} root={false}/>
@@ -28,19 +28,19 @@ const { items,root=true } = Astro.props;
     </ul>
 }
 <style>
-    span.parent{
+    a.parent{
         cursor:pointer;
     }
-    span.parent > svg{
+    a.parent > span > svg{
         width:16px;
         height:16px;
         rotate: 0deg;
         transition: rotate .4s ease-in-out;
     }
-    span.parent.expanded > svg{
+    a.parent.expanded > span > svg{
         rotate: 90deg;
     }
-    span:hover.parent > svg > path{
+    a:hover.parent > span > svg > path{
         stroke:#CCCCCC;
     }
     ul{
@@ -97,7 +97,7 @@ const { items,root=true } = Astro.props;
     let toggler = document.getElementsByClassName("parent");
     for (let i = 0; i < toggler.length; i++) {
       toggler[i].addEventListener("click", function(e) {
-          this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
+          this.parentElement.querySelector("ul")?.classList.toggle("hidden");
           this.classList.toggle("expanded");
           e.preventDefault()
       });

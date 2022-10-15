@@ -41,7 +41,6 @@ pnpm astro add deno
 - gallery
 - menu auto depth adjust (all level or nothins)
 - menu depth slider or depth selector
-- left menu, directory without index should have action on full area
 - AppBar right float icons
 - ssr mode signin with github
 - pages types and icons

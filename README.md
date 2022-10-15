@@ -8,11 +8,12 @@ Performance oriented, built with native astro components, no dependencies to any
 ## Features
 - astro components (.astro) html css js
 - article content immediatly searchable with native browser search, no lazy loading or custom content cache manipulations
-- Left pages Tree menu
-- Right Table of Content menu
+- Left Menu pages Tree Navigation
+- Right Menu Table of Content
 - Menus consist of Trees with unlimited depth and recursively expandable sections
 - Menus can be opened, closed and resized by the user
-- Menus are built by astro and seen as read html by the client
+- Menus are built by astro and seen as readable html by the client
+- markdown mdx
 
 # Dev
 ## Creation
@@ -30,24 +31,28 @@ pnpm astro add deno
  - prepare `.github/workflows/deploy.yml`
 
 ## Todos
-- left menu directory without index has action on full area
+- resize toc menu
+- get headings from imported markdown
+- add href links icons to markdown
+- menu auto depth adjust
+- menu depth slider
+- left menu, directory without index should have action on full area
 - AppBar right float icons
 - ssr mode signin with github
-- markdown mdx
-- ToC
+- panzoom component
+- gallery
 - pages types and icons
 - left nav menu generation from getStaticPatshs
 - auto adjust collapsed Tree menu items to fit page height (all level or nothins)
-- Arrow icon on fixed-nav when menu can be opened/collapsed
 - open close on nav-resize click
 - store nav menu width / prevent reset on same page reload
-- evaluate css resize if it can resolve resize mouse events usage
 
-## issues
-adding interactive SVGs that can be styled with css is challenging
-- `svg.astro` uses the innerHTML fragment which breaks visibility of `style` tag no longer scoping imported SVG
- - import of `rightarrow.astro` still requires style to be either global or inline
- - Tree menu collapse transition :
+## Thoughts
+- allow index pages but do not use them to keep consistent nav menu of folders/items
+- adding interactive SVGs that can be styled with css is challenging
+  - `svg.astro` uses the innerHTML fragment which breaks visibility of `style` tag no longer scoping imported SVG
+  - import of `rightarrow.astro` still requires style to be either global or inline
+  - Tree menu collapse transition :
     - display block/none does not animate the height
     - scaleY does not bring the height down to 0 due to remaining padding margin
     - height can be animated but must be set initially

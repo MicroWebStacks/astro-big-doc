@@ -6,9 +6,12 @@ import { process_menu_tree,process_toc_list } from "../components/menu_utils";
 
 export interface Props {
 	title: string;
+	headings: Array<Object>;
 }
-let { title, frontmatter, headings } = Astro.props;
-title = title?title:frontmatter.title
+
+const { headings } = Astro.props;
+const { title } = Astro.props.frontmatter || Astro.props;
+
 
 const left_nav_menu = process_menu_tree(Astro.url,raw_menu)
 const right_toc_menu = process_toc_list(headings)
@@ -49,7 +52,7 @@ const right_toc_menu = process_toc_list(headings)
 				<p>footer</p>
 			</footer>
 		</div>
-		<div id="fixed-right" class={`fixed-nav ${left_nav_menu.visible?"active":""}`}/>
+		<div id="fixed-right" class={`fixed-nav ${right_toc_menu.visible?"active":""}`}/>
 	</body>
 </html>
 
@@ -128,17 +131,24 @@ footer p{
     scroll-padding-top: 10px;
 }
 .content::-webkit-scrollbar {
-  width: 1rem;
+	width: 1rem;
 }
 .content::-webkit-scrollbar-track {
-  background: #1E1E1E; 
+	background: #1E1E1E; 
 }
 .content::-webkit-scrollbar-thumb {
-  background: #464647; 
+	background: #464647; 
 }
 .content::-webkit-scrollbar-thumb:hover {
   background: #515151; 
 }
+
+</style>
+
+<style is:inline>
+	.content * > a{
+			color:#3794FF;
+	}
 
 </style>
 

@@ -1,21 +1,9 @@
 ---
 import Layout from "@/layout/Layout.astro";
-import {Content  as Readme} from '../../readme.md';
+import * as Readme from '../../readme.md';
+
 ---
 <!-- how to get headings and pass them as props -->
-<Layout title="Readme" >
-	<div class="markdown">
-		<Readme/>
-	</div>
+<Layout title="Readme" headings={Readme.getHeadings()}>
+	<Readme.Content/>
 </Layout>
-
-<style is:inline>
-	/* The Layout Style is not active on the slot
-	   The readme layout should be imported from the frontmatter
-	   This style would be optimized if not inline
-	   Special selector needed not to override all Layout anchors
-	 */
-	 .markdown * > a{
-		color:#3794FF;
-	 }
-</style>

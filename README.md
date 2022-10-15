@@ -13,7 +13,10 @@ Performance oriented, built with native astro components, no dependencies to any
 - Menus consist of Trees with unlimited depth and recursively expandable sections
 - Menus can be opened, closed and resized by the user
 - Menus are built by astro and seen as readable html by the client
-- markdown mdx
+- markdown 
+  - Supports md and mdx
+  - Right Menu ToC for src/pages markdown
+  - Right Menu ToC for imported `import *` markdown
 
 # Dev
 ## Creation
@@ -31,21 +34,18 @@ pnpm astro add deno
  - prepare `.github/workflows/deploy.yml`
 
 ## Todos
-- resize toc menu
-- get headings from imported markdown
+- panzoom component
+- gallery
 - add href links icons to markdown
-- menu auto depth adjust
+- menu auto depth adjust (all level or nothins)
 - menu depth slider
 - left menu, directory without index should have action on full area
 - AppBar right float icons
 - ssr mode signin with github
-- panzoom component
-- gallery
 - pages types and icons
-- left nav menu generation from getStaticPatshs
-- auto adjust collapsed Tree menu items to fit page height (all level or nothins)
 - open close on nav-resize click
 - store nav menu width / prevent reset on same page reload
+- left nav menu generation from getStaticPaths
 
 ## Thoughts
 - allow index pages but do not use them to keep consistent nav menu of folders/items

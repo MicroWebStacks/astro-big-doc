@@ -5,19 +5,19 @@ globalThis.process = {
 // dist/server/entry.mjs
 import { Server } from "https://deno.land/std@0.132.0/http/server.ts";
 import { fetch } from "https://deno.land/x/file_fetch/mod.ts";
-var $$module3$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+var $$module1$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   get $$metadata() {
-    return $$metadata$f;
+    return $$metadata$e;
   },
   get default() {
     return $$SubMenu;
   },
   get file() {
-    return $$file$f;
+    return $$file$e;
   },
   get url() {
-    return $$url$f;
+    return $$url$e;
   }
 }, Symbol.toStringTag, { value: "Module" }));
 function Mime$1() {
@@ -3752,7 +3752,7 @@ var server_default = {
   check,
   renderToStaticMarkup
 };
-var menu = [
+var raw_menu = [
   {
     text: "Home",
     href: "/",
@@ -3827,9 +3827,9 @@ var menu = [
     href: "/about"
   }
 ];
-var $$module4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+var $$module3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: menu
+  default: raw_menu
 }, Symbol.toStringTag, { value: "Module" }));
 function root_page$1(url2) {
   let str = String(url2);
@@ -3856,9 +3856,9 @@ function url_path$1(url2) {
   }
   return `/${str}`;
 }
-function active_page$1(url2, menu2) {
+function active_page$1(url2, menu) {
   const page = root_page$1(url2);
-  let active_page_index = menu2.map((item) => item.href).indexOf(page);
+  let active_page_index = menu.map((item) => item.href).indexOf(page);
   if (active_page_index == -1) {
     active_page_index = 0;
   }
@@ -3874,36 +3874,118 @@ function active_subpage$1(url2, submenu) {
   });
   return res_index;
 }
-var $$module5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+var $$module2$3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   root_page: root_page$1,
   active_page: active_page$1,
   active_subpage: active_subpage$1
 }, Symbol.toStringTag, { value: "Module" }));
-var $$metadata$h = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/AppBar.astro", { modules: [{ module: $$module4, specifier: "../config/menu.json", assert: {} }, { module: $$module5, specifier: "../components/utils", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
-var $$Astro$i = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/AppBar.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
+var $$metadata$g = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/AppBar.astro", { modules: [{ module: $$module3, specifier: "../config/menu.json", assert: {} }, { module: $$module2$3, specifier: "../components/utils", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
+var $$Astro$h = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/AppBar.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
 var $$AppBar = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$i, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$h, $$props, $$slots);
   Astro2.self = $$AppBar;
-  const active_page_index = active_page$1(Astro2.url, menu);
-  menu.forEach((item, index) => {
+  const active_page_index = active_page$1(Astro2.url, raw_menu);
+  raw_menu.forEach((item, index) => {
     item.active_class = index == active_page_index ? "active" : "";
   });
   const STYLES = [];
   for (const STYLE of STYLES)
     $$result.styles.add(STYLE);
-  return renderTemplate`${maybeRenderHead($$result)}<header class="astro-DPVO3DHK">
-    ${menu.map((item) => renderTemplate`<a${addAttribute(item.href, "href")}${addAttribute(item.active_class + " astro-DPVO3DHK", "class")}>${item.text}</a>`)}
-</header>`;
+  return renderTemplate`${renderComponent($$result, "Fragment", Fragment, { "class": "astro-LRRQEVL7" })}${raw_menu.map((item) => renderTemplate`${maybeRenderHead($$result)}<a${addAttribute(item.href, "href")}${addAttribute(item.active_class + " astro-LRRQEVL7", "class")}>${item.text}</a>`)}
+
+
+`;
 });
-var $$file$h = "D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/AppBar.astro";
-var $$url$h = void 0;
+var $$file$g = "D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/AppBar.astro";
+var $$url$g = void 0;
 var $$module1$2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  $$metadata: $$metadata$h,
+  $$metadata: $$metadata$g,
   default: $$AppBar,
-  file: $$file$h,
-  url: $$url$h
+  file: $$file$g,
+  url: $$url$g
+}, Symbol.toStringTag, { value: "Module" }));
+var $$metadata$f = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/svg/rightarrow.astro", { modules: [], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
+var $$Astro$g = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/svg/rightarrow.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
+var $$Rightarrow = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$g, $$props, $$slots);
+  Astro2.self = $$Rightarrow;
+  return renderTemplate`${maybeRenderHead($$result)}<svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>`;
+});
+var $$file$f = "D:/Dev/MicroWebStacks/astro_nav_menus/src/svg/rightarrow.astro";
+var $$url$f = void 0;
+var $$module2$2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  $$metadata: $$metadata$f,
+  default: $$Rightarrow,
+  file: $$file$f,
+  url: $$url$f
+}, Symbol.toStringTag, { value: "Module" }));
+var $$metadata$e = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/SubMenu.astro", { modules: [{ module: $$module1$1, specifier: "./SubMenu.astro", assert: {} }, { module: $$module2$2, specifier: "../svg/rightarrow.astro", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [{ type: "inline", value: `
+    //This script is here and not under Submenu to make it run only once
+    let toggler = document.getElementsByClassName("parent");
+    for (let i = 0; i < toggler.length; i++) {
+      toggler[i].addEventListener("click", function(e) {
+          this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
+          this.classList.toggle("expanded");
+          e.preventDefault()
+      });
+    }
+` }] });
+var $$Astro$f = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/SubMenu.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
+var $$SubMenu = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$f, $$props, $$slots);
+  Astro2.self = $$SubMenu;
+  const { items, root = true } = Astro2.props;
+  const STYLES = [];
+  for (const STYLE of STYLES)
+    $$result.styles.add(STYLE);
+  return renderTemplate`${items && renderTemplate`${maybeRenderHead($$result)}<ul${addAttribute((root ? "" : "nested") + " astro-7EM45CLO", "class")}>
+        ${items.map((item) => renderTemplate`<li class="astro-7EM45CLO">
+                <a${addAttribute(item.href, "href")}${addAttribute((item.active ? "active" : "") + " astro-7EM45CLO", "class")}>
+                    ${item.parent ? renderTemplate`<span${addAttribute([[{ parent: true, expanded: item.expanded }], "astro-7EM45CLO"], "class:list")}>
+                            <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg" class="astro-7EM45CLO">
+                                <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round" class="astro-7EM45CLO"></path>
+                            </svg>
+                        </span>` : renderTemplate`${renderComponent($$result, "Fragment", Fragment, { "class": "astro-7EM45CLO" })}`}
+                    <span class="astro-7EM45CLO">${item.text}</span>
+                </a>
+                ${renderComponent($$result, "SubMenu", $$SubMenu, { "items": item.items, "root": false, "class": "astro-7EM45CLO" })}
+            </li>`)}
+    </ul>`}
+
+
+
+${maybeRenderHead($$result)}`;
+});
+var $$file$e = "D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/SubMenu.astro";
+var $$url$e = void 0;
+var $$metadata$d = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/TreeMenu.astro", { modules: [{ module: $$module1$1, specifier: "./SubMenu.astro", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
+var $$Astro$e = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/TreeMenu.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
+var $$TreeMenu = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$e, $$props, $$slots);
+  Astro2.self = $$TreeMenu;
+  let { items } = Astro2.props;
+  const STYLES = [];
+  for (const STYLE of STYLES)
+    $$result.styles.add(STYLE);
+  return renderTemplate`${maybeRenderHead($$result)}<nav data-width="20vw" data-state="open" class="astro-IRQJ4JWG">
+    ${renderComponent($$result, "SubMenu", $$SubMenu, { "items": items, "class": "astro-IRQJ4JWG" })}
+</nav>
+
+`;
+});
+var $$file$d = "D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/TreeMenu.astro";
+var $$url$d = void 0;
+var $$module2$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  $$metadata: $$metadata$d,
+  default: $$TreeMenu,
+  file: $$file$d,
+  url: $$url$d
 }, Symbol.toStringTag, { value: "Module" }));
 function root_page(url2) {
   let str = String(url2);
@@ -3959,17 +4041,17 @@ function process_menu_list(url2, raw_menu2) {
   const active_subpage_index = active_subpage(url2, side_menu.items);
   side_menu.items.forEach((item, index) => {
     item.classes = index == active_subpage_index ? "active" : "";
-    item.paddingLeft = item.level ? item.level * 10 + 10 : 10;
+    item.paddingLeft = item.depth ? item.depth * 10 + 10 : 10;
   });
   return side_menu;
 }
-function set_classes(url2, items) {
+function set_classes_recursive(url2, items) {
   items.forEach((item) => {
     item.active = url_path(url2) == item.href;
     if ("items" in item) {
       item.parent = true;
       item.expanded = true;
-      set_classes(url2, item.items);
+      set_classes_recursive(url2, item.items);
     }
   });
 }
@@ -3981,178 +4063,63 @@ function process_menu_tree(url2, raw_menu2) {
     return side_menu;
   }
   side_menu.items = raw_menu2[active_section_index].items;
-  set_classes(url2, side_menu.items);
+  set_classes_recursive(url2, side_menu.items);
   return side_menu;
 }
-var $$module2$2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+function find_parent(index, headings) {
+  const element_depth = headings[index].depth;
+  if (index == 0) {
+    return null;
+  } else {
+    for (let rev_i = index - 1; rev_i >= 0; rev_i--) {
+      if (headings[rev_i].depth < element_depth) {
+        return headings[rev_i];
+      }
+    }
+  }
+}
+function heading_list_to_tree(headings) {
+  for (let element of headings) {
+    element.items = [];
+    element.parent = true;
+    element.expanded = true;
+    element.href = `#${element.slug}`;
+  }
+  let tree = [];
+  for (let index = 0; index < headings.length; index++) {
+    let element = headings[index];
+    let parent = find_parent(index, headings);
+    if (parent) {
+      parent.items.push(element);
+    } else {
+      tree.push(element);
+    }
+  }
+  for (let element of headings) {
+    if (element.items.length == 0) {
+      element.parent = false;
+      delete element.items;
+      delete element.expanded;
+    }
+  }
+  return tree;
+}
+function process_toc_list(headings) {
+  if (typeof headings == "undefined" || headings.length == 0) {
+    return { items: [], visible: false };
+  }
+  let side_menu = { items: [], visible: false };
+  side_menu.items = heading_list_to_tree(headings);
+  side_menu.visible = true;
+  return side_menu;
+}
+var $$module4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   process_menu_list,
-  process_menu_tree
+  process_menu_tree,
+  process_toc_list
 }, Symbol.toStringTag, { value: "Module" }));
-var $$metadata$g = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/svg/rightarrow.astro", { modules: [], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
-var $$Astro$h = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/svg/rightarrow.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
-var $$Rightarrow = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$h, $$props, $$slots);
-  Astro2.self = $$Rightarrow;
-  return renderTemplate`${maybeRenderHead($$result)}<svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
-    <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>`;
-});
-var $$file$g = "D:/Dev/MicroWebStacks/astro_nav_menus/src/svg/rightarrow.astro";
-var $$url$g = void 0;
-var $$module2$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  $$metadata: $$metadata$g,
-  default: $$Rightarrow,
-  file: $$file$g,
-  url: $$url$g
-}, Symbol.toStringTag, { value: "Module" }));
-var $$metadata$f = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/SubMenu.astro", { modules: [{ module: $$module3$1, specifier: "./SubMenu.astro", assert: {} }, { module: $$module2$1, specifier: "../svg/rightarrow.astro", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [{ type: "inline", value: `
-    //This script is here and not under Submenu to make it run only once
-    let toggler = document.getElementsByClassName("parent");
-    for (let i = 0; i < toggler.length; i++) {
-      toggler[i].addEventListener("click", function(e) {
-          this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
-          this.classList.toggle("expanded");
-          e.preventDefault()
-      });
-    }
-` }] });
-var $$Astro$g = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/SubMenu.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
-var $$SubMenu = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$g, $$props, $$slots);
-  Astro2.self = $$SubMenu;
-  const { items, root = true } = Astro2.props;
-  const STYLES = [];
-  for (const STYLE of STYLES)
-    $$result.styles.add(STYLE);
-  return renderTemplate`${items && renderTemplate`${maybeRenderHead($$result)}<ul${addAttribute((root ? "" : "nested") + " astro-7EM45CLO", "class")}>
-        ${items.map((item) => renderTemplate`<li class="astro-7EM45CLO">
-                <a${addAttribute(item.href, "href")}${addAttribute((item.active ? "active" : "") + " astro-7EM45CLO", "class")}>
-                    ${item.parent ? renderTemplate`<span${addAttribute([[{ parent: true, expanded: item.expanded }], "astro-7EM45CLO"], "class:list")}>
-                            <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg" class="astro-7EM45CLO">
-                                <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round" class="astro-7EM45CLO"></path>
-                            </svg>
-                        </span>` : renderTemplate`${renderComponent($$result, "Fragment", Fragment, { "class": "astro-7EM45CLO" })}`}
-                    <span class="astro-7EM45CLO">${item.text}</span>
-                </a>
-                ${renderComponent($$result, "SubMenu", $$SubMenu, { "items": item.items, "root": false, "class": "astro-7EM45CLO" })}
-            </li>`)}
-    </ul>`}
-
-
-
-${maybeRenderHead($$result)}`;
-});
-var $$file$f = "D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/SubMenu.astro";
-var $$url$f = void 0;
-var $$metadata$e = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/NavTree.astro", { modules: [{ module: $$module4, specifier: "../config/menu.json", assert: {} }, { module: $$module2$2, specifier: "../components/menu_utils", assert: {} }, { module: $$module3$1, specifier: "./SubMenu.astro", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
-var $$Astro$f = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/NavTree.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
-var $$NavTree = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$f, $$props, $$slots);
-  Astro2.self = $$NavTree;
-  const side_menu = process_menu_tree(Astro2.url, menu);
-  const STYLES = [];
-  for (const STYLE of STYLES)
-    $$result.styles.add(STYLE);
-  return renderTemplate`${side_menu.visible && renderTemplate`${maybeRenderHead($$result)}<nav data-width="20vw" data-state="open" class="astro-BPAG3RPH">
-        ${renderComponent($$result, "SubMenu", $$SubMenu, { "items": side_menu.items, "class": "astro-BPAG3RPH" })}
-    </nav>`}
-`;
-});
-var $$file$e = "D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/NavTree.astro";
-var $$url$e = void 0;
-var $$module2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  $$metadata: $$metadata$e,
-  default: $$NavTree,
-  file: $$file$e,
-  url: $$url$e
-}, Symbol.toStringTag, { value: "Module" }));
-var raw_menu = [
-  {
-    text: "Home",
-    href: "/",
-    items: [
-      {
-        text: "Page 1",
-        href: "/page1"
-      },
-      {
-        text: "Page 2",
-        href: "/page2"
-      },
-      {
-        text: "Domain 1"
-      },
-      {
-        text: "Sub Page 1",
-        href: "/domain1/subpage1",
-        level: 1
-      },
-      {
-        text: "Sub Page 2",
-        href: "/domain1/subpage2",
-        level: 1
-      },
-      {
-        text: "Page 3",
-        href: "/page3"
-      },
-      {
-        text: "Domain 2 index",
-        href: "/domain2/"
-      },
-      {
-        text: "Sub Page 4",
-        href: "/domain2/subpage4",
-        level: 1
-      },
-      {
-        text: "Sub Domain 2 index",
-        href: "/domain2/subdomain2/",
-        level: 1
-      },
-      {
-        text: "s page5",
-        href: "/domain2/subdomain2/spage5",
-        level: 2
-      }
-    ]
-  },
-  {
-    text: "About",
-    href: "/about"
-  }
-];
-var $$module1$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: raw_menu
-}, Symbol.toStringTag, { value: "Module" }));
-var $$metadata$d = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/NavList.astro", { modules: [{ module: $$module1$1, specifier: "../config/menu_list.json", assert: {} }, { module: $$module2$2, specifier: "../components/menu_utils", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
-var $$Astro$e = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/NavList.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
-var $$NavList = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$e, $$props, $$slots);
-  Astro2.self = $$NavList;
-  const side_menu = process_menu_list(Astro2.url, raw_menu);
-  const STYLES = [];
-  for (const STYLE of STYLES)
-    $$result.styles.add(STYLE);
-  return renderTemplate`${side_menu.visible && renderTemplate`${maybeRenderHead($$result)}<nav data-width="15vw" data-state="open" class="astro-X64GFXQJ">
-        ${side_menu.items.map((item) => renderTemplate`<a${addAttribute(item.href, "href")}${addAttribute(item.active_class + " astro-X64GFXQJ", "class")}${addAttribute(`padding-left:${item.paddingLeft}px`, "style")}>${item.text}</a>`)}
-    </nav>`}
-`;
-});
-var $$file$d = "D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/NavList.astro";
-var $$url$d = void 0;
-var $$module3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  $$metadata: $$metadata$d,
-  default: $$NavList,
-  file: $$file$d,
-  url: $$url$d
-}, Symbol.toStringTag, { value: "Module" }));
-var $$metadata$c = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/Layout.astro", { modules: [{ module: $$module1$2, specifier: "./AppBar.astro", assert: {} }, { module: $$module2, specifier: "./NavTree.astro", assert: {} }, { module: $$module3, specifier: "./NavList.astro", assert: {} }, { module: $$module4, specifier: "../config/menu.json", assert: {} }, { module: $$module5, specifier: "../components/utils", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [{ type: "inline", value: `
+var $$metadata$c = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layout/Layout.astro", { modules: [{ module: $$module1$2, specifier: "./AppBar.astro", assert: {} }, { module: $$module2$1, specifier: "./TreeMenu.astro", assert: {} }, { module: $$module3, specifier: "../config/menu.json", assert: {} }, { module: $$module4, specifier: "../components/menu_utils", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [{ type: "inline", value: `
 	
 	function configure_nav(){
 		const fixed_nav = document.getElementsByClassName("fixed-nav")[0]
@@ -4240,14 +4207,14 @@ var $$Astro$d = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/layo
 var $$Layout = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$d, $$props, $$slots);
   Astro2.self = $$Layout;
-  let { title, frontmatter: frontmatter2 } = Astro2.props;
+  let { title, frontmatter: frontmatter2, headings } = Astro2.props;
   title = title ? title : frontmatter2.title;
-  const active_page_index = active_page$1(Astro2.url, menu);
-  const menu_visible = "items" in menu[active_page_index];
+  const left_nav_menu = process_menu_tree(Astro2.url, raw_menu);
+  const right_toc_menu = process_toc_list(headings);
   const STYLES = [];
   for (const STYLE of STYLES)
     $$result.styles.add(STYLE);
-  return renderTemplate`<html lang="en" class="astro-T3B4LOMQ">
+  return renderTemplate`<html lang="en" class="astro-4UPQ26HU">
 	<head>
 		<meta charset="utf-8">
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -4255,19 +4222,21 @@ var $$Layout = createComponent(async ($$result, $$props, $$slots) => {
 		<meta name="generator"${addAttribute(Astro2.generator, "content")}>
 		<title>${title}</title>
 	${renderHead($$result)}</head>
-	<body class="astro-T3B4LOMQ">
-		<div${addAttribute(`fixed-nav ${menu_visible ? "active" : ""} astro-T3B4LOMQ`, "class")}></div>
-		<div class="appbar-nav_content-footer astro-T3B4LOMQ">
-			${renderComponent($$result, "AppBar", $$AppBar, { "class": "astro-T3B4LOMQ" })}<!-- contain header -->
-			<div class="nav-content astro-T3B4LOMQ">
-				${renderComponent($$result, "NavTree", $$NavTree, { "class": "astro-T3B4LOMQ" })}<!-- optional contains nav -->
-				<div${addAttribute(`nav-resize ${menu_visible ? "active" : ""} astro-T3B4LOMQ`, "class")}></div>
-	 			<main class="content astro-T3B4LOMQ">
+	<body class="astro-4UPQ26HU">
+		<div${addAttribute(`fixed-nav ${left_nav_menu.visible ? "active" : ""} astro-4UPQ26HU`, "class")}></div>
+		<div class="appbar-nav_content-footer astro-4UPQ26HU">
+			<header class="astro-4UPQ26HU">
+				${renderComponent($$result, "AppBar", $$AppBar, { "class": "astro-4UPQ26HU" })}
+			</header>
+			<main class="astro-4UPQ26HU">
+				${left_nav_menu.visible && renderTemplate`${renderComponent($$result, "Fragment", Fragment, { "class": "astro-4UPQ26HU" }, { "default": () => renderTemplate`${renderComponent($$result, "TreeMenu", $$TreeMenu, { "items": left_nav_menu.items, "class": "astro-4UPQ26HU" })}<div id="resize-left" class="nav-resize active astro-4UPQ26HU"></div>` })}`}
+	 			<article class="content astro-4UPQ26HU">
 					${renderSlot($$result, $$slots["default"])}
-				</main>
-			</div>
-			<footer class="astro-T3B4LOMQ">
-				<p class="astro-T3B4LOMQ">footer</p>
+				</article>
+				${right_toc_menu.visible && renderTemplate`${renderComponent($$result, "Fragment", Fragment, { "class": "astro-4UPQ26HU" }, { "default": () => renderTemplate`<div id="resize-right" class="nav-resize active astro-4UPQ26HU"></div>${renderComponent($$result, "TreeMenu", $$TreeMenu, { "items": right_toc_menu.items, "class": "astro-4UPQ26HU" })}` })}`}
+			</main>
+			<footer class="astro-4UPQ26HU">
+				<p class="astro-4UPQ26HU">footer</p>
 			</footer>
 		</div>
 	
@@ -4284,14 +4253,78 @@ var $$module1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   file: $$file$c,
   url: $$url$c
 }, Symbol.toStringTag, { value: "Module" }));
-var $$metadata$b = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/pages/index.astro", { modules: [{ module: $$module1, specifier: "../layout/Layout.astro", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
+var html$2 = '<h1 id="astro_nav_menus">astro_nav_menus</h1>\n<p>Live demo : <a href="https://astro-nav-menus.deno.dev/">https://astro-nav-menus.deno.dev/</a></p>\n<p>Astro Theme that can scale for big documentation websites. Includes a top appbar for sections navigation, left tree menu for section pages and right tree menu for a page table of content.</p>\n<p>Performance oriented, built with native astro components, no dependencies to any extenal framework, no virtual dom. Fully static with no client side rendering. Javascript is for minial manipulations connecting events and classes.</p>\n<h2 id="features">Features</h2>\n<ul>\n<li>astro components (.astro) html css js</li>\n<li>article content immediatly searchable with native browser search, no lazy loading or custom content cache manipulations</li>\n<li>Left pages Tree menu</li>\n<li>Right Table of Content menu</li>\n<li>Menus consist of Trees with unlimited depth and recursively expandable sections</li>\n<li>Menus can be opened, closed and resized by the user</li>\n<li>Menus are built by astro and seen as read html by the client</li>\n</ul>\n<h1 id="dev">Dev</h1>\n<h2 id="creation">Creation</h2>\n<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pnpm create astro@latest</span></span></code></pre>\n<ul>\n<li>Name, Empty Project, No Typescript</li>\n<li>move to root git repo</li>\n<li>delete node_modules</li>\n</ul>\n<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pnpm install</span></span>\n<span class="line"><span style="color: #c9d1d9">pnpm astro add deno</span></span></code></pre>\n<ul>\n<li>add deno and server config to <code>astro.config.mjs</code></li>\n<li>prepare <code>.github/workflows/deploy.yml</code></li>\n</ul>\n<h2 id="todos">Todos</h2>\n<ul>\n<li>left menu directory without index has action on full area</li>\n<li>AppBar right float icons</li>\n<li>ssr mode signin with github</li>\n<li>markdown mdx</li>\n<li>ToC</li>\n<li>pages types and icons</li>\n<li>left nav menu generation from getStaticPatshs</li>\n<li>auto adjust collapsed Tree menu items to fit page height (all level or nothins)</li>\n<li>Arrow icon on fixed-nav when menu can be opened/collapsed</li>\n<li>open close on nav-resize click</li>\n<li>store nav menu width / prevent reset on same page reload</li>\n<li>evaluate css resize if it can resolve resize mouse events usage</li>\n</ul>\n<h2 id="issues">issues</h2>\n<p>adding interactive SVGs that can be styled with css is challenging</p>\n<ul>\n<li><code>svg.astro</code> uses the innerHTML fragment which breaks visibility of <code>style</code> tag no longer scoping imported SVG</li>\n<li>import of <code>rightarrow.astro</code> still requires style to be either global or inline</li>\n<li>Tree menu collapse transition :\n<ul>\n<li>display block/none does not animate the height</li>\n<li>scaleY does not bring the height down to 0 due to remaining padding margin</li>\n<li>height can be animated but must be set initially</li>\n<li>max-height can be animated but must be set to max value which breaks the transition timing</li>\n<li>max-height adjusting with js requires high complexity depending on state of expanded children hierarchy</li>\n<li>clip also needs defined start stop</li>\n<li>flex can also animate but then the flex container height must be set explicitely</li>\n</ul>\n</li>\n</ul>\n<h1 id="survey">survey</h1>\n<p>Analysis of existing Themes for Astro, focus is on documentation</p>\n<h2 id="astro-docs">astro docs</h2>\n<p><a href="https://github.com/withastro/astro/tree/main/examples/docs">https://github.com/withastro/astro/tree/main/examples/docs</a></p>\n<p>Advantages :</p>\n<p>Official example, clean html structure, light and dark toggle, left side pages and right side Table Of Content.</p>\n<p>Limitations :</p>\n<ul>\n<li>react and preact dependencies, despite island architecture this can exclude potential use cases</li>\n<li>Left Menu\n<ul>\n<li>handcoded <code>SIDEBAR</code> in <code>config.ts</code></li>\n<li>first level is map and not list so relying on ordered map</li>\n<li>fixed 2 levels structure</li>\n</ul>\n</li>\n<li>ToC is dynamically parsing the DOM on client side, this reduces astro\u2019s advantage of zero js and server side generation and rendering</li>\n<li>ToC does not take h1 and limited down to h4</li>\n</ul>\n<h2 id="hello-astro">hello astro</h2>\n<p><a href="https://github.com/hellotham/hello-astro">https://github.com/hellotham/hello-astro</a></p>\n<p>built upon astro-docs with differences :</p>\n<ul>\n<li>\n<p>advantage : right side ToC is not DOM client side like astro-docs but built with native astro component taking the <code>headings</code> Markdown Layout Prop <a href="https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props">https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props</a></p>\n</li>\n<li>\n<p>limitation: all svg integrations are either hardcoded or wrapped in images through svgimg</p>\n</li>\n</ul>';
+var frontmatter$3 = {};
+var file$3 = "D:/Dev/MicroWebStacks/astro_nav_menus/readme.md";
+var url$3 = void 0;
+function rawContent$3() {
+  return "# astro_nav_menus\n\nLive demo : https://astro-nav-menus.deno.dev/\n\nAstro Theme that can scale for big documentation websites. Includes a top appbar for sections navigation, left tree menu for section pages and right tree menu for a page table of content.\n\nPerformance oriented, built with native astro components, no dependencies to any extenal framework, no virtual dom. Fully static with no client side rendering. Javascript is for minial manipulations connecting events and classes.\n## Features\n- astro components (.astro) html css js\n- article content immediatly searchable with native browser search, no lazy loading or custom content cache manipulations\n- Left pages Tree menu\n- Right Table of Content menu\n- Menus consist of Trees with unlimited depth and recursively expandable sections\n- Menus can be opened, closed and resized by the user\n- Menus are built by astro and seen as read html by the client\n\n# Dev\n## Creation\n```\npnpm create astro@latest\n```\n - Name, Empty Project, No Typescript\n - move to root git repo\n - delete node_modules\n```\npnpm install\npnpm astro add deno\n```\n - add deno and server config to `astro.config.mjs`\n - prepare `.github/workflows/deploy.yml`\n\n## Todos\n- left menu directory without index has action on full area\n- AppBar right float icons\n- ssr mode signin with github\n- markdown mdx\n- ToC\n- pages types and icons\n- left nav menu generation from getStaticPatshs\n- auto adjust collapsed Tree menu items to fit page height (all level or nothins)\n- Arrow icon on fixed-nav when menu can be opened/collapsed\n- open close on nav-resize click\n- store nav menu width / prevent reset on same page reload\n- evaluate css resize if it can resolve resize mouse events usage\n\n## issues\nadding interactive SVGs that can be styled with css is challenging\n- `svg.astro` uses the innerHTML fragment which breaks visibility of `style` tag no longer scoping imported SVG\n - import of `rightarrow.astro` still requires style to be either global or inline\n - Tree menu collapse transition :\n    - display block/none does not animate the height\n    - scaleY does not bring the height down to 0 due to remaining padding margin\n    - height can be animated but must be set initially\n    - max-height can be animated but must be set to max value which breaks the transition timing\n    - max-height adjusting with js requires high complexity depending on state of expanded children hierarchy\n    - clip also needs defined start stop\n    - flex can also animate but then the flex container height must be set explicitely\n# survey\nAnalysis of existing Themes for Astro, focus is on documentation\n## astro docs\nhttps://github.com/withastro/astro/tree/main/examples/docs\n\nAdvantages :\n\nOfficial example, clean html structure, light and dark toggle, left side pages and right side Table Of Content.\n\nLimitations :\n - react and preact dependencies, despite island architecture this can exclude potential use cases\n - Left Menu\n   - handcoded `SIDEBAR` in `config.ts`\n   - first level is map and not list so relying on ordered map\n   - fixed 2 levels structure\n - ToC is dynamically parsing the DOM on client side, this reduces astro's advantage of zero js and server side generation and rendering\n - ToC does not take h1 and limited down to h4\n\n## hello astro\n\nhttps://github.com/hellotham/hello-astro\n\nbuilt upon astro-docs with differences :\n \n - advantage : right side ToC is not DOM client side like astro-docs but built with native astro component taking the `headings` Markdown Layout Prop https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props\n\n - limitation: all svg integrations are either hardcoded or wrapped in images through svgimg\n";
+}
+function compiledContent$3() {
+  return html$2;
+}
+function getHeadings$3() {
+  return [{ "depth": 1, "slug": "astro_nav_menus", "text": "astro_nav_menus" }, { "depth": 2, "slug": "features", "text": "Features" }, { "depth": 1, "slug": "dev", "text": "Dev" }, { "depth": 2, "slug": "creation", "text": "Creation" }, { "depth": 2, "slug": "todos", "text": "Todos" }, { "depth": 2, "slug": "issues", "text": "issues" }, { "depth": 1, "slug": "survey", "text": "survey" }, { "depth": 2, "slug": "astro-docs", "text": "astro docs" }, { "depth": 2, "slug": "hello-astro", "text": "hello astro" }];
+}
+function getHeaders$2() {
+  console.warn("getHeaders() have been deprecated. Use getHeadings() function instead.");
+  return getHeadings$3();
+}
+async function Content$3() {
+  const { layout, ...content } = frontmatter$3;
+  content.file = file$3;
+  content.url = url$3;
+  content.astro = {};
+  Object.defineProperty(content.astro, "headings", {
+    get() {
+      throw new Error('The "astro" property is no longer supported! To access "headings" from your layout, try using "Astro.props.headings."');
+    }
+  });
+  Object.defineProperty(content.astro, "html", {
+    get() {
+      throw new Error('The "astro" property is no longer supported! To access "html" from your layout, try using "Astro.props.compiledContent()."');
+    }
+  });
+  Object.defineProperty(content.astro, "source", {
+    get() {
+      throw new Error('The "astro" property is no longer supported! To access "source" from your layout, try using "Astro.props.rawContent()."');
+    }
+  });
+  const contentFragment = createVNode(Fragment, { "set:html": html$2 });
+  return contentFragment;
+}
+Content$3[Symbol.for("astro.needsHeadRendering")] = true;
+var $$module2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  frontmatter: frontmatter$3,
+  file: file$3,
+  url: url$3,
+  rawContent: rawContent$3,
+  compiledContent: compiledContent$3,
+  getHeadings: getHeadings$3,
+  getHeaders: getHeaders$2,
+  Content: Content$3,
+  default: Content$3
+}, Symbol.toStringTag, { value: "Module" }));
+var $$metadata$b = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/pages/index.astro", { modules: [{ module: $$module1, specifier: "@/layout/Layout.astro", assert: {} }, { module: $$module2, specifier: "../../readme.md", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
 var $$Astro$c = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/pages/index.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
 var $$Index$3 = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$c, $$props, $$slots);
   Astro2.self = $$Index$3;
-  const title = "Astro Nav Menus";
-  console.log("Hello from Server");
-  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": title }, { "default": () => renderTemplate`${maybeRenderHead($$result)}<h1>Demo Home</h1><p>index page</p>${new Array(100).fill(0).map((id, index) => renderTemplate`<div>${index}</div>`)}` })}`;
+  return renderTemplate`<!-- how to get headings and pass them as props -->${renderComponent($$result, "Layout", $$Layout, { "title": "Readme" }, { "default": () => renderTemplate`${maybeRenderHead($$result)}<div class="markdown">
+		${renderComponent($$result, "Readme", Content$3, {})}
+	</div>` })}
+
+<style>
+	/* The Layout Style is not active on the slot
+	   The readme layout should be imported from the frontmatter
+	   This style would be optimized if not inline
+	   Special selector needed not to override all Layout anchors
+	 */
+	 .markdown * > a{
+		color:#3794FF;
+	 }
+</style>`;
 });
 var $$file$b = "D:/Dev/MicroWebStacks/astro_nav_menus/src/pages/index.astro";
 var $$url$b = "";
@@ -4662,12 +4695,14 @@ var _page11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   file: $$file$3,
   url: $$url$3
 }, Symbol.toStringTag, { value: "Module" }));
-var $$metadata$2 = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/pages/page1.astro", { modules: [{ module: $$module1, specifier: "@/layout/Layout.astro", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
+var $$metadata$2 = createMetadata("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/pages/page1.astro", { modules: [{ module: $$module1, specifier: "../layout/Layout.astro", assert: {} }], hydratedComponents: [], clientOnlyComponents: [], hydrationDirectives: /* @__PURE__ */ new Set([]), hoisted: [] });
 var $$Astro$2 = createAstro("/@fs/D:/Dev/MicroWebStacks/astro_nav_menus/src/pages/page1.astro", "http://localhost/", "file:///D:/Dev/MicroWebStacks/astro_nav_menus/");
 var $$Page1 = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$2, $$props, $$slots);
   Astro2.self = $$Page1;
-  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Page 1" }, { "default": () => renderTemplate`${maybeRenderHead($$result)}<p>I'm in page 1</p>` })}`;
+  const title = "Astro Nav Menus";
+  console.log("Hello from Server");
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": title }, { "default": () => renderTemplate`${maybeRenderHead($$result)}<h1>Demo Home</h1><p>index page</p>${new Array(100).fill(0).map((id, index) => renderTemplate`<div>${index}</div>`)}` })}`;
 });
 var $$file$2 = "D:/Dev/MicroWebStacks/astro_nav_menus/src/pages/page1.astro";
 var $$url$2 = "/page1";
@@ -4712,7 +4747,7 @@ var _page14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
 }, Symbol.toStringTag, { value: "Module" }));
 var pageMap = /* @__PURE__ */ new Map([["src/pages/index.astro", _page0], ["src/pages/markdown/index.astro", _page1], ["src/pages/markdown/components.mdx", _page2], ["src/pages/markdown/hello.md", _page3], ["src/pages/markdown/code.md", _page4], ["src/pages/domain1/subpage1.astro", _page5], ["src/pages/domain1/subpage2.astro", _page6], ["src/pages/domain2/index.astro", _page7], ["src/pages/domain2/subdomain2/index.astro", _page8], ["src/pages/domain2/subdomain2/spage5.astro", _page9], ["src/pages/domain2/subpage4.astro", _page10], ["src/pages/about.astro", _page11], ["src/pages/page1.astro", _page12], ["src/pages/page2.astro", _page13], ["src/pages/page3.astro", _page14]]);
 var renderers = [Object.assign({ "name": "astro:jsx", "serverEntrypoint": "astro/jsx/server.js", "jsxImportSource": "astro" }, { ssr: server_default })];
-var _manifest = Object.assign(deserializeManifest({ "adapterName": "@astrojs/deno", "routes": [{ "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/", "type": "page", "pattern": "^\\/$", "segments": [], "params": [], "component": "src/pages/index.astro", "pathname": "/", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/markdown", "type": "page", "pattern": "^\\/markdown\\/?$", "segments": [[{ "content": "markdown", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/markdown/index.astro", "pathname": "/markdown", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/markdown/components", "type": "page", "pattern": "^\\/markdown\\/components\\/?$", "segments": [[{ "content": "markdown", "dynamic": false, "spread": false }], [{ "content": "components", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/markdown/components.mdx", "pathname": "/markdown/components", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/markdown/hello", "type": "page", "pattern": "^\\/markdown\\/hello\\/?$", "segments": [[{ "content": "markdown", "dynamic": false, "spread": false }], [{ "content": "hello", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/markdown/hello.md", "pathname": "/markdown/hello", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/markdown/code", "type": "page", "pattern": "^\\/markdown\\/code\\/?$", "segments": [[{ "content": "markdown", "dynamic": false, "spread": false }], [{ "content": "code", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/markdown/code.md", "pathname": "/markdown/code", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain1/subpage1", "type": "page", "pattern": "^\\/domain1\\/subpage1\\/?$", "segments": [[{ "content": "domain1", "dynamic": false, "spread": false }], [{ "content": "subpage1", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain1/subpage1.astro", "pathname": "/domain1/subpage1", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain1/subpage2", "type": "page", "pattern": "^\\/domain1\\/subpage2\\/?$", "segments": [[{ "content": "domain1", "dynamic": false, "spread": false }], [{ "content": "subpage2", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain1/subpage2.astro", "pathname": "/domain1/subpage2", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain2", "type": "page", "pattern": "^\\/domain2\\/?$", "segments": [[{ "content": "domain2", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain2/index.astro", "pathname": "/domain2", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain2/subdomain2", "type": "page", "pattern": "^\\/domain2\\/subdomain2\\/?$", "segments": [[{ "content": "domain2", "dynamic": false, "spread": false }], [{ "content": "subdomain2", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain2/subdomain2/index.astro", "pathname": "/domain2/subdomain2", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain2/subdomain2/spage5", "type": "page", "pattern": "^\\/domain2\\/subdomain2\\/spage5\\/?$", "segments": [[{ "content": "domain2", "dynamic": false, "spread": false }], [{ "content": "subdomain2", "dynamic": false, "spread": false }], [{ "content": "spage5", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain2/subdomain2/spage5.astro", "pathname": "/domain2/subdomain2/spage5", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain2/subpage4", "type": "page", "pattern": "^\\/domain2\\/subpage4\\/?$", "segments": [[{ "content": "domain2", "dynamic": false, "spread": false }], [{ "content": "subpage4", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain2/subpage4.astro", "pathname": "/domain2/subpage4", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/about", "type": "page", "pattern": "^\\/about\\/?$", "segments": [[{ "content": "about", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/about.astro", "pathname": "/about", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/page1", "type": "page", "pattern": "^\\/page1\\/?$", "segments": [[{ "content": "page1", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/page1.astro", "pathname": "/page1", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/page2", "type": "page", "pattern": "^\\/page2\\/?$", "segments": [[{ "content": "page2", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/page2.astro", "pathname": "/page2", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.612a861c.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/page3", "type": "page", "pattern": "^\\/page3\\/?$", "segments": [[{ "content": "page3", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/page3.astro", "pathname": "/page3", "_meta": { "trailingSlash": "ignore" } } }], "site": "http://localhost/", "base": "/", "markdown": { "drafts": false, "syntaxHighlight": "shiki", "shikiConfig": { "langs": [], "theme": "github-dark", "wrap": false }, "remarkPlugins": [], "rehypePlugins": [], "remarkRehype": {}, "extendDefaultPlugins": false, "isAstroFlavoredMd": false }, "pageMap": null, "renderers": [], "entryModules": { "\0@astrojs-ssr-virtual-entry": "entry.mjs", "/astro/hoisted.js?q=0": "hoisted.517069ec.js", "astro:scripts/before-hydration.js": "" }, "assets": ["/assets/107d9fe3.612a861c.css", "/favicon.svg"] }), {
+var _manifest = Object.assign(deserializeManifest({ "adapterName": "@astrojs/deno", "routes": [{ "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/", "type": "page", "pattern": "^\\/$", "segments": [], "params": [], "component": "src/pages/index.astro", "pathname": "/", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/markdown", "type": "page", "pattern": "^\\/markdown\\/?$", "segments": [[{ "content": "markdown", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/markdown/index.astro", "pathname": "/markdown", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/markdown/components", "type": "page", "pattern": "^\\/markdown\\/components\\/?$", "segments": [[{ "content": "markdown", "dynamic": false, "spread": false }], [{ "content": "components", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/markdown/components.mdx", "pathname": "/markdown/components", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/markdown/hello", "type": "page", "pattern": "^\\/markdown\\/hello\\/?$", "segments": [[{ "content": "markdown", "dynamic": false, "spread": false }], [{ "content": "hello", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/markdown/hello.md", "pathname": "/markdown/hello", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/markdown/code", "type": "page", "pattern": "^\\/markdown\\/code\\/?$", "segments": [[{ "content": "markdown", "dynamic": false, "spread": false }], [{ "content": "code", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/markdown/code.md", "pathname": "/markdown/code", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain1/subpage1", "type": "page", "pattern": "^\\/domain1\\/subpage1\\/?$", "segments": [[{ "content": "domain1", "dynamic": false, "spread": false }], [{ "content": "subpage1", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain1/subpage1.astro", "pathname": "/domain1/subpage1", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain1/subpage2", "type": "page", "pattern": "^\\/domain1\\/subpage2\\/?$", "segments": [[{ "content": "domain1", "dynamic": false, "spread": false }], [{ "content": "subpage2", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain1/subpage2.astro", "pathname": "/domain1/subpage2", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain2", "type": "page", "pattern": "^\\/domain2\\/?$", "segments": [[{ "content": "domain2", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain2/index.astro", "pathname": "/domain2", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain2/subdomain2", "type": "page", "pattern": "^\\/domain2\\/subdomain2\\/?$", "segments": [[{ "content": "domain2", "dynamic": false, "spread": false }], [{ "content": "subdomain2", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain2/subdomain2/index.astro", "pathname": "/domain2/subdomain2", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain2/subdomain2/spage5", "type": "page", "pattern": "^\\/domain2\\/subdomain2\\/spage5\\/?$", "segments": [[{ "content": "domain2", "dynamic": false, "spread": false }], [{ "content": "subdomain2", "dynamic": false, "spread": false }], [{ "content": "spage5", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain2/subdomain2/spage5.astro", "pathname": "/domain2/subdomain2/spage5", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/domain2/subpage4", "type": "page", "pattern": "^\\/domain2\\/subpage4\\/?$", "segments": [[{ "content": "domain2", "dynamic": false, "spread": false }], [{ "content": "subpage4", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/domain2/subpage4.astro", "pathname": "/domain2/subpage4", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/about", "type": "page", "pattern": "^\\/about\\/?$", "segments": [[{ "content": "about", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/about.astro", "pathname": "/about", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/page1", "type": "page", "pattern": "^\\/page1\\/?$", "segments": [[{ "content": "page1", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/page1.astro", "pathname": "/page1", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/page2", "type": "page", "pattern": "^\\/page2\\/?$", "segments": [[{ "content": "page2", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/page2.astro", "pathname": "/page2", "_meta": { "trailingSlash": "ignore" } } }, { "file": "", "links": ["assets/107d9fe3.2246fcea.css"], "scripts": [{ "type": "inline", "value": 'function u(){document.getElementsByClassName("fixed-nav")[0]?.addEventListener("click",e=>{const t=document.getElementsByTagName("nav")[0],a=t.getAttribute("data-state");a=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):a=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),e.preventDefault()});var s=!1,i,o,n=document.getElementsByClassName("nav-resize")[0];function l(){const e=document.getElementsByTagName("nav")[0];s=!1,e.style.transition="width 0.5s",e.clientWidth<20?(e.setAttribute("data-state","closed"),e.setAttribute("data-width","20vw")):e.setAttribute("data-state","open"),n.style.backgroundColor="#1E1E1E"}n?.addEventListener("mouseenter",e=>{n.style.backgroundColor="#007ACC"}),n?.addEventListener("mouseleave",e=>{n.style.backgroundColor="#1E1E1E"}),n?.addEventListener("mousedown",e=>{const t=document.getElementsByTagName("nav")[0];s=!0,i=e.x,o=t.clientWidth,t.style.transition="none"}),n?.addEventListener("mouseup",e=>{l()}),document.addEventListener("mouseup",e=>{s==!0&&l()}),document.addEventListener("mousemove",e=>{if(s==!0){const t=document.getElementsByTagName("nav")[0],a=o+(e.x-i);a<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),n.style.backgroundColor="#007ACC"):a<160||(a<document.documentElement.clientWidth/2?(t.style.width=a+"px",t.setAttribute("data-width",a+"px"),n.style.backgroundColor="#007ACC"):n.style.backgroundColor="red"),e.preventDefault()}})}const c=document.getElementsByTagName("nav")[0];c&&u();let r=document.getElementsByClassName("parent");for(let d=0;d<r.length;d++)r[d].addEventListener("click",function(s){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.classList.toggle("expanded"),s.preventDefault()});\n' }], "routeData": { "route": "/page3", "type": "page", "pattern": "^\\/page3\\/?$", "segments": [[{ "content": "page3", "dynamic": false, "spread": false }]], "params": [], "component": "src/pages/page3.astro", "pathname": "/page3", "_meta": { "trailingSlash": "ignore" } } }], "site": "http://localhost/", "base": "/", "markdown": { "drafts": false, "syntaxHighlight": "shiki", "shikiConfig": { "langs": [], "theme": "github-dark", "wrap": false }, "remarkPlugins": [], "rehypePlugins": [], "remarkRehype": {}, "extendDefaultPlugins": false, "isAstroFlavoredMd": false }, "pageMap": null, "renderers": [], "entryModules": { "\0@astrojs-ssr-virtual-entry": "entry.mjs", "/astro/hoisted.js?q=0": "hoisted.517069ec.js", "astro:scripts/before-hydration.js": "" }, "assets": ["/assets/107d9fe3.2246fcea.css", "/favicon.svg"] }), {
   pageMap,
   renderers
 });

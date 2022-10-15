@@ -1,23 +1,16 @@
 ---
-import { process_toc_list } from "../components/menu_utils";
 import SubMenu from "./SubMenu.astro";
 
 export interface Props {
-    headings: Array<Object>;
+    items: Array<Object>;
 }
 
-let { headings } = Astro.props;
-
-const side_menu = process_toc_list(headings)
-
-console.log(headings)
-
+let { items } = Astro.props;
 ---
-{side_menu.visible &&
-    <nav data-width="20vw" data-state="open">
-        <SubMenu items={side_menu.items} />
-    </nav>
-}
+<nav data-width="20vw" data-state="open">
+    <SubMenu items={items} />
+</nav>
+
 <style>
 nav{
     background: #252526;

@@ -2,8 +2,8 @@
 import AppBar from './AppBar.astro';
 import NavTree from './NavTree.astro';
 import TocTree from './TocTree.astro';
-import menu from "../config/menu.json"
-import { active_page } from "../components/utils";
+import raw_menu from "../config/menu.json"
+import { process_menu_tree,process_toc_list } from "../components/menu_utils";
 
 export interface Props {
 	title: string;
@@ -11,9 +11,9 @@ export interface Props {
 let { title, frontmatter, headings } = Astro.props;
 title = title?title:frontmatter.title
 
-const active_page_index = active_page(Astro.url,menu)
-const menu_visible = ("items" in menu[active_page_index])
-console.log(headings)
+const left_nav_menu = process_menu_tree(Astro.url,raw_menu)
+const right_toc_menu = process_toc_list(headings)
+
 ---
 <html lang="en">
 	<head>
@@ -24,16 +24,27 @@ console.log(headings)
 		<title>{title}</title>
 	</head>
 	<body >
-		<div class={`fixed-nav ${menu_visible?"active":""}`}/>
+		<div class={`fixed-nav ${left_nav_menu.visible?"active":""}`}/>
 		<div class="appbar-nav_content-footer">
-			<AppBar/><!-- contain header -->
-			<main class="nav-content-toc">
-				<NavTree/><!-- optional contains nav -->
-				<div class={`nav-resize ${menu_visible?"active":""}`}/>
+			<header>
+				<AppBar/>
+			</header>
+			<main>
+				{left_nav_menu.visible &&
+				<>
+					<NavTree items={left_nav_menu.items}/>
+					<div id="resize-left" class="nav-resize active"/>
+				</>
+				}
 	 			<article class="content">
 					<slot/>
 				</article>
-				<TocTree headings={headings}/>
+				{right_toc_menu.visible &&
+				<>
+					<div id="resize-right" class="nav-resize active"/>
+					<TocTree items={right_toc_menu.items}/>
+				</>
+				}
 			</main>
 			<footer>
 				<p>footer</p>
@@ -49,6 +60,30 @@ body{
 	display:flex;
 	flex-direction: row;
 }
+header{
+    flex-grow:0;
+	background-color: #3C3C3C;
+    width:100%;
+    user-select: none;
+}
+main{
+	flex-grow:1;
+	display:flex;
+	flex-direction: row;
+	height:80vh;
+}
+
+footer{
+	flex-grow:0;
+	background-color: #007ACC;
+	color:white;
+	text-align: center;
+	overflow: hidden;
+}
+footer p{
+	margin:6px;
+}
+
 .fixed-nav{
 	width:3em;
 	background-color: #333333;
@@ -72,12 +107,6 @@ body{
 	flex-direction: column;
 	height:100vh;
 }
-.nav-content-toc{
-	flex-grow:1;
-	display:flex;
-	flex-direction: row;
-	height:80vh;
-}
 	.nav-resize{
 		width:0.5rem;
 		background-color: #1E1E1E;
@@ -95,12 +124,14 @@ body{
 	width:100%;
 	overflow:auto;
 	padding:10px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 10px;
 }
 .content::-webkit-scrollbar {
   width: 1rem;
 }
 .content::-webkit-scrollbar-track {
-  background: #252526; 
+  background: #1E1E1E; 
 }
 .content::-webkit-scrollbar-thumb {
   background: #464647; 
@@ -109,16 +140,6 @@ body{
   background: #515151; 
 }
 
-footer{
-	flex-grow:0;
-	background-color: #007ACC;
-	color:white;
-	text-align: center;
-	overflow: hidden;
-}
-footer p{
-	margin:6px;
-}
 </style>
 
 <script >

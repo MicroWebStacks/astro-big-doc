@@ -17,12 +17,12 @@
             {
                 "text":"Sub Page 1",
                 "href":"/domain1/subpage1",
-                "level":1
+                "depth":1
             },
             {
                 "text":"Sub Page 2",
                 "href":"/domain1/subpage2",
-                "level":1
+                "depth":1
             },
             {
                 "text":"Page 3",
@@ -35,17 +35,17 @@
             {
                 "text":"Sub Page 4",
                 "href":"/domain2/subpage4",
-                "level":1
+                "depth":1
             },
             {
                 "text":"Sub Domain 2 index",
                 "href":"/domain2/subdomain2/",
-                "level":1
+                "depth":1
             },
             {
                 "text":"s page5",
                 "href":"/domain2/subdomain2/spage5",
-                "level":2
+                "depth":2
             }
         ]
     },

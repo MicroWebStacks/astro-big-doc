@@ -7,19 +7,13 @@ menu.forEach((item,index)=>{
     item.active_class = (index == active_page_index)?"active":""
 })
 ---
-<header>
+<>
     {menu.map((item)=>(
             <a href={item.href} class={item.active_class}>{item.text}</a>
     ))}
-</header>
+</>
 
 <style>
-header{
-    flex-grow:0;
-	background-color: #3C3C3C;
-    width:100%;
-    user-select: none;
-}
 
 a{
     float:left;

@@ -1,0 +1,25 @@
+---
+import Layout from "@/layout/Layout.astro";
+import {existsSync} from 'fs';
+import {resolve} from 'path';
+
+const {page} = Astro.params;
+const page_path = resolve(process.cwd()+'/data/blog/'+page)
+console.log(page_path)
+if(!existsSync(page_path)){
+    console.log(`${page} does not exist`)
+    return Astro.redirect("/")
+}
+//Astro.glob()only use literals, no variables, no string litterals
+const posts = await Astro.glob('../../../data/blog/**/*.{md,mdx}')
+
+const Post = posts.find((post)=>(resolve(post.file) == page_path))
+if(typeof Post == "undefined"){
+    console.log(`${page} could not be parsed by Astro.glob`)
+    return Astro.redirect("/")
+}
+
+---
+<Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
+	<Post.Content/>
+</Layout>

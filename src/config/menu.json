@@ -75,6 +75,10 @@
         ]
     },
     {
+        "text":"Blog",
+        "href":"/blog/file1.md"
+    },
+    {
         "text":"About",
         "href":"/about/"
     }

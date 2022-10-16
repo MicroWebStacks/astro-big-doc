@@ -39,8 +39,9 @@ pnpm astro add deno
 ## Todos
 - panzoom component
 - gallery
-- hide all and expand current url page
-- menu auto depth adjust (all level or nothins)
+- menu auto depth adjust 
+  - current page depth always open
+  - all level items or nothing
 - menu depth slider or depth selector
 - AppBar right float icons
 - ssr mode signin with github

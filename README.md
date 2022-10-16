@@ -39,17 +39,23 @@ pnpm astro add deno
 ## Todos
 - panzoom component
 - gallery
-- menu auto depth adjust 
+- authentication
+  - AppBar right float icons
+  - ssr mode signin with github
+- markdown
+  - markdown embeds (puml and others)
+  - add href links icons to markdown headings id slugs
+- menus
+  - Structure : generation of left nav menu from src/pages
+  - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
+  - pages types and icons
+  - open close on nav-resize click
+  - menu auto depth adjust 
   - current page depth always open
   - all level items or nothing
-- menu depth slider or depth selector
-- AppBar right float icons
-- ssr mode signin with github
-- pages types and icons
-- open close on nav-resize click
-- store nav menu width / prevent reset on same page reload
-- left nav menu generation from getStaticPaths
-- add href links icons to markdown
+  - depth slider or depth selector
+  - store nav menu width / prevent reset on same page reload
+  - Menu height transition MUI example is working
 
 ## Thoughts
 - allow index pages but do not use them to keep consistent nav menu of folders/items

@@ -1,15 +1,14 @@
 ---
-import SubMenu from "./SubMenu.astro";
+import NavSubMenu from "./NavSubMenu.astro";
 
 export interface Props {
   items: Array<Object>;
-  parent_click: string;
 }
 
-let { items,parent_click } = Astro.props;
+let { items } = Astro.props;
 ---
 <nav data-width="20vw" data-state="open">
-    <SubMenu items={items} parent_click={parent_click}/>
+    <NavSubMenu items={items} />
 </nav>
 
 <style>

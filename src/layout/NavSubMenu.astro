@@ -1,32 +1,31 @@
 ---
-import SubMenu from "./SubMenu.astro";
-import Rightarrow from "../svg/rightarrow.astro";
+import NavSubMenu from "./NavSubMenu.astro";
+
 export interface Props {
 	items: Array<Object>;
     root:boolean;
-    parent_click: string;//"expand" for left nav director/pages differentiation ; "href" for ToC where Arrow handles expand and span handles href
 }
-const { items,root=true,parent_click } = Astro.props;
+const { items,root=true } = Astro.props;
 ---
 {items &&
     <ul class={root?"":"nested"}>
         {items.map((item)=>(
             <li >
-                <a  href={item.parent?((parent_click == "href")?item.href:""):item.href}
-                    class:list={[{active:item.active, parent:item.parent, expanded:item.expanded, click_expand:item.parent&&(parent_click == "expand")}]}
+                <a  href={item.parent?"":item.href}
+                    class:list={[{active:item.active, parent:item.parent, expanded:item.expanded, nav_expand:item.parent}]}
                     >
                     {item.parent &&
-                        <span class:list={[{"icon":true,click_expand:(parent_click == "href")}]}>
+                        <span class="icon">
                             <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </span>
                     }
-                    <span class:list={[{"text":true,href_hover:item.parent&&(parent_click == "href")}]}>
+                    <span class="text">
                         {item.text}
                     </span>
                 </a>
-                <SubMenu items={item.items} root={false} parent_click={parent_click}/>
+                <NavSubMenu items={item.items} root={false}/>
             </li>
         ))}
     </ul>
@@ -48,7 +47,7 @@ const { items,root=true,parent_click } = Astro.props;
     a.active{
         background-color: #37373D;
     }
-    a.click_expand:hover, a:not(.parent):hover{
+    a.nav_expand:hover, a:not(.parent):hover{
         background-color: var(--span-hover);
     }
     a.parent{
@@ -78,13 +77,13 @@ const { items,root=true,parent_click } = Astro.props;
     a.parent.expanded > span > svg{
         rotate: 90deg;
     }
-    span.click_expand:hover{
+    span.nav_expand:hover{
         background-color: var(--span-hover);
     }
-    span.click_expand:hover > svg > path{
+    span.nav_expand:hover > svg > path{
         stroke:var(--svg-hover);
     }
-    a.click_expand:hover > span.icon > svg > path{
+    a.nav_expand:hover > span.icon > svg > path{
         stroke: var(--svg-hover);
     }
 
@@ -125,7 +124,7 @@ const { items,root=true,parent_click } = Astro.props;
 
 <script>
     //This script is here and not under Submenu to make it run only once
-    let toggler = document.getElementsByClassName("click_expand");
+    let toggler = document.getElementsByClassName("nav_expand");
     for (let i = 0; i < toggler.length; i++) {
       toggler[i].addEventListener("click", function(e) {
         console.log(this.tagName)

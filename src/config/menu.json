@@ -23,7 +23,7 @@
     },
     {
         "text":"Astro",
-        "href":"/astro/page1",
+        "href":"/astro/deep_toc",
         "items":[
             {
                 "text":"Deep ToC",

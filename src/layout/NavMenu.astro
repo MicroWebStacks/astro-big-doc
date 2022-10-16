@@ -7,7 +7,7 @@ export interface Props {
 
 let { items } = Astro.props;
 ---
-<nav data-width="20vw" data-state="open">
+<nav class="left-nav" data-width="20vw" data-state="open">
     <NavSubMenu items={items} />
 </nav>
 
@@ -34,6 +34,4 @@ nav::-webkit-scrollbar-thumb:hover {
   background: #515151; 
 }
 
-
 </style>
-

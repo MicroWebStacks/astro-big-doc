@@ -8,7 +8,7 @@ export interface Props {
 const { items,root=true} = Astro.props;
 ---
 {items &&
-    <ul class={root?"":"nested"}>
+    <ul class={root?"root":"nested"}>
         {items.map((item)=>(
             <li >
                 <a  href={item.href}
@@ -66,6 +66,9 @@ const { items,root=true} = Astro.props;
         padding-bottom:5px;
         flex-grow:1;
         display:block;
+    }
+    a.parent > span.text{
+        padding-left: 0px;
     }
 
     span.icon > svg{
@@ -127,15 +130,9 @@ const { items,root=true} = Astro.props;
     let toggler = document.getElementsByClassName("toc_expand");
     for (let i = 0; i < toggler.length; i++) {
       toggler[i].addEventListener("click", function(e) {
-        console.log(this.tagName)
-        if(this.tagName == "A"){                //for false => A handles expand click
-            this.parentElement.querySelector("ul")?.classList.toggle("hidden");
-            this.classList.toggle("expanded");
-        }else if(this.tagName == "SPAN"){       //for true => expand click goes to span
-            this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
-            this.parentElement.classList.toggle("expanded");
-        }
-          e.preventDefault()
+        this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
+        this.parentElement.classList.toggle("expanded");
+        e.preventDefault()
       });
     }
 </script>

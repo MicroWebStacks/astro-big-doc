@@ -39,6 +39,7 @@ pnpm astro add deno
 ## Todos
 - panzoom component
 - gallery
+- hide all and expand current url page
 - menu auto depth adjust (all level or nothins)
 - menu depth slider or depth selector
 - AppBar right float icons
@@ -89,3 +90,11 @@ built upon astro-docs with differences :
  - advantage : right side ToC is not DOM client side like astro-docs but built with native astro component taking the `headings` Markdown Layout Prop https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props
 
  - limitation: all svg integrations are either hardcoded or wrapped in images through svgimg
+
+# License
+- MIT
+## icons
+Apache License
+- https://www.svgrepo.com/svg/19947/folders
+- https://www.svgrepo.com/svg/400563/openfilefolder
+

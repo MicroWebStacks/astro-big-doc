@@ -8,7 +8,7 @@ export interface Props {
 const { items,root=true } = Astro.props;
 ---
 {items &&
-    <ul class={root?"":"nested"}>
+    <ul class={root?"root":"nested"}>
         {items.map((item)=>(
             <li >
                 <a  href={item.parent?"":item.href}
@@ -20,6 +20,8 @@ const { items,root=true } = Astro.props;
                                 <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </span>
+                        //<object class="icon closed hidden" data="/folders-svgrepo-com.svg" type="image/svg+xml"/>
+                        //<object class="icon open" data="/openfilefolder-svgrepo-com.svg" type="image/svg+xml"/>
                     }
                     <span class="text">
                         {item.text}
@@ -35,6 +37,7 @@ const { items,root=true } = Astro.props;
         --span-hover: #606060;/* #2A2D2E */
         --svg-hover: #4d99cc;
     }
+
     a{
         padding:0px;
         padding-left:0px;
@@ -53,6 +56,7 @@ const { items,root=true } = Astro.props;
     a.parent{
         cursor:pointer;
         display:flex;
+        align-items:center;
     }
     span.icon{
         padding:10px;
@@ -67,12 +71,20 @@ const { items,root=true } = Astro.props;
         flex-grow:1;
         display:block;
     }
+    a.parent > span.text{
+        padding-left: 0px;
+    }
 
     span.icon > svg{
         width:16px;
         height:16px;
         rotate: 0deg;
         transition: rotate .4s ease-in-out;
+    }
+    object.icon{
+        width:16px;
+        height:16px;
+        padding-bottom:5px;
     }
     a.parent.expanded > span > svg{
         rotate: 90deg;
@@ -117,8 +129,16 @@ const { items,root=true } = Astro.props;
     li{
         min-width: 130px;
     }
-
-    
+    object.hidden{
+        display:flex;
+        visibility: collapse;
+    }
+    ul.root > li{
+        margin: 5px;
+        box-shadow: 2px 2px 4px 0px rgba(145, 144, 144, 0.5);
+        border-radius: 10px;
+    }
+   
 </style>
 
 
@@ -127,15 +147,14 @@ const { items,root=true } = Astro.props;
     let toggler = document.getElementsByClassName("nav_expand");
     for (let i = 0; i < toggler.length; i++) {
       toggler[i].addEventListener("click", function(e) {
-        console.log(this.tagName)
-        if(this.tagName == "A"){                //for (parent_click == "expand") => A handles expand click
-            this.parentElement.querySelector("ul")?.classList.toggle("hidden");
-            this.classList.toggle("expanded");
-        }else if(this.tagName == "SPAN"){       //for (parent_click == "href") => expand click goes to span
-            this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
-            this.parentElement.classList.toggle("expanded");
+        const ul = this.parentElement.querySelector("ul")
+        ul.classList.toggle("hidden");
+        if(ul.classList.contains("hidden")){
+            this.classList.remove("expanded");
+        }else{
+            this.classList.add("expanded");
         }
-          e.preventDefault()
+        e.preventDefault()
       });
     }
 </script>

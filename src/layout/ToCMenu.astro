@@ -5,9 +5,9 @@ export interface Props {
   items: Array<Object>;
 }
 
-let { items,parent_click } = Astro.props;
+let { items } = Astro.props;
 ---
-<nav data-width="20vw" data-state="open">
+<nav class="right-toc" data-width="20vw" data-state="open">
     <ToCSubMenu items={items} />
 </nav>
 

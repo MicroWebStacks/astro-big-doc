@@ -13,7 +13,7 @@ export default defineConfig({
     // Can be 'shiki' (default), 'prism' or false to disable highlighting
     syntaxHighlight: 'shiki',
     remarkPlugins:[
-      remarkPlantUML
+      [remarkPlantUML,{ baseUrl: "https://www.plantuml.com/plantuml/svg" }]
     ]
   },
   integrations: [mdx()]

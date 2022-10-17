@@ -7,14 +7,6 @@ import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
-  adapter: vercel(),
-  markdown: {
-    // Can be 'shiki' (default), 'prism' or false to disable highlighting
-    syntaxHighlight: 'shiki',
-    remarkPlugins: [[remarkPlantUML, {
-      baseUrl: "https://www.plantuml.com/plantuml/svg"
-    }]]
-  },
-  integrations: [mdx()]
+  output: "static",
+  adapter: vercel()
 });

@@ -36,6 +36,24 @@ pnpm astro add deno
  - add deno and server config to `astro.config.mjs`
  - prepare `.github/workflows/deploy.yml`
 
+## plantuml SVG
+* reconfigure remarkPlantUML to fetch SVG
+in file `astro.config.mjs`
+```mjs
+    remarkPlugins:[
+      [
+        remarkPlantUML,{ baseUrl: "https://www.plantuml.com/plantuml/svg" }
+      ]
+    ]
+```
+* replace img tag with object tag for searchable SVG
+in file `node_modules\@akebifiky\remark-simple-plantuml\index.js`
+```js
+      node.type = "html";
+      const val = `${options.baseUrl.replace(/\/$/, "")}/${plantumlEncoder.encode(value)}`;
+      node.value = `<object type="image/svg+xml"  data="${val}" />`
+```
+
 ## Todos
 - panzoom component
 - gallery

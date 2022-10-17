@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
+import remarkPlantUML from '@akebifiky/remark-simple-plantuml'
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,7 +11,12 @@ export default defineConfig({
   }),
   markdown: {
     // Can be 'shiki' (default), 'prism' or false to disable highlighting
-    syntaxHighlight: 'shiki'
+    syntaxHighlight: 'shiki',
+    remarkPlugins:[
+      [
+        remarkPlantUML,{ baseUrl: "https://www.plantuml.com/plantuml/svg" }
+      ]
+    ]
   },
   integrations: [mdx()]
 });

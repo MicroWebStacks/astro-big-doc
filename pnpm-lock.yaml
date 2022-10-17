@@ -2,17 +2,19 @@ lockfileVersion: 5.4
 
 specifiers:
   '@akebifiky/remark-simple-plantuml': ^1.0.2
-  '@astrojs/deno': ^1.1.0
   '@astrojs/mdx': ^0.11.4
   '@astrojs/node': ^2.0.0
   astro: ^1.4.2
+  plantuml-encoder: ^1.4.0
+  unist-util-visit: ^4.1.1
 
 dependencies:
   '@akebifiky/remark-simple-plantuml': 1.0.2
-  '@astrojs/deno': 1.1.0
   '@astrojs/mdx': 0.11.4
   '@astrojs/node': 2.0.0
   astro: 1.4.2
+  plantuml-encoder: 1.4.0
+  unist-util-visit: 4.1.1
 
 packages:
 
@@ -37,12 +39,6 @@ packages:
 
   /@astrojs/compiler/0.25.2:
     resolution: {integrity: sha512-GE7uLvH7rSHuTHdMun+867TWsgYNYsaGuhvXsywcaabl4W4n/3b1kzgzrIsrXYBo51J0k6qD33mVdsHdvwv5rw==}
-    dev: false
-
-  /@astrojs/deno/1.1.0:
-    resolution: {integrity: sha512-oPjKmQQkLZPD3tl+Mur86SguTPlOYwASByAmRWAGOesmHgktTHebuJprc2dvqfmbao6mZbToZPLm63IqdJqlRg==}
-    dependencies:
-      esbuild: 0.14.54
     dev: false
 
   /@astrojs/language-server/0.26.2:

@@ -11,9 +11,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.4.2",
+    "@akebifiky/remark-simple-plantuml": "^1.0.2",
     "@astrojs/mdx": "^0.11.4",
     "@astrojs/node": "^2.0.0",
-    "@akebifiky/remark-simple-plantuml": "^1.0.2"
+    "astro": "^1.4.2",
+    "plantuml-encoder": "^1.4.0",
+    "unist-util-visit": "^4.1.1"
   }
 }

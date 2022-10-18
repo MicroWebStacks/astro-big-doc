@@ -60,9 +60,11 @@ in file `node_modules\@akebifiky\remark-simple-plantuml\index.js`
 - authentication
   - AppBar right float icons
   - ssr mode signin with github
-- markdown
-  - markdown embeds (puml and others)
-  - add href links icons to markdown headings id slugs
+- markdown headings plugin add icons for id slugs
+- markdown diagrams puml
+  - on build time, check readme data and optionally regenerate the svg
+  - remark plugin replace puml with astro panzoom svg component (with object integration)
+  - pass also on all .puml files in the folder to turn them in SVG potentially directly used by the readmes in astro panzoom svg component
 - menus
   - Structure : generation of left nav menu from src/pages
   - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files

@@ -1,13 +1,15 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
-import {remarkPlantUML} from './src/libs/remark-object-plantuml'
+import node from "@astrojs/node";
+import remarkPlantUML from '@akebifiky/remark-simple-plantuml'
 
+// https://astro.build/config
 export default defineConfig({
-  output: "static",
-  site: 'http://localhost',
-  base: '',
-  trailingSlash: 'ignore',
-  markdown:{
+  output: "server",
+  adapter: node({
+    mode: 'standalone'
+  }),
+  markdown: {
     // Can be 'shiki' (default), 'prism' or false to disable highlighting
     syntaxHighlight: 'shiki',
     remarkPlugins:[

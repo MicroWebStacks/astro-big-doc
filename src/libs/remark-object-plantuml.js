@@ -18,12 +18,10 @@ const DEFAULT_OPTIONS = {
  *
  * @param {Object} pluginOptions Remark plugin options.
  */
-function remarkSimplePlantumlPlugin(pluginOptions) {
-    console.log("plugin")
+function remarkPlantUML(pluginOptions) {
   const options = { ...DEFAULT_OPTIONS, ...pluginOptions };
 
   return function transformer(syntaxTree) {
-    console.log("plugin running")
     visit(syntaxTree, "code", node => {
       let { lang, value, meta } = node;
       if (!lang || !value || lang !== "plantuml") return;
@@ -38,7 +36,6 @@ function remarkSimplePlantumlPlugin(pluginOptions) {
   };
 }
 
-//TODO still not working __vite_ssr_import_0__.default is not a function
-export {
-    remarkSimplePlantumlPlugin
+export{
+  remarkPlantUML
 }

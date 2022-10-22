@@ -19,6 +19,14 @@ if(typeof Post == "undefined"){
     return Astro.redirect("/")
 }
 
+//for static test only
+export async function getStaticPaths(){
+    return [
+    { params: { page: 'file1.md' } },
+    { params: { page: 'file2.md' } }
+  ];    
+}
+
 ---
 <Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
 	<Post.Content/>

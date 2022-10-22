@@ -15,6 +15,6 @@
     "@astrojs/node": "^2.0.0",
     "astro": "^1.5.2",
     "plantuml-encoder": "^1.4.0",
-    "unist-util-visit": "^2.0.2"
+    "unist-util-visit": "^4.1.1"
   }
 }

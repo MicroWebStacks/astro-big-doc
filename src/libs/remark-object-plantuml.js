@@ -1,7 +1,7 @@
 //https://www.npmjs.com/package/@akebifiky/remark-simple-plantuml
 //adapted to replace img svg with an object svg
 
-import visit from "unist-util-visit";
+import {visit} from "unist-util-visit";
 import plantumlEncoder from "plantuml-encoder";
 
 const DEFAULT_OPTIONS = {

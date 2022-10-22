@@ -5,14 +5,14 @@ specifiers:
   '@astrojs/node': ^2.0.0
   astro: ^1.5.2
   plantuml-encoder: ^1.4.0
-  unist-util-visit: ^2.0.2
+  unist-util-visit: ^4.1.1
 
 dependencies:
   '@astrojs/mdx': 0.11.4
   '@astrojs/node': 2.0.0
   astro: 1.5.2
   plantuml-encoder: 1.4.0
-  unist-util-visit: 2.0.3
+  unist-util-visit: 4.1.1
 
 packages:
 
@@ -3713,10 +3713,6 @@ packages:
     resolution: {integrity: sha512-TiWE6DVtVe7Ye2QxOVW9kqybs6cZexNwTwSMVgkfjEReqy/xwGpAXb99OxktoWwmL+Z+Epb0Dn8/GNDYP1wnUw==}
     dev: false
 
-  /unist-util-is/4.1.0:
-    resolution: {integrity: sha512-ZOQSsnce92GrxSqlnEEseX0gi7GH9zTJZ0p9dtu87WRb/37mMPO2Ilx1s/t9vBHrFhbgweUwb+t7cIn5dxPhZg==}
-    dev: false
-
   /unist-util-is/5.1.1:
     resolution: {integrity: sha512-F5CZ68eYzuSvJjGhCLPL3cYx45IxkqXSetCcRgUXtbcm50X2L9oOWQlfUfDdAf+6Pd27YDblBfdtmsThXmwpbQ==}
     dev: false
@@ -3762,26 +3758,11 @@ packages:
     resolution: {integrity: sha512-sA/nXwYRCQVRwZU2/tQWUqJ9JSFM1X3x7JIOsIgSzrFHcfVt6NkzDtKzyxg2cZWkCwGF9CO8x4QNZRJRMK8FeQ==}
     dev: false
 
-  /unist-util-visit-parents/3.1.1:
-    resolution: {integrity: sha512-1KROIZWo6bcMrZEwiH2UrXDyalAa0uqzWCxCJj6lPOvTve2WkfgCytoDTPaMnodXh1WrXOq0haVYHj99ynJlsg==}
-    dependencies:
-      '@types/unist': 2.0.6
-      unist-util-is: 4.1.0
-    dev: false
-
   /unist-util-visit-parents/5.1.1:
     resolution: {integrity: sha512-gks4baapT/kNRaWxuGkl5BIhoanZo7sC/cUT/JToSRNL1dYoXRFl75d++NkjYk4TAu2uv2Px+l8guMajogeuiw==}
     dependencies:
       '@types/unist': 2.0.6
       unist-util-is: 5.1.1
-    dev: false
-
-  /unist-util-visit/2.0.3:
-    resolution: {integrity: sha512-iJ4/RczbJMkD0712mGktuGpm/U4By4FfDonL7N/9tATGIF4imikjOuagyMY53tnZq3NP6BcmlrHhEKAfGWjh7Q==}
-    dependencies:
-      '@types/unist': 2.0.6
-      unist-util-is: 4.1.0
-      unist-util-visit-parents: 3.1.1
     dev: false
 
   /unist-util-visit/4.1.1:

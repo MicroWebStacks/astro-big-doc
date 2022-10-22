@@ -37,22 +37,8 @@ pnpm astro add deno
  - prepare `.github/workflows/deploy.yml`
 
 ## plantuml SVG
-* reconfigure remarkPlantUML to fetch SVG
-in file `astro.config.mjs`
-```mjs
-    remarkPlugins:[
-      [
-        remarkPlantUML,{ baseUrl: "https://www.plantuml.com/plantuml/svg" }
-      ]
-    ]
-```
-* replace img tag with object tag for searchable SVG
-in file `node_modules\@akebifiky\remark-simple-plantuml\index.js`
-```js
-      node.type = "html";
-      const val = `${options.baseUrl.replace(/\/$/, "")}/${plantumlEncoder.encode(value)}`;
-      node.value = `<object type="image/svg+xml"  data="${val}" />`
-```
+* `remark-object-plantuml` : Dynamic, the client needs to wait for svg generation when the page is loaded. The plugin only replace plantuml code with html `object` tag pointing on server with encoded text in url.
+* `remark-astro-plantuml` : Static, svg generated on build time. The lpugin extracts plantuml code, place it on extrnal `.puml` file and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed. Uses then an astro component to integrate the generated svg.
 
 ## Todos
 - node not serving files

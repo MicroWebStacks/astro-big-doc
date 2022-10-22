@@ -2,21 +2,24 @@
 import Layout from "@/layout/Layout.astro";
 import {existsSync,readdirSync} from 'fs';
 import {resolve} from 'path';
+import Svgb from "@/svg/svgblog.astro"
+
+const output_static = true
 
 const {page} = Astro.params;
 const page_path = resolve(process.cwd()+'/data/blog/'+page)
 console.log(page_path)
-if(!existsSync(page_path)){
+if(!existsSync(page_path) && !output_static){
     console.log(`${page} does not exist`)
-    return Astro.redirect("/")
+    //return Astro.redirect("/")
 }
 //Astro.glob()only use literals, no variables, no string litterals
 const posts = await Astro.glob('../../../data/blog/**/*.{md,mdx}')//relative to this file
 
 const Post = posts.find((post)=>(resolve(post.file) == page_path))
-if(typeof Post == "undefined"){
+if((typeof Post == "undefined") && !output_static){
     console.log(`${page} could not be parsed by Astro.glob`)
-    return Astro.redirect("/")
+    //return Astro.redirect("/")
 }
 
 export async function getStaticPaths(){
@@ -25,6 +28,8 @@ export async function getStaticPaths(){
 }
 
 ---
+{Post &&
 <Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
-	<Post.Content/>
+        <Post.Content components={{ Svgb,svgb:Svgb }}/>
 </Layout>
+}

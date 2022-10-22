@@ -7,6 +7,7 @@ export interface Props {
 
 const { filename } = Astro.props as Props;
 const innerHTML = readFileSync(`./data/blog/${filename}`).toString();
+console.log(import.meta.url)
 ---
 
 <Fragment set:html={innerHTML} />

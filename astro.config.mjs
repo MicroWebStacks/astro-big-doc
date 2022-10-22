@@ -9,12 +9,17 @@ export default defineConfig({
   base: '',
   trailingSlash: 'ignore',
   markdown:{
-    // Can be 'shiki' (default), 'prism' or false to disable highlighting
-    syntaxHighlight: 'shiki',
+    syntaxHighlight: false,
     remarkPlugins: [
-      remarkPUML,
-      remarkPlantUML,
-    ]
+        remarkPlantUML
+    ],
+    rehypePlugins: [],
+    extendDefaultPlugins: true
   },
-  integrations: [mdx()]
+  integrations: [mdx({
+    remarkPlugins:[
+      remarkPUML
+    ],
+    extendPlugins: 'astroDefaults'
+  })]
 });

@@ -44,8 +44,9 @@ pnpm astro add deno
 - node not serving files
 - markdown headings plugin add icons for id slugs
 - markdown diagrams puml
-  - on build time, check readme data and optionally regenerate the svg
+  - on build time, check markdown data and optionally regenerate the svg
   - remark plugin replace puml with astro panzoom svg component (with object integration)
+  - Bug : plantuml Svgb eats up following markdown
   - pass also on all .puml files in the folder to turn them in SVG potentially directly used by the readmes in astro panzoom svg component
 - panzoom component
 - gallery

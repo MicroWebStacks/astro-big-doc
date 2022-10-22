@@ -76,18 +76,18 @@
     },
     {
         "text":"Blog",
-        "href":"/blog/file1.md",
+        "href":"/blog/file1.mdx",
         "items":[
             {
-                "text":"Page 1",
-                "href":"/blog/file1.md"
+                "text":"Static Plantuml",
+                "href":"/blog/file1.mdx"
             },
             {
-                "text":"Page 2",
-                "href":"/blog/file2.mdx"
+                "text":"Dynamic Plantuml",
+                "href":"/blog/file2.md"
             },
             {
-                "text":"Page 3",
+                "text":"Svg",
                 "href":"/blog/file3.mdx"
             }
         ]

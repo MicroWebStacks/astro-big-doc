@@ -1,9 +1,8 @@
 ---
 title: Great Post
 ---
-# title
-hello file1
-
+# Plantuml Dynamic loading
+Loaded dynamically from the plantuml server. Some latecy is observed.
 
 ## Sequence
 

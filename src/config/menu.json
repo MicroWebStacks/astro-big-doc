@@ -76,7 +76,17 @@
     },
     {
         "text":"Blog",
-        "href":"/blog/file1.md"
+        "href":"/blog/file1.md",
+        "items":[
+            {
+                "text":"Page 1",
+                "href":"/blog/file1.md"
+            },
+            {
+                "text":"Page 2",
+                "href":"/blog/file2.mdx"
+            }
+        ]
     },
     {
         "text":"About",

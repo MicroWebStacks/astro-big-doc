@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layout/Layout.astro";
-import {existsSync} from 'fs';
+import {existsSync,readdirSync} from 'fs';
 import {resolve} from 'path';
 
 const {page} = Astro.params;
@@ -11,7 +11,7 @@ if(!existsSync(page_path)){
     return Astro.redirect("/")
 }
 //Astro.glob()only use literals, no variables, no string litterals
-const posts = await Astro.glob('../../../data/blog/**/*.{md,mdx}')
+const posts = await Astro.glob('../../../data/blog/**/*.{md,mdx}')//relative to this file
 
 const Post = posts.find((post)=>(resolve(post.file) == page_path))
 if(typeof Post == "undefined"){
@@ -19,12 +19,9 @@ if(typeof Post == "undefined"){
     return Astro.redirect("/")
 }
 
-//for static test only
 export async function getStaticPaths(){
-    return [
-    { params: { page: 'file1.md' } },
-    { params: { page: 'file2.md' } }
-  ];    
+    const files = readdirSync('data/blog/')//relative to astro root
+    return files.map((file)=>({params:{page:file}}))
 }
 
 ---

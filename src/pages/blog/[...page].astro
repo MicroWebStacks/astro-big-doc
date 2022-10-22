@@ -30,6 +30,6 @@ export async function getStaticPaths(){
 ---
 {Post &&
 <Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
-        <Post.Content components={{ Svgb,svgb:Svgb }}/>
+        <Post.Content components={{ Svgb,svg:Svgb }}/>
 </Layout>
 }

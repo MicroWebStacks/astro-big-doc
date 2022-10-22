@@ -85,6 +85,10 @@
             {
                 "text":"Page 2",
                 "href":"/blog/file2.mdx"
+            },
+            {
+                "text":"Page 3",
+                "href":"/blog/file3.mdx"
             }
         ]
     },

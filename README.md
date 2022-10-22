@@ -1,4 +1,4 @@
-# astro_nav_menus
+# astro big doc
 
 Live demo : https://astro-nav-menus.deno.dev/
 
@@ -91,8 +91,15 @@ in file `node_modules\@akebifiky\remark-simple-plantuml\index.js`
     - max-height adjusting with js requires high complexity depending on state of expanded children hierarchy
     - clip also needs defined start stop
     - flex can also animate but then the flex container height must be set explicitely
-# survey
-Analysis of existing Themes for Astro, focus is on documentation
+
+# References
+* https://github.com/syntax-tree/mdast
+* https://github.com/syntax-tree/mdast#code
+* https://github.com/syntax-tree/mdast#html
+* https://github.com/remarkjs/remark/blob/main/doc/plugins.md
+* https://github.com/syntax-tree/unist-util-visit
+* https://github.com/akebifiky/remark-simple-plantuml
+
 ## astro docs
 https://github.com/withastro/astro/tree/main/examples/docs
 
@@ -121,8 +128,8 @@ built upon astro-docs with differences :
 
 # License
 - MIT
-## icons
+## images
 Apache License
 - https://www.svgrepo.com/svg/19947/folders
 - https://www.svgrepo.com/svg/400563/openfilefolder
-
+- https://freesvg.org/1542512156 : tree

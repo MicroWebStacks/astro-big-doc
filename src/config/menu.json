@@ -89,6 +89,10 @@
             {
                 "text":"Svg",
                 "href":"/blog/file3.mdx"
+            },
+            {
+                "text":"Plantuml as Astro component",
+                "href":"/blog/file4.mdx"
             }
         ]
     },

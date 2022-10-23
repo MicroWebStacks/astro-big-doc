@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
-import {remarkPlantUML} from './src/libs/remark-plantuml-object'
-import {remarkPUML} from './src/libs/remark-plantuml-svg'
+import {remarkPUMLObj} from './src/libs/remark-plantuml-object'
+import {remarkPUMLSvg} from './src/libs/remark-plantuml-svg'
+import {remarkPUMLAstro} from './src/libs/remark-plantuml-astro'
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,8 +13,9 @@ export default defineConfig({
   markdown:{
     syntaxHighlight: 'shiki',
     remarkPlugins: [
-      remarkPUML,
-      remarkPlantUML,
+      remarkPUMLObj,
+      remarkPUMLSvg,
+      remarkPUMLAstro
     ],
     rehypePlugins: [],
     extendDefaultPlugins: true

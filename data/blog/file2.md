@@ -1,10 +1,10 @@
 ---
 title: Great Post
 ---
-# Plantuml Dynamic loading
-Loaded dynamically from the plantuml server. Some latecy is observed.
+# Plantuml Markdown integrations
 
-## sequence static
+## static sequence
+This sequence is using `remark-plantuml-svg` which replaces the code with svg on build time
 
 ```plantuml
 @startuml
@@ -15,7 +15,8 @@ Foo -> Foo1 : Message(Hi there)
 ```
 
 
-## Sequence
+## dynamic sequence
+This sequence is using `remark-plantuml-object` which only encodes the sequence and place it on an `object` that is fetched on load from the client. Some latecy can be observed on first load.
 
 ```plantumldyn
 @startuml

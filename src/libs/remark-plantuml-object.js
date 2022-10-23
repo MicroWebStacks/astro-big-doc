@@ -18,7 +18,7 @@ const DEFAULT_OPTIONS = {
  *
  * @param {Object} pluginOptions Remark plugin options.
  */
-function remarkPlantUML(pluginOptions) {
+function remarkPUMLObj(pluginOptions) {
   const options = { ...DEFAULT_OPTIONS, ...pluginOptions };
 
   return function transformer(syntaxTree) {
@@ -36,5 +36,5 @@ function remarkPlantUML(pluginOptions) {
 }
 
 export{
-  remarkPlantUML
+  remarkPUMLObj
 }

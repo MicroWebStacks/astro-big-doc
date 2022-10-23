@@ -1,6 +1,8 @@
 # astro big doc
 
-Live demo : https://astro-nav-menus.deno.dev/
+Live demo : https://microwebstacks.github.io/astro-big-doc/
+
+Early stage deno deployment : https://astro-nav-menus.deno.dev/
 
 Astro Theme that can scale for big documentation websites. Includes an unimited depth config menu that starts with a top appbar for sections navigation, then continues on a tree left  menu for pages. Each page then has a tree right menu for its table of content.
 
@@ -40,18 +42,17 @@ pnpm create astro@latest
  - prepare `.github/workflows/deploy.yml`
 
 ## plantuml SVG
-* `remark-object-plantuml` : Dynamic, the client needs to wait for svg generation when the page is loaded. The plugin only replace plantuml code with html `object` tag pointing on server with encoded text in url.
-* `remark-svg-plantuml` : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal `.puml` file for vs code preview convenience and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.
+* `remark-plantuml-object` : Dynamic, the client needs to wait for svg generation when the page is loaded. The plugin only replace plantuml code with html `object` tag pointing on server with encoded text in url.
+* `remark-plantuml-svg` : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal `.puml` file for vs code preview convenience and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.
+* `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
 
 ## Todos
-- node not serving files
-- markdown headings plugin add icons for id slugs
-- markdown diagrams puml
-  - on build time, check markdown data and optionally regenerate the svg
-  - remark plugin replace puml with astro panzoom svg component (with object integration)
-  - Bug : plantuml Svgb eats up following markdown
-  - pass also on all .puml files in the folder to turn them in SVG potentially directly used by the readmes in astro panzoom svg component
+- Issue : how to pass filename only and identify the path of the caller component, check Astro.resolve()
 - panzoom component
+  - start Dynamic Modal
+- Markdown enhacement with Astro component (only works for mdx not md)
+  - markdown headings, hover highlight and icons for id slugs
+- Issue : node not serving files
 - gallery
 - authentication
   - AppBar right float icons
@@ -65,8 +66,8 @@ pnpm create astro@latest
   - current page depth always open
   - all level items or nothing
   - depth slider or depth selector
-  - store nav menu width / prevent reset on same page reload
-  - Menu height transition MUI example is working
+  - Issue: Menu height transition MUI example is working
+  - (optional) store nav menu width / prevent reset on same page reload
 
 ## Hints
 - menu config allows index pages but do not use them to keep consistent nav menu of folders/items
@@ -120,7 +121,7 @@ built upon astro-docs with differences :
 # License
 - MIT
 ## images
-Apache License
 - https://www.svgrepo.com/svg/19947/folders
 - https://www.svgrepo.com/svg/400563/openfilefolder
 - https://freesvg.org/1542512156 : tree
+- https://www.svgrepo.com/svg/75085/full-screen

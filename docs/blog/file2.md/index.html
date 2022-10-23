@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="astro-APHAMN3I">
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+		<meta name="viewport" content="width=device-width">
+		<meta name="generator" content="Astro v1.5.2">
+		<title>Great Post</title>
+	<link rel="stylesheet" href="/assets/index.4d34db6d.css" /><script type="module">function g(s,e,t,m){s.addEventListener("click",n=>{const i=t.getAttribute("data-state");i=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):i=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),n.preventDefault()});var d=!1,o,a;function l(){d=!1,t.style.transition="width 0.5s",t.clientWidth<20?(t.setAttribute("data-state","closed"),t.setAttribute("data-width","20vw")):t.setAttribute("data-state","open"),e.style.backgroundColor="#1E1E1E"}e.addEventListener("mouseenter",n=>{e.style.backgroundColor="#007ACC"}),e.addEventListener("mouseleave",n=>{e.style.backgroundColor="#1E1E1E"}),e.addEventListener("mousedown",n=>{d=!0,o=n.x,a=t.clientWidth,t.style.transition="none"}),e.addEventListener("mouseup",n=>{l()}),document.addEventListener("mouseup",n=>{d==!0&&l()}),document.addEventListener("mousemove",n=>{if(d==!0){const i=m?a+n.x-o:a-n.x+o;i<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),e.style.backgroundColor="#007ACC"):i<160||(i<document.documentElement.clientWidth*.4?(t.style.width=i+"px",t.setAttribute("data-width",i+"px"),e.style.backgroundColor="#007ACC"):e.style.backgroundColor="red"),n.preventDefault()}})}const r=document.getElementById("fixed-left");if(r.classList.contains("active")){const s=document.getElementById("resize-left"),e=s.previousElementSibling;g(r,s,e,!0)}const c=document.getElementById("fixed-right");if(c.classList.contains("active")){const s=document.getElementById("resize-right"),e=s.nextElementSibling;g(c,s,e,!1)}let u=document.getElementsByClassName("toc_expand");for(let s=0;s<u.length;s++)u[s].addEventListener("click",function(e){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.parentElement.classList.toggle("expanded"),e.preventDefault()});let f=document.getElementsByClassName("nav_expand");for(let s=0;s<f.length;s++)f[s].addEventListener("click",function(e){const t=this.parentElement.querySelector("ul");t.classList.toggle("hidden"),t.classList.contains("hidden")?this.classList.remove("expanded"):this.classList.add("expanded"),e.preventDefault()});
+</script></head>
+	<body class="astro-APHAMN3I">
+		<div id="fixed-left" class="fixed-nav active astro-APHAMN3I"></div>
+		<div class="appbar-nav_content-footer astro-APHAMN3I">
+			<header class="astro-APHAMN3I">
+				<a href="/" class=" astro-3LDIVNZW">Markdown</a><a href="/astro/deep_toc" class=" astro-3LDIVNZW">Astro</a><a href="/blog/file1.mdx" class="active astro-3LDIVNZW">Blog</a><a href="/about/" class=" astro-3LDIVNZW">About</a>
+
+
+
+			</header>
+			<main class="astro-APHAMN3I">
+				<nav class="left-nav astro-MADNGOYV" data-width="20vw" data-state="open">
+    <ul class="root astro-LCRE4AI6">
+        <li class="astro-LCRE4AI6">
+                <a href="/blog/file1.mdx" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        MDX Static Plantuml
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-LCRE4AI6">
+                <a href="/blog/file2.md" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        MD Static vs Dynamic
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-LCRE4AI6">
+                <a href="/blog/file3.mdx" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        Svg
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+</nav>
+
+<div id="resize-left" class="nav-resize active astro-APHAMN3I"></div>
+	 			<article class="content astro-APHAMN3I">
+					<h1 id="plantuml-dynamic-loading">Plantuml Dynamic loading</h1>
+<p>Loaded dynamically from the plantuml server. Some latecy is observed.</p>
+<h2 id="sequence-static">sequence static</h2>
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="152px" preserveAspectRatio="none" style="width:233px;height:152px;background:#FFFFFF;" version="1.1" viewBox="0 0 233 152" width="233px" zoomAndPan="magnify"><defs></defs><g><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="52" x2="52" y1="53.2969" y2="102.4297"></line><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="191.5" x2="191.5" y1="53.2969" y2="102.4297"></line><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="94" x="5" y="22"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="12" y="41.9951">Participant</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="94" x="5" y="101.4297"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="12" y="121.4248">Participant</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="151.5" y="49.9951">Reception</text><path d="M171.5,9 L171.5,33 M171.5,21 L188.5,21 " fill="none" style="stroke:#181818;stroke-width:0.5;"></path><ellipse cx="200.5" cy="21" fill="#E2E2F0" rx="12" ry="12" style="stroke:#181818;stroke-width:0.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="151.5" y="114.4248">Reception</text><path d="M171.5,121.7266 L171.5,145.7266 M171.5,133.7266 L188.5,133.7266 " fill="none" style="stroke:#181818;stroke-width:0.5;"></path><ellipse cx="200.5" cy="133.7266" fill="#E2E2F0" rx="12" ry="12" style="stroke:#181818;stroke-width:0.5;"></ellipse><polygon fill="#181818" points="180,80.4297,190,84.4297,180,88.4297,184,84.4297" style="stroke:#181818;stroke-width:1.0;"></polygon><line style="stroke:#181818;stroke-width:1.0;" x1="52" x2="186" y1="84.4297" y2="84.4297"></line><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116" x="59" y="79.3638">Message(Hi there)</text><!--MD5=[800c485395b55d2fb6501fd3be789c3e]
+@startuml
+participant Participant as Foo
+boundary    Reception    as Foo1
+Foo -> Foo1 : Message(Hi there)
+@enduml
+
+PlantUML version 1.2022.10beta2(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
+<h2 id="sequence">Sequence</h2>
+<object type="image/svg+xml" data="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuIe0qfd9cGM9UIKA0KZin685j_nyhgJyqhoKnA9A1I08IarEBIZ9pCy3SI3oXbn0Ga7N3inMi5BmJIqkJanFrV38L2Z9I2rArUHoICrB0Te30000"></object>
+				</article>
+				<div id="resize-right" class="nav-resize active astro-APHAMN3I"></div><nav class="right-toc astro-CGS27VIX" data-width="20vw" data-state="open">
+    <ul class="root astro-ZXOBRMHW">
+        <li class="astro-ZXOBRMHW">
+                <a href="#plantuml-dynamic-loading" class="parent expanded astro-ZXOBRMHW">
+                    <span class="icon toc_expand astro-ZXOBRMHW">
+                            <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg" class="astro-ZXOBRMHW">
+                                <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round" class="astro-ZXOBRMHW"></path>
+                            </svg>
+                        </span>
+                    <span class="text href_hover astro-ZXOBRMHW">
+                        Plantuml Dynamic loading
+                    </span>
+                </a>
+                <ul class="nested astro-ZXOBRMHW">
+        <li class="astro-ZXOBRMHW">
+                <a href="#sequence-static" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        sequence static
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#sequence" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        Sequence
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+</nav>
+
+
+			</main>
+			<footer class="astro-APHAMN3I">
+				<p class="astro-APHAMN3I">footer</p>
+			</footer>
+		</div>
+		<div id="fixed-right" class="fixed-nav active astro-APHAMN3I"></div>
+	
+
+<style>
+	.content * > a{
+			color:#3794FF;
+	}
+	h1::after{
+		content:"";
+		background-image: url('/link.svg');
+		height: 16px;
+		width: 16px;
+		display: inline-block;
+	}
+</style>
+
+
+</body></html>

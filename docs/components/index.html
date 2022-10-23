@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="astro-APHAMN3I">
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+		<meta name="viewport" content="width=device-width">
+		<meta name="generator" content="Astro v1.5.2">
+		<title>MDX with Components</title>
+	<link rel="stylesheet" href="/assets/index.4d34db6d.css" /><script type="module">function g(s,e,t,m){s.addEventListener("click",n=>{const i=t.getAttribute("data-state");i=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):i=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),n.preventDefault()});var d=!1,o,a;function l(){d=!1,t.style.transition="width 0.5s",t.clientWidth<20?(t.setAttribute("data-state","closed"),t.setAttribute("data-width","20vw")):t.setAttribute("data-state","open"),e.style.backgroundColor="#1E1E1E"}e.addEventListener("mouseenter",n=>{e.style.backgroundColor="#007ACC"}),e.addEventListener("mouseleave",n=>{e.style.backgroundColor="#1E1E1E"}),e.addEventListener("mousedown",n=>{d=!0,o=n.x,a=t.clientWidth,t.style.transition="none"}),e.addEventListener("mouseup",n=>{l()}),document.addEventListener("mouseup",n=>{d==!0&&l()}),document.addEventListener("mousemove",n=>{if(d==!0){const i=m?a+n.x-o:a-n.x+o;i<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),e.style.backgroundColor="#007ACC"):i<160||(i<document.documentElement.clientWidth*.4?(t.style.width=i+"px",t.setAttribute("data-width",i+"px"),e.style.backgroundColor="#007ACC"):e.style.backgroundColor="red"),n.preventDefault()}})}const r=document.getElementById("fixed-left");if(r.classList.contains("active")){const s=document.getElementById("resize-left"),e=s.previousElementSibling;g(r,s,e,!0)}const c=document.getElementById("fixed-right");if(c.classList.contains("active")){const s=document.getElementById("resize-right"),e=s.nextElementSibling;g(c,s,e,!1)}let u=document.getElementsByClassName("toc_expand");for(let s=0;s<u.length;s++)u[s].addEventListener("click",function(e){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.parentElement.classList.toggle("expanded"),e.preventDefault()});let f=document.getElementsByClassName("nav_expand");for(let s=0;s<f.length;s++)f[s].addEventListener("click",function(e){const t=this.parentElement.querySelector("ul");t.classList.toggle("hidden"),t.classList.contains("hidden")?this.classList.remove("expanded"):this.classList.add("expanded"),e.preventDefault()});
+</script></head>
+	<body class="astro-APHAMN3I">
+		<div id="fixed-left" class="fixed-nav active astro-APHAMN3I"></div>
+		<div class="appbar-nav_content-footer astro-APHAMN3I">
+			<header class="astro-APHAMN3I">
+				<a href="/" class="active astro-3LDIVNZW">Markdown</a><a href="/astro/deep_toc" class=" astro-3LDIVNZW">Astro</a><a href="/blog/file1.mdx" class=" astro-3LDIVNZW">Blog</a><a href="/about/" class=" astro-3LDIVNZW">About</a>
+
+
+
+			</header>
+			<main class="astro-APHAMN3I">
+				<nav class="left-nav astro-MADNGOYV" data-width="20vw" data-state="open">
+    <ul class="root astro-LCRE4AI6">
+        <li class="astro-LCRE4AI6">
+                <a href="/" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        Simple Markdown
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-LCRE4AI6">
+                <a href="/components" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        MDX
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-LCRE4AI6">
+                <a href="/code" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        Code Highlight
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-LCRE4AI6">
+                <a href="/readme" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        Readme
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+</nav>
+
+<div id="resize-left" class="nav-resize active astro-APHAMN3I"></div>
+	 			<article class="content astro-APHAMN3I">
+					<h1 id="title-1">Title 1</h1>
+<p>This is an astro component</p>
+<svg viewBox="0 0 100 80" width="25" height="25" fill="#d0d0d0">
+    <rect width="100" height="20" rx="10" ry="10"></rect>
+    <rect y="30" width="100" height="20" rx="10" ry="10"></rect>
+    <rect y="60" width="100" height="20" rx="10" ry="10"></rect>
+</svg>
+<p>and here a sequence</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="120px" preserveAspectRatio="none" style="width:192px;height:120px;background:#FFFFFF" version="1.1" viewBox="0 0 192 120" width="192px" zoomAndPan="magnify"><defs></defs><g><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0" x1="39" x2="39" y1="36.2969" y2="85.4297"></line><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0" x1="160" x2="160" y1="36.2969" y2="85.4297"></line><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5" width="68" x="5" y="5"></rect><text fill="#000000" fontFamily="sans-serif" fontSize="14" lengthAdjust="spacing" textLength="54" x="12" y="24.9951">Michael</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5" width="68" x="5" y="84.4297"></rect><text fill="#000000" fontFamily="sans-serif" fontSize="14" lengthAdjust="spacing" textLength="54" x="12" y="104.4248">Michael</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5" width="52" x="134" y="5"></rect><text fill="#000000" fontFamily="sans-serif" fontSize="14" lengthAdjust="spacing" textLength="38" x="141" y="24.9951">Maria</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5" width="52" x="134" y="84.4297"></rect><text fill="#000000" fontFamily="sans-serif" fontSize="14" lengthAdjust="spacing" textLength="38" x="141" y="104.4248">Maria</text><polygon fill="#181818" points="148,63.4297,158,67.4297,148,71.4297,152,67.4297" style="stroke:#181818;stroke-width:1.0"></polygon><line style="stroke:#181818;stroke-width:1.0" x1="39" x2="154" y1="67.4297" y2="67.4297"></line><text fill="#000000" fontFamily="sans-serif" fontSize="13" lengthAdjust="spacing" textLength="97" x="46" y="62.3638">Message(Hello)</text></g></svg>
+				</article>
+				<div id="resize-right" class="nav-resize active astro-APHAMN3I"></div><nav class="right-toc astro-CGS27VIX" data-width="20vw" data-state="open">
+    <ul class="root astro-ZXOBRMHW">
+        <li class="astro-ZXOBRMHW">
+                <a href="#title-1" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        Title 1
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+</nav>
+
+
+			</main>
+			<footer class="astro-APHAMN3I">
+				<p class="astro-APHAMN3I">footer</p>
+			</footer>
+		</div>
+		<div id="fixed-right" class="fixed-nav active astro-APHAMN3I"></div>
+	
+
+<style>
+	.content * > a{
+			color:#3794FF;
+	}
+	h1::after{
+		content:"";
+		background-image: url('/link.svg');
+		height: 16px;
+		width: 16px;
+		display: inline-block;
+	}
+</style>
+
+
+</body></html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!-- how to get headings and pass them as props --><html lang="en" class="astro-APHAMN3I">
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+		<meta name="viewport" content="width=device-width">
+		<meta name="generator" content="Astro v1.5.2">
+		<title>Readme</title>
+	<link rel="stylesheet" href="/assets/index.4d34db6d.css" /><script type="module">function g(s,e,t,m){s.addEventListener("click",n=>{const i=t.getAttribute("data-state");i=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):i=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),n.preventDefault()});var d=!1,o,a;function l(){d=!1,t.style.transition="width 0.5s",t.clientWidth<20?(t.setAttribute("data-state","closed"),t.setAttribute("data-width","20vw")):t.setAttribute("data-state","open"),e.style.backgroundColor="#1E1E1E"}e.addEventListener("mouseenter",n=>{e.style.backgroundColor="#007ACC"}),e.addEventListener("mouseleave",n=>{e.style.backgroundColor="#1E1E1E"}),e.addEventListener("mousedown",n=>{d=!0,o=n.x,a=t.clientWidth,t.style.transition="none"}),e.addEventListener("mouseup",n=>{l()}),document.addEventListener("mouseup",n=>{d==!0&&l()}),document.addEventListener("mousemove",n=>{if(d==!0){const i=m?a+n.x-o:a-n.x+o;i<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),e.style.backgroundColor="#007ACC"):i<160||(i<document.documentElement.clientWidth*.4?(t.style.width=i+"px",t.setAttribute("data-width",i+"px"),e.style.backgroundColor="#007ACC"):e.style.backgroundColor="red"),n.preventDefault()}})}const r=document.getElementById("fixed-left");if(r.classList.contains("active")){const s=document.getElementById("resize-left"),e=s.previousElementSibling;g(r,s,e,!0)}const c=document.getElementById("fixed-right");if(c.classList.contains("active")){const s=document.getElementById("resize-right"),e=s.nextElementSibling;g(c,s,e,!1)}let u=document.getElementsByClassName("toc_expand");for(let s=0;s<u.length;s++)u[s].addEventListener("click",function(e){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.parentElement.classList.toggle("expanded"),e.preventDefault()});let f=document.getElementsByClassName("nav_expand");for(let s=0;s<f.length;s++)f[s].addEventListener("click",function(e){const t=this.parentElement.querySelector("ul");t.classList.toggle("hidden"),t.classList.contains("hidden")?this.classList.remove("expanded"):this.classList.add("expanded"),e.preventDefault()});
+</script></head>
+	<body class="astro-APHAMN3I">
+		<div id="fixed-left" class="fixed-nav active astro-APHAMN3I"></div>
+		<div class="appbar-nav_content-footer astro-APHAMN3I">
+			<header class="astro-APHAMN3I">
+				<a href="/" class="active astro-3LDIVNZW">Markdown</a><a href="/astro/deep_toc" class=" astro-3LDIVNZW">Astro</a><a href="/blog/file1.mdx" class=" astro-3LDIVNZW">Blog</a><a href="/about/" class=" astro-3LDIVNZW">About</a>
+
+
+
+			</header>
+			<main class="astro-APHAMN3I">
+				<nav class="left-nav astro-MADNGOYV" data-width="20vw" data-state="open">
+    <ul class="root astro-LCRE4AI6">
+        <li class="astro-LCRE4AI6">
+                <a href="/" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        Simple Markdown
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-LCRE4AI6">
+                <a href="/components" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        MDX
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-LCRE4AI6">
+                <a href="/code" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        Code Highlight
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-LCRE4AI6">
+                <a href="/readme" class="astro-LCRE4AI6">
+                    
+                    <span class="text astro-LCRE4AI6">
+                        Readme
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+</nav>
+
+<div id="resize-left" class="nav-resize active astro-APHAMN3I"></div>
+	 			<article class="content astro-APHAMN3I">
+					<h1 id="astro-big-doc">astro big doc</h1>
+<p>Live demo : <a href="https://astro-nav-menus.deno.dev/">https://astro-nav-menus.deno.dev/</a></p>
+<p>Astro Theme that can scale for big documentation websites. Includes an unimited depth config menu that starts with a top appbar for sections navigation, then continues on a tree left  menu for pages. Each page then has a tree right menu for its table of content.</p>
+<p>User friendly even for large menus as both left and right ones are collapsible and width adjustable by the user.</p>
+<p>Performance oriented, using astro components only, no css extenal framework, no virtual dom. Focus on static generation on build time, no client side rendering. Javascript is for minial manipulations connecting events and classes.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>astro components (.astro) html css js</li>
+<li>article page full content as html ready for browser search</li>
+<li>Left Menu pages Tree Navigation</li>
+<li>Right Menu Table of Content</li>
+<li>Menus consist of Trees with unlimited depth and recursively expandable sections</li>
+<li>Menus can be opened, collapsed and width adjusted by the user</li>
+<li>Menus are built by astro and seen as readable html hierarchy by the client</li>
+<li>markdown
+<ul>
+<li>Supports md and mdx</li>
+<li>Automatic Right Menu ToC generation for all markdown pages</li>
+<li>Markdown pages can be either in <code>scr/pages</code> or on any other server local path e.g. <code>data/blog</code> or <code>../../content/markdown</code></li>
+</ul>
+</li>
+<li>Navigation menu can have pages or directories similar to file system browsing experience</li>
+</ul>
+<h1 id="dev">Dev</h1>
+<h2 id="getting-started">getting started</h2>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pnpm install</span></span>
+<span class="line"><span style="color: #c9d1d9">pnpm run dev</span></span>
+<span class="line"><span style="color: #c9d1d9">pnpm run build</span></span></code></pre>
+<h2 id="creation">creation</h2>
+<p>This project was created as follows</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pnpm create astro@latest</span></span></code></pre>
+<ul>
+<li>Name, Empty Project, No Typescript</li>
+<li>move to root git repo</li>
+<li>delete node_modules</li>
+<li>add deno and server config to <code>astro.config.mjs</code></li>
+<li>prepare <code>.github/workflows/deploy.yml</code></li>
+</ul>
+<h2 id="plantuml-svg">plantuml SVG</h2>
+<ul>
+<li><code>remark-object-plantuml</code> : Dynamic, the client needs to wait for svg generation when the page is loaded. The plugin only replace plantuml code with html <code>object</code> tag pointing on server with encoded text in url.</li>
+<li><code>remark-svg-plantuml</code> : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal <code>.puml</code> file for vs code preview convenience and convert it to <code>.svg</code> on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.</li>
+</ul>
+<h2 id="todos">Todos</h2>
+<ul>
+<li>node not serving files</li>
+<li>markdown headings plugin add icons for id slugs</li>
+<li>markdown diagrams puml
+<ul>
+<li>on build time, check markdown data and optionally regenerate the svg</li>
+<li>remark plugin replace puml with astro panzoom svg component (with object integration)</li>
+<li>Bug : plantuml Svgb eats up following markdown</li>
+<li>pass also on all .puml files in the folder to turn them in SVG potentially directly used by the readmes in astro panzoom svg component</li>
+</ul>
+</li>
+<li>panzoom component</li>
+<li>gallery</li>
+<li>authentication
+<ul>
+<li>AppBar right float icons</li>
+<li>ssr mode signin with github</li>
+</ul>
+</li>
+<li>menus
+<ul>
+<li>Structure : generation of left nav menu from src/pages</li>
+<li>Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files</li>
+<li>pages types and icons</li>
+<li>open close on nav-resize click</li>
+<li>menu auto depth adjust</li>
+<li>current page depth always open</li>
+<li>all level items or nothing</li>
+<li>depth slider or depth selector</li>
+<li>store nav menu width / prevent reset on same page reload</li>
+<li>Menu height transition MUI example is working</li>
+</ul>
+</li>
+</ul>
+<h2 id="hints">Hints</h2>
+<ul>
+<li>menu config allows index pages but do not use them to keep consistent nav menu of folders/items</li>
+<li>adding interactive SVGs that can be styled with css is challenging
+<ul>
+<li><code>svg.astro</code> uses the innerHTML fragment which breaks visibility of <code>style</code> tag no longer scoping imported SVG</li>
+<li>import of <code>rightarrow.astro</code> still requires style to be either global or inline</li>
+<li>Tree menu collapse transition :
+<ul>
+<li>display block/none does not animate the height</li>
+<li>scaleY does not bring the height down to 0 due to remaining padding margin</li>
+<li>height can be animated but must be set initially</li>
+<li>max-height can be animated but must be set to max value which breaks the transition timing</li>
+<li>max-height adjusting with js requires high complexity depending on state of expanded children hierarchy</li>
+<li>clip also needs defined start stop</li>
+<li>flex can also animate but then the flex container height must be set explicitely</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>node js modules filename not in <code>__filename</code> but in <code>import.meta.url</code></li>
+<li><code>&#x3C;Content components={{}}/></code> only replaces html items injected from plugins and not items written in markdown page</li>
+</ul>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://github.com/syntax-tree/mdast">https://github.com/syntax-tree/mdast</a></li>
+<li><a href="https://github.com/syntax-tree/mdast#code">https://github.com/syntax-tree/mdast#code</a></li>
+<li><a href="https://github.com/syntax-tree/mdast#html">https://github.com/syntax-tree/mdast#html</a></li>
+<li><a href="https://github.com/remarkjs/remark/blob/main/doc/plugins.md">https://github.com/remarkjs/remark/blob/main/doc/plugins.md</a></li>
+<li><a href="https://github.com/syntax-tree/unist-util-visit">https://github.com/syntax-tree/unist-util-visit</a></li>
+<li><a href="https://github.com/akebifiky/remark-simple-plantuml">https://github.com/akebifiky/remark-simple-plantuml</a></li>
+</ul>
+<h2 id="astro-docs">astro docs</h2>
+<p><a href="https://github.com/withastro/astro/tree/main/examples/docs">https://github.com/withastro/astro/tree/main/examples/docs</a></p>
+<p>Advantages :</p>
+<p>Official example, clean html structure, light and dark toggle, left side pages and right side Table Of Content.</p>
+<p>Limitations :</p>
+<ul>
+<li>react and preact dependencies, despite island architecture this can exclude potential use cases</li>
+<li>Left Menu
+<ul>
+<li>handcoded <code>SIDEBAR</code> in <code>config.ts</code></li>
+<li>first level is map and not list so relying on ordered map</li>
+<li>fixed 2 levels structure</li>
+</ul>
+</li>
+<li>ToC is dynamically parsing the DOM on client side, this reduces astro’s advantage of zero js and server side generation and rendering</li>
+<li>ToC does not take h1 and limited down to h4</li>
+</ul>
+<h2 id="hello-astro">hello astro</h2>
+<p><a href="https://github.com/hellotham/hello-astro">https://github.com/hellotham/hello-astro</a></p>
+<p>built upon astro-docs with differences :</p>
+<ul>
+<li>
+<p>advantage : right side ToC is not DOM client side like astro-docs but built with native astro component taking the <code>headings</code> Markdown Layout Prop <a href="https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props">https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props</a></p>
+</li>
+<li>
+<p>limitation: all svg integrations are either hardcoded or wrapped in images through svgimg</p>
+</li>
+</ul>
+<h1 id="license">License</h1>
+<ul>
+<li>MIT</li>
+</ul>
+<h2 id="images">images</h2>
+<p>Apache License</p>
+<ul>
+<li><a href="https://www.svgrepo.com/svg/19947/folders">https://www.svgrepo.com/svg/19947/folders</a></li>
+<li><a href="https://www.svgrepo.com/svg/400563/openfilefolder">https://www.svgrepo.com/svg/400563/openfilefolder</a></li>
+<li><a href="https://freesvg.org/1542512156">https://freesvg.org/1542512156</a> : tree</li>
+</ul>
+				</article>
+				<div id="resize-right" class="nav-resize active astro-APHAMN3I"></div><nav class="right-toc astro-CGS27VIX" data-width="20vw" data-state="open">
+    <ul class="root astro-ZXOBRMHW">
+        <li class="astro-ZXOBRMHW">
+                <a href="#astro-big-doc" class="parent expanded astro-ZXOBRMHW">
+                    <span class="icon toc_expand astro-ZXOBRMHW">
+                            <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg" class="astro-ZXOBRMHW">
+                                <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round" class="astro-ZXOBRMHW"></path>
+                            </svg>
+                        </span>
+                    <span class="text href_hover astro-ZXOBRMHW">
+                        astro big doc
+                    </span>
+                </a>
+                <ul class="nested astro-ZXOBRMHW">
+        <li class="astro-ZXOBRMHW">
+                <a href="#features" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        Features
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#dev" class="parent expanded astro-ZXOBRMHW">
+                    <span class="icon toc_expand astro-ZXOBRMHW">
+                            <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg" class="astro-ZXOBRMHW">
+                                <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round" class="astro-ZXOBRMHW"></path>
+                            </svg>
+                        </span>
+                    <span class="text href_hover astro-ZXOBRMHW">
+                        Dev
+                    </span>
+                </a>
+                <ul class="nested astro-ZXOBRMHW">
+        <li class="astro-ZXOBRMHW">
+                <a href="#getting-started" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        getting started
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#creation" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        creation
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#plantuml-svg" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        plantuml SVG
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#todos" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        Todos
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#hints" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        Hints
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#references" class="parent expanded astro-ZXOBRMHW">
+                    <span class="icon toc_expand astro-ZXOBRMHW">
+                            <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg" class="astro-ZXOBRMHW">
+                                <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round" class="astro-ZXOBRMHW"></path>
+                            </svg>
+                        </span>
+                    <span class="text href_hover astro-ZXOBRMHW">
+                        References
+                    </span>
+                </a>
+                <ul class="nested astro-ZXOBRMHW">
+        <li class="astro-ZXOBRMHW">
+                <a href="#astro-docs" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        astro docs
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#hello-astro" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        hello astro
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+            </li><li class="astro-ZXOBRMHW">
+                <a href="#license" class="parent expanded astro-ZXOBRMHW">
+                    <span class="icon toc_expand astro-ZXOBRMHW">
+                            <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg" class="astro-ZXOBRMHW">
+                                <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round" class="astro-ZXOBRMHW"></path>
+                            </svg>
+                        </span>
+                    <span class="text href_hover astro-ZXOBRMHW">
+                        License
+                    </span>
+                </a>
+                <ul class="nested astro-ZXOBRMHW">
+        <li class="astro-ZXOBRMHW">
+                <a href="#images" class="astro-ZXOBRMHW">
+                    
+                    <span class="text astro-ZXOBRMHW">
+                        images
+                    </span>
+                </a>
+                
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+            </li>
+    </ul>
+
+
+
+
+</nav>
+
+
+			</main>
+			<footer class="astro-APHAMN3I">
+				<p class="astro-APHAMN3I">footer</p>
+			</footer>
+		</div>
+		<div id="fixed-right" class="fixed-nav active astro-APHAMN3I"></div>
+	
+
+<style>
+	.content * > a{
+			color:#3794FF;
+	}
+	h1::after{
+		content:"";
+		background-image: url('/link.svg');
+		height: 16px;
+		width: 16px;
+		display: inline-block;
+	}
+</style>
+
+
+</body></html>

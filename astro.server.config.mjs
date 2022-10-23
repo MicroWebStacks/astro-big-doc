@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
-import {remarkPlantUML} from './src/libs/remark-object-plantuml'
-import {remarkPUML} from './src/libs/remark-svg-plantuml'
+import {remarkPlantUML} from './src/libs/remark-plantuml-object'
+import {remarkPUML} from './src/libs/remark-plantuml-svg'
 
 // https://astro.build/config
 export default defineConfig({

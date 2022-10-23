@@ -8,6 +8,7 @@ export interface Props {
 const { 'data-filename':filename } = Astro.props as Props;
 const filepath = `./data/blog/${filename}`
 console.log(`Svgb calld for : ${filepath}`)
+
 const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
 ---
 <Fragment set:html={innerHTML} />

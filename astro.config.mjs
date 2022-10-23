@@ -6,8 +6,8 @@ import {remarkPUML} from './src/libs/remark-plantuml-svg'
 export default defineConfig({
   output: "static",
   outDir: "./docs",
-  site: 'http://localhost',
-  base: '',
+  site: 'http://microwebstacks.github.io',
+  base: 'astro-big-doc',
   trailingSlash: 'ignore',
   markdown:{
     syntaxHighlight: 'shiki',

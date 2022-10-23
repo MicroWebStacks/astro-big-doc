@@ -3,8 +3,9 @@ import Layout from "@/layout/Layout.astro";
 import {existsSync,readdirSync} from 'fs';
 import {resolve} from 'path';
 import Svgb from "@/svg/svgblog.astro"
+import { Debug } from 'astro/components';
 
-const output_static = true
+const output_static = true;//import.meta.en.SSR is buggy always True : https://docs.astro.build/en/reference/api-reference/#importmeta
 
 const {page} = Astro.params;
 const page_path = resolve(process.cwd()+'/data/blog/'+page)
@@ -30,6 +31,6 @@ export async function getStaticPaths(){
 ---
 {Post &&
 <Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
-        <Post.Content components={{ Svgb,svg:Svgb }}/>
+        <Post.Content components={{ Svgb }} />
 </Layout>
 }

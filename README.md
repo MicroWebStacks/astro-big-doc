@@ -41,7 +41,7 @@ pnpm create astro@latest
 
 ## plantuml SVG
 * `remark-object-plantuml` : Dynamic, the client needs to wait for svg generation when the page is loaded. The plugin only replace plantuml code with html `object` tag pointing on server with encoded text in url.
-* `remark-astro-plantuml` : Static, svg generated on build time. The lpugin extracts plantuml code, place it on extrnal `.puml` file and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed. Uses then an astro component to integrate the generated svg.
+* `remark-svg-plantuml` : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal `.puml` file for vs code preview convenience and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.
 
 ## Todos
 - node not serving files
@@ -82,6 +82,7 @@ pnpm create astro@latest
     - clip also needs defined start stop
     - flex can also animate but then the flex container height must be set explicitely
 - node js modules filename not in `__filename` but in `import.meta.url`
+- `<Content components={{}}/>` only replaces html items injected from plugins and not items written in markdown page
 # References
 * https://github.com/syntax-tree/mdast
 * https://github.com/syntax-tree/mdast#code

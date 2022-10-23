@@ -1,12 +1,13 @@
 ---
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
-import {readFileSync} from 'fs'
+import {existsSync,readFileSync} from 'fs'
 export interface Props {
   'data-filename': string;
 }
 
 const { 'data-filename':filename } = Astro.props as Props;
-const innerHTML = readFileSync(`./data/blog/${filename}`).toString();
+const filepath = `./data/blog/${filename}`
+console.log(`Svgb calld for : ${filepath}`)
+const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
 ---
-
 <Fragment set:html={innerHTML} />

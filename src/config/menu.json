@@ -79,11 +79,11 @@
         "href":"/blog/file1.mdx",
         "items":[
             {
-                "text":"Static Plantuml",
+                "text":"MDX Static Plantuml",
                 "href":"/blog/file1.mdx"
             },
             {
-                "text":"Dynamic Plantuml",
+                "text":"MD Static vs Dynamic",
                 "href":"/blog/file2.md"
             },
             {

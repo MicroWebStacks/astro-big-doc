@@ -1,6 +1,6 @@
 import {visit} from "unist-util-visit";
 import plantumlEncoder from "plantuml-encoder";
-import {existsSync,writeFileSync,statSync} from 'fs'
+import {existsSync,writeFileSync,statSync, readFileSync} from 'fs'
 import {basename} from 'path'
 import fetch from 'sync-fetch'
 
@@ -29,8 +29,10 @@ function update_puml_file(file,value,meta,baseUrl){
     const url = `${baseUrl}/${plantumlEncoder.encode(value)}`;
     const svg_text = fetch(url).text()
     writeFileSync(svg_file,svg_text)
+    return svg_text
+  }else{
+    return readFileSync(svg_file).toString()
   }
-  return basename(svg_file)
 }
 
 
@@ -50,9 +52,9 @@ function remarkPUML(pluginOptions) {
   return function transformer(syntaxTree,file) {
     visit(syntaxTree, "code", node => {
       if (!node.lang || !node.value || node.lang !== "plantuml") return;
-      const svg_file = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
+      const svg_text = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
       node.type = "html";
-      node.value = `<svg data-filename="${svg_file}" />`
+      node.value = svg_text
       node.alt = node.meta;
       node.meta = undefined;
     });

@@ -1,13 +1,6 @@
-# Plantuml Static integration
+# Plantuml Static integrations
 
-## Astro Component
-This is using an `Svgb` Astro component. Here the user has to provide an svg file
-```jsx
-<Svgb data-filename="file1.mdx.my-puml.svg" />
-```
-<Svgb data-filename="file1.mdx.my-puml.svg" />
-
-## Code
+## Plantuml Code Rehype plugin
 This is using a `puml` code. Here the user write a plantuml sequence on the markdown code tag, astro will replace it on build time with an svg using a remark plugin.
 
 ```
@@ -22,4 +15,9 @@ Michael -> Maria : Message(Hello)
 @enduml
 ```
 
-After the code
+## Svg Astro Component
+This is using an `Svgb` Astro component. Here the user has to provide an svg file
+```jsx
+<Svgb data-filename="file1.mdx.my-puml.svg" />
+```
+<Svgb data-filename="file1.mdx.my-puml.svg" />

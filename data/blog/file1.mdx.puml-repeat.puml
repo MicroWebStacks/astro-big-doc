@@ -1,0 +1,3 @@
+@startuml
+Michael -> Maria : Message(Hello)
+@enduml

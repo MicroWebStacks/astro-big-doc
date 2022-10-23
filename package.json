@@ -16,7 +16,6 @@
     "astro": "^1.5.2",
     "plantuml-encoder": "^1.4.0",
     "shiki": "^0.11.1",
-    "shiki-rehype": "^1.0.1",
     "sync-fetch": "^0.4.2",
     "unist-util-visit": "^4.1.1"
   }

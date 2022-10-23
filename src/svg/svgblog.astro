@@ -2,12 +2,11 @@
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
 import {readFileSync} from 'fs'
 export interface Props {
-  filename: string;
+  'data-filename': string;
 }
 
-const { filename } = Astro.props as Props;
+const { 'data-filename':filename } = Astro.props as Props;
 const innerHTML = readFileSync(`./data/blog/${filename}`).toString();
-console.log(import.meta.url)
 ---
 
 <Fragment set:html={innerHTML} />

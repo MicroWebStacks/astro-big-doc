@@ -52,7 +52,7 @@ function remarkPUML(pluginOptions) {
       if (!node.lang || !node.value || node.lang !== "plantuml") return;
       const svg_file = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
       node.type = "html";
-      node.value = `<svg filename="${svg_file}" />`
+      node.value = `<svg data-filename="${svg_file}" />`
       node.alt = node.meta;
       node.meta = undefined;
     });

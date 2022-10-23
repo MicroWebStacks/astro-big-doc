@@ -2,37 +2,40 @@
 
 Live demo : https://astro-nav-menus.deno.dev/
 
-Astro Theme that can scale for big documentation websites. Includes a top appbar for sections navigation, left tree menu for section pages and right tree menu for a page table of content.
+Astro Theme that can scale for big documentation websites. Includes an unimited depth config menu that starts with a top appbar for sections navigation, then continues on a tree left  menu for pages. Each page then has a tree right menu for its table of content.
 
-Performance oriented, built with native astro components, no dependencies to any extenal framework, no virtual dom. Fully static with no client side rendering. Javascript is for minial manipulations connecting events and classes.
+User friendly even for large menus as both left and right ones are collapsible and width adjustable by the user.
+
+Performance oriented, using astro components only, no css extenal framework, no virtual dom. Focus on static generation on build time, no client side rendering. Javascript is for minial manipulations connecting events and classes.
 ## Features
 - astro components (.astro) html css js
-- article content immediatly searchable with native browser search, no lazy loading or custom content cache manipulations
+- article page full content as html ready for browser search
 - Left Menu pages Tree Navigation
 - Right Menu Table of Content
 - Menus consist of Trees with unlimited depth and recursively expandable sections
-- Menus can be opened, closed and resized by the user
-- Menus are built by astro and seen as readable html by the client
+- Menus can be opened, collapsed and width adjusted by the user
+- Menus are built by astro and seen as readable html hierarchy by the client
 - markdown 
   - Supports md and mdx
-  - Right Menu ToC for src/pages markdown
-  - Right Menu ToC for imported `import *` markdown
-- Top menu must have href from items
-- Submenu should not have href href to keep pages / directories distinction
-
+  - Automatic Right Menu ToC generation for all markdown pages
+  - Markdown pages can be either in `scr/pages` or on any other server local path e.g. `data/blog` or `../../content/markdown`
+- Navigation menu can have pages or directories similar to file system browsing experience
 
 # Dev
-## Creation
+## getting started
+```
+pnpm install
+pnpm run dev
+pnpm run build
+```
+## creation
+This project was created as follows
 ```
 pnpm create astro@latest
 ```
  - Name, Empty Project, No Typescript
  - move to root git repo
  - delete node_modules
-```
-pnpm install
-pnpm astro add deno
-```
  - add deno and server config to `astro.config.mjs`
  - prepare `.github/workflows/deploy.yml`
 
@@ -65,8 +68,8 @@ pnpm astro add deno
   - store nav menu width / prevent reset on same page reload
   - Menu height transition MUI example is working
 
-## Thoughts
-- allow index pages but do not use them to keep consistent nav menu of folders/items
+## Hints
+- menu config allows index pages but do not use them to keep consistent nav menu of folders/items
 - adding interactive SVGs that can be styled with css is challenging
   - `svg.astro` uses the innerHTML fragment which breaks visibility of `style` tag no longer scoping imported SVG
   - import of `rightarrow.astro` still requires style to be either global or inline
@@ -78,7 +81,7 @@ pnpm astro add deno
     - max-height adjusting with js requires high complexity depending on state of expanded children hierarchy
     - clip also needs defined start stop
     - flex can also animate but then the flex container height must be set explicitely
-
+- node js modules filename not in `__filename` but in `import.meta.url`
 # References
 * https://github.com/syntax-tree/mdast
 * https://github.com/syntax-tree/mdast#code

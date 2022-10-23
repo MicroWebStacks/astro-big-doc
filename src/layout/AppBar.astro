@@ -1,15 +1,18 @@
 ---
 import menu from "../config/menu.json"
-import { active_page } from "@/components/menu_utils";
+import { remove_base,active_page } from "@/components/menu_utils";
 
-const active_page_index = active_page(Astro.url,menu)
+const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
+const pageUrl = remove_base(baseUrl,Astro.url.pathname)
+const active_page_index = active_page(pageUrl,menu)
 menu.forEach((item,index)=>{
     item.active_class = (index == active_page_index)?"active":""
 })
+
 ---
 <>
     {menu.map((item)=>(
-            <a href={item.href} class={item.active_class}>{item.text}</a>
+            <a href={baseUrl+item.href} class={item.active_class}>{item.text}</a>
     ))}
 </>
 

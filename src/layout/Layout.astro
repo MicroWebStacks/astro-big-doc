@@ -3,7 +3,8 @@ import AppBar from './AppBar.astro';
 import NavMenu from './NavMenu.astro';
 import ToCMenu from './ToCMenu.astro';
 import raw_menu from "../config/menu.json"
-import { process_menu_tree,process_toc_list } from "../components/menu_utils";
+import { remove_base,process_menu_tree,process_toc_list } from "../components/menu_utils";
+
 
 export interface Props {
 	title: string;
@@ -13,15 +14,16 @@ export interface Props {
 const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
 
+const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
+const pageUrl = remove_base(baseUrl,Astro.url.pathname)
 
-const left_nav_menu = process_menu_tree(Astro.url,raw_menu)
+const left_nav_menu = process_menu_tree(pageUrl,raw_menu)
 const right_toc_menu = process_toc_list(headings)
-
 ---
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={`${baseUrl}/favicon.svg`} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -153,7 +155,7 @@ footer p{
 	}
 	h1::after{
 		content:"";
-		background-image: url('/link.svg');
+		background-image: url('import.meta.env.BASE_URLlink.svg');
 		height: 16px;
 		width: 16px;
 		display: inline-block;

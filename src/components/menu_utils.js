@@ -1,3 +1,10 @@
+function remove_base(base,url){
+    if(url.startsWith(base)){
+        url = url.slice(base.length)
+    }
+    return url
+}
+
 function root_page(url){
     let str = String(url)
     if(str.includes("//")){
@@ -168,5 +175,6 @@ export{
     process_menu_list,
     process_menu_tree,
     process_toc_list,
-    active_page
+    active_page,
+    remove_base
 }

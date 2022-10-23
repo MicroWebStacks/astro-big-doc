@@ -6,12 +6,13 @@ export interface Props {
     root:boolean;
 }
 const { items,root=true } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 ---
 {items &&
     <ul class={root?"root":"nested"}>
         {items.map((item)=>(
             <li >
-                <a  href={item.parent?"":item.href}
+                <a  href={item.parent?"":baseUrl+item.href}
                     class:list={[{active:item.active, parent:item.parent, expanded:item.expanded, nav_expand:item.parent}]}
                     >
                     {item.parent &&

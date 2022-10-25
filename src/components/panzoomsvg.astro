@@ -1,19 +1,21 @@
 ---
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
 import {existsSync,readFileSync} from 'fs'
-import Svg from '@/components/svg.astro'
+import SvgIcons from '@/components/svgicons.astro'
 export interface Props {
   'data-filename': string;
+  'data-filedir': string;
 }
 
-const { 'data-filename':filename } = Astro.props as Props;
-const filepath = `./data/blog/${filename}`
+const { 'data-filename':filename,'data-filedir':filedir } = Astro.props as Props;
+const filepath = `${filedir}/${filename}`
+console.log(`SvgPz ===> : ${filepath}`)
 
 const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
 ---
 <div class="container">
   <div class="header">
-    <Svg filename="full-screen"/>
+    <SvgIcons filename="full-screen"/>
   </div>
   <div class="figure">
     <Fragment set:html={innerHTML} />

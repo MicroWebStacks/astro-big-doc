@@ -25,3 +25,5 @@ boundary    Reception    as Foo1
 Foo -> Foo1 : Message(Hi there)
 @enduml
 ```
+
+<SvgPz data-filename="tree.svg" />

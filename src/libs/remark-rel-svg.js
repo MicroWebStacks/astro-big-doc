@@ -46,24 +46,26 @@ function update_puml_file(file,value,meta,baseUrl){
  *
  * @param {Object} pluginOptions Remark plugin options.
  */
-function remarkPUMLAstro(pluginOptions) {
+function remarkRelSvg(pluginOptions) {
   const options = { ...DEFAULT_OPTIONS, ...pluginOptions };
   const baseUrl = options.baseUrl.replace(/\/$/, "")
   return function transformer(syntaxTree,file) {
-    visit(syntaxTree, "code", node => {
-      if (!node.lang || !node.value || node.lang !== "plantumlastro") return;
-      const svg_file = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
-      const filedir = dirname(file.history[0])
-      console.log(filedir)
-      node.type = "html";
-      node.value = `<data data-filename="${svg_file}" data-filedir="${filedir}"/>`
-      node.alt = node.meta;
-      node.meta = undefined;
+    visit(syntaxTree,  node => {
+      if(node.name != 'SvgPz'){
+        return
+      }
+      if(node.type == "mdxJsxFlowElement"){
+        const filedir = dirname(file.history[0])
+        node.attributes.push({type:'mdxJsxAttribute',name:'data-filedir',value:filedir})
+      }
+      else if(node.type == "html"){
+        //console.log(node)
+      }
     });
     return syntaxTree;
   };
 }
 
 export{
-  remarkPUMLAstro
+  remarkRelSvg
 }

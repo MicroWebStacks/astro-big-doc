@@ -1,12 +1,13 @@
 ---
 title: Great Post
 ---
-# Plantuml Markdown integrations
+# Mardown Static vs Dynamic
+By default, astro components cannot be used on an `.md` file unless it is treated like `.mdx`.
 
-## static sequence
-This sequence is using `remark-plantuml-svg` which replaces the code with svg on build time
+## Remark Plantuml Svg (Static)
+This code is using `plantumlsvg` code. The remark plugin associated with it is `remark-plantuml-svg`, it directly replaces the code block with an svg content. which is loaded at the same time with the page content.
 
-```plantuml
+```plantumlsvg
 @startuml
 participant Participant as Foo
 boundary    Reception    as Foo1
@@ -15,8 +16,8 @@ Foo -> Foo1 : Message(Hi there)
 ```
 
 
-## dynamic sequence
-This sequence is using `remark-plantuml-object` which only encodes the sequence and place it on an `object` that is fetched on load from the client. Some latecy can be observed on first load.
+## Remark Plantuml Object (Dynamic)
+This code is using `plantumldyn` code. The remark plugin associated with it is `remark-plantuml-object`, it encodes the sequence and places it on the url of an object of type svg. After the user loads the page, the url will be fetcehd from the plantuml server by the client and rendered afterwards which can cause a delay on first load.
 
 ```plantumldyn
 @startuml
@@ -25,5 +26,3 @@ boundary    Reception    as Foo1
 Foo -> Foo1 : Message(Hi there)
 @enduml
 ```
-
-<SvgPz data-filename="tree.svg" />

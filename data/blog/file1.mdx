@@ -1,13 +1,13 @@
 # Plantuml Static integrations
-
-## Plantuml Code Rehype plugin
-This is using a `puml` code. Here the user write a plantuml sequence on the markdown code tag, astro will replace it on build time with an svg using a remark plugin.
-
+These integrations use a markdown code block with specific languages
 ```
 @startuml
 Michael -> Maria : Message(Hello)
 @enduml
 ```
+
+## Remark Plantuml Svg
+This code is using `plantumlsvg` code. The remark plugin associated with it is `remark-plantuml-svg`, it directly replaces the code block with an svg content.
 
 ```plantuml my-puml
 @startuml
@@ -15,9 +15,13 @@ Michael -> Maria : Message(Hello)
 @enduml
 ```
 
-## Svg Astro Component
-This is using an `SvgPz` Astro component. Here the user has to provide an svg file name that is in the same markdown file directory
-```jsx
-<SvgPz data-filename="file1.mdx.my-puml.svg" />
+## Remark Plantuml Astro Component
+This code is using `plantuml` code. The remark plugin associated with it is `remark-plantuml-astro` it generates an svg file out of the sequence and only passes a `<data.../>` tag that will be replaced by an `SvgPz` astro component, which can enhance it with features like modal pan zoom or more.
+
+```plantumlastro my-puml
+@startuml
+Michael -> Maria : Message(Hello)
+@enduml
 ```
-<SvgPz data-filename="file1.mdx.my-puml.svg" />
+
+after

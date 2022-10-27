@@ -4,9 +4,8 @@ import mdx from "@astrojs/mdx";
 import {remarkPUMLObj} from './src/libs/remark-plantuml-object'
 import {remarkPUMLSvg} from './src/libs/remark-plantuml-svg'
 import {remarkPUMLAstro} from './src/libs/remark-plantuml-astro'
+import {remarkRelSvg} from './src/libs/remark-rel-svg'
 
-
-// https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: node({
@@ -15,11 +14,13 @@ export default defineConfig({
   markdown:{
     syntaxHighlight: 'shiki',
     remarkPlugins: [
+      remarkRelSvg,
       remarkPUMLObj,
       remarkPUMLSvg,
-      remarkPUMLAstro
+      remarkPUMLAstro,
     ],
-    rehypePlugins: [],
+    rehypePlugins: [
+    ],
     extendDefaultPlugins: true
   },
   integrations: [mdx()]

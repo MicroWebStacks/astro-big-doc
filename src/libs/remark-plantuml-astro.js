@@ -22,11 +22,11 @@ function update_puml_file(file,value,meta,baseUrl){
     const pmtime = statSync(svg_file).mtime
     if(pmtime > mtime){
       do_update = false
-      console.log(`svg file exist for puml ${puml_title}`)
+      //console.log(`svg file exist for puml ${puml_title}`)
     }
   }
   if(do_update){
-    console.log(`creating puml+svg files : ${puml_file} + .svg`)
+    //console.log(`creating puml+svg files : ${puml_file} + .svg`)
     writeFileSync(puml_file,value)
     const url = `${baseUrl}/${plantumlEncoder.encode(value)}`;
     const svg_text = fetch(url).text()
@@ -50,13 +50,13 @@ function remarkPUMLAstro(pluginOptions) {
   const options = { ...DEFAULT_OPTIONS, ...pluginOptions };
   const baseUrl = options.baseUrl.replace(/\/$/, "")
   return function transformer(syntaxTree,file) {
+    //console.log("   ---   remarkPUMLAstro   ---")
     visit(syntaxTree, "code", node => {
       if (!node.lang || !node.value || node.lang !== "plantumlastro") return;
       const svg_file = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
       const filedir = dirname(file.history[0])
-      console.log(filedir)
       node.type = "html";
-      node.value = `<data data-filename="${svg_file}" data-filedir="${filedir}"/>`
+      node.value = `<data data-filename="${svg_file}" data-filedir="${filedir}"> </data>`
       node.alt = node.meta;
       node.meta = undefined;
     });

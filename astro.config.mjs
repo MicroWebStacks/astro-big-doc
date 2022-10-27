@@ -9,7 +9,7 @@ export default defineConfig({
   output: "static",
   outDir: "./docs",
   site: 'http://microwebstacks.github.io',
-  base: '',
+  base: 'astro-big-doc',
   trailingSlash: 'ignore',
   markdown:{
     syntaxHighlight: 'shiki',

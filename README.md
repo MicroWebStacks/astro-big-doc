@@ -84,6 +84,8 @@ pnpm create astro@latest
     - flex can also animate but then the flex container height must be set explicitely
 - node js modules filename not in `__filename` but in `import.meta.url`
 - `<Content components={{}}/>` only replaces html items injected from plugins and not items written in markdown page
+- `<Content components={{}}/>` does not replace Astro components in MD, only in MDX
+
 # References
 * https://github.com/syntax-tree/mdast
 * https://github.com/syntax-tree/mdast#code

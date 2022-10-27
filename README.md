@@ -17,11 +17,12 @@ Performance oriented, using astro components only, no css extenal framework, no 
 - Menus consist of Trees with unlimited depth and recursively expandable sections
 - Menus can be opened, collapsed and width adjusted by the user
 - Menus are built by astro and seen as readable html hierarchy by the client
+- Navigation menu can have pages or directories similar to file system browsing experience
 - markdown 
   - Supports md and mdx
   - Automatic Right Menu ToC generation for all markdown pages
   - Markdown pages can be either in `scr/pages` or on any other server local path e.g. `data/blog` or `../../content/markdown`
-- Navigation menu can have pages or directories similar to file system browsing experience
+  - Plantuml with dynamic and static Svg in MD, Astro component in MDX
 
 # Dev
 ## getting started
@@ -47,11 +48,11 @@ pnpm create astro@latest
 * `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
 
 ## Todos
-- Issue : how to pass filename only and identify the path of the caller component, check Astro.resolve()
 - panzoom component
   - start Dynamic Modal
-- Markdown enhacement with Astro component (only works for mdx not md)
-  - markdown headings, hover highlight and icons for id slugs
+- Markdown
+  - pass MD as MDX
+  - Enhance headings with Astro component, hover highlight and icons for id slugs
 - Issue : node not serving files
 - gallery
 - authentication

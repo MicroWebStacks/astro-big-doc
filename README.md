@@ -48,17 +48,18 @@ pnpm create astro@latest
 * `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
 
 ## Todos
-- panzoom component
-  - start Dynamic Modal
+- Components
+  - panzoom Modal
+  - gallery
 - Markdown
   - pass MD as MDX
   - Enhance headings with Astro component, hover highlight and icons for id slugs
-- Issue : node not serving files
-- gallery
+  - add more code formats, e.g. mermaid,...
 - authentication
   - AppBar right float icons
   - ssr mode signin with github
 - menus
+  - ToC scroll spy highlight open close right depth
   - Structure : generation of left nav menu from src/pages
   - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
   - pages types and icons

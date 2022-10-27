@@ -2,19 +2,18 @@
 title: 'Plantuml as Astro component'
 ---
 
-# Plantuml
+# Plantuml Astro in 
 
 ```
-@startuml
-Michael -> Maria : Message(Hello)
-@enduml
-```
-
-```plantumlastro my-puml
 @startuml
 Michael -> Maria : Message(Hello)
 Maria -> Daniel : Message(Hi)
 @enduml
 ```
 
-after
+```plantumlsvg my-puml
+@startuml
+Michael -> Maria : Message(Hello)
+Maria -> Daniel : Message(Hi)
+@enduml
+```

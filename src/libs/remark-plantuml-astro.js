@@ -52,7 +52,7 @@ function remarkPUMLAstro(pluginOptions) {
   return function transformer(syntaxTree,file) {
     //console.log("   ---   remarkPUMLAstro   ---")
     visit(syntaxTree, "code", node => {
-      if (!node.lang || !node.value || node.lang !== "plantumlastro") return;
+      if (!node.lang || !node.value || node.lang !== "plantuml") return;
       const svg_file = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
       const filedir = dirname(file.history[0])
       node.type = "html";

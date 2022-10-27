@@ -17,9 +17,9 @@ Foo -> Foo1 : Message(Hi there)
 
 
 ## Remark Plantuml Object (Dynamic)
-This code is using `plantumldyn` code. The remark plugin associated with it is `remark-plantuml-object`, it encodes the sequence and places it on the url of an object of type svg. After the user loads the page, the url will be fetcehd from the plantuml server by the client and rendered afterwards which can cause a delay on first load.
+This code is using `plantumlobj` code. The remark plugin associated with it is `remark-plantuml-object`, it encodes the sequence and places it on the url of an object of type svg. After the user loads the page, the url will be fetcehd from the plantuml server by the client and rendered afterwards which can cause a delay on first load.
 
-```plantumldyn
+```plantumlobj
 @startuml
 participant Participant as Foo
 boundary    Reception    as Foo1

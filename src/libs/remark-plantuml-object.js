@@ -24,10 +24,10 @@ function remarkPUMLObj(pluginOptions) {
   return function transformer(syntaxTree) {
     visit(syntaxTree, "code", node => {
       let { lang, value, meta } = node;
-      if (!lang || !value || lang !== "plantumldyn") return;
+      if (!lang || !value || lang !== "plantumlobj") return;
       node.type = "html";
       const val = `${options.baseUrl.replace(/\/$/, "")}/${plantumlEncoder.encode(value)}`;
-      node.value = `<object type="image/svg+xml"  data="${val}" />`
+      node.value = `<object type="image/svg+xml"  data="${val}" > </object>`
       node.alt = meta;
       node.meta = undefined;
     });

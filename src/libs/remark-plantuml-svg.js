@@ -20,7 +20,7 @@ function update_puml_file(file,value,meta,baseUrl){
     const pmtime = statSync(svg_file).mtime
     if(pmtime > mtime){
       do_update = false
-      console.log(`svg file exist for puml ${puml_title}`)
+      //console.log(`svg file exist for puml ${puml_title}`)
     }
   }
   if(do_update){
@@ -51,7 +51,7 @@ function remarkPUMLSvg(pluginOptions) {
   const baseUrl = options.baseUrl.replace(/\/$/, "")
   return function transformer(syntaxTree,file) {
     visit(syntaxTree, "code", node => {
-      if (!node.lang || !node.value || node.lang !== "plantuml") return;
+      if (!node.lang || !node.value || node.lang !== "plantumlsvg") return;
       const svg_text = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
       node.type = "html";
       node.value = svg_text

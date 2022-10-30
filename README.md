@@ -12,12 +12,15 @@ Performance oriented, using astro components only, no css extenal framework, no 
 ## Features
 - astro components (.astro) html css js
 - article page full content as html ready for browser search
-- Left Menu pages Tree Navigation
-- Right Menu Table of Content with ScrollSpy
-- Menus consist of Trees with unlimited depth and recursively expandable sections
-- Menus can be opened, collapsed and width adjusted by the user
-- Menus are built by astro and seen as readable html hierarchy by the client
-- Navigation menu can have pages or directories similar to file system browsing experience
+- Menus
+  - Built by astro and seen as readable html hierarchy by the client
+  - Trees with unlimited depth and recursively expandable sections
+  - Can be opened, collapsed and width adjusted by the user
+  - Navigation Menu (Left Menu)
+    - can have pages or directories similar to file system browsing experience
+    - Auto expands decendance of active page only
+  - Table Of Content (Right Menu)
+    - ScrollSpy
 - markdown 
   - Supports md and mdx
   - Automatic Right Menu ToC generation for all markdown pages

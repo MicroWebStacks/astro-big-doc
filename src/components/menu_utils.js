@@ -53,14 +53,18 @@ function active_page(url, raw_menu){
 }
 
 function set_classes_recursive(url,items){
+    let active_descendant = false
     items.forEach((item)=>{
         item.active = (url_path(url) == item.href)
+        active_descendant ||= item.active
         if("items" in item){
             item.parent = true
-            item.expanded = true
-            set_classes_recursive(url,item.items)
+            item.active_descendant = set_classes_recursive(url,item.items)
+            item.expanded = item.active_descendant
+            active_descendant ||= item.active_descendant
         }
     })
+    return active_descendant
 }
 
 /**  Topmenu  : depth 0
@@ -78,7 +82,6 @@ function process_menu_tree(url,raw_menu){
     side_menu.items = raw_menu[active_section_index].items
 
     set_classes_recursive(url,side_menu.items)
-
     return side_menu
 }
 

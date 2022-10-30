@@ -39,6 +39,7 @@ function url_path(url){
 
 function active_page(url, raw_menu){
     const page = root_page(url)
+    console.log(`active_page = ${page}`)
     raw_menu.forEach((item)=>{item.base = get_base(item.href)})
     let active_page_index = raw_menu.map(item=>item.base).indexOf(page)
     //assumption is that the first page (index 0) is always the Home root '/'
@@ -50,6 +51,7 @@ function active_page(url, raw_menu){
 
 function active_subpage(url,submenu){
     const path = url_path(url)
+    console.log(`active_subpage path = ${path}`)
     let res_index = -1
     submenu.forEach((element,index) => {
         //console.log(`path(${path}) == href(${element.href})`)

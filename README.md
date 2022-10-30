@@ -13,7 +13,7 @@ Performance oriented, using astro components only, no css extenal framework, no 
 - astro components (.astro) html css js
 - article page full content as html ready for browser search
 - Left Menu pages Tree Navigation
-- Right Menu Table of Content
+- Right Menu Table of Content with ScrollSpy
 - Menus consist of Trees with unlimited depth and recursively expandable sections
 - Menus can be opened, collapsed and width adjusted by the user
 - Menus are built by astro and seen as readable html hierarchy by the client
@@ -23,6 +23,29 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - Automatic Right Menu ToC generation for all markdown pages
   - Markdown pages can be either in `scr/pages` or on any other server local path e.g. `data/blog` or `../../content/markdown`
   - Plantuml with dynamic and static Svg in MD, Astro component in MDX
+
+## Todos
+- Components
+  - panzoom Modal
+  - gallery
+- Markdown
+  - pass MD as MDX
+  - Enhance headings with Astro component, hover highlight and icons for id slugs
+  - add more code formats, e.g. mermaid,...
+- authentication
+  - AppBar right float icons
+  - ssr mode signin with github
+- menus
+  - Left Nav auto-expand : open page depth, close all others
+  - ToC auto-expand : open scroll spy, close all others
+  - Left and right : min (disabled) or expand to level slider or selector
+  - Left and right : auto expand depth adjust to available vertical space (all level or nothing)
+  - Structure : generation of left nav menu from src/pages
+  - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
+  - pages types and icons
+  - open close on nav-resize click
+  - Issue: Menu height transition MUI example is working
+  - (optional) store nav menu width / prevent reset on same page reload
 
 # Dev
 ## getting started
@@ -47,28 +70,6 @@ pnpm create astro@latest
 * `remark-plantuml-svg` : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal `.puml` file for vs code preview convenience and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.
 * `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
 
-## Todos
-- Components
-  - panzoom Modal
-  - gallery
-- Markdown
-  - pass MD as MDX
-  - Enhance headings with Astro component, hover highlight and icons for id slugs
-  - add more code formats, e.g. mermaid,...
-- authentication
-  - AppBar right float icons
-  - ssr mode signin with github
-- menus
-  - Left Nav auto-expand : open page depth, close all others
-  - ToC auto-expand : open scroll spy, close all others
-  - Left and right : min (disabled) or expand to level slider or selector
-  - Left and right : auto expand depth adjust to available vertical space (all level or nothing)
-  - Structure : generation of left nav menu from src/pages
-  - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
-  - pages types and icons
-  - open close on nav-resize click
-  - Issue: Menu height transition MUI example is working
-  - (optional) store nav menu width / prevent reset on same page reload
 
 ## Hints
 - menu config allows index pages but do not use them to keep consistent nav menu of folders/items

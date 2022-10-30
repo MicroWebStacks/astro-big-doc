@@ -52,41 +52,6 @@ function active_page(url, raw_menu){
     return active_page_index
 }
 
-function active_subpage(url,submenu){
-    const path = url_path(url)
-    console.log(`active_subpage path = ${path}`)
-    let res_index = -1
-    submenu.forEach((element,index) => {
-        //console.log(`path(${path}) == href(${element.href})`)
-        if(path.startsWith(element.href)){
-            res_index = index
-        }
-    });
-    return res_index
-}
-
-/** bad idea - incomplete - due complexity of unlinked children management
- */
-function process_menu_list(url,raw_menu){
-    let side_menu = {items:[],visible:false}
-
-    const active_section_index = active_page(url,raw_menu)
-    side_menu.visible = ("items" in raw_menu[active_section_index])
-    if(side_menu.visible == false)    {
-        return side_menu
-    }
-    side_menu.items = raw_menu[active_section_index].items
-
-    const active_subpage_index = active_subpage(url,side_menu.items)
-    side_menu.items.forEach((item,index)=>{
-        item.classes = (index == active_subpage_index)?"active":""
-        item.paddingLeft = item.depth?item.depth*10+10:10
-    })
-    
-
-    return side_menu
-}
-
 function set_classes_recursive(url,items){
     items.forEach((item)=>{
         item.active = (url_path(url) == item.href)
@@ -177,7 +142,6 @@ function process_toc_list(headings){
 }
 
 export{
-    process_menu_list,
     process_menu_tree,
     process_toc_list,
     active_page,

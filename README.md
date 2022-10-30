@@ -48,7 +48,6 @@ pnpm create astro@latest
 * `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
 
 ## Todos
-- Issue : left nav menu active page not highlighted
 - Components
   - panzoom Modal
   - gallery

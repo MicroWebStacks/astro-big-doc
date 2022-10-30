@@ -34,12 +34,15 @@ function url_path(url){
     }else{
         str = ""
     }
+    if(str.endsWith('/')){//rstrip('/')
+        str = str.slice(0,-1)
+    }
     return `/${str}`
 }
 
 function active_page(url, raw_menu){
     const page = root_page(url)
-    console.log(`active_page = ${page}`)
+    //console.log(`active_page = ${page}`)
     raw_menu.forEach((item)=>{item.base = get_base(item.href)})
     let active_page_index = raw_menu.map(item=>item.base).indexOf(page)
     //assumption is that the first page (index 0) is always the Home root '/'

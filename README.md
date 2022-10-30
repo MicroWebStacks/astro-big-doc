@@ -59,15 +59,14 @@ pnpm create astro@latest
   - AppBar right float icons
   - ssr mode signin with github
 - menus
-  - ToC scroll spy highlight open close right depth
+  - Left Nav auto-expand : open page depth, close all others
+  - ToC auto-expand : open scroll spy, close all others
+  - Left and right : min (disabled) or expand to level slider or selector
+  - Left and right : auto expand depth adjust to available vertical space (all level or nothing)
   - Structure : generation of left nav menu from src/pages
   - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
   - pages types and icons
   - open close on nav-resize click
-  - menu auto depth adjust 
-  - current page depth always open
-  - all level items or nothing
-  - depth slider or depth selector
   - Issue: Menu height transition MUI example is working
   - (optional) store nav menu width / prevent reset on same page reload
 

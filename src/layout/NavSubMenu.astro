@@ -1,5 +1,4 @@
 ---
-import NavSubMenu from "./NavSubMenu.astro";//todo replace with Astro.self
 
 export interface Props {
 	items: Array<Object>;
@@ -28,7 +27,7 @@ const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
                         {item.text}
                     </span>
                 </a>
-                <NavSubMenu items={item.items} root={false}/>
+                <Astro.self items={item.items} root={false}/>
             </li>
         ))}
     </ul>

@@ -1,6 +1,7 @@
 ---
 import menu from "../config/menu.json"
 import { remove_base,active_page } from "@/components/menu_utils";
+import Icon from "@/components/svgicons.astro"
 
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const pageUrl = remove_base(baseUrl,Astro.url.pathname)
@@ -11,12 +12,29 @@ menu.forEach((item,index)=>{
 
 ---
 <>
-    {menu.map((item)=>(
-            <a href={baseUrl+item.href} class={item.active_class}>{item.text}</a>
-    ))}
+    <ul id="navbar-top">
+        {menu.filter(item=>!item.right).map((item)=>(
+            <li><a href={baseUrl+item.href} class={item.active_class}>{item.text}</a></li>
+            ))}
+    </ul>
+    <ul id="navbar-right">
+        {menu.filter(item=>item.right).map((item)=>(
+            <li>
+                <a href={item.href} class="" target="blank">
+                    <img src={baseUrl+"/"+item.img} width="32px"/>
+                </a>
+            </li>
+            ))}
+    </ul>
 </>
 
 <style>
+    ul{
+        margin:0px;
+    }
+    li{
+        list-style: none;
+    }
 
 a{
     float:left;
@@ -34,5 +52,13 @@ a.active{
     border:0px;
     border-bottom:  3px solid rgb(88, 88, 88);
     background-color: #454646;
+}
+#navbar-right {
+    padding-right: 50px;
+}
+
+#navbar-right > li > a{
+    float:right;
+    padding: 6px;
 }
 </style>

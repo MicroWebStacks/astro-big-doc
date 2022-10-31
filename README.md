@@ -39,7 +39,7 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - AppBar right float icons
   - ssr mode signin with github
 - menus
-  - Left Nav auto-expand : open page depth, close all others
+  - float right icons link to gihub
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector
   - Left and right : auto expand depth adjust to available vertical space (all level or nothing)
@@ -49,6 +49,7 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - open close on nav-resize click
   - Issue: Menu height transition MUI example is working
   - (optional) store nav menu width / prevent reset on same page reload
+  - minor issue : Expand arrow rotates for nothing on page reload
 
 # Dev
 ## getting started

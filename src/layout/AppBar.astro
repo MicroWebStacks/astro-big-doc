@@ -12,11 +12,11 @@ menu.forEach((item,index)=>{
 
 ---
 <>
-    <ul id="navbar-top">
+    {<ul id="navbar-top">
         {menu.filter(item=>!item.icon).map((item)=>(
             <li><a href={baseUrl+item.href} class={item.active_class}>{item.text}</a></li>
             ))}
-    </ul>
+    </ul>}
     <ul id="navbar-right">
         {menu.filter(item=>item.icon).map((item)=>(
             <li>

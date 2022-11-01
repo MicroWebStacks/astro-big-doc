@@ -1,0 +1,41 @@
+<mxfile host="65bd71144e">
+    <diagram id="DBtAsE_8EIPGSWh5YOdW" name="Page-1">
+        <mxGraphModel dx="517" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="16" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry width="320" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="shape=filledEdge;rounded=0;fixDash=1;endArrow=none;strokeWidth=30;fillColor=#333333;edgeStyle=orthogonalEdgeStyle;strokeColor=none;" parent="1" edge="1">
+                    <mxGeometry width="60" height="40" relative="1" as="geometry">
+                        <mxPoint x="200" y="40" as="sourcePoint"/>
+                        <mxPoint x="280" y="90" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" value="" style="shape=filledEdge;rounded=0;fixDash=1;endArrow=none;strokeWidth=30;fillColor=#333333;edgeStyle=orthogonalEdgeStyle;strokeColor=none;" parent="1" edge="1">
+                    <mxGeometry width="60" height="40" relative="1" as="geometry">
+                        <mxPoint x="120" y="240" as="sourcePoint"/>
+                        <mxPoint x="40" y="190" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="" style="shape=filledEdge;rounded=0;fixDash=1;endArrow=none;strokeWidth=30;fillColor=#333333;edgeStyle=orthogonalEdgeStyle;strokeColor=none;" parent="1" edge="1">
+                    <mxGeometry width="60" height="40" relative="1" as="geometry">
+                        <mxPoint x="200" y="240" as="sourcePoint"/>
+                        <mxPoint x="280" y="190" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="280" y="240"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="18" value="" style="shape=filledEdge;rounded=0;fixDash=1;endArrow=none;strokeWidth=30;fillColor=#333333;edgeStyle=orthogonalEdgeStyle;strokeColor=none;" parent="1" edge="1">
+                    <mxGeometry width="60" height="40" relative="1" as="geometry">
+                        <mxPoint x="120" y="40" as="sourcePoint"/>
+                        <mxPoint x="40" y="90" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

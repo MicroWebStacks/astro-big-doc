@@ -14,16 +14,18 @@ console.log(`SvgPz ===> : ${filepath}`)
 const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
 ---
 <div class="container" data-filename={filename}>
-  <div class="header">
+  <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>
   <div class="figure">
     <Fragment set:html={innerHTML} />
   </div>
-  <div class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <Fragment set:html={innerHTML} />
+  <div class="modal-background">
+    <div class="modal">
+      <div class="modal-header close">
+        <span class="close-x">&times;</span>
+      </div>
+      <!-- SVG clone will be appended here -->
     </div>
   </div>
 </div>
@@ -45,9 +47,10 @@ const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await A
 .header{
   display:flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   background:white;
-  width:100%;
+  align-items: stretch;
+  width:98%;/* not clear why right side padding is ignored */
   padding: 2px;
   border-radius: 5px;
 }
@@ -59,9 +62,7 @@ const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await A
 .figure{
   display: flex;
 }
-.figure > svg{
-}
-.modal{
+.modal-background{
   display: none;
   position: fixed;
   z-index: 1;
@@ -74,25 +75,38 @@ const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await A
   background-color: black;
   background-color: rgba(0,0,0,0.4);
 }
-.modal-content {
+.modal {
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
+  padding: 5px;
   border: 1px solid #888;
   width:fit-content;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
+.modal-header{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+  align-items: stretch;
+  border-radius: 5px;
+}
+.close-x {
+  color: #aaa;
+  font-size: 20px;
   font-weight: bold;
 }
-
-.close:hover,
-.close:focus {
-  color: #000;
+.modal-header:hover {
   text-decoration: none;
   cursor: pointer;
+  background:#ddd;
+}
+.modal-header:hover > span{
+  color: #000;
+
 }
 </style>
 
@@ -102,24 +116,41 @@ const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await A
   width: 16px;
   margin:0px;
   padding:2px;
+  fill:#aaa;
 }
+.header:hover > svg{
+  fill:rgb(56, 56, 56);
+}
+
 </style>
 
 <script define:vars={{ filename }}>
   const container = document.querySelector(`.container[data-filename="${filename}"]`)
-  const header = container.querySelector(".header")
+  const open = container.querySelector(".open")
   const modal = container.querySelector(".modal")
-  const close = modal.querySelector(".close")
-  header.onclick = ()=>{
+  const modalBkg = container.querySelector(".modal-background")
+  const close = modalBkg.querySelector(".close")
+
+  function openModal(){
+    modalBkg.style.display = "block"
     const svg = container.querySelector(".figure").firstElementChild
-    modal.style.display = "block"
+    modal.appendChild(svg.cloneNode(true))
+  }
+  function closeModal(){
+    modalBkg.style.display = "none"
+    const svgModal = modal.querySelector("svg")
+    svgModal.remove()
+  }
+
+  open.onclick = ()=>{
+    openModal()
   }
   close.onclick = ()=>{
-    modal.style.display = "none"
+    closeModal()
   }
-  modal.onclick = (event)=>{
-    if(event.target == modal){
-      modal.style.display = "none"
+  modalBkg.onclick = (event)=>{
+    if(event.target == modalBkg){
+      closeModal()
     }
   }
 </script>

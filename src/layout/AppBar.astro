@@ -1,7 +1,7 @@
 ---
 import menu from "../config/menu.json"
 import { remove_base,active_page } from "@/components/menu_utils";
-import Icon from "@/components/svgicons.astro"
+import Icon from "@/components/icon.astro"
 
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const pageUrl = remove_base(baseUrl,Astro.url.pathname)
@@ -13,15 +13,15 @@ menu.forEach((item,index)=>{
 ---
 <>
     <ul id="navbar-top">
-        {menu.filter(item=>!item.right).map((item)=>(
+        {menu.filter(item=>!item.icon).map((item)=>(
             <li><a href={baseUrl+item.href} class={item.active_class}>{item.text}</a></li>
             ))}
     </ul>
     <ul id="navbar-right">
-        {menu.filter(item=>item.right).map((item)=>(
+        {menu.filter(item=>item.icon).map((item)=>(
             <li>
-                <a href={item.href} class="" target="blank">
-                    <img src={baseUrl+"/"+item.img} width="32px"/>
+                <a href={item.href} target="blank">
+                    <Icon filename={item.icon} />
                 </a>
             </li>
             ))}

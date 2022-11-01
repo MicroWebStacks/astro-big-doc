@@ -101,8 +101,7 @@
         "href":"/about/"
     },
     {
-        "href":"https://github.com/MicroWebStacks/astro-big-doc",
-        "right":true,
-        "img":"github.png"
+        "icon":"github",
+        "href":"https://github.com/MicroWebStacks/astro-big-doc"
     }
 ]

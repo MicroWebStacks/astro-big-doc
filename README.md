@@ -39,7 +39,6 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - AppBar right float icons
   - ssr mode signin with github
 - menus
-  - float right icons link to gihub
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector
   - Left and right : auto expand depth adjust to available vertical space (all level or nothing)

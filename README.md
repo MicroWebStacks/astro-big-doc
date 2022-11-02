@@ -28,16 +28,19 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - Plantuml with dynamic and static Svg in MD, Astro component in MDX
 
 ## Todos
+- Issues
+  - github link image on src github pages deployment fails
+- Tests
+  - test panzoom with complex ppt svg to check shadowless artefacts
+  - test panzoom with wide svgs that have been max-width adjusetd to the page
 - Components
-  - panzoom Modal
   - gallery
+  - panzoom support img formats
 - Markdown
   - pass MD as MDX
   - Enhance headings with Astro component, hover highlight and icons for id slugs
   - add more code formats, e.g. mermaid,...
-- authentication
-  - AppBar right float icons
-  - ssr mode signin with github
+- authentication signin with github
 - menus
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector

@@ -1,0 +1,56 @@
+---
+export interface Props {
+  'data-filename': string;
+  'data-filedir': string;
+}
+
+const { 'data-filename':filename,'data-filedir':filedir } = Astro.props as Props;
+
+console.log(`Gallery : ${filedir} / ${filename}`)
+---
+
+<div class="container" data-filename={filename}>
+    <button class="collapsible">
+        Click to expand
+    </button>
+    <div class="content">
+        Hello
+    </div>
+</div>
+
+<style>
+.container{
+    background:red;
+    padding:5px;
+    border-radius: 5px;
+}
+.collapsible{
+    text-align: left;
+    background: green;
+    border: none;
+    cursor: pointer;
+    width:100%;
+    padding: 10px;
+}
+.content{
+    background:blue;
+    padding-top:0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+</style>
+
+<script define:vars={{ filename }} >
+    const container = document.querySelector(`.container[data-filename="${filename}"]`)
+    const collapsible = container.querySelector(".collapsible")
+    const content = container.querySelector(".content")
+    collapsible.onclick = ()=>{
+        if (content.style.maxHeight){
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    }
+</script>

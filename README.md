@@ -28,8 +28,6 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - Plantuml with dynamic and static Svg in MD, Astro component in MDX
 
 ## Todos
-- Issues
-  - github link image on src github pages deployment fails
 - Tests
   - test panzoom with complex ppt svg to check shadowless artefacts
   - test panzoom with wide svgs that have been max-width adjusetd to the page

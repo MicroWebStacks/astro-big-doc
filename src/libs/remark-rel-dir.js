@@ -1,10 +1,10 @@
 import {visit} from "unist-util-visit";
 import {dirname} from 'path'
 
-function remarkRelSvg() {
+function remarkRelDir() {
   return function transformer(syntaxTree,file) {
     visit(syntaxTree,  node => {
-      if(node.name != 'SvgPz'){
+      if((node.name != 'SvgPz')&&(node.name != 'Gallery')){
         return
       }
       if(node.type == "mdxJsxFlowElement"){
@@ -20,5 +20,5 @@ function remarkRelSvg() {
 }
 
 export{
-  remarkRelSvg
+  remarkRelDir
 }

@@ -3,7 +3,7 @@ import mdx from "@astrojs/mdx";
 import {remarkPUMLObj} from './src/libs/remark-plantuml-object'
 import {remarkPUMLSvg} from './src/libs/remark-plantuml-svg'
 import {remarkPUMLAstro} from './src/libs/remark-plantuml-astro'
-import {remarkRelSvg} from './src/libs/remark-rel-svg'
+import {remarkRelDir} from './src/libs/remark-rel-dir'
 
 export default defineConfig({
   output: "static",
@@ -14,7 +14,7 @@ export default defineConfig({
   markdown:{
     syntaxHighlight: 'shiki',
     remarkPlugins: [
-      remarkRelSvg,
+      remarkRelDir,
       remarkPUMLObj,
       remarkPUMLSvg,
       remarkPUMLAstro,

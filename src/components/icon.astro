@@ -5,11 +5,10 @@ export interface Props {
   filename: string;
 }
 
-const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const { filename } = Astro.props as Props;
 console.log(githubImg)
 ---
 {
     (filename == "github") &&
-    <img src={baseUrl+githubImg} height="32px"/>
+    <img src={githubImg} height="32px"/>
 }

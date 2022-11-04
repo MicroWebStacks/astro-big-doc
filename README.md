@@ -76,6 +76,9 @@ pnpm create astro@latest
 
 
 ## Hints
+- SVGs
+  - missing viewbox canot be resized
+  - should not have `preserveAspectRatio="none"`
 - menu config allows index pages but do not use them to keep consistent nav menu of folders/items
 - adding interactive SVGs that can be styled with css is challenging
   - `svg.astro` uses the innerHTML fragment which breaks visibility of `style` tag no longer scoping imported SVG

@@ -1,12 +1,15 @@
 ---
+import {existsSync,readFileSync} from 'fs';
+import Svg from '@/components/svg.astro'
 export interface Props {
   'data-filename': string;
   'data-filedir': string;
 }
 
 const { 'data-filename':filename,'data-filedir':filedir } = Astro.props as Props;
-
-console.log(`Gallery : ${filedir} / ${filename}`)
+const filepath = filedir+'/'+filename
+const json_text = existsSync(filepath)?readFileSync(filepath).toString():"[]"
+const images = JSON.parse(json_text)
 ---
 
 <div class="container" data-filename={filename}>
@@ -14,32 +17,83 @@ console.log(`Gallery : ${filedir} / ${filename}`)
         Click to expand
     </button>
     <div class="content">
-        Hello
+        <div class="itemscontainer">
+            {images.map((image)=>(
+                <div class="item">
+                    <div class="itemimage">
+                        <Svg filepath={`${filedir+'/'+image}`} />
+                    </div>
+                    <div class="overlay">{image}</div>
+                </div>
+            ))}
+        </div>
     </div>
 </div>
 
 <style>
 .container{
-    background:red;
+    background:rgb(134, 134, 134);
     padding:5px;
     border-radius: 5px;
 }
 .collapsible{
+    color:white;
     text-align: left;
-    background: green;
+    background: #333333;
     border: none;
     cursor: pointer;
     width:100%;
     padding: 10px;
 }
+.collapsible:hover{
+    background-color: #545454;
+    transition: background-color 0.3s;
+}
 .content{
-    background:blue;
-    padding-top:0 20px;
+    background:rgb(43, 43, 43);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
+.itemscontainer{
+    padding:10px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px 10px;
+}
+.item{
+    cursor:pointer;
+}
+.itemimage:hover{
+    scale: 1.1;
+    transition: scale 0.5s;
+}
+.item:hover > .overlay{
+    display: block;
+}
+.item:hover > .itemimage{
+    filter:brightness(100%);
+}
+.itemimage{
+    filter:brightness(80%);
+    width:150px;
+    height:150px;
+}
 
+.overlay{
+    padding:5px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    color:white;
+    max-width: 150px;
+}
+</style>
+<style is:inline>
+.itemimage > svg{
+    max-height: 100%;
+    max-width: 100%;
+}
 </style>
 
 <script define:vars={{ filename }} >
@@ -50,6 +104,12 @@ console.log(`Gallery : ${filedir} / ${filename}`)
         if (content.style.maxHeight){
             content.style.maxHeight = null;
         } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    }
+    //TODO how to capture the resize event, custom event from mouse move
+    content.onresize = ()=>{
+        if(content.style.maxHeight){
             content.style.maxHeight = content.scrollHeight + "px";
         }
     }

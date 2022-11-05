@@ -96,7 +96,7 @@ pnpm create astro@latest
     - flex can also animate but then the flex container height must be set explicitely
 - node js modules filename not in `__filename` but in `import.meta.url`
 - Markdown
-  - It is not possible to handle a custom code section with an Astro component in native Astro markdown integration (unless you rewrite the Astro component in remark and rehype). It is only possible in imported markdown where remarked custom components e.g. `<data />` can be replaced on the custom render call with an Astro component. see `blog/[...page].astro`
+  - It is not possible to handle a custom code section with an Astro component in native Astro markdown integration (unless you rewrite the Astro component in remark and rehype). It is only possible in imported markdown where remarked custom components e.g. `<data />` can be replaced on the custom render call with an Astro component. see `blog/[...page].astro`. Fix RFC : https://github.com/withastro/rfcs/pull/285
   - `<Content components={{}}/>` only replaces html items injected from plugins and not items written in markdown page
   - `<Content components={{}}/>` does not replace Astro components in MD, only in MDX
 

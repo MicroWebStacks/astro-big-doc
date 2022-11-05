@@ -89,7 +89,7 @@
 <div id="resize-left" class="nav-resize active astro-73NWPNF6"></div>
 	 			<article class="content astro-73NWPNF6">
 					<h1 id="svg">SVG</h1>
-<h2 id="astro-svg">Astro Svg</h2>
+<h2 id="panzoom-svg">Panzoom svg</h2>
 <p>this is an Svg Astro component. Unlike <code>&lt;object/&gt;</code> tag, this component will be replaced with the full svg in the html page. It uses <code>remark-rel-svg</code> which allow imported markdown to use a server relative path for the svg file.</p>
 <pre class="astro-code" style="background-color:#0d1117;overflow-x:auto"><code><span class="line"><span style="color:#C9D1D9">&lt;</span><span style="color:#7EE787">SvgPz</span><span style="color:#C9D1D9"> </span><span style="color:#79C0FF">data-filename</span><span style="color:#FF7B72">=</span><span style="color:#A5D6FF">&quot;tree.svg&quot;</span><span style="color:#C9D1D9"> /&gt;</span></span></code></pre>
 <div class="container astro-3JPGDYSA" data-filename="tree.svg">
@@ -235,7 +235,10 @@
     }
   }
 </script>
-<h2 id="direct-svg">Direct svg</h2>
+<h2 id="image-svg">Image svg</h2>
+<pre class="astro-code" style="background-color:#0d1117;overflow-x:auto"><code><span class="line"><span style="color:#C9D1D9">![</span><span style="color:#A5D6FF;font-weight:bold">Tree</span><span style="color:#C9D1D9">](</span><span style="color:#C9D1D9;font-weight:bold">./tree.svg</span><span style="color:#C9D1D9">)</span></span></code></pre>
+<p><img src="/astro-big-doc/raw/data/blog/tree.svg" alt="Tree"/></p>
+<h2 id="svg-text-in-markdown">Svg text in markdown</h2>
 <p>SVG Files can be used in markdown too, as long as they don’t have a <code>data-filename</code>, they’ll be apssed through as is.</p>
 <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg"><path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 				</article>
@@ -254,10 +257,10 @@
                 </a>
                 <ul class="nested astro-W5IILIOF">
         <li class="astro-W5IILIOF">
-                <a href="#astro-svg" class="toc_href astro-W5IILIOF">
+                <a href="#panzoom-svg" class="toc_href astro-W5IILIOF">
                     
                     <span class="text astro-W5IILIOF">
-                        Astro Svg
+                        Panzoom svg
                     </span>
                 </a>
                 
@@ -266,10 +269,22 @@
 
 
             </li><li class="astro-W5IILIOF">
-                <a href="#direct-svg" class="toc_href astro-W5IILIOF">
+                <a href="#image-svg" class="toc_href astro-W5IILIOF">
                     
                     <span class="text astro-W5IILIOF">
-                        Direct svg
+                        Image svg
+                    </span>
+                </a>
+                
+
+
+
+
+            </li><li class="astro-W5IILIOF">
+                <a href="#svg-text-in-markdown" class="toc_href astro-W5IILIOF">
+                    
+                    <span class="text astro-W5IILIOF">
+                        Svg text in markdown
                     </span>
                 </a>
                 

@@ -35,8 +35,9 @@ function update_puml_file(file,value,meta,baseUrl){
 }
 
 function createSvgPz(filename, filedir){
+  //mdxJsxFlowElement or mdxjsEsm
   return {
-    type: "mdxJsxFlowElement",
+    type: "mdxjsEsm",
     name: 'SvgPz',
     attributes: [
       {

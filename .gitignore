@@ -1,5 +1,5 @@
-# build output
 dist/
+public/raw/
 
 # dependencies
 node_modules/

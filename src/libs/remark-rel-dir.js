@@ -3,7 +3,9 @@ import {dirname} from 'path'
 
 function remarkRelDir() {
   return function transformer(syntaxTree,file) {
+    //console.log(` 'remarkRelDir' * in file '${file.history}'`)
     visit(syntaxTree,  node => {
+      //console.log(`   * node '${node.type}'`)
       if((node.name != 'SvgPz')&&(node.name != 'Gallery')){
         return
       }

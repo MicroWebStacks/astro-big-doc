@@ -18,6 +18,10 @@
             {
                 "text":"Readme",
                 "href":"/readme"
+            },
+            {
+                "text":"Images",
+                "href":"/images"
             }
         ]
     },

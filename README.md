@@ -28,7 +28,10 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - Plantuml with dynamic and static Svg in MD, Astro component in MDX
 
 ## Todos
+- Focus on pages markdown and public server content, file system content needs self hosting management
+- Components relative usage of images (astro image component)
 - Tests
+  - test multi instance, check unique script usage and update uid passing component to js
   - test panzoom with complex ppt svg to check shadowless artefacts
   - test panzoom with wide svgs that have been max-width adjusetd to the page
 - Components

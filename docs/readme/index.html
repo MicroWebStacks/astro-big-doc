@@ -224,8 +224,13 @@
 </ul>
 </li>
 <li>node js modules filename not in <code>__filename</code> but in <code>import.meta.url</code></li>
+<li>Markdown
+<ul>
+<li>It is not possible to handle a custom code section with an Astro component in native Astro markdown integration (unless you rewrite the Astro component in remark and rehype). It is only possible in imported markdown where remarked custom components e.g. <code>&#x3C;data /></code> can be replaced on the custom render call with an Astro component. see <code>blog/[...page].astro</code></li>
 <li><code>&#x3C;Content components={{}}/></code> only replaces html items injected from plugins and not items written in markdown page</li>
 <li><code>&#x3C;Content components={{}}/></code> does not replace Astro components in MD, only in MDX</li>
+</ul>
+</li>
 </ul>
 <h1 id="references">References</h1>
 <ul>

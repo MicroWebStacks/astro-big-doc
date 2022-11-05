@@ -1,6 +1,7 @@
 ---
 import {existsSync,readFileSync} from 'fs';
 import {relAssetToUrl} from '../libs/utils'
+import PanZoomModal from './panzoommodal.astro'
 
 export interface Props {
   'data-filename': string;
@@ -33,6 +34,7 @@ const imagesUrls = relImages.map((relFile)=>({
                         <object data={image.url} />
                     </div>
                     <div class="overlay">{image.file}</div>
+                    <PanZoomModal url={image.url} />
                 </div>
             ))}
         </div>
@@ -123,4 +125,15 @@ object{
         }
         console.log(content.style.maxHeight)
     }
+
+    //item open modal
+    const itemimages = document.querySelectorAll(".itemimage")
+    const items = [...itemimages]
+    for(let el in items){
+        items[el].onclick = (e)=>{
+            const modal = e.target.parentElement.querySelector(".modal-background")
+            modal.classList.toggle("visible")
+        }
+    }
+
 </script>

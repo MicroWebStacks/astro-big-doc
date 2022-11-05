@@ -1,13 +1,21 @@
 ---
+import {existsSync,readFileSync} from 'fs'
 import { suid } from '@/libs/utils';
 
 
 export interface Props {
     url: string;
+    filepath:string;
 }
 
-const {url} = Astro.props as Props;
+const {url,filepath} = Astro.props as Props;
 const uid = suid()
+
+const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
+console.log(filepath)
+console.log(existsSync(filepath))
+//TODO hadle imag differently by injeting it with an obj
+const isSvg = true
 
 ---
 <div class="modal-background" data-uid={uid}>
@@ -17,7 +25,10 @@ const uid = suid()
     </div>
     <div class="modal-content">
       <div class="modal-center">
-        <object data={url} />
+        {isSvg?
+          <Fragment set:html={innerHTML} />:
+          <object data={url} />
+        }
       </div>
     </div>
   </div>
@@ -100,11 +111,37 @@ const uid = suid()
 
 <script define:vars={{uid}} type="module">
 import '/astro-big-doc/panzoom.js';
+  let state = "init"
+  let pzref = null
+  const zoomOptions = {
+    minZoom: 0.1,
+    maxZoom:4
+    }
 
-const background = document.querySelector(`.modal-background[data-uid="${uid}"]`)
-const close = background.querySelector(".close")
-close.onclick = ()=>{
-    background.classList.toggle("visible")
+  const background = document.querySelector(`.modal-background[data-uid="${uid}"]`)
+  const close = background.querySelector(".close")
+  const content = background.querySelector(".modal-content")
+  console.log(content)
+  function initModal(){
+    const center = background.querySelector(".modal-center")
+    const svg = center.querySelector("svg")
+    //const item = center.parentElement.parentElement.parentElement.parentElement
+    //const object = item.querySelector(".itemimage").querySelector("object")
+    //console.log(object.shadowRoot)//TODO could not catch shdowRoot
+    pzref = panzoom(svg,zoomOptions)
   }
 
+
+  close.onclick = ()=>{
+      pzref.dispose()
+      background.classList.remove("visible")
+    }
+    //TODO custom event from item open modal
+    //TODO issue first mousedown without move does not pan zoom
+    content.onmousemove = (e)=>{
+    if(content.getAttribute("data-init") != "done"){
+      content.setAttribute("data-init","done")
+      initModal()
+    }
+  }
 </script>

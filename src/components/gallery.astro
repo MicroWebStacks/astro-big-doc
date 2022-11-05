@@ -34,7 +34,7 @@ const imagesUrls = relImages.map((relFile)=>({
                         <object data={image.url} />
                     </div>
                     <div class="overlay">{image.file}</div>
-                    <PanZoomModal url={image.url} />
+                    <PanZoomModal url={image.url} filepath={filedir+'/'+image.file}/>
                 </div>
             ))}
         </div>
@@ -133,6 +133,7 @@ object{
         items[el].onclick = (e)=>{
             const modal = e.target.parentElement.querySelector(".modal-background")
             modal.classList.toggle("visible")
+            console.log(modal.getAttribute("data-uid"))
         }
     }
 

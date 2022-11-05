@@ -111,16 +111,18 @@ This does not
 ```
 Full cases
 ```javascript
-  //1) works fine in dev and build but hardcoded
-  //import '/astro-big-doc/panzoom.js';
+  //0) works fine in dev and build but hardcoded
+  import '/astro-big-doc/panzoom.js';
+  //1) does not work when component used from another one e.g. from Markdown on another path resolves to relative markdown path
+  import "./panzoom.js";
   //2) works in dev mode only, not deployed
   import '../../node_modules/panzoom/dist/panzoom';
   //3) unexpected template string
-  //import `${baseUrl}/panzoom.min`; 
+  import `${baseUrl}/panzoom.min`; 
   //4)
-  //import "import.meta.env.BASE_URL/panzoom.min";
+  import "import.meta.env.BASE_URL/panzoom.min";
   //5) warning : files in the public directory are served at the root path.  Instead of /public/panzoom, use /panzoom.
-	//import '../../public/panzoom';
+	import '../../public/panzoom';
 ```
 
 # References

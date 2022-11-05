@@ -1,3 +1,5 @@
+import {existsSync,copyFileSync,mkdirSync} from 'fs'
+import {resolve,normalize,dirname,join,relative} from 'path'
 import config from '../../astro.config.mjs'
 
 function relAssetToUrl(relativepath,refdir){

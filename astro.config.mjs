@@ -4,7 +4,7 @@ import {remarkPUMLObj} from './src/libs/remark-plantuml-object'
 import {remarkPUMLSvg} from './src/libs/remark-plantuml-svg'
 import {remarkPUMLAstro} from './src/libs/remark-plantuml-astro'
 import {remarkRelDir} from './src/libs/remark-rel-dir'
-import {remarkRelAsset} from './src/libs/remark-rel-asset'
+import {remarkRelAsset} from './src/libs/remark-rel-asset-func'
 import {rehypeCheck} from './src/libs/rehype-check'
 
 export default defineConfig({

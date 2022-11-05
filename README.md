@@ -111,18 +111,15 @@ This does not
 ```
 Full cases
 ```javascript
-  //1) dev mode no way to get rid of this hardcoded baseUrl
-  //   build mode - crash
+  //1) works fine in dev and build but hardcoded
   //import '/astro-big-doc/panzoom.js';
-  //2) this only works in dev mode, no assets management in build
+  //2) works in dev mode only, not deployed
   import '../../node_modules/panzoom/dist/panzoom';
-  //3)
-  //import `${baseUrl}/panzoom.min`; // unexpected template string
+  //3) unexpected template string
+  //import `${baseUrl}/panzoom.min`; 
   //4)
   //import "import.meta.env.BASE_URL/panzoom.min";
-  //5) 
-  //   warning : files in the public directory are served at the root path.  
-  //   Instead of /public/panzoom, use /panzoom.
+  //5) warning : files in the public directory are served at the root path.  Instead of /public/panzoom, use /panzoom.
 	//import '../../public/panzoom';
 ```
 

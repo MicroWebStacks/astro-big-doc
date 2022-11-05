@@ -1,40 +1,11 @@
 ---
-import {existsSync,copyFileSync,mkdirSync} from 'fs'
-import {resolve,normalize,dirname,join,relative} from 'path'
-//import config from '../../astro.config.mjs'//results in require is not defined
-
-const config = {base:"astro-big-doc"}
-
-import {readFileSync} from 'fs';
+import {existsSync,readFileSync} from 'fs';
 import {relAssetToUrl} from '../libs/utils'
-import Svg from '@/components/svg.astro'
+
 export interface Props {
   'data-filename': string;
   'data-filedir': string;
     expanded: boolean;
-}
-
-function relAssetToUrlNo(relativepath,refdir){
-    let newurl = relativepath
-    const filepath = join(refdir,relativepath)
-    if(existsSync(filepath)){
-      const rootdir = join(dirname(normalize(import.meta.url)),"../..").replace("file:\\","")
-      const targetroot = join(rootdir,"public/raw")
-      const filerootrel = relative(rootdir,refdir)
-      const targetpath = resolve(targetroot,filerootrel)
-      const targetfile = join(targetpath,relativepath)
-      const targetdir = dirname(targetfile)
-      //console.log(`copy from '${filepath}' to '${targetfile}'`)
-      const newpath = join("raw/",filerootrel,relativepath)
-      newurl = "/"+config.base +"/"+ newpath.replaceAll('\\','/')
-      //console.log(`  * new asset url = '${newurl}'`)
-      if(!existsSync(targetdir)){
-        mkdirSync(targetdir,{ recursive: true })
-      }
-      copyFileSync(filepath,targetfile)
-    }
-
-    return newurl
 }
 
 
@@ -43,9 +14,7 @@ const filepath = filedir+'/'+filename
 const json_text = existsSync(filepath)?readFileSync(filepath).toString():"[]"
 const relImages = JSON.parse(json_text)
 
-console.log(import.meta.url)
-
-const ImageUrls = relImages.map((relFile)=>({
+const imagesUrls = relImages.map((relFile)=>({
         file:relFile,
         url:relAssetToUrl(relFile,filedir,import.meta.env.BASE_URL)
     }))
@@ -57,7 +26,7 @@ const ImageUrls = relImages.map((relFile)=>({
     </button>
     <div class={`content ${expanded?"expanded":""}`}>
         <div class="itemscontainer">
-            {ImageUrls.map((image)=>(
+            {imagesUrls.map((image)=>(
                 <div class="item">
                     <div class="itemimage">
                         <object data={image.url} />

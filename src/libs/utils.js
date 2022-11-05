@@ -1,8 +1,8 @@
 import {existsSync,copyFileSync,mkdirSync} from 'fs'
 import {resolve,normalize,dirname,join,relative} from 'path'
-import config from '../../astro.config.mjs'
+//import config from '../../astro.config.mjs'
 
-function relAssetToUrl(relativepath,refdir){
+function relAssetToUrl(relativepath,refdir,baseUrl){
     let newurl = relativepath
     const filepath = join(refdir,relativepath)
     if(existsSync(filepath)){
@@ -14,7 +14,7 @@ function relAssetToUrl(relativepath,refdir){
       const targetdir = dirname(targetfile)
       //console.log(`copy from '${filepath}' to '${targetfile}'`)
       const newpath = join("raw/",filerootrel,relativepath)
-      newurl = "/"+config.base +"/"+ newpath.replaceAll('\\','/')
+      newurl = baseUrl+ newpath.replaceAll('\\','/')
       //console.log(`  * new asset url = '${newurl}'`)
       if(!existsSync(targetdir)){
         mkdirSync(targetdir,{ recursive: true })

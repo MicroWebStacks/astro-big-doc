@@ -1,5 +1,12 @@
 ---
-import {existsSync,readFileSync} from 'fs';
+import {existsSync,copyFileSync,mkdirSync} from 'fs'
+import {resolve,normalize,dirname,join,relative} from 'path'
+//import config from '../../astro.config.mjs'//results in require is not defined
+
+const config = {base:"astro-big-doc"}
+
+import {readFileSync} from 'fs';
+import {relAssetToUrl} from '../libs/utils'
 import Svg from '@/components/svg.astro'
 export interface Props {
   'data-filename': string;
@@ -7,11 +14,41 @@ export interface Props {
     expanded: boolean;
 }
 
+function relAssetToUrlNo(relativepath,refdir){
+    let newurl = relativepath
+    const filepath = join(refdir,relativepath)
+    if(existsSync(filepath)){
+      const rootdir = join(dirname(normalize(import.meta.url)),"../..").replace("file:\\","")
+      const targetroot = join(rootdir,"public/raw")
+      const filerootrel = relative(rootdir,refdir)
+      const targetpath = resolve(targetroot,filerootrel)
+      const targetfile = join(targetpath,relativepath)
+      const targetdir = dirname(targetfile)
+      //console.log(`copy from '${filepath}' to '${targetfile}'`)
+      const newpath = join("raw/",filerootrel,relativepath)
+      newurl = "/"+config.base +"/"+ newpath.replaceAll('\\','/')
+      //console.log(`  * new asset url = '${newurl}'`)
+      if(!existsSync(targetdir)){
+        mkdirSync(targetdir,{ recursive: true })
+      }
+      copyFileSync(filepath,targetfile)
+    }
+
+    return newurl
+}
+
+
 const { 'data-filename':filename,'data-filedir':filedir,expanded } = Astro.props as Props;
 const filepath = filedir+'/'+filename
 const json_text = existsSync(filepath)?readFileSync(filepath).toString():"[]"
-const images = JSON.parse(json_text)
-console.log(expanded)
+const relImages = JSON.parse(json_text)
+
+console.log(import.meta.url)
+
+const ImageUrls = relImages.map((relFile)=>({
+        file:relFile,
+        url:relAssetToUrl(relFile,filedir,import.meta.env.BASE_URL)
+    }))
 ---
 
 <div class="container" data-filename={filename}>
@@ -20,12 +57,12 @@ console.log(expanded)
     </button>
     <div class={`content ${expanded?"expanded":""}`}>
         <div class="itemscontainer">
-            {images.map((image)=>(
+            {ImageUrls.map((image)=>(
                 <div class="item">
                     <div class="itemimage">
-                        <Svg filepath={`${filedir+'/'+image}`} />
+                        <object data={image.url} />
                     </div>
-                    <div class="overlay">{image}</div>
+                    <div class="overlay">{image.file}</div>
                 </div>
             ))}
         </div>
@@ -95,7 +132,7 @@ console.log(expanded)
 }
 </style>
 <style is:inline>
-.itemimage > svg{
+.itemimage > object{
     max-height: 100%;
     max-width: 100%;
 }

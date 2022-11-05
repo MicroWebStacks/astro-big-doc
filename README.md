@@ -99,6 +99,32 @@ pnpm create astro@latest
   - It is not possible to handle a custom code section with an Astro component in native Astro markdown integration (unless you rewrite the Astro component in remark and rehype). It is only possible in imported markdown where remarked custom components e.g. `<data />` can be replaced on the custom render call with an Astro component. see `blog/[...page].astro`. Fix RFC : https://github.com/withastro/rfcs/pull/285
   - `<Content components={{}}/>` only replaces html items injected from plugins and not items written in markdown page
   - `<Content components={{}}/>` does not replace Astro components in MD, only in MDX
+## curious script import behaviour
+This code event commented crashes the build
+```javascript
+  import '../../node_modules/panzoom/dist/panzoom';
+  //import "import.meta.env.BASE_URL/panzoom.min";
+```
+This does not
+```javascript
+  import '../../node_modules/panzoom/dist/panzoom';
+```
+Full cases
+```javascript
+  //1) dev mode no way to get rid of this hardcoded baseUrl
+  //   build mode - crash
+  //import '/astro-big-doc/panzoom.js';
+  //2) this only works in dev mode, no assets management in build
+  import '../../node_modules/panzoom/dist/panzoom';
+  //3)
+  //import `${baseUrl}/panzoom.min`; // unexpected template string
+  //4)
+  //import "import.meta.env.BASE_URL/panzoom.min";
+  //5) 
+  //   warning : files in the public directory are served at the root path.  
+  //   Instead of /public/panzoom, use /panzoom.
+	//import '../../public/panzoom';
+```
 
 # References
 * https://github.com/syntax-tree/mdast

@@ -139,12 +139,7 @@ const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await A
 </style>
 
 <script define:vars={{ filename }} type="module" >
-  import '/astro-big-doc/panzoom.js';//no way to get rid of this hardcoded baseUrl
-	//import '../../node_modules/panzoom/dist/panzoom';//this only works in dev mode, no assets management in build
-  //import `${baseUrl}/panzoom.min`; // unexpected template string
-  //import "import.meta.env.BASE_URL/panzoom.min";//Crash
-	//import '../../public/panzoom';//warning : files in the public directory are served at the root path.   //Instead of /public/panzoom, use /panzoom.
-
+import '/astro-big-doc/panzoom.js';
 
   let pzref = null
   const zoomOptions = {

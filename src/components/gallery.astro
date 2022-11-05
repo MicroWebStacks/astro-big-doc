@@ -4,19 +4,21 @@ import Svg from '@/components/svg.astro'
 export interface Props {
   'data-filename': string;
   'data-filedir': string;
+    expanded: boolean;
 }
 
-const { 'data-filename':filename,'data-filedir':filedir } = Astro.props as Props;
+const { 'data-filename':filename,'data-filedir':filedir,expanded } = Astro.props as Props;
 const filepath = filedir+'/'+filename
 const json_text = existsSync(filepath)?readFileSync(filepath).toString():"[]"
 const images = JSON.parse(json_text)
+console.log(expanded)
 ---
 
 <div class="container" data-filename={filename}>
     <button class="collapsible">
-        Click to expand
+        {expanded?"Click to close":"Click to expand"}
     </button>
-    <div class="content">
+    <div class={`content ${expanded?"expanded":""}`}>
         <div class="itemscontainer">
             {images.map((image)=>(
                 <div class="item">
@@ -54,6 +56,9 @@ const images = JSON.parse(json_text)
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+}
+.content.expanded{
+    max-height: 600px;
 }
 .itemscontainer{
     padding:10px;
@@ -101,16 +106,15 @@ const images = JSON.parse(json_text)
     const collapsible = container.querySelector(".collapsible")
     const content = container.querySelector(".content")
     collapsible.onclick = ()=>{
-        if (content.style.maxHeight){
-            content.style.maxHeight = null;
+        content.classList.toggle("expanded")
+        if (content.classList.contains("expanded")){
+            //*2 speeds up the animation but resolves the resize problem without actively watching the resize
+            content.style.maxHeight = content.scrollHeight*2 + "px";
+            collapsible.textContent = "Click to close"
         } else {
-            content.style.maxHeight = content.scrollHeight + "px";
+            content.style.maxHeight = null;
+            collapsible.textContent = "Click to expand"
         }
-    }
-    //TODO how to capture the resize event, custom event from mouse move
-    content.onresize = ()=>{
-        if(content.style.maxHeight){
-            content.style.maxHeight = content.scrollHeight + "px";
-        }
+        console.log(content.style.maxHeight)
     }
 </script>

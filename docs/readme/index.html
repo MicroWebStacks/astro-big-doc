@@ -101,10 +101,10 @@
 	 			<article class="content astro-73NWPNF6">
 					<h1 id="astro-big-doc">astro big doc</h1>
 <p>Live demo : <a href="https://microwebstacks.github.io/astro-big-doc/">https://microwebstacks.github.io/astro-big-doc/</a></p>
-<p>Early stage deno deployment : <a href="https://astro-nav-menus.deno.dev/">https://astro-nav-menus.deno.dev/</a></p>
 <p>Astro Theme that can scale for big documentation websites. Includes an unimited depth config menu that starts with a top appbar for sections navigation, then continues on a tree left  menu for pages. Each page then has a tree right menu for its table of content.</p>
 <p>User friendly even for large menus as both left and right ones are collapsible and width adjustable by the user.</p>
-<p>Performance oriented, using astro components only, no css extenal framework, no virtual dom. Focus on static generation on build time, no client side rendering. Javascript is for minial manipulations connecting events and classes.</p>
+<p>Performance oriented, using astro components only, no virtual DOM, no extenal css framework (you can add your own though). Focus on static generation on build time, no client side rendering. Javascript is for minial manipulations connecting events and classes.</p>
+<p>UX friendly Markdown without import and referencing local images, enhancements with components for panzoom, gallery, and code embeds.</p>
 <h2 id="features">Features</h2>
 <ul>
 <li>astro components (.astro) html css js</li>
@@ -135,31 +135,16 @@
 <li>Plantuml with dynamic and static Svg in MD, Astro component in MDX</li>
 </ul>
 </li>
+<li>components
+<ul>
+<li>Panzoom for SVGs and images</li>
+<li>Gallery with json list of SVGs and images</li>
+<li>assets management to simplify referencing local files in Markdown and Astro components</li>
+</ul>
+</li>
 </ul>
 <h2 id="todos">Todos</h2>
 <ul>
-<li>Focus on pages markdown and public server content, file system content needs self hosting management</li>
-<li>Components relative usage of images (astro image component)</li>
-<li>Tests
-<ul>
-<li>test multi instance, check unique script usage and update uid passing component to js</li>
-<li>test panzoom with complex ppt svg to check shadowless artefacts</li>
-<li>test panzoom with wide svgs that have been max-width adjusetd to the page</li>
-</ul>
-</li>
-<li>Components
-<ul>
-<li>gallery</li>
-<li>panzoom support img formats</li>
-</ul>
-</li>
-<li>Markdown
-<ul>
-<li>pass MD as MDX</li>
-<li>Enhance headings with Astro component, hover highlight and icons for id slugs</li>
-<li>add more code formats, e.g. mermaid,…</li>
-</ul>
-</li>
 <li>authentication signin with github</li>
 <li>menus
 <ul>
@@ -175,8 +160,16 @@
 <li>minor issue : Expand arrow rotates for nothing on page reload</li>
 </ul>
 </li>
+<li>Markdown
+<ul>
+<li>pass MD as MDX (workaround, rename .md to .mdx)</li>
+<li>Enhance headings with Astro component, hover highlight and icons for id slugs</li>
+<li>add more code formats, e.g. mermaid,…</li>
 </ul>
-<h1 id="dev">Dev</h1>
+</li>
+<li>Components : test panzoom with wide svgs that have been max-width adjusetd to the page</li>
+</ul>
+<h1 id="developer-guide">Developer guide</h1>
 <h2 id="getting-started">getting started</h2>
 <pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pnpm install</span></span>
 <span class="line"><span style="color: #c9d1d9">pnpm run dev</span></span>
@@ -345,14 +338,14 @@
 
 
             </li><li class="astro-W5IILIOF">
-                <a href="#dev" class="toc_href parent expanded astro-W5IILIOF">
+                <a href="#developer-guide" class="toc_href parent expanded astro-W5IILIOF">
                     <span class="icon toc_expand astro-W5IILIOF">
                             <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg" class="astro-W5IILIOF">
                                 <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round" class="astro-W5IILIOF"></path>
                             </svg>
                         </span>
                     <span class="text href_hover astro-W5IILIOF">
-                        Dev
+                        Developer guide
                     </span>
                 </a>
                 <ul class="nested astro-W5IILIOF">

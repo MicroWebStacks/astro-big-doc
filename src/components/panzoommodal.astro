@@ -114,13 +114,13 @@ import '/astro-big-doc/panzoom.js';
   let pzref = null
   const zoomOptions = {
     minZoom: 0.1,
-    maxZoom:4
+    maxZoom:4,
+    //autocenter:true
     }
 
   const background = document.querySelector(`.modal-background[data-uid="${uid}"]`)
   const close = background.querySelector(".close")
   const content = background.querySelector(".modal-content")
-  console.log(content)
   function initModal(){
     const center = background.querySelector(".modal-center")
     if(isSvg){
@@ -137,14 +137,24 @@ import '/astro-big-doc/panzoom.js';
 
 
   close.onclick = ()=>{
-      pzref.dispose()
-      background.classList.remove("visible")
-    }
-    //TODO custom event from item open modal
-    //TODO issue first mousedown without move does not pan zoom
-    content.onmousemove = (e)=>{
+    background.classList.remove("visible")
+    //pzref.zoomTo(0,0,1)
+    pzref.dispose()
+    initModal()
+    //pzref.dispose() //cannot add another dispose here otherwise repositioning to init does not take place
+    content.setAttribute("data-init","reset")
+    //console.log(`modal (${uid}) (${content.getAttribute("data-init")})`)
+  }
+
+  //TODO custom event from item open modal
+  //TODO issue first mousedown without move does not pan zoom
+  content.onmousemove = (e)=>{
     if(content.getAttribute("data-init") != "done"){
       content.setAttribute("data-init","done")
+      //console.log(`modal (${uid}) (${content.getAttribute("data-init")})`)
+      if(pzref){
+        pzref.dispose()
+      }
       initModal()
     }
   }

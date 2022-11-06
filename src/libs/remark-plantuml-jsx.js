@@ -34,11 +34,11 @@ function update_puml_file(file,value,meta,baseUrl){
   return basename(svg_file)
 }
 
-function createSvgPz(filename, filedir){
+function createPanzoom(filename, filedir){
   //mdxJsxFlowElement or mdxjsEsm
   return {
     type: "mdxjsEsm",
-    name: 'SvgPz',
+    name: 'Panzoom',
     attributes: [
       {
         type: 'mdxJsxAttribute',
@@ -78,7 +78,7 @@ function remarkPUMLAstro(pluginOptions) {
       const svg_file = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
       const filedir = dirname(file.history[0])
       console.log(`plantuml-astro dir : ${filedir}`)
-      node = createSvgPz(svg_file,filedir)
+      node = createPanzoom(svg_file,filedir)
     });
     return syntaxTree;
   };

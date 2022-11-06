@@ -6,7 +6,7 @@ function remarkRelDir() {
     //console.log(` 'remarkRelDir' * in file '${file.history}'`)
     visit(syntaxTree,  node => {
       //console.log(`   * node '${node.type}'`)
-      if((node.name != 'SvgPz')&&(node.name != 'Gallery')){
+      if((node.name != 'Panzoom')&&(node.name != 'Gallery')){
         return
       }
       if(node.type == "mdxJsxFlowElement"){

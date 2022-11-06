@@ -2,16 +2,23 @@
 title: 'Markdown with Svg'
 ---
 
-# SVG
+# Panzoom
 ## Panzoom svg
 
-this is an Svg Astro component. Unlike `<object/>` tag, this component will be replaced with the full svg in the html page. It uses `remark-rel-svg` which allow imported markdown to use a server relative path for the svg file.
+this is a Panzoom Astro component. It wraps an image or svg on a frame that has open modal button. The modal adds panzoom function
 
 ```jsx
-<SvgPz data-filename="tree.svg" />
+<Panzoom data-filename="tree.svg" />
 ```
 
-<SvgPz data-filename="tree.svg" />
+<Panzoom data-filename="tree.svg" />
+
+## Panzoom image
+```jsx
+<Panzoom data-filename="github-dark.png" />
+```
+
+<Panzoom data-filename="github-dark.png" />
 
 ## Image svg
 ```markdown
@@ -23,7 +30,7 @@ this is an Svg Astro component. Unlike `<object/>` tag, this component will be r
 
 ## Svg text in markdown
 
-SVG Files can be used in markdown too, as long as they don't have a `data-filename`, they'll be apssed through as is.
+SVG Files can be used in markdown too, they'll be passed through as is.
 
 <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
     <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>

@@ -132,8 +132,7 @@ object{
     for(let el in items){
         items[el].onclick = (e)=>{
             const modal = e.target.parentElement.querySelector(".modal-background")
-            modal.classList.toggle("visible")
-            console.log(modal.getAttribute("data-uid"))
+            modal.classList.add("visible")
         }
     }
 

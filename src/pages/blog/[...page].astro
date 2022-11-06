@@ -2,7 +2,7 @@
 import Layout from "@/layout/Layout.astro";
 import {existsSync,readdirSync} from 'fs';
 import {resolve} from 'path';
-import SvgPz from "@/components/panzoomsvg.astro"
+import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
 
 
@@ -32,6 +32,6 @@ export async function getStaticPaths(){
 ---
 {Post &&
 <Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
-        <Post.Content components={{ Gallery,SvgPz,data:SvgPz }}/>
+        <Post.Content components={{ Gallery,Panzoom,data:Panzoom }}/>
 </Layout>
 }

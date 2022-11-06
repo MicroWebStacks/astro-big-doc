@@ -1,38 +1,30 @@
 ---
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
 import {existsSync,readFileSync} from 'fs'
+import PanZoomModal from './panzoommodal.astro'
 import SvgIcons from '@/components/svgicons.astro'
+import {relAssetToUrl,suid} from '../libs/utils'
+
 export interface Props {
   'data-filename': string;
   'data-filedir': string;
 }
 
 const { 'data-filename':filename,'data-filedir':filedir } = Astro.props as Props;
-const filepath = `${filedir}/${filename}`
-console.log(`SvgPz ===> : ${filepath}`)
 
-const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
+const uid = suid()
+const asseturl = relAssetToUrl(filename,filedir,import.meta.env.BASE_URL)
+console.log(` * panzoom : '${asseturl}'`)
+
 ---
-<div class="container" data-filename={filename}>
+<div class="container" data-uid={uid}>
   <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>
   <div class="figure">
-    <Fragment set:html={innerHTML} />
+    <object data={asseturl} />
   </div>
-  <div class="modal-background">
-    <div class="modal">
-      <div class="modal-header close">
-        <span class="close-x">&times;</span>
-      </div>
-      <div class="modal-content">
-        <!-- modal-center needed otherwise svg being a flex item distords panzoom coordinates -->
-        <div class="modal-center">
-          <!-- SVG clone will be placed here -->
-        </div>
-      </div>
-    </div>
-  </div>
+  <PanZoomModal url={asseturl} filepath={filedir+'/'+filename}/>
 </div>
 
 <style >
@@ -138,42 +130,15 @@ const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await A
 
 </style>
 
-<script define:vars={{ filename }} type="module" >
-	import '../../node_modules/panzoom/dist/panzoom';
-  let pzref = null
-  const zoomOptions = {
-    minZoom: 0.1,
-    maxZoom:4
-    }
-  const container = document.querySelector(`.container[data-filename="${filename}"]`)
-  const open = container.querySelector(".open")
-  const modal = container.querySelector(".modal-center")
-  const modalBkg = container.querySelector(".modal-background")
-  const close = modalBkg.querySelector(".close")
+<script define:vars={{ uid }} type="module" >
+import '/astro-big-doc/panzoom.js';
 
-  function openModal(){
-    modalBkg.style.display = "block"
-    const svg = container.querySelector(".figure").firstElementChild
-    const svgModal = svg.cloneNode(true)
-    modal.appendChild(svgModal)
-    pzref = panzoom(svgModal,zoomOptions)
-  }
-  function closeModal(){
-    modalBkg.style.display = "none"
-    const svgModal = modal.querySelector("svg")
-    pzref.dispose()
-    svgModal.remove()
-  }
+  const container = document.querySelector(`.container[data-uid="${uid}"]`)
+  const open = container.querySelector(".open")
 
   open.onclick = ()=>{
-    openModal()
+    const modal = container.querySelector(".modal-background")
+    modal.classList.add("visible")
   }
-  close.onclick = ()=>{
-    closeModal()
-  }
-  modalBkg.onclick = (event)=>{
-    if(event.target == modalBkg){
-      closeModal()
-    }
-  }
+
 </script>

@@ -69,7 +69,6 @@ function remarkPUMLAstro(pluginOptions) {
   const baseUrl = options.baseUrl.replace(/\/$/, "")
   return function transformer(syntaxTree,file) {
     visit(syntaxTree, "code",node => {
-      console.log(node)
       if (!node.lang || !node.value || node.lang !== "plantuml") {
         console.log("  nooo, returning now!")
         return;

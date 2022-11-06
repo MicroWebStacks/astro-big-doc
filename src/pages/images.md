@@ -6,6 +6,8 @@ title: "Relative images"
 this is a relative image embed. Thanks to the `remark-rel-asset` plugin, it works in Astro same as in vscode and in github.
 
 ```markdown
+![github dark](github-dark.png)
+or
 ![github dark](./github-dark.png)
 ```
 

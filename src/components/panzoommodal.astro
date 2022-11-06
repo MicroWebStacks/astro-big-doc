@@ -8,13 +8,15 @@ export interface Props {
     filepath:string;
 }
 
+//TODO currently all pazoom items do create and ship html for svg
+//this is because the parent object .shadowRoot could be be captured to be cloned within a free Svg
+//A free Svg instead of object is important in panzoom to keep interactivity enbaled
+//object would require to pass mouse events to allow panzoom which disables interactivity
+
 const {url,filepath} = Astro.props as Props;
 const uid = suid()
 
 const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
-console.log(filepath)
-console.log(existsSync(filepath))
-//TODO hadle imag differently by injeting it with an obj
 const isSvg = filepath.endsWith(".svg")
 
 ---
@@ -27,7 +29,7 @@ const isSvg = filepath.endsWith(".svg")
       <div class="modal-center">
         {isSvg?
           <Fragment set:html={innerHTML} />:
-            <object data={url} />
+            <img src={url} />
         }
       </div>
     </div>
@@ -125,13 +127,10 @@ import '/astro-big-doc/panzoom.js';
     const center = background.querySelector(".modal-center")
     if(isSvg){
       const svg = center.querySelector("svg")
-      //const item = center.parentElement.parentElement.parentElement.parentElement
-      //const object = item.querySelector(".itemimage").querySelector("object")
-      //console.log(object.shadowRoot)//TODO could not catch shdowRoot
       pzref = panzoom(svg,zoomOptions)
     }else{
-      const object = center.querySelector("object")
-      pzref = panzoom(object,zoomOptions)
+      const image = center.querySelector("img")
+      pzref = panzoom(image,zoomOptions)
     }
   }
 

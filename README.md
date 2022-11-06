@@ -2,13 +2,13 @@
 
 Live demo : https://microwebstacks.github.io/astro-big-doc/
 
-Early stage deno deployment : https://astro-nav-menus.deno.dev/
-
 Astro Theme that can scale for big documentation websites. Includes an unimited depth config menu that starts with a top appbar for sections navigation, then continues on a tree left  menu for pages. Each page then has a tree right menu for its table of content.
 
 User friendly even for large menus as both left and right ones are collapsible and width adjustable by the user.
 
-Performance oriented, using astro components only, no css extenal framework, no virtual dom. Focus on static generation on build time, no client side rendering. Javascript is for minial manipulations connecting events and classes.
+Performance oriented, using astro components only, no virtual DOM, no extenal css framework (you can add your own though). Focus on static generation on build time, no client side rendering. Javascript is for minial manipulations connecting events and classes.
+
+UX friendly Markdown without import and referencing local images, enhancements with components for panzoom, gallery, and code embeds.
 ## Features
 - astro components (.astro) html css js
 - article page full content as html ready for browser search
@@ -26,21 +26,12 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - Automatic Right Menu ToC generation for all markdown pages
   - Markdown pages can be either in `scr/pages` or on any other server local path e.g. `data/blog` or `../../content/markdown`
   - Plantuml with dynamic and static Svg in MD, Astro component in MDX
+- components
+  - Panzoom for SVGs and images
+  - Gallery with json list of SVGs and images
+  - assets management to simplify referencing local files in Markdown and Astro components
 
 ## Todos
-- Focus on pages markdown and public server content, file system content needs self hosting management
-- Components relative usage of images (astro image component)
-- Tests
-  - test multi instance, check unique script usage and update uid passing component to js
-  - test panzoom with complex ppt svg to check shadowless artefacts
-  - test panzoom with wide svgs that have been max-width adjusetd to the page
-- Components
-  - gallery
-  - panzoom support img formats
-- Markdown
-  - pass MD as MDX
-  - Enhance headings with Astro component, hover highlight and icons for id slugs
-  - add more code formats, e.g. mermaid,...
 - authentication signin with github
 - menus
   - ToC auto-expand : open scroll spy, close all others
@@ -53,8 +44,13 @@ Performance oriented, using astro components only, no css extenal framework, no 
   - Issue: Menu height transition MUI example is working
   - (optional) store nav menu width / prevent reset on same page reload
   - minor issue : Expand arrow rotates for nothing on page reload
+- Markdown
+  - pass MD as MDX (workaround, rename .md to .mdx)
+  - Enhance headings with Astro component, hover highlight and icons for id slugs
+  - add more code formats, e.g. mermaid,...
+- Components : test panzoom with wide svgs that have been max-width adjusetd to the page
 
-# Dev
+# Developer guide
 ## getting started
 ```
 pnpm install

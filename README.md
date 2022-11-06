@@ -32,6 +32,9 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Gallery with json list of SVGs and images
 
 ## Todos
+- mobile and narrow format support
+  - left nav menu full screen or collapsed
+  - Table of content sticky on top when not collaped
 - authentication signin with github
 - menus
   - ToC auto-expand : open scroll spy, close all others

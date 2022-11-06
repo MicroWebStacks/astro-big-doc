@@ -11,30 +11,44 @@ menu.forEach((item,index)=>{
 })
 
 ---
-<>
-    {<ul id="navbar-top">
-        {menu.filter(item=>!item.icon).map((item)=>(
+<div class="navbar">
+    <ul class="navbar-left">
+            {menu.filter(item=>!item.icon).map((item)=>(
             <li><a href={baseUrl+item.href} class={item.active_class}>{item.text}</a></li>
             ))}
-    </ul>}
-    <ul id="navbar-right">
+    </ul>
+    <ul class="navbar-right">
         {menu.filter(item=>item.icon).map((item)=>(
             <li>
                 <a href={item.href} target="blank">
                     <Icon filename={item.icon} />
-                </a>
-            </li>
-            ))}
+                    </a>
+                    </li>
+                    ))}
     </ul>
-</>
+</div>
 
 <style>
-    ul{
-        margin:0px;
-    }
-    li{
-        list-style: none;
-    }
+.navbar{
+    display:flex;
+    justify-content: space-between;
+    min-width: 400px;
+}
+.navbar-left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.navbar-right {
+    padding-right: 50px;
+}
+
+ul{
+    margin:0px;
+}
+li{
+    list-style: none;
+}
 
 a{
     float:left;
@@ -53,11 +67,8 @@ a.active{
     border-bottom:  3px solid rgb(88, 88, 88);
     background-color: #454646;
 }
-#navbar-right {
-    padding-right: 50px;
-}
 
-#navbar-right > li > a{
+.navbar-right > li > a{
     float:right;
     padding: 6px;
 }

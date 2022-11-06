@@ -20,16 +20,16 @@ UX friendly Markdown without import and referencing local images, enhancements w
     - can have pages or directories similar to file system browsing experience
     - Auto expands decendance of active page only
   - Table Of Content (Right Menu)
-    - ScrollSpy
+    - ScrollSpy highlight of current section
 - markdown 
   - Supports md and mdx
   - Automatic Right Menu ToC generation for all markdown pages
   - Markdown pages can be either in `scr/pages` or on any other server local path e.g. `data/blog` or `../../content/markdown`
   - Plantuml with dynamic and static Svg in MD, Astro component in MDX
+  - allows local file referencing with automatic assets management
 - components
   - Panzoom for SVGs and images
   - Gallery with json list of SVGs and images
-  - assets management to simplify referencing local files in Markdown and Astro components
 
 ## Todos
 - authentication signin with github

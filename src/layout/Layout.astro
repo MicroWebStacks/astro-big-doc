@@ -41,13 +41,22 @@ const right_toc_menu = process_toc_list(headings)
 					<div id="resize-left" class="nav-resize active"/>
 				</>
 				}
-	 			<article class="content">
-					<slot/>
+
+				<article class="content">
+					<div id="mobile-toc">
+						<NavMenu items={left_nav_menu.items} />
+						<ToCMenu items={right_toc_menu.items} />
+					</div>
+					<div class="article-slot">
+						<slot/>
+					</div>
 				</article>
 				{right_toc_menu.visible &&
 				<>
 					<div id="resize-right" class="nav-resize active"/>
-					<ToCMenu items={right_toc_menu.items} />
+					<div id="right-toc">
+						<ToCMenu items={right_toc_menu.items} />
+					</div>
 				</>
 				}
 			</main>
@@ -71,6 +80,9 @@ header{
 	background-color: #3C3C3C;
     width:100%;
     user-select: none;
+}
+#mobile-toc{
+	display: none;
 }
 main{
 	flex-grow:1;
@@ -147,18 +159,24 @@ footer p{
   background: #515151; 
 }
 
+#right-toc{
+	background: #252526;
+}
+@media only screen and (max-width: 700px) {
+	#fixed-left, #fixed-right, #resize-right, #resize-left, #right-toc {
+		display:none;
+	}
+	#mobile-toc{
+		display: block;
+	}
+
+}
+
 </style>
 
 <style is:inline>
-	.content * > a{
+	.article-slot * > a{
 			color:#3794FF;
-	}
-	h1::after{
-		content:"";
-		background-image: url('import.meta.env.BASE_URLlink.svg');
-		height: 16px;
-		width: 16px;
-		display: inline-block;
 	}
 </style>
 

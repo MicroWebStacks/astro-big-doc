@@ -15,7 +15,7 @@ const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await A
 console.log(filepath)
 console.log(existsSync(filepath))
 //TODO hadle imag differently by injeting it with an obj
-const isSvg = true
+const isSvg = filepath.endsWith(".svg")
 
 ---
 <div class="modal-background" data-uid={uid}>
@@ -27,7 +27,7 @@ const isSvg = true
       <div class="modal-center">
         {isSvg?
           <Fragment set:html={innerHTML} />:
-          <object data={url} />
+            <object data={url} />
         }
       </div>
     </div>
@@ -109,9 +109,8 @@ const isSvg = true
 
 </style>
 
-<script define:vars={{uid}} type="module">
+<script define:vars={{uid,isSvg}} type="module">
 import '/astro-big-doc/panzoom.js';
-  let state = "init"
   let pzref = null
   const zoomOptions = {
     minZoom: 0.1,
@@ -124,11 +123,16 @@ import '/astro-big-doc/panzoom.js';
   console.log(content)
   function initModal(){
     const center = background.querySelector(".modal-center")
-    const svg = center.querySelector("svg")
-    //const item = center.parentElement.parentElement.parentElement.parentElement
-    //const object = item.querySelector(".itemimage").querySelector("object")
-    //console.log(object.shadowRoot)//TODO could not catch shdowRoot
-    pzref = panzoom(svg,zoomOptions)
+    if(isSvg){
+      const svg = center.querySelector("svg")
+      //const item = center.parentElement.parentElement.parentElement.parentElement
+      //const object = item.querySelector(".itemimage").querySelector("object")
+      //console.log(object.shadowRoot)//TODO could not catch shdowRoot
+      pzref = panzoom(svg,zoomOptions)
+    }else{
+      const object = center.querySelector("object")
+      pzref = panzoom(object,zoomOptions)
+    }
   }
 
 

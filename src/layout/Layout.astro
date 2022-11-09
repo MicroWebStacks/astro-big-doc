@@ -37,15 +37,16 @@ const right_toc_menu = process_toc_list(headings)
 			<main>
 				{left_nav_menu.visible &&
 				<>
-					<NavMenu items={left_nav_menu.items} />
+					<div id="wide-nav">
+						<NavMenu items={left_nav_menu.items} />
+					</div>
 					<div id="resize-left" class="nav-resize active"/>
 				</>
 				}
 
 				<article class="content">
-					<div id="mobile-toc">
+					<div id="mobile-nav">
 						<NavMenu items={left_nav_menu.items} />
-						<ToCMenu items={right_toc_menu.items} />
 					</div>
 					<div class="article-slot">
 						<slot/>
@@ -81,7 +82,7 @@ header{
     width:100%;
     user-select: none;
 }
-#mobile-toc{
+#mobile-nav{
 	display: none;
 }
 main{
@@ -166,8 +167,19 @@ footer p{
 	#fixed-left, #fixed-right, #resize-right, #resize-left, #right-toc {
 		display:none;
 	}
-	#mobile-toc{
+	.content{
+		display:flex;
+		flex-direction: column;
+	}
+	#wide-nav{
+		display:none;
+	}
+	#mobile-nav{
 		display: block;
+		background-color: aqua;
+	}
+	.article-slot{
+
 	}
 
 }

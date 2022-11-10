@@ -10,7 +10,8 @@ function remarkRelAsset() {
       if(!['image'].includes(node.type)){
         return
       }
-      node.url = relAssetToUrl(node.url,dirname(file.history[0]),"/"+config.base+"/")
+      const addUrl = config.base?config.base+'/':''
+      node.url = relAssetToUrl(node.url,dirname(file.history[0]),"/"+addUrl)
     });
     return syntaxTree;
   };

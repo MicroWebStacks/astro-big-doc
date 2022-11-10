@@ -2,7 +2,7 @@
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
 import PanZoomModal from './panzoommodal.astro'
 import SvgIcons from '@/components/svgicons.astro'
-import {relAssetToUrl,suid} from '../libs/utils'
+import {relAssetToUrl,suid} from '@/libs/utils'
 
 export interface Props {
   'data-filename': string;
@@ -130,14 +130,14 @@ console.log(` * panzoom : '${asseturl}'`)
 </style>
 
 <script define:vars={{ uid }} type="module" >
-import '/astro-big-doc/panzoom.js';
+  import { event } from "/utils.js"
 
   const container = document.querySelector(`.container[data-uid="${uid}"]`)
   const open = container.querySelector(".open")
 
   open.onclick = ()=>{
-    const modal = container.querySelector(".modal-background")
-    modal.classList.add("visible")
+    const modal = document.querySelector(".modal-background")
+    event(modal,"init")
   }
 
 </script>

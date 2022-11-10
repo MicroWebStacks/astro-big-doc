@@ -18,6 +18,7 @@ const uid = suid()
 
 const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
 const isSvg = filepath.endsWith(".svg")
+const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 
 ---
 <div class="modal-background" data-uid={uid}>
@@ -111,8 +112,8 @@ const isSvg = filepath.endsWith(".svg")
 
 </style>
 
-<script define:vars={{uid,isSvg}} type="module">
-import '/astro-big-doc/panzoom.js';
+<script define:vars={{uid,isSvg,baseUrl}} type="module">
+  await import(`${baseUrl}/panzoom.js`)
   let pzref = null
   const zoomOptions = {
     minZoom: 0.1,
@@ -123,7 +124,7 @@ import '/astro-big-doc/panzoom.js';
   const background = document.querySelector(`.modal-background[data-uid="${uid}"]`)
   const close = background.querySelector(".close")
   const content = background.querySelector(".modal-content")
-  function initModal(){
+  function initPanZoom(){
     const center = background.querySelector(".modal-center")
     if(isSvg){
       const svg = center.querySelector("svg")
@@ -133,28 +134,27 @@ import '/astro-big-doc/panzoom.js';
       pzref = panzoom(image,zoomOptions)
     }
   }
-
-
-  close.onclick = ()=>{
-    background.classList.remove("visible")
-    //pzref.zoomTo(0,0,1)
-    pzref.dispose()
-    initModal()
-    //pzref.dispose() //cannot add another dispose here otherwise repositioning to init does not take place
-    content.setAttribute("data-init","reset")
-    //console.log(`modal (${uid}) (${content.getAttribute("data-init")})`)
-  }
-
-  //TODO custom event from item open modal
-  //TODO issue first mousedown without move does not pan zoom
-  content.onmousemove = (e)=>{
+  function initModal(){
+    background.classList.add("visible")
     if(content.getAttribute("data-init") != "done"){
       content.setAttribute("data-init","done")
       //console.log(`modal (${uid}) (${content.getAttribute("data-init")})`)
       if(pzref){
         pzref.dispose()
       }
-      initModal()
+      initPanZoom()
     }
   }
+
+  close.onclick = ()=>{
+    background.classList.remove("visible")
+    //pzref.zoomTo(0,0,1)
+    pzref.dispose()
+    initPanZoom()
+    //pzref.dispose() //cannot add another dispose here otherwise repositioning to init does not take place
+    content.setAttribute("data-init","reset")
+    //console.log(`modal (${uid}) (${content.getAttribute("data-init")})`)
+  }
+
+  background.addEventListener("init",initModal  ,false)
 </script>

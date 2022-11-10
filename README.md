@@ -30,12 +30,10 @@ UX friendly Markdown without import and referencing local images, enhancements w
 - components
   - Panzoom for SVGs and images
   - Gallery with json list of SVGs and images
-
+- Mobile layout
 ## Todos
-- mobile and narrow format support
-  - left nav menu full screen or collapsed
-  - Table of content sticky on top when not collaped
 - authentication signin with github
+- SSR Node : how to add baseURL
 - menus
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector

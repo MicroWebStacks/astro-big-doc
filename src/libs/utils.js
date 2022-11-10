@@ -42,9 +42,21 @@ function suid(){
   return sub+"_"+Math.floor(Math.random() * 10000)
 }
 
+
+function event(element,event_name,data=null){
+	var event = new CustomEvent(event_name, {detail:data});
+	element.dispatchEvent(event);
+}
+
+function window_event(event_name,data){
+	var event = new CustomEvent(event_name, {detail:data});
+	window.dispatchEvent(event);
+}
+
 export{
     relAssetToUrl,
     uid,
-    suid
+    suid,
+    event,
+    window_event
 }
-

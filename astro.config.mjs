@@ -11,7 +11,7 @@ import {rehypeCheck} from './src/libs/rehype-check'
 export default defineConfig({
   output: "server",
   adapter: node({
-    mode: 'standalone'
+    mode: 'middleware'
   }),
   markdown:{
     syntaxHighlight: 'shiki',

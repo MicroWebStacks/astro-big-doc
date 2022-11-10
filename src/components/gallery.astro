@@ -109,7 +109,9 @@ object{
 }
 </style>
 
-<script define:vars={{ filename }} >
+<script define:vars={{ filename }} type="module" >
+    import { event } from "/utils.js"
+
     const container = document.querySelector(`.container[data-filename="${filename}"]`)
     const collapsible = container.querySelector(".collapsible")
     const content = container.querySelector(".content")
@@ -132,8 +134,7 @@ object{
     for(let el in items){
         items[el].onclick = (e)=>{
             const modal = e.target.parentElement.querySelector(".modal-background")
-            modal.classList.add("visible")
+            event(modal,"init")
         }
     }
-
 </script>

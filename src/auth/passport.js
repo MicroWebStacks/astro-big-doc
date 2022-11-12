@@ -59,7 +59,7 @@ authRouter.get('/auth/github/callback',
   function(req, res) {
     // Successful authentication, redirect home.
     console.log("success in callback")
-    //res.redirect('/');
+    res.redirect('/');
   });
 
 //TODO Catch 404

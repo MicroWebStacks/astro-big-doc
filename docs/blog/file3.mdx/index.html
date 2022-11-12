@@ -7,7 +7,7 @@
 		<meta name="generator" content="Astro v1.6.0">
 		<title>Markdown with Svg</title>
 	<link rel="stylesheet" href="/astro-big-doc/assets/index.fa617865.css" />
-<link rel="stylesheet" href="/astro-big-doc/assets/_...page_.59278ca5.css" /><script type="module">function h(s,e,t,E){s.addEventListener("click",n=>{const i=t.getAttribute("data-state");console.log(i),i=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):i=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),n.preventDefault()});var o=!1,d,r;function l(){o=!1,t.style.transition="width 0.5s",t.clientWidth<20?(t.setAttribute("data-state","closed"),t.setAttribute("data-width","20vw")):t.setAttribute("data-state","open"),e.style.backgroundColor="#1E1E1E"}e.addEventListener("mouseenter",n=>{e.style.backgroundColor="#007ACC"}),e.addEventListener("mouseleave",n=>{e.style.backgroundColor="#1E1E1E"}),e.addEventListener("mousedown",n=>{o=!0,d=n.x,r=t.clientWidth,t.style.transition="none"}),e.addEventListener("mouseup",n=>{l()}),document.addEventListener("mouseup",n=>{o==!0&&l()}),document.addEventListener("mousemove",n=>{if(o==!0){const i=E?r+n.x-d:r-n.x+d;i<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),e.style.backgroundColor="#007ACC"):i<160||(i<document.documentElement.clientWidth*.4?(t.style.width=i+"px",t.setAttribute("data-width",i+"px"),e.style.backgroundColor="#007ACC"):e.style.backgroundColor="red"),n.preventDefault()}})}const u=document.getElementById("fixed-left");if(u.classList.contains("active")){const s=document.getElementById("resize-left"),e=s.previousElementSibling.firstElementChild;h(u,s,e,!0)}const f=document.getElementById("fixed-right");if(f.classList.contains("active")){const s=document.getElementById("resize-right"),e=s.nextElementSibling.firstElementChild;h(f,s,e,!1)}let m=document.getElementsByClassName("toc_expand");for(let s=0;s<m.length;s++)m[s].addEventListener("click",function(e){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.parentElement.classList.toggle("expanded"),e.preventDefault()});function p(s){return`#${CSS.escape(s.replace("#",""))}`}const c=document.querySelector("article.content"),y=document.getElementsByClassName("toc_href"),a=[...y].map(s=>c.querySelector(p(s.getAttribute("href"))));c.addEventListener("scroll",s=>{let e=null;for(let t in a)if(a[t].offsetTop>c.scrollTop){e=a[t];break}if(e){document.querySelector(".toc_href.active")?.classList.remove("active");const t=e.id;document.querySelector(`a[href="#${t}"]`)?.classList.add("active")}});let g=document.getElementsByClassName("nav_expand");for(let s=0;s<g.length;s++)g[s].addEventListener("click",function(e){const t=this.parentElement.querySelector("ul");t.classList.toggle("hidden"),t.classList.contains("hidden")?this.classList.remove("expanded"):this.classList.add("expanded"),e.preventDefault()});
+<link rel="stylesheet" href="/astro-big-doc/assets/_...page_.aad6e41c.css" /><script type="module">function h(s,e,t,E){s.addEventListener("click",n=>{const i=t.getAttribute("data-state");console.log(i),i=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):i=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),n.preventDefault()});var o=!1,d,r;function l(){o=!1,t.style.transition="width 0.5s",t.clientWidth<20?(t.setAttribute("data-state","closed"),t.setAttribute("data-width","20vw")):t.setAttribute("data-state","open"),e.style.backgroundColor="#1E1E1E"}e.addEventListener("mouseenter",n=>{e.style.backgroundColor="#007ACC"}),e.addEventListener("mouseleave",n=>{e.style.backgroundColor="#1E1E1E"}),e.addEventListener("mousedown",n=>{o=!0,d=n.x,r=t.clientWidth,t.style.transition="none"}),e.addEventListener("mouseup",n=>{l()}),document.addEventListener("mouseup",n=>{o==!0&&l()}),document.addEventListener("mousemove",n=>{if(o==!0){const i=E?r+n.x-d:r-n.x+d;i<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),e.style.backgroundColor="#007ACC"):i<160||(i<document.documentElement.clientWidth*.4?(t.style.width=i+"px",t.setAttribute("data-width",i+"px"),e.style.backgroundColor="#007ACC"):e.style.backgroundColor="red"),n.preventDefault()}})}const u=document.getElementById("fixed-left");if(u.classList.contains("active")){const s=document.getElementById("resize-left"),e=s.previousElementSibling.firstElementChild;h(u,s,e,!0)}const f=document.getElementById("fixed-right");if(f.classList.contains("active")){const s=document.getElementById("resize-right"),e=s.nextElementSibling.firstElementChild;h(f,s,e,!1)}let m=document.getElementsByClassName("nav_expand");for(let s=0;s<m.length;s++)m[s].addEventListener("click",function(e){const t=this.parentElement.querySelector("ul");t.classList.toggle("hidden"),t.classList.contains("hidden")?this.classList.remove("expanded"):this.classList.add("expanded"),e.preventDefault()});let g=document.getElementsByClassName("toc_expand");for(let s=0;s<g.length;s++)g[s].addEventListener("click",function(e){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.parentElement.classList.toggle("expanded"),e.preventDefault()});function p(s){return`#${CSS.escape(s.replace("#",""))}`}const c=document.querySelector("article.content"),y=document.getElementsByClassName("toc_href"),a=[...y].map(s=>c.querySelector(p(s.getAttribute("href"))));c.addEventListener("scroll",s=>{let e=null;for(let t in a)if(a[t].offsetTop>c.scrollTop){e=a[t];break}if(e){document.querySelector(".toc_href.active")?.classList.remove("active");const t=e.id;document.querySelector(`a[href="#${t}"]`)?.classList.add("active")}});
 </script></head>
 	<body class="astro-WO4OGKQV">
 		<div id="fixed-left" class="fixed-nav active astro-WO4OGKQV"></div>
@@ -156,8 +156,8 @@
 <h2 id="panzoom-svg">Panzoom svg</h2>
 <p>this is a Panzoom Astro component. It wraps an image or svg on a frame that has open modal button. The modal adds panzoom function</p>
 <pre class="astro-code" style="background-color:#0d1117;overflow-x:auto"><code><span class="line"><span style="color:#C9D1D9">&lt;</span><span style="color:#7EE787">Panzoom</span><span style="color:#C9D1D9"> </span><span style="color:#79C0FF">data-filename</span><span style="color:#FF7B72">=</span><span style="color:#A5D6FF">&quot;tree.svg&quot;</span><span style="color:#C9D1D9"> /&gt;</span></span></code></pre>
-<div class="container astro-WRZ4RO3Q" data-uid="87964_3767">
-  <div class="header open astro-WRZ4RO3Q">
+<div class="container astro-IHZSX5P7" data-uid="12024_6880">
+  <div class="header open astro-IHZSX5P7">
     <?xml version="1.0" encoding="iso-8859-1"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 	 viewBox="0 0 489.001 489.001" xml:space="preserve" width="32px" height="32px">
@@ -177,10 +177,10 @@
 
 
   </div>
-  <div class="figure astro-WRZ4RO3Q">
-    <object data="/astro-big-doc/raw/data/blog/tree.svg" class="astro-WRZ4RO3Q"></object>
+  <div class="figure astro-IHZSX5P7">
+    <object data="/astro-big-doc/raw/data/blog/tree.svg" class="astro-IHZSX5P7"></object>
   </div>
-  <div class="modal-background astro-UE2CPDNF" data-uid="87964_5909">
+  <div class="modal-background astro-UE2CPDNF" data-uid="12025_212">
   <div class="modal astro-UE2CPDNF">
     <div class="modal-header close astro-UE2CPDNF">
       <span class="close-x astro-UE2CPDNF">&times;</span>
@@ -210,7 +210,7 @@
 </style>
 
 <script type="module">const url = "/astro-big-doc/raw/data/blog/tree.svg";
-const uid = "87964_5909";
+const uid = "12025_212";
 const isSvg = true;
 const baseUrl = "/astro-big-doc";
 
@@ -288,9 +288,10 @@ const baseUrl = "/astro-big-doc";
 
 </style>
 
-<script type="module">const uid = "87964_3767";
+<script type="module">const uid = "12024_6880";
+const baseUrl = "/astro-big-doc";
 
-  import { event } from "/utils.js"
+  const {event} = await import(`${baseUrl}/utils.js`)
 
   const container = document.querySelector(`.container[data-uid="${uid}"]`)
   const open = container.querySelector(".open")
@@ -303,8 +304,8 @@ const baseUrl = "/astro-big-doc";
 </script>
 <h2 id="panzoom-image">Panzoom image</h2>
 <pre class="astro-code" style="background-color:#0d1117;overflow-x:auto"><code><span class="line"><span style="color:#C9D1D9">&lt;</span><span style="color:#7EE787">Panzoom</span><span style="color:#C9D1D9"> </span><span style="color:#79C0FF">data-filename</span><span style="color:#FF7B72">=</span><span style="color:#A5D6FF">&quot;github-dark.png&quot;</span><span style="color:#C9D1D9"> /&gt;</span></span></code></pre>
-<div class="container astro-WRZ4RO3Q" data-uid="87964_7840">
-  <div class="header open astro-WRZ4RO3Q">
+<div class="container astro-IHZSX5P7" data-uid="12024_7004">
+  <div class="header open astro-IHZSX5P7">
     <?xml version="1.0" encoding="iso-8859-1"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 	 viewBox="0 0 489.001 489.001" xml:space="preserve" width="32px" height="32px">
@@ -324,10 +325,10 @@ const baseUrl = "/astro-big-doc";
 
 
   </div>
-  <div class="figure astro-WRZ4RO3Q">
-    <object data="/astro-big-doc/raw/data/blog/github-dark.png" class="astro-WRZ4RO3Q"></object>
+  <div class="figure astro-IHZSX5P7">
+    <object data="/astro-big-doc/raw/data/blog/github-dark.png" class="astro-IHZSX5P7"></object>
   </div>
-  <div class="modal-background astro-UE2CPDNF" data-uid="87964_373">
+  <div class="modal-background astro-UE2CPDNF" data-uid="12025_566">
   <div class="modal astro-UE2CPDNF">
     <div class="modal-header close astro-UE2CPDNF">
       <span class="close-x astro-UE2CPDNF">&times;</span>
@@ -357,7 +358,7 @@ const baseUrl = "/astro-big-doc";
 </style>
 
 <script type="module">const url = "/astro-big-doc/raw/data/blog/github-dark.png";
-const uid = "87964_373";
+const uid = "12025_566";
 const isSvg = false;
 const baseUrl = "/astro-big-doc";
 
@@ -435,9 +436,10 @@ const baseUrl = "/astro-big-doc";
 
 </style>
 
-<script type="module">const uid = "87964_7840";
+<script type="module">const uid = "12024_7004";
+const baseUrl = "/astro-big-doc";
 
-  import { event } from "/utils.js"
+  const {event} = await import(`${baseUrl}/utils.js`)
 
   const container = document.querySelector(`.container[data-uid="${uid}"]`)
   const open = container.querySelector(".open")

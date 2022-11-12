@@ -11,6 +11,7 @@ export interface Props {
 
 const { 'data-filename':filename,'data-filedir':filedir } = Astro.props as Props;
 
+const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const uid = suid()
 const asseturl = relAssetToUrl(filename,filedir,import.meta.env.BASE_URL)
 console.log(` * panzoom : '${asseturl}'`)
@@ -78,8 +79,8 @@ object{
 
 </style>
 
-<script define:vars={{ uid }} type="module" >
-  import { event } from "/utils.js"
+<script define:vars={{ uid,baseUrl }} type="module" >
+  const {event} = await import(`${baseUrl}/utils.js`)
 
   const container = document.querySelector(`.container[data-uid="${uid}"]`)
   const open = container.querySelector(".open")

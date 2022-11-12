@@ -7,7 +7,7 @@
 		<meta name="generator" content="Astro v1.6.0">
 		<title></title>
 	<link rel="stylesheet" href="/astro-big-doc/assets/index.fa617865.css" />
-<link rel="stylesheet" href="/astro-big-doc/assets/_...page_.59278ca5.css" /><script type="module">function h(s,e,t,E){s.addEventListener("click",n=>{const i=t.getAttribute("data-state");console.log(i),i=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):i=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),n.preventDefault()});var o=!1,d,r;function l(){o=!1,t.style.transition="width 0.5s",t.clientWidth<20?(t.setAttribute("data-state","closed"),t.setAttribute("data-width","20vw")):t.setAttribute("data-state","open"),e.style.backgroundColor="#1E1E1E"}e.addEventListener("mouseenter",n=>{e.style.backgroundColor="#007ACC"}),e.addEventListener("mouseleave",n=>{e.style.backgroundColor="#1E1E1E"}),e.addEventListener("mousedown",n=>{o=!0,d=n.x,r=t.clientWidth,t.style.transition="none"}),e.addEventListener("mouseup",n=>{l()}),document.addEventListener("mouseup",n=>{o==!0&&l()}),document.addEventListener("mousemove",n=>{if(o==!0){const i=E?r+n.x-d:r-n.x+d;i<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),e.style.backgroundColor="#007ACC"):i<160||(i<document.documentElement.clientWidth*.4?(t.style.width=i+"px",t.setAttribute("data-width",i+"px"),e.style.backgroundColor="#007ACC"):e.style.backgroundColor="red"),n.preventDefault()}})}const u=document.getElementById("fixed-left");if(u.classList.contains("active")){const s=document.getElementById("resize-left"),e=s.previousElementSibling.firstElementChild;h(u,s,e,!0)}const f=document.getElementById("fixed-right");if(f.classList.contains("active")){const s=document.getElementById("resize-right"),e=s.nextElementSibling.firstElementChild;h(f,s,e,!1)}let m=document.getElementsByClassName("toc_expand");for(let s=0;s<m.length;s++)m[s].addEventListener("click",function(e){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.parentElement.classList.toggle("expanded"),e.preventDefault()});function p(s){return`#${CSS.escape(s.replace("#",""))}`}const c=document.querySelector("article.content"),y=document.getElementsByClassName("toc_href"),a=[...y].map(s=>c.querySelector(p(s.getAttribute("href"))));c.addEventListener("scroll",s=>{let e=null;for(let t in a)if(a[t].offsetTop>c.scrollTop){e=a[t];break}if(e){document.querySelector(".toc_href.active")?.classList.remove("active");const t=e.id;document.querySelector(`a[href="#${t}"]`)?.classList.add("active")}});let g=document.getElementsByClassName("nav_expand");for(let s=0;s<g.length;s++)g[s].addEventListener("click",function(e){const t=this.parentElement.querySelector("ul");t.classList.toggle("hidden"),t.classList.contains("hidden")?this.classList.remove("expanded"):this.classList.add("expanded"),e.preventDefault()});
+<link rel="stylesheet" href="/astro-big-doc/assets/_...page_.aad6e41c.css" /><script type="module">function h(s,e,t,E){s.addEventListener("click",n=>{const i=t.getAttribute("data-state");console.log(i),i=="open"?(t.setAttribute("data-state","closed"),t.style.width="0vw"):i=="closed"&&(t.setAttribute("data-state","open"),t.style.width=t.getAttribute("data-width")),n.preventDefault()});var o=!1,d,r;function l(){o=!1,t.style.transition="width 0.5s",t.clientWidth<20?(t.setAttribute("data-state","closed"),t.setAttribute("data-width","20vw")):t.setAttribute("data-state","open"),e.style.backgroundColor="#1E1E1E"}e.addEventListener("mouseenter",n=>{e.style.backgroundColor="#007ACC"}),e.addEventListener("mouseleave",n=>{e.style.backgroundColor="#1E1E1E"}),e.addEventListener("mousedown",n=>{o=!0,d=n.x,r=t.clientWidth,t.style.transition="none"}),e.addEventListener("mouseup",n=>{l()}),document.addEventListener("mouseup",n=>{o==!0&&l()}),document.addEventListener("mousemove",n=>{if(o==!0){const i=E?r+n.x-d:r-n.x+d;i<=60?(t.style.width="0px",t.setAttribute("data-width","0px"),e.style.backgroundColor="#007ACC"):i<160||(i<document.documentElement.clientWidth*.4?(t.style.width=i+"px",t.setAttribute("data-width",i+"px"),e.style.backgroundColor="#007ACC"):e.style.backgroundColor="red"),n.preventDefault()}})}const u=document.getElementById("fixed-left");if(u.classList.contains("active")){const s=document.getElementById("resize-left"),e=s.previousElementSibling.firstElementChild;h(u,s,e,!0)}const f=document.getElementById("fixed-right");if(f.classList.contains("active")){const s=document.getElementById("resize-right"),e=s.nextElementSibling.firstElementChild;h(f,s,e,!1)}let m=document.getElementsByClassName("nav_expand");for(let s=0;s<m.length;s++)m[s].addEventListener("click",function(e){const t=this.parentElement.querySelector("ul");t.classList.toggle("hidden"),t.classList.contains("hidden")?this.classList.remove("expanded"):this.classList.add("expanded"),e.preventDefault()});let g=document.getElementsByClassName("toc_expand");for(let s=0;s<g.length;s++)g[s].addEventListener("click",function(e){this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden"),this.parentElement.classList.toggle("expanded"),e.preventDefault()});function p(s){return`#${CSS.escape(s.replace("#",""))}`}const c=document.querySelector("article.content"),y=document.getElementsByClassName("toc_href"),a=[...y].map(s=>c.querySelector(p(s.getAttribute("href"))));c.addEventListener("scroll",s=>{let e=null;for(let t in a)if(a[t].offsetTop>c.scrollTop){e=a[t];break}if(e){document.querySelector(".toc_href.active")?.classList.remove("active");const t=e.id;document.querySelector(`a[href="#${t}"]`)?.classList.add("active")}});
 </script></head>
 	<body class="astro-WO4OGKQV">
 		<div id="fixed-left" class="fixed-nav active astro-WO4OGKQV"></div>
@@ -155,18 +155,18 @@
 						<h1 id="gallery">Gallery</h1>
 <p>This is a Gallery Astro component, a relative file is provided with the list of images</p>
 <pre class="astro-code" style="background-color:#0d1117;overflow-x:auto"><code><span class="line"><span style="color:#C9D1D9">&lt;</span><span style="color:#7EE787">Gallery</span><span style="color:#C9D1D9"> </span><span style="color:#79C0FF">data-filename</span><span style="color:#FF7B72">=</span><span style="color:#A5D6FF">&quot;gallery-images.json&quot;</span><span style="color:#C9D1D9"> /&gt;</span></span></code></pre>
-<div class="container astro-PGVW4FO3" data-filename="gallery-images.json">
-    <button class="collapsible astro-PGVW4FO3">
+<div class="container astro-XRKD4ONZ" data-filename="gallery-images.json">
+    <button class="collapsible astro-XRKD4ONZ">
         Click to close
     </button>
-    <div class="content expanded astro-PGVW4FO3">
-        <div class="itemscontainer astro-PGVW4FO3">
-            <div class="item astro-PGVW4FO3">
-                    <div class="itemimage astro-PGVW4FO3">
-                        <object data="/astro-big-doc/raw/data/blog/tree.svg" class="astro-PGVW4FO3"></object>
+    <div class="content expanded astro-XRKD4ONZ">
+        <div class="itemscontainer astro-XRKD4ONZ">
+            <div class="item astro-XRKD4ONZ">
+                    <div class="itemimage astro-XRKD4ONZ">
+                        <object data="/astro-big-doc/raw/data/blog/tree.svg" class="astro-XRKD4ONZ"></object>
                     </div>
-                    <div class="overlay astro-PGVW4FO3">tree.svg</div>
-                    <div class="modal-background astro-UE2CPDNF" data-uid="87967_536">
+                    <div class="overlay astro-XRKD4ONZ">tree.svg</div>
+                    <div class="modal-background astro-UE2CPDNF" data-uid="12027_4136">
   <div class="modal astro-UE2CPDNF">
     <div class="modal-header close astro-UE2CPDNF">
       <span class="close-x astro-UE2CPDNF">&times;</span>
@@ -196,7 +196,7 @@
 </style>
 
 <script type="module">const url = "/astro-big-doc/raw/data/blog/tree.svg";
-const uid = "87967_536";
+const uid = "12027_4136";
 const isSvg = true;
 const baseUrl = "/astro-big-doc";
 
@@ -256,12 +256,12 @@ const baseUrl = "/astro-big-doc";
 
   modal.addEventListener("init",initModal  ,false)
 </script>
-                </div><div class="item astro-PGVW4FO3">
-                    <div class="itemimage astro-PGVW4FO3">
-                        <object data="/astro-big-doc/raw/data/blog/gallery-tiger.svg" class="astro-PGVW4FO3"></object>
+                </div><div class="item astro-XRKD4ONZ">
+                    <div class="itemimage astro-XRKD4ONZ">
+                        <object data="/astro-big-doc/raw/data/blog/gallery-tiger.svg" class="astro-XRKD4ONZ"></object>
                     </div>
-                    <div class="overlay astro-PGVW4FO3">gallery-tiger.svg</div>
-                    <div class="modal-background astro-UE2CPDNF" data-uid="87967_9334">
+                    <div class="overlay astro-XRKD4ONZ">gallery-tiger.svg</div>
+                    <div class="modal-background astro-UE2CPDNF" data-uid="12027_3497">
   <div class="modal astro-UE2CPDNF">
     <div class="modal-header close astro-UE2CPDNF">
       <span class="close-x astro-UE2CPDNF">&times;</span>
@@ -291,7 +291,7 @@ const baseUrl = "/astro-big-doc";
 </style>
 
 <script type="module">const url = "/astro-big-doc/raw/data/blog/gallery-tiger.svg";
-const uid = "87967_9334";
+const uid = "12027_3497";
 const isSvg = true;
 const baseUrl = "/astro-big-doc";
 
@@ -351,12 +351,12 @@ const baseUrl = "/astro-big-doc";
 
   modal.addEventListener("init",initModal  ,false)
 </script>
-                </div><div class="item astro-PGVW4FO3">
-                    <div class="itemimage astro-PGVW4FO3">
-                        <object data="/astro-big-doc/raw/data/blog/gallery-long_diag.svg" class="astro-PGVW4FO3"></object>
+                </div><div class="item astro-XRKD4ONZ">
+                    <div class="itemimage astro-XRKD4ONZ">
+                        <object data="/astro-big-doc/raw/data/blog/gallery-long_diag.svg" class="astro-XRKD4ONZ"></object>
                     </div>
-                    <div class="overlay astro-PGVW4FO3">gallery-long_diag.svg</div>
-                    <div class="modal-background astro-UE2CPDNF" data-uid="87967_2613">
+                    <div class="overlay astro-XRKD4ONZ">gallery-long_diag.svg</div>
+                    <div class="modal-background astro-UE2CPDNF" data-uid="12027_3284">
   <div class="modal astro-UE2CPDNF">
     <div class="modal-header close astro-UE2CPDNF">
       <span class="close-x astro-UE2CPDNF">&times;</span>
@@ -386,7 +386,7 @@ const baseUrl = "/astro-big-doc";
 </style>
 
 <script type="module">const url = "/astro-big-doc/raw/data/blog/gallery-long_diag.svg";
-const uid = "87967_2613";
+const uid = "12027_3284";
 const isSvg = true;
 const baseUrl = "/astro-big-doc";
 
@@ -446,12 +446,12 @@ const baseUrl = "/astro-big-doc";
 
   modal.addEventListener("init",initModal  ,false)
 </script>
-                </div><div class="item astro-PGVW4FO3">
-                    <div class="itemimage astro-PGVW4FO3">
-                        <object data="/astro-big-doc/raw/data/blog/gallery-Linux_kernel_map.svg" class="astro-PGVW4FO3"></object>
+                </div><div class="item astro-XRKD4ONZ">
+                    <div class="itemimage astro-XRKD4ONZ">
+                        <object data="/astro-big-doc/raw/data/blog/gallery-Linux_kernel_map.svg" class="astro-XRKD4ONZ"></object>
                     </div>
-                    <div class="overlay astro-PGVW4FO3">gallery-Linux_kernel_map.svg</div>
-                    <div class="modal-background astro-UE2CPDNF" data-uid="87967_4068">
+                    <div class="overlay astro-XRKD4ONZ">gallery-Linux_kernel_map.svg</div>
+                    <div class="modal-background astro-UE2CPDNF" data-uid="12027_738">
   <div class="modal astro-UE2CPDNF">
     <div class="modal-header close astro-UE2CPDNF">
       <span class="close-x astro-UE2CPDNF">&times;</span>
@@ -481,7 +481,7 @@ const baseUrl = "/astro-big-doc";
 </style>
 
 <script type="module">const url = "/astro-big-doc/raw/data/blog/gallery-Linux_kernel_map.svg";
-const uid = "87967_4068";
+const uid = "12027_738";
 const isSvg = true;
 const baseUrl = "/astro-big-doc";
 
@@ -541,12 +541,12 @@ const baseUrl = "/astro-big-doc";
 
   modal.addEventListener("init",initModal  ,false)
 </script>
-                </div><div class="item astro-PGVW4FO3">
-                    <div class="itemimage astro-PGVW4FO3">
-                        <object data="/astro-big-doc/raw/data/blog/gallery-tiger.svg" class="astro-PGVW4FO3"></object>
+                </div><div class="item astro-XRKD4ONZ">
+                    <div class="itemimage astro-XRKD4ONZ">
+                        <object data="/astro-big-doc/raw/data/blog/gallery-tiger.svg" class="astro-XRKD4ONZ"></object>
                     </div>
-                    <div class="overlay astro-PGVW4FO3">gallery-tiger.svg</div>
-                    <div class="modal-background astro-UE2CPDNF" data-uid="87967_9690">
+                    <div class="overlay astro-XRKD4ONZ">gallery-tiger.svg</div>
+                    <div class="modal-background astro-UE2CPDNF" data-uid="12027_4357">
   <div class="modal astro-UE2CPDNF">
     <div class="modal-header close astro-UE2CPDNF">
       <span class="close-x astro-UE2CPDNF">&times;</span>
@@ -576,7 +576,7 @@ const baseUrl = "/astro-big-doc";
 </style>
 
 <script type="module">const url = "/astro-big-doc/raw/data/blog/gallery-tiger.svg";
-const uid = "87967_9690";
+const uid = "12027_4357";
 const isSvg = true;
 const baseUrl = "/astro-big-doc";
 
@@ -636,12 +636,12 @@ const baseUrl = "/astro-big-doc";
 
   modal.addEventListener("init",initModal  ,false)
 </script>
-                </div><div class="item astro-PGVW4FO3">
-                    <div class="itemimage astro-PGVW4FO3">
-                        <object data="/astro-big-doc/raw/data/blog/github-dark.png" class="astro-PGVW4FO3"></object>
+                </div><div class="item astro-XRKD4ONZ">
+                    <div class="itemimage astro-XRKD4ONZ">
+                        <object data="/astro-big-doc/raw/data/blog/github-dark.png" class="astro-XRKD4ONZ"></object>
                     </div>
-                    <div class="overlay astro-PGVW4FO3">github-dark.png</div>
-                    <div class="modal-background astro-UE2CPDNF" data-uid="87967_8541">
+                    <div class="overlay astro-XRKD4ONZ">github-dark.png</div>
+                    <div class="modal-background astro-UE2CPDNF" data-uid="12027_210">
   <div class="modal astro-UE2CPDNF">
     <div class="modal-header close astro-UE2CPDNF">
       <span class="close-x astro-UE2CPDNF">&times;</span>
@@ -671,7 +671,7 @@ const baseUrl = "/astro-big-doc";
 </style>
 
 <script type="module">const url = "/astro-big-doc/raw/data/blog/github-dark.png";
-const uid = "87967_8541";
+const uid = "12027_210";
 const isSvg = false;
 const baseUrl = "/astro-big-doc";
 
@@ -739,8 +739,9 @@ const baseUrl = "/astro-big-doc";
 
 
 <script type="module">const filename = "gallery-images.json";
+const baseUrl = "/astro-big-doc";
 
-    import { event } from "/utils.js"
+    const {event} = await import(`${baseUrl}/utils.js`)
 
     const container = document.querySelector(`.container[data-filename="${filename}"]`)
     const collapsible = container.querySelector(".collapsible")

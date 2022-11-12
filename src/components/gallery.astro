@@ -14,7 +14,7 @@ const { 'data-filename':filename,'data-filedir':filedir,expanded } = Astro.props
 const filepath = filedir+'/'+filename
 const json_text = existsSync(filepath)?readFileSync(filepath).toString():"[]"
 const relImages = JSON.parse(json_text)
-
+const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const imagesUrls = relImages.map((relFile)=>({
         file:relFile,
         url:relAssetToUrl(relFile,filedir,import.meta.env.BASE_URL)
@@ -109,8 +109,8 @@ object{
 }
 </style>
 
-<script define:vars={{ filename }} type="module" >
-    import { event } from "/utils.js"
+<script define:vars={{ filename,baseUrl }} type="module" >
+    const {event} = await import(`${baseUrl}/utils.js`)
 
     const container = document.querySelector(`.container[data-filename="${filename}"]`)
     const collapsible = container.querySelector(".collapsible")

@@ -1,4 +1,3 @@
-import node from '@astrojs/node'
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
 import {remarkPUMLObj} from './src/libs/remark-plantuml-object'
@@ -9,10 +8,11 @@ import {remarkRelAsset} from './src/libs/remark-rel-asset'
 import {rehypeCheck} from './src/libs/rehype-check'
 
 export default defineConfig({
-  output: "server",
-  adapter: node({
-    mode: 'middleware'
-  }),
+  output: "static",
+  outDir: "./docs",
+  site: 'http://microwebstacks.github.io',
+  base: 'astro-big-doc',
+  trailingSlash: 'ignore',
   markdown:{
     syntaxHighlight: 'shiki',
     remarkPlugins: [

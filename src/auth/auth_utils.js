@@ -7,16 +7,13 @@ function showKeys(info,obj){
 }
 
 function verifyUser(accessToken, refreshToken, profile, cb){
-    console.log(" * verifyUser()")
-    console.log(`   accessToken : ${accessToken}`)
-    console.log(`   refreshToken : ${refreshToken}`)
-    console.log(`   profile  id:${profile.id} username:${profile.username}`)
-    let user = profile.id
+    const user = profile
+    console.log(` * verifyUser(id:${user.id})`)
+    //console.log(`   accessToken : ${accessToken}`)
+    //console.log(`   refreshToken : ${refreshToken}`)
     console.log("   checking user id, this is a demo, all users accepted ")
     cb(null,user)
 }
-  
- 
   
 export {
     showKeys,

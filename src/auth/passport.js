@@ -15,25 +15,8 @@ const strategyConfig = {
 }
 
 passport.use(new GitHubStrategy(strategyConfig,  verifyUser));
-
-passport.serializeUser(function(user, cb) {
-  console.log(`* passport.serializeUser githubId: ${user}`)
-  process.nextTick(function() {
-    return cb(null, {
-      id: user.id,
-      username: user.username,
-      picture: user.picture
-    });
-  });
-});
-
-passport.deserializeUser(function(user, cb) {
-  console.log(`* passport.deserializeUser : ${user}`)
-  process.nextTick(function() {
-    return cb(null, user);
-  });
-});
-
+passport.serializeUser((user,done)=>{done(null,user)});
+passport.deserializeUser((user,done)=>{done(null,user)});
 
 const authRouter = express.Router()
 
@@ -51,10 +34,8 @@ authRouter.use(passport.session())
 authRouter.use((req,resp,next)=>{
   //showKeys("2)",req)
   console.log('\n'+req.originalUrl)
-  console.log(req.sessionID)
+  console.log(`req.sessionID : ${req.sessionID}`)
   console.log(`req.isAuthenticated() : ${req.isAuthenticated()}`)
-  //console.log(req.session)
-  console.log(req.sessionStore.sessions)
   next()
 })
 

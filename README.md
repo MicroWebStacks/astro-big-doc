@@ -32,6 +32,10 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Gallery with json list of SVGs and images
 - Mobile layout
 ## Todos
+- Open
+  - hardcoded baseUrl on hoisted script import : https://github.com/withastro/astro/issues/5381
+  - SSR Node : how to add baseURL
+## ideas
 - menus
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector
@@ -47,10 +51,6 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - pass MD as MDX (workaround, rename .md to .mdx)
   - Enhance headings with Astro component, hover highlight and icons for id slugs
   - add more code formats, e.g. mermaid,...
-- Components : test panzoom with wide svgs that have been max-width adjusetd to the page
-- Open
-  - hardcoded baseUrl on hoisted script import : https://github.com/withastro/astro/issues/5381
-  - SSR Node : how to add baseURL
 
 # Developer guide
 ## getting started

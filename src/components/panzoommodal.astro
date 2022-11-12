@@ -15,7 +15,6 @@ export interface Props {
 
 const {url,filepath} = Astro.props as Props;
 
-const innerHTML = existsSync(filepath)?readFileSync(filepath).toString():await Astro.slots.render('default');
 const isSvg = filepath.endsWith(".svg")
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const uid = suid()

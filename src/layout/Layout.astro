@@ -29,7 +29,7 @@ const right_toc_menu = process_toc_list(headings)
 		<title>{title}</title>
 	</head>
 	<body >
-		<div id="fixed-left" class={`fixed-nav ${left_nav_menu.visible?"active":""}`}/>
+		<div id="fixed-left" class={`fixed-nav ${left_nav_menu.visible?"active":""}`} />
 		<div class="appbar-nav_content-footer">
 			<header>
 				<AppBar/>
@@ -200,6 +200,7 @@ footer p{
 	function configure_nav(fixed_el,resize_el,nav_el,left_to_right){
 		fixed_el.addEventListener("click",(e)=>{
 			const current_state = nav_el.getAttribute("data-state")
+			console.log(current_state)
 			if(current_state == "open"){
 				nav_el.setAttribute("data-state","closed")
 				nav_el.style.width = "0vw"
@@ -270,13 +271,13 @@ footer p{
 	const fixed_left = document.getElementById("fixed-left")
 	if(fixed_left.classList.contains("active")){
 		const resize_left = document.getElementById("resize-left")
-		const nav = resize_left.previousElementSibling
+		const nav = resize_left.previousElementSibling.firstElementChild
 		configure_nav(fixed_left,resize_left,nav,true)
 	}
 	const fixed_right = document.getElementById("fixed-right")
 	if(fixed_right.classList.contains("active")){
 		const resize_right = document.getElementById("resize-right")
-		const nav = resize_right.nextElementSibling
+		const nav = resize_right.nextElementSibling.firstElementChild
 		configure_nav(fixed_right,resize_right,nav,false)
 	}
 

@@ -105,10 +105,6 @@
         "href":"/about/"
     },
     {
-        "text":"Sign In",
-        "href":"/auth/github"
-    },
-    {
         "icon":"github",
         "href":"https://github.com/MicroWebStacks/astro-big-doc"
     }

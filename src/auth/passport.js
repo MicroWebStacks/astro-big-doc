@@ -4,7 +4,7 @@ import passport from 'passport'
 import {Strategy} from 'passport-github'
 import express from 'express'
 import session from 'express-session'
-import { verifyUser,showKeys } from './auth_utils.js'
+import { verifyUser } from './auth_utils.js'
 
 const GitHubStrategy = Strategy;
 
@@ -14,6 +14,8 @@ const strategyConfig = {
   callbackURL: "http://127.0.0.1:3000/auth/github/callback"
 }
 
+let first_url = '/'
+
 passport.use(new GitHubStrategy(strategyConfig,  verifyUser));
 passport.serializeUser((user,done)=>{done(null,user)});
 passport.deserializeUser((user,done)=>{done(null,user)});
@@ -22,7 +24,7 @@ const authRouter = express.Router()
 
 //'sessionStore', 'sessionID', 'session'
 authRouter.use(session({
-  secret:'keyboard cat',
+  secret:process.env.SESSION_SECRET,
   resave:false,
   saveUninitialized:false
 }))
@@ -31,26 +33,25 @@ authRouter.use(session({
 authRouter.use(passport.initialize())
 authRouter.use(passport.session())
 
-authRouter.use((req,resp,next)=>{
-  //showKeys("2)",req)
-  console.log('\n'+req.originalUrl)
-  console.log(`req.sessionID : ${req.sessionID}`)
-  console.log(`req.isAuthenticated() : ${req.isAuthenticated()}`)
-  next()
-})
-
 authRouter.get('/auth/github',passport.authenticate('github'));
 
 authRouter.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/access' }),
   function(req, res) {
-    // Successful authentication, redirect home.
-    console.log("success in callback")
-    res.redirect('/');
+    console.log(`req.sessionID : ${req.sessionID} ; authenticated : ${req.isAuthenticated()}`)
+    // Auth Success, redirect to first requested url
+    res.redirect(first_url);
   });
 
-//TODO Catch 404
-//TODO Catch Errors
+authRouter.use((req,res,next)=>{
+  if(req.isAuthenticated()){
+    next()
+  }else{
+    console.log(`req.sessionID : ${req.sessionID} ; authenticated : ${req.isAuthenticated()}`)
+    first_url = req.url
+    res.redirect('/auth/github')
+  }
+})
 
 export{
     authRouter

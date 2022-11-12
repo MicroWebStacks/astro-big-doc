@@ -10,8 +10,8 @@ Performance oriented, using astro components only, no virtual DOM, no extenal cs
 
 UX friendly Markdown without import and referencing local images, enhancements with components for panzoom, gallery, and code embeds.
 ## Features
-- astro components (.astro) html css js
-- article page full content as html ready for browser search
+- Pure astro components (.astro) html css js
+- static or server with authentication middleware (express, passport, github strategy)
 - Menus
   - Built by astro and seen as readable html hierarchy by the client
   - Trees with unlimited depth and recursively expandable sections
@@ -32,8 +32,6 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Gallery with json list of SVGs and images
 - Mobile layout
 ## Todos
-- authentication signin with github
-- SSR Node : how to add baseURL
 - menus
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector
@@ -50,8 +48,9 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Enhance headings with Astro component, hover highlight and icons for id slugs
   - add more code formats, e.g. mermaid,...
 - Components : test panzoom with wide svgs that have been max-width adjusetd to the page
-- Issues
+- Open
   - hardcoded baseUrl on hoisted script import : https://github.com/withastro/astro/issues/5381
+  - SSR Node : how to add baseURL
 
 # Developer guide
 ## getting started
@@ -83,6 +82,7 @@ pnpm create astro@latest
 - passport-github : https://github.com/jaredhanson/passport-github
 - passport-github doc : http://www.passportjs.org/packages/passport-github/
 - passport example : https://github.com/passport/todos-express-facebook/blob/master/app.js
+- jwo example : https://gist.github.com/jwo/ea79620b5229e7821e4ae61055899cf9
 
 
 ## Hints

@@ -3,6 +3,7 @@ dotenv.config()
 import passport from 'passport'
 import {Strategy} from 'passport-github'
 import express from 'express'
+import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import { verifyUser,showKeys } from './auth_utils.js'
 
@@ -37,6 +38,15 @@ passport.deserializeUser(function(user, cb) {
 
 const authRouter = express.Router()
 
+//authRouter.use((req,resp,next)=>{
+//  showKeys("1)",req)
+//  next()
+//})
+
+//'secret', 'cookies', 'signedCookies'
+authRouter.use(cookieParser()) 
+
+//'sessionStore', 'sessionID', 'session'
 authRouter.use(session({
   secret:'keyboard cat',
   resave:false,
@@ -44,11 +54,20 @@ authRouter.use(session({
   cookie: {secure: true}
 }))
 
+//'logIn', 'login', 'logOut', 'logout', 'isAuthenticated', 'isUnauthenticated'
+authRouter.use(passport.authenticate('session'));
+
 authRouter.use((req,resp,next)=>{
-  console.log(req.originalUrl)
+  //showKeys("2)",req)
+  console.log('\n'+req.originalUrl)
   console.log(req.sessionID)
-  console.log(req.session)
-  console.log(req.sessionStore)
+  console.log(`req.isAuthenticated() : ${req.isAuthenticated()}`)
+  //console.log(req.session)
+  console.log(req.sessionStore.sessions)
+  console.log("* cookies :")
+  console.log(req.secret)
+  console.log(req.cookies)
+  console.log(req.signedCookies)
   next()
 })
 

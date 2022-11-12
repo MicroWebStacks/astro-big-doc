@@ -700,7 +700,7 @@ function createPanZoom(domElement, options) {
 
       pinchZoomLength = currentPinchLength;
       e.stopPropagation();
-      e.preventDefault();
+      //e.preventDefault();
     }
   }
 

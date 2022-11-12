@@ -50,6 +50,8 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Enhance headings with Astro component, hover highlight and icons for id slugs
   - add more code formats, e.g. mermaid,...
 - Components : test panzoom with wide svgs that have been max-width adjusetd to the page
+- Issues
+  - hardcoded baseUrl on hoisted script import : https://github.com/withastro/astro/issues/5381
 
 # Developer guide
 ## getting started
@@ -74,6 +76,14 @@ pnpm create astro@latest
 * `remark-plantuml-svg` : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal `.puml` file for vs code preview convenience and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.
 * `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
 
+## Authentication
+- Github OAuth : https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
+- express-session : https://github.com/expressjs/session
+- passport OAuth doc : http://www.passportjs.org/concepts/authentication/oauth/
+- passport-github : https://github.com/jaredhanson/passport-github
+- passport-github doc : http://www.passportjs.org/packages/passport-github/
+- passport example : https://github.com/passport/todos-express-facebook/blob/master/app.js
+
 
 ## Hints
 - SVGs
@@ -96,31 +106,6 @@ pnpm create astro@latest
   - It is not possible to handle a custom code section with an Astro component in native Astro markdown integration (unless you rewrite the Astro component in remark and rehype). It is only possible in imported markdown where remarked custom components e.g. `<data />` can be replaced on the custom render call with an Astro component. see `blog/[...page].astro`. Fix RFC : https://github.com/withastro/rfcs/pull/285
   - `<Content components={{}}/>` only replaces html items injected from plugins and not items written in markdown page
   - `<Content components={{}}/>` does not replace Astro components in MD, only in MDX
-## curious script import behaviour
-This code event commented crashes the build
-```javascript
-  import '../../node_modules/panzoom/dist/panzoom';
-  //import "import.meta.env.BASE_URL/panzoom.min";
-```
-This does not
-```javascript
-  import '../../node_modules/panzoom/dist/panzoom';
-```
-Full cases
-```javascript
-  //0) works fine in dev and build but hardcoded
-  import '/astro-big-doc/panzoom.js';
-  //1) does not work when component used from another one e.g. from Markdown on another path resolves to relative markdown path
-  import "./panzoom.js";
-  //2) works in dev mode only, not deployed
-  import '../../node_modules/panzoom/dist/panzoom';
-  //3) unexpected template string
-  import `${baseUrl}/panzoom.min`; 
-  //4)
-  import "import.meta.env.BASE_URL/panzoom.min";
-  //5) warning : files in the public directory are served at the root path.  Instead of /public/panzoom, use /panzoom.
-	import '../../public/panzoom';
-```
 
 # References
 * https://github.com/syntax-tree/mdast

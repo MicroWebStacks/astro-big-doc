@@ -6,6 +6,13 @@
       "name": "Development server",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "type": "node",
+      "name": "Debug Server",
+      "request": "launch",
+      "command": "node server.js",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }

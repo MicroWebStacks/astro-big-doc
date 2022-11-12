@@ -1,6 +1,6 @@
 import express from 'express';
 import { handler as ssrHandler } from './dist/server/entry.mjs';
-import {authRouter} from './src/auth/passport.js'
+import {authRouter} from './src/auth/auth_router.js'
 
 const app = express();
 app.use(express.static('dist/client/'))

@@ -4,7 +4,7 @@ import passport from 'passport'
 import {Strategy} from 'passport-github'
 import express from 'express'
 import session from 'express-session'
-import { verifyUser } from './auth_utils.js'
+import { verifyUser } from './auth_verify.js'
 
 const GitHubStrategy = Strategy;
 

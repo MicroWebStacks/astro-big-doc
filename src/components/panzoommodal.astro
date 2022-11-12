@@ -28,10 +28,7 @@ const uid = suid()
     </div>
     <div class="modal-content">
       <div class="modal-center">
-        {isSvg?
-          <Fragment set:html={innerHTML} />:
-            <img src={url} />
-        }
+        <!-- injected svg or img on modal init -->
       </div>
     </div>
   </div>
@@ -112,7 +109,7 @@ const uid = suid()
 
 </style>
 
-<script define:vars={{uid,isSvg,baseUrl}} type="module">
+<script define:vars={{url,uid,isSvg,baseUrl}} type="module">
   await import(`${baseUrl}/panzoom.js`)
   let pzref = null
   const zoomOptions = {
@@ -123,8 +120,8 @@ const uid = suid()
 
   const modal = document.querySelector(`.modal-background[data-uid="${uid}"]`)
   const close = modal.querySelector(".close")
+  const center = modal.querySelector(".modal-center")
   function initPanZoom(){
-    const center = modal.querySelector(".modal-center")
     if(isSvg){
       const svg = center.querySelector("svg")
       pzref = panzoom(svg,zoomOptions)
@@ -133,12 +130,32 @@ const uid = suid()
       pzref = panzoom(image,zoomOptions)
     }
   }
+  async function fetchAsset(){
+    if(isSvg){
+      const svg = center.querySelector("svg")
+      if(!svg){
+        const resp = await fetch(url)
+        const text = await resp.text()
+        center.insertAdjacentHTML( 'beforeend', text )
+      }
+    }else{
+      const img = center.querySelector("img")
+      if(!img){
+        const resp = await fetch(url)
+        const blob = await resp.blob()
+        const imgObjURL = URL.createObjectURL(blob)
+        const imgElement = document.createElement('img')
+        imgElement.src = imgObjURL
+        center.appendChild(imgElement)
+      }
+    }
+  }
   function initModal(){
+    fetchAsset().then(initPanZoom)
     modal.classList.add("visible")
       if(pzref){
         pzref.dispose()
       }
-      initPanZoom()
   }
 
   close.onclick = ()=>{

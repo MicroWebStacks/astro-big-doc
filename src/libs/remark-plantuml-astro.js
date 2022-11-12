@@ -14,7 +14,6 @@ function update_puml_file(file,value,meta,baseUrl){
   console.log("file = " + file)
   const mtime = statSync(file).mtime
   const puml_title = (meta)?meta:counter++;
-  const puml_file = file + "." + puml_title + ".puml"
   const svg_file = file + "." + puml_title + ".svg"
 
   let do_update = true
@@ -27,7 +26,6 @@ function update_puml_file(file,value,meta,baseUrl){
   }
   if(do_update){
     //console.log(`creating puml+svg files : ${puml_file} + .svg`)
-    writeFileSync(puml_file,value)
     const url = `${baseUrl}/${plantumlEncoder.encode(value)}`;
     const svg_text = fetch(url).text()
     writeFileSync(svg_file,svg_text)

@@ -18,8 +18,8 @@ app.use(ssrHandler);
 const use_https = ["true","1"].includes(process.env.USE_HTTPS.toLowerCase())
 
 if(use_https){
-    const key = readFileSync(rel_to_abs(import.meta.url,process.env.CERT_FILE),'utf8')
-    const cert = readFileSync(rel_to_abs(import.meta.url,process.env.KEY_FILE),'utf8')
+    const key = readFileSync(rel_to_abs(import.meta.url,process.env.KEY_FILE),'utf8')
+    const cert = readFileSync(rel_to_abs(import.meta.url,process.env.CERT_FILE),'utf8')
     const httpsServer = https.createServer({key,cert},app)
     httpsServer.listen(3000);//443 for clear url
 }else{

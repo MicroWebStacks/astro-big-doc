@@ -87,7 +87,7 @@ pnpm create astro@latest
 - jwo example : https://gist.github.com/jwo/ea79620b5229e7821e4ae61055899cf9
 
 - using self signed keys with `server/create.sh` result in browser warning 'your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID)
-
+- for 'Let's Encrypt' certificates, ownership has to be proven by visibility of the host from the public internet which makes it not usable for internal domains and local network hosts
 
 ## Hints
 - SVGs

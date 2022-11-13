@@ -8,8 +8,14 @@ import {remarkRelDir} from './src/libs/remark-rel-dir'
 import {remarkRelAsset} from './src/libs/remark-rel-asset'
 import {rehypeCheck} from './src/libs/rehype-check'
 
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 export default defineConfig({
   output: "server",
+  server:{
+    port:parseInt(process.env.SERVER_PORT)
+  },
   adapter: node({
     mode: 'middleware'
   }),

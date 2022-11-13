@@ -1,17 +1,19 @@
-import * as dotenv from 'dotenv'
-dotenv.config()
 import passport from 'passport'
 import {Strategy} from 'passport-github'
 import express from 'express'
 import session from 'express-session'
 import { verifyUser } from './auth_verify.js'
 
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 const GitHubStrategy = Strategy;
 
+const callbackURL = process.env.SERVER_HOST+":"+process.env.SERVER_PORT+"/auth/github/callback"
 const strategyConfig = {
   clientID:     process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+  callbackURL: callbackURL
 }
 
 let first_url = '/'
@@ -27,6 +29,7 @@ authRouter.use(session({
   secret:process.env.SESSION_SECRET,
   resave:false,
   saveUninitialized:false
+  // using MemoryStore for debug only not for prod see https://expressjs.com/en/resources/middleware/session.html
 }))
 
 //'logIn', 'login', 'logOut', 'logout', 'isAuthenticated', 'isUnauthenticated'

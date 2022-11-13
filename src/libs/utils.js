@@ -2,6 +2,11 @@ import {existsSync,copyFileSync,mkdirSync} from 'fs'
 import {resolve,normalize,dirname,join,relative} from 'path'
 //import config from '../../astro.config.mjs'
 
+//resolve(reference,relative) does not work due to 'file:\'
+function rel_to_abs(reference,relative){
+  return join(dirname(normalize(reference)),relative).replace("file:\\","")
+}
+
 //Note 'imp*ort.me*ta.en*v.BA*SE_URL' only works from Astro component not from remark-rel-asset plugin
 function relAssetToUrl(relativepath,refdir,baseUrl){
     let newurl = relativepath
@@ -9,9 +14,9 @@ function relAssetToUrl(relativepath,refdir,baseUrl){
     if(existsSync(filepath)){
       console.log(`   * impo*rt.me*ta.ur*l = ${import.meta.url}`)
 
-      let rootdir = join(dirname(normalize(import.meta.url)),"../..").replace("file:\\","")
+      let rootdir = rel_to_abs(import.meta.url,"../..")
       if(import.meta.env.PROD){
-        rootdir = join(dirname(normalize(import.meta.url)),"..").replace("file:\\","")
+        rootdir = rel_to_abs(import.meta.url,"..")
       }
       console.log(`   * rootdir = '${rootdir}'`)
       const targetroot = join(rootdir,"public/raw")
@@ -54,6 +59,7 @@ function window_event(event_name,data){
 }
 
 export{
+    rel_to_abs,
     relAssetToUrl,
     uid,
     suid,

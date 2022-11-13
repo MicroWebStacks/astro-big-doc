@@ -77,12 +77,16 @@ pnpm create astro@latest
 
 ## Authentication
 - Github OAuth : https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
-- express-session : https://github.com/expressjs/session
+- express-session : 
+  - repo https://github.com/expressjs/session
+  - doc https://expressjs.com/en/resources/middleware/session.html
 - passport OAuth doc : http://www.passportjs.org/concepts/authentication/oauth/
 - passport-github : https://github.com/jaredhanson/passport-github
 - passport-github doc : http://www.passportjs.org/packages/passport-github/
 - passport example : https://github.com/passport/todos-express-facebook/blob/master/app.js
 - jwo example : https://gist.github.com/jwo/ea79620b5229e7821e4ae61055899cf9
+
+- using self signed keys with `server/create.sh` result in browser warning 'your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID)
 
 
 ## Hints

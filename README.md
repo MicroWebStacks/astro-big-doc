@@ -110,7 +110,8 @@ pnpm create astro@latest
   - It is not possible to handle a custom code section with an Astro component in native Astro markdown integration (unless you rewrite the Astro component in remark and rehype). It is only possible in imported markdown where remarked custom components e.g. `<data />` can be replaced on the custom render call with an Astro component. see `blog/[...page].astro`. Fix RFC : https://github.com/withastro/rfcs/pull/285
   - `<Content components={{}}/>` only replaces html items injected from plugins and not items written in markdown page
   - `<Content components={{}}/>` does not replace Astro components in MD, only in MDX
-
+  - `import.meta.glob('./file1.md',{as:'mdx'})` => error despite correct file?mdx `no such file or directory`
+  - ``await import(`file:///file.mdx`)`` works ``await import(`file:///${page}.mdx`)`` does not, cannot find file that actuall exist
 # References
 * https://github.com/syntax-tree/mdast
 * https://github.com/syntax-tree/mdast#code

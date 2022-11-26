@@ -3,6 +3,8 @@ import plantumlEncoder from "plantuml-encoder";
 import {existsSync,writeFileSync,statSync, readFileSync} from 'fs'
 import {basename,dirname} from 'path'
 import fetch from 'sync-fetch'
+import config from '../../astro.config.mjs'
+import {relAssetToUrl} from './utils'
 
 const DEFAULT_OPTIONS = {
   baseUrl: "https://www.plantuml.com/plantuml/svg"
@@ -10,6 +12,7 @@ const DEFAULT_OPTIONS = {
 
 let counter = 0
 
+//todo move cache directly to 'public/raw'
 function update_puml_file(file,value,meta,baseUrl){
   console.log("file = " + file)
   const mtime = statSync(file).mtime
@@ -54,7 +57,9 @@ function remarkPUMLAstro(pluginOptions) {
       const svg_file = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
       const filedir = dirname(file.history[0])
       node.type = "html";
-      node.value = `<data data-filename="${svg_file}" data-filedir="${filedir}"> </data>`
+      const addUrl = config.base?config.base+'/':''
+      const url = relAssetToUrl(svg_file,dirname(file.history[0]),"/"+addUrl)
+      node.value = `<data data-url="${url}" > </data>`
       node.alt = node.meta;
       node.meta = undefined;
     });

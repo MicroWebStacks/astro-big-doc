@@ -3,20 +3,22 @@ import {dirname} from 'path'
 import {relAssetToUrl} from './utils'
 import config from '../../astro.config.mjs'
 
-function remarkRelAsset() {
+function remarkImage() {
   return function transformer(syntaxTree,file) {
-    console.log(` 'remarkRelAsset' * in file '${file.history}'`)
+    console.log(` 'image' * in file '${file.history}'`)
     visit(syntaxTree,  node => {
       if(!['image'].includes(node.type)){
         return
       }
       const addUrl = config.base?config.base+'/':''
       node.url = relAssetToUrl(node.url,dirname(file.history[0]),"/"+addUrl)
+      node.value = `<data data-url="${node.url}" }"> </data>`
+      node.type = 'html'
     });
     return syntaxTree;
   };
 }
 
 export{
-  remarkRelAsset
+  remarkImage
 }

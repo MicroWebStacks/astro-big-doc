@@ -1,4 +1,4 @@
-import {existsSync,copyFileSync,mkdirSync} from 'fs'
+import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
 import {resolve,normalize,dirname,join,relative} from 'path'
 //import config from '../../astro.config.mjs'
 
@@ -7,18 +7,24 @@ function rel_to_abs(reference,relative){
   return join(dirname(normalize(reference)),relative).replace("file:\\","")
 }
 
+function isNewer(filepath,targetfile){
+  const t1 = statSync(filepath).mtime
+  const t2 = statSync(targetfile).mtime
+  return (t1>t2)
+}
+
 //Note 'imp*ort.me*ta.en*v.BA*SE_URL' only works from Astro component not from remark-rel-asset plugin
 function relAssetToUrl(relativepath,refdir,baseUrl){
     let newurl = relativepath
     const filepath = join(refdir,relativepath)
     if(existsSync(filepath)){
-      console.log(`   * impo*rt.me*ta.ur*l = ${import.meta.url}`)
+      //console.log(`   * impo*rt.me*ta.ur*l = ${import.meta.url}`)
 
       let rootdir = rel_to_abs(import.meta.url,"../..")
       if(import.meta.env.PROD){
         rootdir = rel_to_abs(import.meta.url,"..")
       }
-      console.log(`   * rootdir = '${rootdir}'`)
+      //console.log(`   * rootdir = '${rootdir}'`)
       const targetroot = join(rootdir,"public/raw")
       const filerootrel = relative(rootdir,refdir)
       const targetpath = resolve(targetroot,filerootrel)
@@ -27,11 +33,19 @@ function relAssetToUrl(relativepath,refdir,baseUrl){
       //console.log(`copy from '${filepath}' to '${targetfile}'`)
       const newpath = join("raw/",filerootrel,relativepath)
       newurl = baseUrl+ newpath.replaceAll('\\','/')
-      console.log(`  * new asset url = '${newurl}'`)
       if(!existsSync(targetdir)){
         mkdirSync(targetdir,{ recursive: true })
       }
-      copyFileSync(filepath,targetfile)
+      if(!existsSync(targetfile)){
+        copyFileSync(filepath,targetfile)
+        console.log(`  utils.js> * new asset url = '${newurl}'`)
+      }
+      else if(isNewer(filepath,targetfile)){
+        copyFileSync(filepath,targetfile)
+        console.log(`  utils.js> * updated asset url = '${newurl}'`)
+      }else{
+        //console.log(`  utils.js> * existing asset url = '${newurl}'`)
+      }
     }
 
     return newurl

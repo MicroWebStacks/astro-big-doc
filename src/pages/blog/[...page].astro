@@ -6,24 +6,24 @@ import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
 
 
-const output_static = true;//import.meta.en.SSR is buggy always True : https://docs.astro.build/en/reference/api-reference/#importmeta
-
 const {page} = Astro.params;
+console.log(`page = ${page}`)
+
 const page_path = resolve(process.cwd()+'/data/blog/'+page)
-console.log(page_path)
-if(!existsSync(page_path) && !output_static){
+if(!existsSync(page_path)){
     console.log(`${page} does not exist`)
-    //return Astro.redirect("/")
+    return Astro.redirect("/")
 }
-//Astro.glob()only use literals, no variables, no string litterals
-const posts = await Astro.glob('../../../data/blog/**/*.{md,mdx}')//relative to this file
-
+//Astro.glob()only use literals, no variables, no string litterals, relative to this file
+const posts = await Astro.glob('../../../data/blog/**/*.{md,mdx}')
 const Post = posts.find((post)=>(resolve(post.file) == page_path))
-if((typeof Post == "undefined") && !output_static){
-    console.log(`${page} could not be parsed by Astro.glob`)
-    //return Astro.redirect("/")
+
+if((typeof Post == "undefined")){
+    console.log(`${page} could not be imported`)
+    return Astro.redirect("/")
 }
 
+//Dummy to allow static build for test but not supported
 export async function getStaticPaths(){
     const files = readdirSync('data/blog/')//relative to astro root
     return files.map((file)=>({params:{page:file}}))
@@ -32,6 +32,6 @@ export async function getStaticPaths(){
 ---
 {Post &&
 <Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
-        <Post.Content components={{ Gallery,Panzoom,data:Panzoom }}/>
+        <Post.Content components={{...Post.components, Gallery,Panzoom,data:Panzoom }}/>
 </Layout>
 }

@@ -4,8 +4,9 @@ import mdx from "@astrojs/mdx";
 import {remarkPUMLObj} from './src/libs/remark-plantuml-object'
 import {remarkPUMLSvg} from './src/libs/remark-plantuml-svg'
 import {remarkPUMLAstro} from './src/libs/remark-plantuml-astro'
-import {remarkRelDir} from './src/libs/remark-rel-dir'
-import {remarkRelAsset} from './src/libs/remark-rel-asset'
+import {remarkImage} from './src/libs/remark-image-pz'
+import {remarkPanzoom} from './src/libs/remark-panzoom'
+import {remarkGallery} from './src/libs/remark-gallery'
 import {rehypeCheck} from './src/libs/rehype-check'
 
 import * as dotenv from 'dotenv'
@@ -22,8 +23,9 @@ export default defineConfig({
   markdown:{
     syntaxHighlight: 'shiki',
     remarkPlugins: [
-      remarkRelAsset,
-      remarkRelDir,
+      remarkImage,
+      remarkPanzoom,
+      remarkGallery,
       remarkPUMLObj,
       remarkPUMLSvg,
       remarkPUMLAstro,// in MD though MDX only otherwise syntax highlight from MD takes over MDX

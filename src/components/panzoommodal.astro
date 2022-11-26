@@ -5,7 +5,6 @@ import { suid } from '@/libs/utils';
 
 export interface Props {
     url: string;
-    filepath:string;
 }
 
 //TODO currently all pazoom items do create and ship html for svg
@@ -13,9 +12,9 @@ export interface Props {
 //A free Svg instead of object is important in panzoom to keep interactivity enbaled
 //object would require to pass mouse events to allow panzoom which disables interactivity
 
-const {url,filepath} = Astro.props as Props;
+const {url} = Astro.props as Props;
 
-const isSvg = filepath.endsWith(".svg")
+const isSvg = url.endsWith(".svg")
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const uid = suid()
 

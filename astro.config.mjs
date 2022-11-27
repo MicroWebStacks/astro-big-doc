@@ -35,7 +35,7 @@ if(process.env.MODE == "MIDDLEWARE"){
     ...default_options,
     output: "server",
     server:{
-      port:parseInt(process.env.SERVER_PORT)
+      port:parseInt(process.env.PORT)
     },
     adapter: node({
       mode: 'middleware'

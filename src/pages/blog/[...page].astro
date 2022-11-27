@@ -26,10 +26,12 @@ if((typeof Post == "undefined")){
     return Astro.redirect("/")
 }
 
+//TODO if user authorised to view the page, otherwise redirect
+
 //Dummy to allow static build for test but not supported
 export async function getStaticPaths(){
     const files = readdirSync('data/blog/')//relative to astro root
-    return files.map((file)=>({params:{page:file}}))
+    return files.filter(file=>file.endsWith('.mdx')).map((file)=>({params:{page:file}}))
 }
 
 ---

@@ -11,7 +11,7 @@ dotenv.config()
 
 const GitHubStrategy = Strategy;
 
-const callbackURL = process.env.SERVER_HOST+":"+process.env.SERVER_PORT+"/auth/github/callback"
+const callbackURL = process.env.HOST+":"+process.env.PORT+"/auth/github/callback"
 const strategyConfig = {
   clientID:     process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,

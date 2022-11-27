@@ -1,13 +1,16 @@
 ---
 import Layout from "@/layout/Layout.astro";
-import {existsSync,readdirSync} from 'fs';
+import {existsSync,readdirSync,readFileSync} from 'fs';
 import {resolve} from 'path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
-
+import {get_session_id} from "../../../server/auth/auth_router"
+import { env } from 'node:process';
 
 const {page} = Astro.params;
-console.log(`page = ${page}`)
+const cookie = Astro.request.headers.get('cookie');
+const session_id = get_session_id(cookie)
+console.log(`Astro> hello user ${env[session_id]} on page ${page}`)
 
 const page_path = resolve(process.cwd()+'/data/blog/'+page)
 if(!existsSync(page_path)){

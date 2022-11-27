@@ -1,12 +1,16 @@
 ---
 import Layout from "@/layout/Layout.astro";
-import {existsSync,readdirSync,readFileSync} from 'fs';
+import {existsSync,readdirSync} from 'fs';
 import {resolve} from 'path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
+import {session_user} from "../../../server/auth/auth_utils"
 
 const {page} = Astro.params;
 console.log(`Astro> page ${page}`)
+
+const user = session_user(Astro.request) //also adds .user to Astro.request
+console.log(`Astro> [...page] ${user?"hello user "+user:""}`)
 
 const page_path = resolve(process.cwd()+'/data/blog/'+page)
 if(!existsSync(page_path)){

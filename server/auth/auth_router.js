@@ -48,7 +48,7 @@ const onSuccess = function(req, res) {
   res.redirect(first_url);
 }
 
-const checkAuth = (req,res,next)=>{
+const checkAuthenticated = (req,res,next)=>{
   if(req.isAuthenticated()){
     next()
   }else{
@@ -73,7 +73,9 @@ authRouter.get('/auth/github/callback',
                 passport.authenticate('github', { failureRedirect: '/access' }),
                 onSuccess);
 
-authRouter.use(checkAuth)
+authRouter.use(checkAuthenticated)
+
+//TODO checkAuthorised
 
 export{
     authRouter

@@ -26,16 +26,23 @@ function get_session_id(cookie){
     return 0
 }
 
-function get_user(request){
-    const cookie = request.headers.get('cookie');
-    const session_id = get_session_id(cookie)
-    const user = env[session_id]              //give back the user saved by storeUser
-    return user
+function session_user(request){
+    if(request.user){
+        return request.user
+    }
+    else if(import.meta.env.PROD){
+        const cookie = request.headers.get('cookie');
+        const session_id = get_session_id(cookie)
+        const user = env[session_id]              //give back the user saved by storeUser
+        request.user = user
+        return user
+    }
+    else return ""
 }
 
 export {
     showKeys,
     verifyUser,
     get_session_id,
-    get_user
+    session_user
 }

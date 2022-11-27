@@ -12,14 +12,7 @@ import {rehypeCheck} from './src/libs/rehype-check'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-export default defineConfig({
-  output: "server",
-  server:{
-    port:parseInt(process.env.SERVER_PORT)
-  },
-  adapter: node({
-    mode: 'middleware'
-  }),
+const default_options = {
   markdown:{
     syntaxHighlight: 'shiki',
     remarkPlugins: [
@@ -35,4 +28,28 @@ export default defineConfig({
     extendDefaultPlugins: true
   },
   integrations: [mdx()]
-});
+}
+
+if(process.env.MODE == "MIDDLEWARE"){
+  var config_options = {
+    ...default_options,
+    output: "server",
+    server:{
+      port:parseInt(process.env.SERVER_PORT)
+    },
+    adapter: node({
+      mode: 'middleware'
+    })
+  };
+}else if(process.env.MODE == "STATIC"){
+  var config_options   = {
+    ...default_options,
+    output: "static",
+    outDir: "./docs",
+    site: process.env.SITE,
+    base: process.env.BASE,
+    trailingSlash: 'ignore'
+  };
+}
+
+export default defineConfig(config_options);

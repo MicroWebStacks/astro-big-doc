@@ -1,3 +1,4 @@
+import { env } from 'node:process';
 
 function showKeys(info,obj){
     console.log(info)
@@ -16,8 +17,25 @@ function verifyUser(accessToken, refreshToken, profile, cb){
     //in case of real verification, check user in DB, otherwise return non null err
     cb(null,user)
 }
-  
+
+function get_session_id(cookie){
+    const prefix = "connect.sid=s%3A"
+    if(cookie.startsWith(prefix)){
+      return (cookie.split(prefix)[1].split(".")[0])
+    }
+    return 0
+}
+
+function get_user(request){
+    const cookie = request.headers.get('cookie');
+    const session_id = get_session_id(cookie)
+    const user = env[session_id]              //give back the user saved by storeUser
+    return user
+}
+
 export {
     showKeys,
-    verifyUser
+    verifyUser,
+    get_session_id,
+    get_user
 }

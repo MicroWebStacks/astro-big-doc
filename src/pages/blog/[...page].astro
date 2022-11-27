@@ -4,13 +4,9 @@ import {existsSync,readdirSync,readFileSync} from 'fs';
 import {resolve} from 'path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
-import {get_session_id} from "../../../server/auth/auth_router"
-import { env } from 'node:process';
 
 const {page} = Astro.params;
-const cookie = Astro.request.headers.get('cookie');
-const session_id = get_session_id(cookie)
-console.log(`Astro> hello user ${env[session_id]} on page ${page}`)
+console.log(`Astro> page ${page}`)
 
 const page_path = resolve(process.cwd()+'/data/blog/'+page)
 if(!existsSync(page_path)){

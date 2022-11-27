@@ -4,6 +4,7 @@ import NavMenu from './NavMenu.astro';
 import ToCMenu from './ToCMenu.astro';
 import raw_menu from "../config/menu.json"
 import { remove_base,process_menu_tree,process_toc_list } from "../components/menu_utils";
+import {get_user} from "../../server/auth/auth_utils"
 
 
 export interface Props {
@@ -19,6 +20,10 @@ const pageUrl = remove_base(baseUrl,Astro.url.pathname)
 
 const left_nav_menu = process_menu_tree(pageUrl,raw_menu)
 const right_toc_menu = process_toc_list(headings)
+
+console.log(`Astro> hello user ${get_user(Astro.request)}`)
+
+
 ---
 <html lang="en">
 	<head>

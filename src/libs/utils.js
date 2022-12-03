@@ -19,10 +19,7 @@ function relAssetToUrl(relativepath,refdir,baseUrl){
     if(existsSync(filepath)){
       //console.log(`   * impo*rt.me*ta.ur*l = ${import.meta.url}`)
 
-      let rootdir = rel_to_abs(import.meta.url,"../..")
-      if(import.meta.env.PROD){
-        rootdir = rel_to_abs(import.meta.url,"..")
-      }
+      const rootdir = process.cwd()
       //console.log(`   * rootdir = '${rootdir}'`)
       const targetroot = join(rootdir,"public/raw")
       const filerootrel = relative(rootdir,refdir)

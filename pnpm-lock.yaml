@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@astrojs/mdx': ^0.12.0
   '@astrojs/node': ^3.1.0
-  astro: ^1.6.10
+  astro: ^1.6.12
   cookie-parser: ^1.4.6
   dotenv: ^16.0.3
   express: ^4.18.2

@@ -1,6 +1,14 @@
 import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
 import {resolve,normalize,dirname,join,relative} from 'path'
 
+function root_abs(){
+  let rootdir = rel_to_abs(import.meta.url,"../..")
+  if(import.meta.env.PROD){
+    rootdir = rel_to_abs(import.meta.url,"..")
+  }
+  return rootdir
+}
+
 //resolve(reference,relative) does not work due to 'file:\'
 function rel_to_abs(reference,relative){
   return join(dirname(normalize(reference)),relative).replace("file:\\","")
@@ -74,5 +82,6 @@ export{
     uid,
     suid,
     event,
-    window_event
+    window_event,
+    root_abs
 }

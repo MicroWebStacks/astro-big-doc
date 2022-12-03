@@ -32,9 +32,7 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Gallery with json list of SVGs and images
 - Mobile layout
 ## Todos
-- Open
-  - hardcoded baseUrl on hoisted script import : https://github.com/withastro/astro/issues/5381
-  - SSR Node : how to add baseURL
+- root dir from process not reliable use `root_abs()`
 ## ideas
 - menus
   - ToC auto-expand : open scroll spy, close all others
@@ -113,6 +111,7 @@ pnpm create astro@latest
   - `import.meta.glob('./file1.md',{as:'mdx'})` => error despite correct file?mdx `no such file or directory`
   - ``await import(`file:///file.mdx`)`` works ``await import(`file:///${page}.mdx`)`` does not, cannot find file that actuall exist
   - `import 'module.js'` instead of `import 'module'` takes `import.meta.env.PROD` away, env becomes undefined
+- baseUrl usage on hoisted script only possible with Dynamic import : https://github.com/withastro/astro/issues/5381
 
 # References
 * https://github.com/syntax-tree/mdast

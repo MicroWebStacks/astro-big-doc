@@ -5,27 +5,31 @@ import {resolve} from 'path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
 import {session_user} from "../../../server/auth/auth_utils"
+import {rel_to_abs} from '@/libs/utils'
 
 const {page} = Astro.params;
 console.log(`Astro> page ${page}`)
 
 const user = session_user(Astro.request) //also adds .user to Astro.request
-console.log(`Astro> [...page] ${user?"hello user "+user:""}`)
+if(user){
+    console.log(`Astro> [...page] hello user ${user}`)
+}
 
 const page_path = resolve(process.cwd()+'/data/blog/'+page)
 if(!existsSync(page_path)){
     console.log(`${page} does not exist`)
     return Astro.redirect("/")
 }
-//Astro.glob()only use literals, no variables, no string litterals, relative to this file
-const posts = await Astro.glob('../../../data/blog/**/*.{md,mdx}')
-const Post = posts.find((post)=>(resolve(post.file) == page_path))
 
-if((typeof Post == "undefined")){
+const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}')
+const Post_path = Object.keys(posts).find((path)=>(rel_to_abs(import.meta.url,path) == page_path))
+
+if((typeof Post_path == "undefined")){
     console.log(`${page} could not be imported`)
     return Astro.redirect("/")
 }
 
+const Post = await posts[Post_path]()
 //TODO if user authorised to view the page, otherwise redirect
 
 //Dummy to allow static build for test but not supported

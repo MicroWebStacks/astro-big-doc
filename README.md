@@ -112,6 +112,8 @@ pnpm create astro@latest
   - `<Content components={{}}/>` does not replace Astro components in MD, only in MDX
   - `import.meta.glob('./file1.md',{as:'mdx'})` => error despite correct file?mdx `no such file or directory`
   - ``await import(`file:///file.mdx`)`` works ``await import(`file:///${page}.mdx`)`` does not, cannot find file that actuall exist
+  - `import 'module.js'` instead of `import 'module'` takes `import.meta.env.PROD` away, env becomes undefined
+
 # References
 * https://github.com/syntax-tree/mdast
 * https://github.com/syntax-tree/mdast#code

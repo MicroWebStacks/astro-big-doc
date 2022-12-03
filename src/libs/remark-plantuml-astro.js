@@ -3,8 +3,8 @@ import plantumlEncoder from "plantuml-encoder";
 import {existsSync,writeFileSync,statSync, readFileSync} from 'fs'
 import {basename,dirname} from 'path'
 import fetch from 'sync-fetch'
-import config from '../../astro.config.mjs'
-import {relAssetToUrl} from './utils'
+import {relAssetToUrl} from './utils.js'
+import {config} from '../../config.js'
 
 const DEFAULT_OPTIONS = {
   baseUrl: "https://www.plantuml.com/plantuml/svg"

@@ -1,7 +1,9 @@
 import {visit} from "unist-util-visit";
 import {dirname} from 'path'
-import {relAssetToUrl} from './utils'
-import config from '../../astro.config.mjs'
+import {relAssetToUrl} from './utils.js'
+import {config} from '../../config.js'
+
+//console.log(`mode = '${config.mode}' / base = '${config.base}'`)
 
 function remarkImage() {
   return function transformer(syntaxTree,file) {

@@ -1,6 +1,5 @@
 import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
 import {resolve,normalize,dirname,join,relative} from 'path'
-//import config from '../../astro.config.mjs'
 
 //resolve(reference,relative) does not work due to 'file:\'
 function rel_to_abs(reference,relative){

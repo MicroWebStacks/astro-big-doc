@@ -21,7 +21,9 @@ const left_nav_menu = process_menu_tree(pageUrl,raw_menu)
 const right_toc_menu = process_toc_list(headings)
 
 const user = session_user(Astro.request) //also adds .user to Astro.request
-console.log(`Astro> [Layout] ${user?"hello user "+user:""}`)
+if(user){
+    console.log(`Astro> [...page] hello user ${user}`)
+}
 
 
 ---

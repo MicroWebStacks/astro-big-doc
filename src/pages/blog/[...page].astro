@@ -4,15 +4,10 @@ import {existsSync,readdirSync} from 'fs';
 import {resolve} from 'path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
-import {session_user} from "../../../server/auth/auth_utils"
 
 const {page} = Astro.params;
 console.log(`Astro> page ${page}`)
 
-const user = session_user(Astro.request) //also adds .user to Astro.request
-if(user){
-    console.log(`Astro> [...page] hello user ${user}`)
-}
 const base_path = process.cwd()+'/data/blog/'
 const page_path = resolve(base_path+page)
 
@@ -35,8 +30,11 @@ const Post = await posts[Post_path]()
 
 //Dummy to allow static build for test but not supported
 export async function getStaticPaths(){
+    function is_markdown(file){
+        return (file.endsWith('.md')||file.endsWith('.mdx'))
+    }
     const files = readdirSync('data/blog/')//relative to astro root
-    return files.filter(file=>file.endsWith('.mdx')).map((file)=>({params:{page:file}}))
+    return files.filter(file=>is_markdown(file)).map((file)=>({params:{page:file}}))
 }
 
 ---

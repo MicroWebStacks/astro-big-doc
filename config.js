@@ -4,13 +4,13 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const config = {
-    mode:process.env.MODE,
+    out_mode:process.env.OUT_MODE,//STATIC,MIDDLEWARE
     site:process.env.SITE,
     base:process.env.BASE,  //for the js code, Astro components can use imp*ort.me*ta.en*v.BA*SE_URL
     port:process.env.PORT,
 }
 
-if(process.env.MODE == "MIDDLEWARE"){
+if(process.env.OUT_MODE == "MIDDLEWARE"){
     config.base = ""
 }
 

@@ -3,8 +3,6 @@ import {dirname} from 'path'
 import {relAssetToUrl} from './utils.js'
 import {config} from '../../config.js'
 
-//console.log(`mode = '${config.mode}' / base = '${config.base}'`)
-
 function remarkImage() {
   return function transformer(syntaxTree,file) {
     console.log(` 'image' * in file '${file.history}'`)

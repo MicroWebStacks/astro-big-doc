@@ -29,7 +29,7 @@ const default_options = {
 
 var config_options = {}
 
-if(config.mode == "MIDDLEWARE"){
+if(config.out_mode == "MIDDLEWARE"){
   config_options = {
     ...default_options,
     output: "server",
@@ -40,7 +40,7 @@ if(config.mode == "MIDDLEWARE"){
       mode: 'middleware'
     })
   };
-}else if(config.mode == "STATIC"){
+}else if(config.out_mode == "STATIC"){
   config_options   = {
     ...default_options,
     output: "static",

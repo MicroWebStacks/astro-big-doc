@@ -1,32 +1,42 @@
 [
     {
-        "text":"Markdown",
-        "href":"/",
-        "items"        :[
+        "text":"Home",
+        "href":"/blog/gallery.mdx",
+        "items":[
             {
-                "text":"Simple Markdown",
-                "href":"/"
+                "text":"Gallery",
+                "href":"/blog/gallery.mdx"
             },
             {
-                "text":"MDX",
-                "href":"/components"
+                "text":"Panzoom",
+                "href":"/blog/file3.mdx"
             },
             {
-                "text":"Code Highlight",
-                "href":"/code"
+                "text":"MDX Plantuml",
+                "href":"/blog/file1.mdx"
             },
             {
-                "text":"Readme",
-                "href":"/readme"
-            },
-            {
-                "text":"Images",
-                "href":"/images"
+                "text":"MD Static vs Dynamic",
+                "href":"/blog/file2.md"
             }
         ]
     },
     {
-        "text":"Astro",
+        "text":"Readme",
+        "href":"/local_markdown/readme",
+        "items"        :[
+            {
+                "text":"Readme",
+                "href":"/local_markdown/readme"
+            },
+            {
+                "text":"Simple Markdown",
+                "href":"/local_markdown/"
+            }
+        ]
+    },
+    {
+        "text":"Menus",
         "href":"/astro/deep_toc",
         "items":[
             {
@@ -75,28 +85,6 @@
                         ]
                     }
                 ]
-            }
-        ]
-    },
-    {
-        "text":"Blog",
-        "href":"/blog/file1.mdx",
-        "items":[
-            {
-                "text":"MDX Plantuml",
-                "href":"/blog/file1.mdx"
-            },
-            {
-                "text":"MD Static vs Dynamic",
-                "href":"/blog/file2.md"
-            },
-            {
-                "text":"Panzoom",
-                "href":"/blog/file3.mdx"
-            },
-            {
-                "text":"Gallery",
-                "href":"/blog/gallery.mdx"
             }
         ]
     },

@@ -14,6 +14,10 @@ app.use(express.static('dist/client/'))
 app.use(express.static('dist/client/raw'))
 app.use(authRouter)
 app.use(ssrHandler);
+app.use((req, res, next) => {
+    res.status(404).send("Sorry can't find that!")
+  })
+
 
 const use_https = ["true","1"].includes(process.env.USE_HTTPS.toLowerCase())
 

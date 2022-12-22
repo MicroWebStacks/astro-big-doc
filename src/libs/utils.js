@@ -83,5 +83,6 @@ export{
     suid,
     event,
     window_event,
-    root_abs
+    root_abs,
+    isNewer
 }

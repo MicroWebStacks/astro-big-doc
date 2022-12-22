@@ -32,6 +32,7 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Gallery with json list of SVGs and images
 - Mobile layout
 ## Todos
+- generate menu from files
 - root dir from process not reliable use `root_abs()`
 - check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration

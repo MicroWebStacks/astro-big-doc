@@ -4,11 +4,16 @@ import {existsSync,writeFileSync,statSync, readFileSync} from 'fs'
 import {basename} from 'path'
 import fetch from 'sync-fetch'
 
-const DEFAULT_OPTIONS = {
-  baseUrl: "https://www.plantuml.com/plantuml/svg"
-};
+const puml_server ="https://www.plantuml.com/plantuml/svg"
 
 let counter = 0
+
+function puml_text_to_svg(text){
+  const url = `${puml_server}/${plantumlEncoder.encode(text)}`;
+  const svg_text = fetch(url).text()
+  return svg_text
+}
+
 
 function update_puml_file(file,value,meta,baseUrl){
   const mtime = statSync(file).mtime
@@ -44,13 +49,11 @@ function update_puml_file(file,value,meta,baseUrl){
  *
  * @param {Object} pluginOptions Remark plugin options.
  */
-function remarkPUMLSvg(pluginOptions) {
-  const options = { ...DEFAULT_OPTIONS, ...pluginOptions };
-  const baseUrl = options.baseUrl.replace(/\/$/, "")
+function remarkPUMLSvg() {
   return function transformer(syntaxTree,file) {
     visit(syntaxTree, "code", node => {
       if (!node.lang || !node.value || node.lang !== "plantumlsvg") return;
-      const svg_text = update_puml_file(file.history[0],node.value,node.meta,baseUrl)
+      const svg_text = puml_text_to_svg(node.value)
       node.type = "html";
       node.value = svg_text
       node.alt = node.meta;

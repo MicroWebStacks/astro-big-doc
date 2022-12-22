@@ -1,5 +1,6 @@
 import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
-import {resolve,normalize,dirname,join,relative} from 'path'
+import {basename,resolve,normalize,dirname,join,relative} from 'path'
+import {config} from '../../config'
 
 function root_abs(){
   let rootdir = rel_to_abs(import.meta.url,"../..")
@@ -18,6 +19,22 @@ function isNewer(filepath,targetfile){
   const t1 = statSync(filepath).mtime
   const t2 = statSync(targetfile).mtime
   return (t1>t2)
+}
+
+function cache_file_url(source_file){
+  const source_dir = dirname(source_file)
+  const rootdir = process.cwd()
+  const targetroot = join(rootdir,"public/raw")
+  const source_file_base_name = basename(source_file)
+  const file_rel_to_root = relative(rootdir,source_dir)
+  const targetpath = resolve(targetroot,file_rel_to_root)
+  const targetfile = join(targetpath,source_file_base_name)
+
+  const baseUrl = "/" + (config.base?(config.base+'/'):'')
+  const relativepath = basename(source_file)
+  const newpath = join("raw/",file_rel_to_root,relativepath)
+  const url = baseUrl+ newpath.replaceAll('\\','/')
+  return {targetfile,url}
 }
 
 //Note 'imp*ort.me*ta.en*v.BA*SE_URL' only works from Astro component not from remark-rel-asset plugin
@@ -84,5 +101,6 @@ export{
     event,
     window_event,
     root_abs,
-    isNewer
+    isNewer,
+    cache_file_url
 }

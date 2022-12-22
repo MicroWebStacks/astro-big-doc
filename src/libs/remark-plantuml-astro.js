@@ -1,12 +1,9 @@
 import {visit} from "unist-util-visit";
 import plantumlEncoder from "plantuml-encoder";
 import {writeFileSync} from 'fs'
-import {basename} from 'path'
 import fetch from 'sync-fetch'
-import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
-import {resolve,dirname,join,relative} from 'path'
-import { config } from '../../config.js'
-import { isNewer } from './utils'
+import {existsSync,statSync} from 'fs'
+import { cache_file_url } from './utils'
 
 const puml_server ="https://www.plantuml.com/plantuml/svg"
 
@@ -18,57 +15,17 @@ function puml_text_to_svg_file(text,svg_file){
   writeFileSync(svg_file,svg_text)
 }
 
-function relAssetToUrl(svg_file,file){
-  const relativepath = basename(svg_file)
-  const refdir = dirname(file)
-
-  const baseUrl = '/' + config.base?(config.base+'/'):''
-
-  let newurl = relativepath
-  const filepath = join(refdir,relativepath)
-  if(existsSync(filepath)){
-    //console.log(`   * impo*rt.me*ta.ur*l = ${import.meta.url}`)
-
-    const rootdir = process.cwd()
-    //console.log(`   * rootdir = '${rootdir}'`)
-    const targetroot = join(rootdir,"public/raw")
-    const filerootrel = relative(rootdir,refdir)
-    const targetpath = resolve(targetroot,filerootrel)
-    const targetfile = join(targetpath,relativepath)
-    const targetdir = dirname(targetfile)
-    //console.log(`copy from '${filepath}' to '${targetfile}'`)
-    const newpath = join("raw/",filerootrel,relativepath)
-    newurl = baseUrl+ newpath.replaceAll('\\','/')
-    if(!existsSync(targetdir)){
-      mkdirSync(targetdir,{ recursive: true })
-    }
-    if(!existsSync(targetfile)){
-      copyFileSync(filepath,targetfile)
-      console.log(`  utils.js> * new asset url = '${newurl}'`)
-    }
-    else if(isNewer(filepath,targetfile)){
-      copyFileSync(filepath,targetfile)
-      console.log(`  utils.js> * updated asset url = '${newurl}'`)
-    }else{
-      //console.log(`  utils.js> * existing asset url = '${newurl}'`)
-    }
-  }
-
-  return newurl
-}
-
-//todo move cache directly to 'public/raw'
 function update_puml_file(file,value,meta){
-  console.log("file = " + file)
+  //console.log("file = " + file)
   const mtime = statSync(file).mtime
   const puml_title = (meta)?meta:counter++;
   const svg_file = file + "." + puml_title + ".svg"
 
-
+  const {targetfile:svg_target_file,url} = cache_file_url(svg_file)
 
   let do_update = true
-  if(existsSync(svg_file)){
-    const pmtime = statSync(svg_file).mtime
+  if(existsSync(svg_target_file)){
+    const pmtime = statSync(svg_target_file).mtime
     if(pmtime > mtime){
       do_update = false
       //console.log(`svg file exist for puml ${puml_title}`)
@@ -76,12 +33,9 @@ function update_puml_file(file,value,meta){
   }
   if(do_update){
     //console.log(`creating puml+svg files : ${puml_file} + .svg`)
-    puml_text_to_svg_file(value,svg_file)
+    puml_text_to_svg_file(value,svg_target_file)
+    console.log(`generated svg_file = ${svg_target_file} for url '${url}'`)
   }
-  console.log(`svg_file = ${svg_file} /// basename(svg_file) = ${basename(svg_file)}`)
-  console.log(`dirname(file) = ${dirname(file)}`)
-  console.log(`dirname(svg_file) = ${dirname(svg_file)}`)
-  const url = relAssetToUrl(svg_file,file)
 
   return url
 }

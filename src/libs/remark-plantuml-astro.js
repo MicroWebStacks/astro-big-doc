@@ -18,9 +18,11 @@ function puml_text_to_svg_file(text,svg_file){
   writeFileSync(svg_file,svg_text)
 }
 
-function relAssetToUrl(relativepath,refdir,baseUrl){
-  const addUrl = config.base?config.base+'/':''
-  baseUrl += addUrl
+function relAssetToUrl(svg_file,file){
+  const relativepath = basename(svg_file)
+  const refdir = dirname(file)
+
+  const baseUrl = '/' + config.base?(config.base+'/'):''
 
   let newurl = relativepath
   const filepath = join(refdir,relativepath)
@@ -62,6 +64,8 @@ function update_puml_file(file,value,meta){
   const puml_title = (meta)?meta:counter++;
   const svg_file = file + "." + puml_title + ".svg"
 
+
+
   let do_update = true
   if(existsSync(svg_file)){
     const pmtime = statSync(svg_file).mtime
@@ -74,9 +78,10 @@ function update_puml_file(file,value,meta){
     //console.log(`creating puml+svg files : ${puml_file} + .svg`)
     puml_text_to_svg_file(value,svg_file)
   }
-  console.log(`${svg_file} /// ${basename(svg_file)}`)
-  const base_svg_file = basename(svg_file)
-  const url = relAssetToUrl(base_svg_file,dirname(file),"/")
+  console.log(`svg_file = ${svg_file} /// basename(svg_file) = ${basename(svg_file)}`)
+  console.log(`dirname(file) = ${dirname(file)}`)
+  console.log(`dirname(svg_file) = ${dirname(svg_file)}`)
+  const url = relAssetToUrl(svg_file,file)
 
   return url
 }

@@ -25,7 +25,11 @@ const default_options = {
     ],
     extendDefaultPlugins: true
   },
-  integrations: [mdx(),int_test()]
+  integrations: [mdx(),int_test()],
+  vite:{
+    plugins:[
+    ]
+  }
 }
 
 var config_options = {}

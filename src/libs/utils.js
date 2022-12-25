@@ -109,6 +109,10 @@ function green_log(text){
   console.log(colors.FgGreen,text,colors.Reset)
 }
 
+function blue_log(text){
+  console.log(colors.FgCyan,text,colors.Reset)
+}
+
 export{
     rel_to_abs,
     relAssetToUrl,
@@ -117,5 +121,6 @@ export{
     event,
     window_event,
     root_abs,
-    green_log
+    green_log,
+    blue_log
 }

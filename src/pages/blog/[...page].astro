@@ -5,6 +5,7 @@ import {resolve} from 'path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
 import Page_404 from "@/components/404.astro"
+import H1 from "@/components/headings/H1.astro"
 
 const {page} = Astro.params;
 console.log(`Astro> page ${page}`)
@@ -42,10 +43,13 @@ export async function getStaticPaths(){
     const files = await fs.readdir('data/blog/')//relative to astro root
     return files.filter(file=>is_markdown(file)).map((file)=>({params:{page:file}}))
 }
+
+
 ---
 {Post &&
 <Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
-        <Post.Content components={{...Post.components, Gallery,Panzoom,data:Panzoom }}/>
+    <H1/>
+        <Post.Content components={{...Post.components, Gallery,Panzoom,data:Panzoom,h1:H1 }}/>
 </Layout>
 }
 {!found &&

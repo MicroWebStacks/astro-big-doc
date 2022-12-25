@@ -50,7 +50,13 @@ UX friendly Markdown without import and referencing local images, enhancements w
 - Markdown
   - pass MD as MDX (workaround, rename .md to .mdx)
   - Enhance headings with Astro component, hover highlight and icons for id slugs
-  - add more code formats, e.g. mermaid,...
+  - add more code formats, e.g. mermaid, D2, ...
+- content Structure
+  - organize content with filesystem menu
+  - parse yaml tags and orgnaize menu with tags order hierarchy
+- caching
+  - SSR render on page hash condition, using ETag
+  - page hash with depndencies hashes, include assets hash as attribute
 
 # Developer guide
 ## getting started

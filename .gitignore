@@ -1,5 +1,6 @@
 dist/
 public/raw/
+temp/
 
 # dependencies
 node_modules/

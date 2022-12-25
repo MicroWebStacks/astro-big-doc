@@ -6,7 +6,7 @@ export interface Props {
 const { id } = Astro.props as Props;
 
 ---
-<h1 id={id} class="heading"><slot/></h1>
+<h2 id={id} class="heading"><slot/></h2>
 
 <style>
 .active{
@@ -16,5 +16,4 @@ const { id } = Astro.props as Props;
 .hover{
   background-color: #606060;
 }
-
 </style>

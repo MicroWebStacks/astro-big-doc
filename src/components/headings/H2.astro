@@ -1,4 +1,5 @@
 ---
+import Heading from './Heading.astro'
 export interface Props {
   id: string;
 }
@@ -6,18 +7,6 @@ export interface Props {
 const { id } = Astro.props as Props;
 
 ---
-<h2 id={id} class="heading"><slot/></h2>
-
-<style>
-.active{
-  background-color: #37373D;
-  padding: 2px;
-}
-.hover{
-  background-color: #606060;
-}
-.heading:hover{
-  background-color: #606060;
-}
-
-</style>
+<Heading id={id} tag={'h2'}>
+  <slot/>
+</Heading>

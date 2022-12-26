@@ -1,0 +1,67 @@
+---
+import Svg from '@/components/svgicons.astro'
+export interface Props {
+    id: string;
+    tag: string;
+}
+
+const { id,tag } = Astro.props as Props;
+
+const Heading = tag
+
+---
+<Heading id={id} class="content heading">
+  <a href={`#${id}`} id="heading" >
+    <slot/>
+    <div class="icon link">
+      <Svg filename="link" width={20} color={'white'}/>
+    </div>
+  </a>
+</Heading>
+
+<style>
+.heading.active{
+  background-color: #37373D;
+}
+.heading.hover{
+  background-color: #606060;
+}
+.heading:hover{
+    background-color: #606060;
+}
+#heading{
+    color:rgb(201, 190, 190);
+    text-decoration: none;
+    flex-grow: 1;
+    display:flex;
+    align-items: center;
+}
+.icon{
+  display:none;
+  margin-left: 5px;
+  flex-grow: 100;
+}
+.heading:hover > a > .icon{
+  display:block;
+}
+
+</style>
+<style is:inline>
+.icon.link > svg{
+    width:20px;
+    fill:rgb(201, 190, 190);
+}
+</style>
+<script>
+  const headings = document.querySelectorAll(".content.heading");
+  headings.forEach(element => {
+      element.addEventListener('mouseenter',(event)=>{
+          document.querySelector(`a[href="#${event.target.id}"].toc_href`)?.classList.add("active")
+          event.stopPropagation()
+      })        
+      element.addEventListener('mouseleave',(event)=>{
+        document.querySelector(`a[href="#${event.target.id}"].toc_href`)?.classList.remove("active")
+        event.stopPropagation()
+      })        
+  });
+</script>

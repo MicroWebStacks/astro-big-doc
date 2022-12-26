@@ -1,6 +1,7 @@
 [
     {
         "text":"Home",
+        "path": "/data/blog",
         "href":"/blog/gallery.mdx",
         "items":[
             {

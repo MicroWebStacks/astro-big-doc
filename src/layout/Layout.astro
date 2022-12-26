@@ -2,7 +2,8 @@
 import AppBar from './AppBar.astro';
 import NavMenu from './NavMenu.astro';
 import ToCMenu from './ToCMenu.astro';
-import raw_menu from "../config/menu.json"
+import raw_menu from '../config/menu.json'
+import {get_nav_menu} from "./menu.js"
 import { remove_base,process_menu_tree,process_toc_list } from "../components/menu_utils";
 import {session_user} from "../../server/auth/auth_utils"
 import {config} from "@/config"
@@ -17,7 +18,11 @@ const { title } = Astro.props.frontmatter || Astro.props;
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const pageUrl = remove_base(baseUrl,Astro.url.pathname)
 
+console.log(`baseUrl = ${baseUrl} ; config.base = ${config.base}`)
+console.log(`Layout> pageUrl=${pageUrl} ; Astro.url.pathname=${Astro.url.pathname}`)
+
 const left_nav_menu = process_menu_tree(pageUrl,raw_menu)
+//const left_nav_menu = get_nav_menu(Astro.url.pathname)
 const right_toc_menu = process_toc_list(headings)
 
 if(config.out_mode != "STATIC"){

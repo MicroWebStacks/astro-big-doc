@@ -161,10 +161,54 @@ function process_toc_list(headings){
     return side_menu
 }
 
+function find_parent_dir(index,files_list){
+    return null
+}
+
+function file_list_to_menu_tree(files,href_base){
+    let files_list =[]
+    console.log(`href_base = ${href_base}`)
+    //console.log(files)
+
+    files.forEach((file)=>{
+        let element = {
+            items:[],
+            parent:false,
+            expanded:false,
+            href : href_base + file.replace('\\','/')
+        }
+        files_list.push(element)        
+    })
+
+    let tree = []
+
+    for(let index=0; index<files_list.length;index++){
+        let element = files_list[index]
+        let parent = find_parent_dir(index,files_list)
+        if(parent){
+            parent.items.push(element)
+        }else{
+            tree.push(element)
+        }
+    }
+
+    for(let element of files_list){
+        if (element.items.length == 0){
+            element.parent = false
+            delete element.items
+            delete element.expanded
+        }
+    }
+
+    console.log(tree)
+    return tree
+}
+
 export{
     process_menu_tree,
     process_toc_list,
     active_page,
     remove_base,
-    first_level_ignore_base    
+    first_level_ignore_base,
+    file_list_to_menu_tree
 }

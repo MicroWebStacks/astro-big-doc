@@ -2,6 +2,7 @@
     {
         "text":"Home",
         "path": "/data/blog",
+        "href_base": "/blog/",
         "href":"/blog/gallery.mdx",
         "items":[
             {

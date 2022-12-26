@@ -1,4 +1,5 @@
 ---
+import Svg from '@/components/svgicons.astro'
 export interface Props {
   id: string;
 }
@@ -6,7 +7,14 @@ export interface Props {
 const { id } = Astro.props as Props;
 
 ---
-<h1 id={id} class="heading"><slot/></h1>
+<h1 id={id} class="heading">
+  <a href={`#${id}`} id="heading">
+    <slot/>
+  </a>
+  <div class="icon">
+    <Svg filename="link"/>
+  </div>
+</h1>
 
 <style>
 .active{
@@ -16,5 +24,41 @@ const { id } = Astro.props as Props;
 .hover{
   background-color: #606060;
 }
+.heading{
+  display:flex;
+}
+.heading:hover{
+  background-color: #606060;
+}
+#heading{
+  color:rgb(201, 190, 190);
+  text-decoration: none;
+  flex-grow: 1;
+}
+.icon{
+  display:none;
+  flex-grow: 100;
+}
+.heading:hover > .icon{
+  display:block;
+}
 
 </style>
+<style is:inline>
+
+</style>
+<script>
+import { event } from "@/libs/utils";
+
+  const headings = document.querySelectorAll(".heading");
+  headings.forEach(element => {
+      element.addEventListener('mouseenter',(event)=>{
+          const id = event.target.id
+          document.querySelector(`a[href="#${id}"]`)?.classList.add("active")
+      })        
+      element.addEventListener('mouseout',(event)=>{
+        const id = event.target.id
+        document.querySelector(`a[href="#${id}"]`)?.classList.remove("active")
+      })        
+  });
+</script>

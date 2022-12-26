@@ -161,15 +161,12 @@ const { items,root=true} = Astro.props;
             console.log(id)
             document.querySelector(`a[href="#${id}"]`)?.classList.add("active")
             document.getElementById(id)?.classList.add("active")
-            //TODO Parallel active for headings
-            //remove old active heading
-            //spy.classList.add("active")
         }
     })
 
     const href_els = document.querySelectorAll(".toc_href");
     href_els.forEach(element => {
-        element.addEventListener('mouseover',()=>{
+        element.addEventListener('mouseenter',()=>{
             const href = element.getAttribute('href')
             const id = href.slice(1,href.length)
             document.getElementById(id)?.classList.add("hover")

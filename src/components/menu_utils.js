@@ -1,3 +1,6 @@
+import {config} from "@/config"
+import {dirname} from 'path'
+
 function remove_base(base,url){
     if(url.startsWith(base)){
         url = url.slice(base.length)
@@ -38,6 +41,20 @@ function url_path(url){
         str = str.slice(0,-1)
     }
     return `/${str}`
+}
+
+function first_level_ignore_base(pageUrl){
+    let base = config.base
+    if(!base.startsWith('/')){
+        base = '/'+base
+    }
+    const page_url_no_base = remove_base(base,pageUrl)
+    const parts = dirname(page_url_no_base).split('/')
+    if(parts.length > 1){
+        return parts[1]
+    }else{
+        return ''
+    }
 }
 
 function active_page(url, raw_menu){
@@ -148,5 +165,6 @@ export{
     process_menu_tree,
     process_toc_list,
     active_page,
-    remove_base
+    remove_base,
+    first_level_ignore_base    
 }

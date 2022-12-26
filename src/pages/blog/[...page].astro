@@ -42,6 +42,7 @@ export async function getStaticPaths(){
     function is_markdown(file){
         return (file.endsWith('.md')||file.endsWith('.mdx'))
     }
+    //TODO not all files see menu.js wip
     const files = await fs.readdir('data/blog/')//relative to astro root
     return files.filter(file=>is_markdown(file)).map((file)=>({params:{page:file}}))
 }

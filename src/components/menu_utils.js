@@ -175,6 +175,7 @@ function file_list_to_menu_tree(files,href_base){
             items:[],
             parent:false,
             expanded:false,
+            text: file,
             href : href_base + file.replace('\\','/')
         }
         files_list.push(element)        
@@ -199,9 +200,9 @@ function file_list_to_menu_tree(files,href_base){
             delete element.expanded
         }
     }
-
     console.log(tree)
-    return tree
+
+    return {items:tree,visible:true}
 }
 
 export{

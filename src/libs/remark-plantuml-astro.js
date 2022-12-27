@@ -14,7 +14,7 @@ let counter = 0
 
 //todo move cache directly to 'public/raw'
 function update_puml_file(file,value,meta,baseUrl){
-  console.log("file = " + file)
+  console.log("remark-plantuml-astro> file = " + file)
   const mtime = statSync(file).mtime
   const puml_title = (meta)?meta:counter++;
   const svg_file = file + "." + puml_title + ".svg"

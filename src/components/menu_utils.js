@@ -190,18 +190,19 @@ function get_parent(entries,index){
     return entries.find((entry)=>(entry.path == parent_path))
 }
 
-function push_files(entries,files,href_base){
-    files.forEach((file)=>{
+function push_files(files_map,href_base){
+    let entries = []
+    for (const [path, data] of Object.entries(files_map)) {
         let element = {
             parent:false,
-            expanded:false,
-            text: file,
-            path: file,
-            depth: file.split('/').length,
-            href : href_base + file
+            text: data.frontmatter.title?data.frontmatter.title:path,
+            weight: data.frontmatter.weight?data.frontmatter.weight:1,
+            path: path,
+            depth: path.split('/').length,
+            href : href_base + path
         }
         entries.push(element)
-    })
+    }
     return entries
 }
 
@@ -226,28 +227,19 @@ function create_parents(entries){
     }
     //console.log(`parents.length = ${parents.length}`)
     entries = entries.concat(parents)
-    entries.sort((a, b) => a.depth - b.depth);
     entries.sort((a, b) => a.parent - b.parent);
-    //console.log(`entries.length = ${entries.length}`)
+    entries.sort((a, b) => a.depth - b.depth);
+    entries.sort((a, b) => a.weight - b.weight);
+    console.log(entries)
     return entries
 }
 
-function file_list_to_menu_tree(files,href_base){
-    let entries =[]
+function file_list_to_menu_tree(files_map,href_base){
     //console.log(`href_base = ${href_base}`)
-    //console.log(files)
-
-    push_files(entries,files,href_base)
+    
+    let entries = push_files(files_map,href_base)
     entries.sort((a, b) => a.depth - b.depth);
     entries = create_parents(entries)
-
-    //post process delete empty items
-    for(let element of entries){
-        if (element.parent == false){
-            delete element.expanded
-        }
-    }
-    //console.log(entries)
 
     return {items:entries,visible:true}
 }

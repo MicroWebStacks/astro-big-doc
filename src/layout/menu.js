@@ -3,6 +3,8 @@ import {first_level_ignore_base} from '@/components/menu_utils'
 import {promises as fs} from 'fs';
 import {resolve,join,relative} from 'path'
 import { file_list_to_menu_tree,set_classes_recursive } from '../components/menu_utils';
+import matter from 'gray-matter';
+
 
 const menu_map = {}
 
@@ -16,6 +18,29 @@ async function parse_dir_recursive(dir) {
     return files.reduce((a, f) => a.concat(f), []);
 }
 
+function url_to_file(section_path,page){
+  const base_path = process.cwd()+section_path
+  const page_path = resolve(base_path,page)
+  return page_path
+}
+
+async function file_list_to_data_map(mdx_files,section_path,href_base){
+  let result = {}
+  for(let file of mdx_files){
+    const abs_path = url_to_file(section_path,file)
+    const content = await fs.readFile(abs_path, 'utf-8');
+    const frontmatter = matter(content).data
+    result[file] = {
+      path:file,
+      abs_path:abs_path,
+      href: href_base + file,
+      frontmatter: frontmatter
+    }
+  }
+  console.log(result)
+  return result
+}
+
 async function create_section_menu(section_path,href_base){
   const rootdir = process.cwd()
   const search_base = join(rootdir,section_path)
@@ -26,11 +51,13 @@ async function create_section_menu(section_path,href_base){
   const mdx_files = mdx_files_abs.map((file)=>(relative(search_base,file).replaceAll('\\','/')))
   //mdx_files.forEach(file => {console.log(file)     });
   //turn path results in a hierarchal menu (from list, level to Tree)
-  const section_menu = file_list_to_menu_tree(mdx_files,href_base)
+  const files_map = await file_list_to_data_map(mdx_files,section_path,href_base)
+  const section_menu = file_list_to_menu_tree(files_map,href_base)
 
   return {
     menu:section_menu,
-    files:mdx_files,
+    files_list:mdx_files,
+    files_map:files_map,
     path:section_path,
     href:href_base
   }
@@ -65,13 +92,16 @@ async function get_section_files(section_path,href_base){
     menu_map[section_path] = await create_section_menu(section_path,href_base)
   }
  
-  return menu_map[section_path].files
+  return menu_map[section_path].files_list
 }
 
 function get_section_file_from_url(section_path,page){
-  const base_path = process.cwd()+section_path
-  const page_path = resolve(base_path,page)
-  return page_path
+  if(page in menu_map[section_path].files_map){
+    return menu_map[section_path].files_map[page].abs_path
+  }else{
+    console.warn(`menu> ${page} not available`)
+    return null
+  }
 }
 
 export{

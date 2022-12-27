@@ -187,10 +187,6 @@ function get_parent(entries,index){
     return entries.find((entry)=>(entry.path == parent_path))
 }
 
-function find_parent_dir_index(index,entries){
-    return null
-}
-
 function push_files(entries,files,href_base){
     files.forEach((file)=>{
         let element = {

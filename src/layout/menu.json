@@ -3,25 +3,7 @@
         "text":"Home",
         "path": "/data/blog",
         "href_base": "/blog/",
-        "href":"/blog/gallery.mdx",
-        "items":[
-            {
-                "text":"Gallery",
-                "href":"/blog/gallery.mdx"
-            },
-            {
-                "text":"Panzoom",
-                "href":"/blog/file3.mdx"
-            },
-            {
-                "text":"Plantuml",
-                "href":"/blog/file1.mdx"
-            },
-            {
-                "text":"Static vs Dynamic",
-                "href":"/blog/file2.mdx"
-            }
-        ]
+        "href":"/blog/gallery.mdx"
     },
     {
         "text":"Readme",

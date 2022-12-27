@@ -161,48 +161,96 @@ function process_toc_list(headings){
     return side_menu
 }
 
-function find_parent_dir(index,files_list){
+function create_parent(entry){
+    const path = dirname(entry.path)
+    return {
+        items:[
+        ],
+        parent:true,
+        expanded:false,
+        text:path,
+        path: path,
+        depth: path.split('/').length
+    }
+}
+
+function needs_parent(entry){
+    if(entry.depth == 1){                 //already on root
+        return false
+    }
+    return true
+}
+
+function get_parent(entries,index){
+    const entry = entries[index]
+    const parent_path = dirname(entry.path)
+    return entries.find((entry)=>(entry.path == parent_path))
+}
+
+function find_parent_dir_index(index,entries){
     return null
 }
 
-function file_list_to_menu_tree(files,href_base){
-    let files_list =[]
-    console.log(`href_base = ${href_base}`)
-    //console.log(files)
-
+function push_files(entries,files,href_base){
     files.forEach((file)=>{
         let element = {
-            items:[],
             parent:false,
             expanded:false,
             text: file,
-            href : href_base + file.replace('\\','/')
+            path: file,
+            depth: file.split('/').length,
+            href : href_base + file
         }
-        files_list.push(element)        
+        entries.push(element)
     })
+    return entries
+}
 
-    let tree = []
-
-    for(let index=0; index<files_list.length;index++){
-        let element = files_list[index]
-        let parent = find_parent_dir(index,files_list)
-        if(parent){
-            parent.items.push(element)
+function create_parents(entries){
+    let parents = []
+    console.log(`entries.length = ${entries.length}`)
+    for(let index=0; index<entries.length;){
+        const entry = entries[index]
+        if(needs_parent(entry)){
+            const parent_index = get_parent(entries,index)
+            if(parent_index == undefined){
+                parents.push(create_parent(entry))
+                parents[parents.length-1].items.push(entry)
+            }else{
+                entries[parent_index].items.push(entry)
+            }
+            entries.splice(index,1)
         }else{
-            tree.push(element)
+            index++
         }
     }
+    console.log(`parents.length = ${parents.length}`)
+    entries = entries.concat(parents)
+    entries.sort((a, b) => a.depth - b.depth);
+    entries.sort((a, b) => a.parent - b.parent);
+    console.log(`entries.length = ${entries.length}`)
+    return entries
+}
 
-    for(let element of files_list){
-        if (element.items.length == 0){
-            element.parent = false
-            delete element.items
+function file_list_to_menu_tree(files,href_base){
+    let entries =[]
+    console.log(`href_base = ${href_base}`)
+    //console.log(files)
+
+    push_files(entries,files,href_base)
+    entries.sort((a, b) => a.depth - b.depth);
+    entries = create_parents(entries)
+    console.log(`entries.length = ${entries.length}`)
+
+    //post process delete empty items
+    for(let element of entries){
+        if (element.parent == false){
             delete element.expanded
         }
     }
-    console.log(tree)
+    console.log(entries)
 
-    return {items:tree,visible:true}
+    return {items:entries,visible:true}
 }
 
 export{

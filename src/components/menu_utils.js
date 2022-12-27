@@ -207,7 +207,7 @@ function push_files(entries,files,href_base){
 
 function create_parents(entries){
     let parents = []
-    console.log(`entries.length = ${entries.length}`)
+    console.log(`menu_utils> entries.length = ${entries.length}`)
     for(let index=0; index<entries.length;){
         const entry = entries[index]
         if(needs_parent(entry)){
@@ -224,23 +224,22 @@ function create_parents(entries){
             index++
         }
     }
-    console.log(`parents.length = ${parents.length}`)
+    //console.log(`parents.length = ${parents.length}`)
     entries = entries.concat(parents)
     entries.sort((a, b) => a.depth - b.depth);
     entries.sort((a, b) => a.parent - b.parent);
-    console.log(`entries.length = ${entries.length}`)
+    //console.log(`entries.length = ${entries.length}`)
     return entries
 }
 
 function file_list_to_menu_tree(files,href_base){
     let entries =[]
-    console.log(`href_base = ${href_base}`)
+    //console.log(`href_base = ${href_base}`)
     //console.log(files)
 
     push_files(entries,files,href_base)
     entries.sort((a, b) => a.depth - b.depth);
     entries = create_parents(entries)
-    console.log(`entries.length = ${entries.length}`)
 
     //post process delete empty items
     for(let element of entries){
@@ -248,7 +247,7 @@ function file_list_to_menu_tree(files,href_base){
             delete element.expanded
         }
     }
-    console.log(entries)
+    //console.log(entries)
 
     return {items:entries,visible:true}
 }
@@ -259,5 +258,6 @@ export{
     active_page,
     remove_base,
     first_level_ignore_base,
-    file_list_to_menu_tree
+    file_list_to_menu_tree,
+    set_classes_recursive
 }

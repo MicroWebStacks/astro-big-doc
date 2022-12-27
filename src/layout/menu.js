@@ -2,8 +2,7 @@ import raw_menu from './menu.json'
 import {first_level_ignore_base} from '@/components/menu_utils'
 import {promises as fs} from 'fs';
 import {resolve,join,relative} from 'path'
-import { file_list_to_menu_tree } from '../components/menu_utils';
-import { create } from 'domain';
+import { file_list_to_menu_tree,set_classes_recursive } from '../components/menu_utils';
 
 const menu_map = {}
 
@@ -20,7 +19,7 @@ async function parse_dir_recursive(dir) {
 async function create_section_menu(section_path,href_base){
   const rootdir = process.cwd()
   const search_base = join(rootdir,section_path)
-  console.log(`section_path = ${section_path} ; search_base = ${search_base}`)
+  console.log(`menu> section_path = ${section_path} ; search_base = ${search_base}`)
   const files = await parse_dir_recursive(search_base)
   //console.log(files)
   const mdx_files_abs = files.filter((file)=>(file.endsWith('.mdx')))
@@ -31,26 +30,33 @@ async function create_section_menu(section_path,href_base){
 
   return {
     menu:section_menu,
-    files:mdx_files
+    files:mdx_files,
+    path:section_path,
+    href:href_base
   }
 }
 
 async function get_nav_menu(pageUrl){
   const section = first_level_ignore_base(pageUrl)
-  console.log(`section = ${section}`)
+  console.log(`menu> get_nav_menu() section = ${section}`)
   const section_entry = raw_menu.find((entry)=>(entry.href.split('/')[1] == section))
   const section_path = section_entry.path
   if('items' in section_entry){
-    const menu = {...section_entry,visible:true}
-    if(menu.items.length ==1){
-      menu.visible = false
+    section_entry.visible = true
+    if(section_entry.items.length ==1){
+      section_entry.visible = false
     }
-    return menu
+    console.log(section_entry)
+    set_classes_recursive(pageUrl,section_entry.items)
+    return section_entry
   }
   if(!section_path in menu_map){
       menu_map[section_path] = await create_section_menu(section_path,section_entry.href_base)
   }
   //console.log(menu_map[section_path])
+  if('items' in menu_map[section_path]){
+    set_classes_recursive(pageUrl,menu_map[section_path].items)
+  }
   return menu_map[section_path].menu
 }
 
@@ -62,7 +68,14 @@ async function get_section_files(section_path,href_base){
   return menu_map[section_path].files
 }
 
+function get_section_file_from_url(section_path,page){
+  const base_path = process.cwd()+section_path
+  const page_path = resolve(base_path,page)
+  return page_path
+}
+
 export{
     get_nav_menu,
-    get_section_files
+    get_section_files,
+    get_section_file_from_url
 }

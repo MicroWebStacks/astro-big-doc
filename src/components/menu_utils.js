@@ -1,5 +1,5 @@
 import {config} from "@/config"
-import {dirname} from 'path'
+import {dirname,basename} from 'path'
 
 function remove_base(base,url){
     if(url.startsWith(base)){
@@ -218,6 +218,7 @@ function create_parents(entries){
             }else{
                 entries[parent_index].items.push(entry)
             }
+            entry.text = basename(entry.text)
             entries.splice(index,1)
         }else{
             index++

@@ -48,7 +48,10 @@ function first_level_ignore_base(pageUrl){
     if(!base.startsWith('/')){
         base = '/'+base
     }
-    const page_url_no_base = remove_base(base,pageUrl)
+    let page_url_no_base = remove_base(base,pageUrl)
+    if(page_url_no_base.endsWith('/')){
+        page_url_no_base += 'index' //to help the split dirname extraction
+    }
     const parts = dirname(page_url_no_base).split('/')
     if(parts.length > 1){
         return parts[1]
@@ -167,7 +170,7 @@ function create_parent(entry){
         items:[
         ],
         parent:true,
-        expanded:false,
+        expanded:true,
         text:path,
         path: path,
         depth: path.split('/').length

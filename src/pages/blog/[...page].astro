@@ -8,6 +8,7 @@ import Page_404 from "@/components/404.astro"
 import H1 from "@/components/headings/H1.astro"
 import H2 from "@/components/headings/H2.astro"
 import H3 from "@/components/headings/H3.astro"
+import {get_section_files} from "@/layout/menu"
 
 const {page} = Astro.params;
 console.log(`Astro> page ${page}`)
@@ -37,14 +38,11 @@ if(found){
     }
 }
 
-//Dummy to allow static build for test but not supported
 export async function getStaticPaths(){
-    function is_markdown(file){
-        return (file.endsWith('.md')||file.endsWith('.mdx'))
-    }
+    
     //TODO not all files see menu.js wip
-    const files = await fs.readdir('data/blog/')//relative to astro root
-    return files.filter(file=>is_markdown(file)).map((file)=>({params:{page:file}}))
+    const files = await get_section_files('/data/blog','/blog/')
+    return files.map((file)=>({params:{page:file}}))
 }
 
 

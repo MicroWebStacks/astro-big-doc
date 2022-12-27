@@ -36,6 +36,21 @@ UX friendly Markdown without import and referencing local images, enhancements w
 - check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration
 ## ideas
+- Markdown
+  - pass MD as MDX (workaround, rename .md to .mdx)
+- content Structure
+  - organize content with filesystem menu
+  - parse yaml tags and orgnaize menu with tags order hierarchy
+  - Structure : generation of left nav menu from src/pages
+  - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
+- caching
+  - SSR render on page hash condition, using ETag
+  - page hash with depndencies hashes, include assets hash as attribute
+- menus
+  - store nav menu width / prevent reset on same page reload
+## more ideas
+- Markdown
+  - add more code formats, e.g. mermaid, D2, ...
 - menus
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector
@@ -45,18 +60,8 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - pages types and icons
   - open close on nav-resize click
   - Issue: Menu height transition MUI example is working
-  - (optional) store nav menu width / prevent reset on same page reload
   - minor issue : Expand arrow rotates for nothing on page reload
-- Markdown
-  - pass MD as MDX (workaround, rename .md to .mdx)
-  - Enhance headings with Astro component, hover highlight and icons for id slugs
-  - add more code formats, e.g. mermaid, D2, ...
-- content Structure
-  - organize content with filesystem menu
-  - parse yaml tags and orgnaize menu with tags order hierarchy
-- caching
-  - SSR render on page hash condition, using ETag
-  - page hash with depndencies hashes, include assets hash as attribute
+
 
 # Developer guide
 ## getting started

@@ -8,6 +8,7 @@ import {remarkImage} from './src/libs/remark-image-pz'
 import {remarkPanzoom} from './src/libs/remark-panzoom'
 import {remarkGallery} from './src/libs/remark-gallery'
 import {config} from './config'
+import {int_test} from './src/libs/integration-test'
 
 const default_options = {
   markdown:{
@@ -24,7 +25,11 @@ const default_options = {
     ],
     extendDefaultPlugins: true
   },
-  integrations: [mdx()]
+  integrations: [mdx(),int_test()],
+  vite:{
+    plugins:[
+    ]
+  }
 }
 
 var config_options = {}
@@ -44,7 +49,7 @@ if(config.out_mode == "MIDDLEWARE"){
   config_options   = {
     ...default_options,
     output: "static",
-    outDir: "./docs",
+    outDir: "./temp",
     site: config.site,
     base: config.base,
     trailingSlash: 'ignore'

@@ -1,45 +1,55 @@
 ---
 import Layout from "@/layout/Layout.astro";
-import {existsSync,readdirSync} from 'fs';
+import {promises as fs} from 'fs';
 import {resolve} from 'path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
+import Page_404 from "@/components/404.astro"
+import H1 from "@/components/headings/H1.astro"
+import H2 from "@/components/headings/H2.astro"
+import H3 from "@/components/headings/H3.astro"
+import {get_section_files, get_section_file_from_url} from "@/layout/menu"
 
 const {page} = Astro.params;
-console.log(`Astro> page ${page}`)
+const page_path = get_section_file_from_url('/data/blog',page)
+console.log(`Astro/blog> url: ${page} file: ${page_path}`)
 
-const base_path = process.cwd()+'/data/blog/'
-const page_path = resolve(base_path+page)
-
-if(!existsSync(page_path)){
-    console.log(`${page} does not exist`)
-    return Astro.redirect("/")
+let found = true
+let Post = null
+try {
+  await fs.access(page_path)
+} catch {
+    console.warn(`Astro/blog> ${page} does not exist`)
+    found = false
 }
 
-const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}')//relative to this component file
-const component_path = process.cwd()+'/src/pages/blog/'
-const Post_path = Object.keys(posts).find((path)=>(resolve(component_path,path) == page_path))
+if(found){
+    const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}')//relative to this component file
+    const component_path = process.cwd()+'/src/pages/blog/'
+    const Post_path = Object.keys(posts).find((path)=>(resolve(component_path,path) == page_path))
+    
 
-if((typeof Post_path == "undefined")){
-    console.log(`${page} could not be imported`)
-    return Astro.redirect("/")
-}
-
-const Post = await posts[Post_path]()
-//TODO if user authorised to view the page, otherwise redirect
-
-//Dummy to allow static build for test but not supported
-export async function getStaticPaths(){
-    function is_markdown(file){
-        return (file.endsWith('.md')||file.endsWith('.mdx'))
+    if((typeof Post_path == "undefined")){
+        console.warn(`Astro/blog> ${page} could not be imported`)
+        found = false
     }
-    const files = readdirSync('data/blog/')//relative to astro root
-    return files.filter(file=>is_markdown(file)).map((file)=>({params:{page:file}}))
+    if(found){
+        Post = await posts[Post_path]()
+    }
 }
+
+export async function getStaticPaths(){
+    const static_files_paths = await get_section_files('/data/blog','/blog/')
+    return static_files_paths.map((file)=>({params:{page:file}}))
+}
+
 
 ---
 {Post &&
 <Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
-        <Post.Content components={{...Post.components, Gallery,Panzoom,data:Panzoom }}/>
+        <Post.Content components={{...Post.components, Gallery,Panzoom,data:Panzoom,h1:H1,h2:H2,h3:H3 }}/>
 </Layout>
+}
+{!found &&
+<Page_404 target={page}/>
 }

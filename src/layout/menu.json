@@ -1,25 +1,9 @@
 [
     {
         "text":"Home",
-        "href":"/blog/gallery.mdx",
-        "items":[
-            {
-                "text":"Gallery",
-                "href":"/blog/gallery.mdx"
-            },
-            {
-                "text":"Panzoom",
-                "href":"/blog/file3.mdx"
-            },
-            {
-                "text":"MDX Plantuml",
-                "href":"/blog/file1.mdx"
-            },
-            {
-                "text":"MD Static vs Dynamic",
-                "href":"/blog/file2.md"
-            }
-        ]
+        "path": "/data/blog",
+        "href_base": "/blog/",
+        "href":"/blog/gallery.mdx"
     },
     {
         "text":"Readme",
@@ -90,7 +74,15 @@
     },
     {
         "text":"About",
-        "href":"/about/"
+        "path": "/pages/about",
+        "href_base": "/about/",
+        "href":"/about/",
+        "items"        :[
+            {
+                "text":"About page",
+                "href":"/about/"
+            }
+        ]
     },
     {
         "icon":"github",

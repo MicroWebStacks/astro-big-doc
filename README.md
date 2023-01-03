@@ -13,6 +13,7 @@ UX friendly Markdown without import and referencing local images, enhancements w
 - Pure astro components (.astro) html css js
 - static or server with authentication middleware (express, passport, github strategy)
 - Menus
+  - menu generation from file system
   - Built by astro and seen as readable html hierarchy by the client
   - Trees with unlimited depth and recursively expandable sections
   - Can be opened, collapsed and width adjusted by the user
@@ -21,7 +22,7 @@ UX friendly Markdown without import and referencing local images, enhancements w
     - Auto expands decendance of active page only
   - Table Of Content (Right Menu)
     - ScrollSpy highlight of current section
-- markdown 
+- Markdown
   - Supports md and mdx
   - Automatic Right Menu ToC generation for all markdown pages
   - Markdown pages can be either in `scr/pages` or on any other server local path e.g. `data/blog` or `../../content/markdown`
@@ -37,6 +38,21 @@ UX friendly Markdown without import and referencing local images, enhancements w
 - check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration
 ## ideas
+- Markdown
+  - pass MD as MDX (workaround, rename .md to .mdx)
+- content Structure
+  - parse yaml tags and orgnaize menu with tags order hierarchy
+  - Structure : generation of left nav menu from src/pages
+  - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
+  - support slugs for pages instead of filenames
+- caching
+  - SSR render on page hash condition, using ETag
+  - page hash with depndencies hashes, include assets hash as attribute
+- menus
+  - store nav menu width / prevent reset on same page reload
+## more ideas
+- Markdown
+  - add more code formats, e.g. mermaid, D2, ...
 - menus
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector
@@ -46,12 +62,8 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - pages types and icons
   - open close on nav-resize click
   - Issue: Menu height transition MUI example is working
-  - (optional) store nav menu width / prevent reset on same page reload
   - minor issue : Expand arrow rotates for nothing on page reload
-- Markdown
-  - pass MD as MDX (workaround, rename .md to .mdx)
-  - Enhance headings with Astro component, hover highlight and icons for id slugs
-  - add more code formats, e.g. mermaid,...
+
 
 # Developer guide
 ## getting started

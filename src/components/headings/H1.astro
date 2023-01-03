@@ -1,0 +1,12 @@
+---
+import Heading from './Heading.astro'
+export interface Props {
+  id: string;
+}
+
+const { id } = Astro.props as Props;
+
+---
+<Heading id={id} tag={'h1'}>
+  <slot/>
+</Heading>

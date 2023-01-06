@@ -8,10 +8,10 @@ import Page_404 from "@/components/404.astro"
 import H1 from "@/components/headings/H1.astro"
 import H2 from "@/components/headings/H2.astro"
 import H3 from "@/components/headings/H3.astro"
-import {get_section_files, get_section_file_from_url} from "@/layout/menu"
+import {get_section_urls, get_section_file_from_url} from "@/layout/menu"
 
 const {page} = Astro.params;
-const page_path = get_section_file_from_url('/data/blog',page)
+const page_path = await get_section_file_from_url('/data/blog',page,'/blog/')
 console.log(`Astro/blog> url: ${page} file: ${page_path}`)
 
 let found = true
@@ -39,7 +39,7 @@ if(found){
 }
 
 export async function getStaticPaths(){
-    const static_files_paths = await get_section_files('/data/blog','/blog/')
+    const static_files_paths = await get_section_urls('/data/blog','/blog/')
     return static_files_paths.map((file)=>({params:{page:file}}))
 }
 

@@ -1,9 +1,10 @@
 import raw_menu from './menu.json'
 import {promises as fs} from 'fs';
 import {resolve,join,relative} from 'path'
-import {  first_level_ignore_base,file_list_to_menu_tree,
-          set_classes_recursive } from './menu_utils';
+import {  url_to_section,file_list_to_menu_tree,
+          set_classes_recursive,trim_ext } from './menu_utils';
 import matter from 'gray-matter';
+import {config} from '@/config'
 
 const menu_map = {}
 
@@ -26,17 +27,21 @@ function url_to_file(section_path,page){
 async function file_list_to_data_map(mdx_files,section_path,href_base){
   let result = {}
   for(let file of mdx_files){
+    //const url = '/'+config.base + href_base + trim_ext(file)
+    const url = href_base + trim_ext(file)
+    const section_url = trim_ext(file)
     const abs_path = url_to_file(section_path,file)
     const content = await fs.readFile(abs_path, 'utf-8');
     const frontmatter = matter(content).data
-    result[file] = {
+    result[url] = {
       path:file,
       abs_path:abs_path,
-      href: href_base + file,
+      url: url,
+      section_url: section_url,
       frontmatter: frontmatter
     }
   }
-  console.log(result)
+  //console.log(result)
   return result
 }
 
@@ -56,6 +61,7 @@ async function create_section_menu(section_path,href_base){
   return {
     menu:section_menu,
     files_list:mdx_files,
+    section_urls_list:Object.values(files_map).map(file=>file.section_url),
     files_map:files_map,
     path:section_path,
     href:href_base
@@ -63,7 +69,7 @@ async function create_section_menu(section_path,href_base){
 }
 
 async function get_nav_menu(pageUrl){
-  const section = first_level_ignore_base(pageUrl)
+  const section = url_to_section(pageUrl)
   console.log(`menu> get_nav_menu() section = ${section}`)
   const section_entry = raw_menu.find((entry)=>(entry.href.split('/')[1] == section))
   const section_path = section_entry.path
@@ -72,11 +78,11 @@ async function get_nav_menu(pageUrl){
     if(section_entry.items.length ==1){
       section_entry.visible = false
     }
-    console.log(section_entry)
+    //console.log(section_entry)
     set_classes_recursive(pageUrl,section_entry.items)
     return section_entry
   }
-  if(!section_path in menu_map){
+  if(!(section_path in menu_map)){
       menu_map[section_path] = await create_section_menu(section_path,section_entry.href_base)
   }
   //console.log(menu_map[section_path])
@@ -86,25 +92,30 @@ async function get_nav_menu(pageUrl){
   return menu_map[section_path].menu
 }
 
-async function get_section_files(section_path,href_base){
+async function get_section_urls(section_path,href_base){
   if(!(section_path in menu_map)){
     menu_map[section_path] = await create_section_menu(section_path,href_base)
   }
  
-  return menu_map[section_path].files_list
+  return menu_map[section_path].section_urls_list
 }
 
-function get_section_file_from_url(section_path,page){
+// '/data/blog', '/blog/gallery' => 'D:\Dev\MicroWebStacks\astro-big-doc\data\blog\gallery.mdx'
+async function get_section_file_from_url(section_path,page,href_base){
+  if(!(section_path in menu_map)){
+    menu_map[section_path] = await create_section_menu(section_path,href_base)
+  }
+  page = href_base + page
   if(page in menu_map[section_path].files_map){
     return menu_map[section_path].files_map[page].abs_path
   }else{
-    console.warn(`menu> ${page} not available`)
+    console.warn(`menu> page '${page}' not available`)
     return null
   }
 }
 
 export{
     get_nav_menu,
-    get_section_files,
+    get_section_urls,
     get_section_file_from_url
 }

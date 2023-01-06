@@ -3,7 +3,7 @@
         "text":"Home",
         "path": "/data/blog",
         "href_base": "/blog/",
-        "href":"/blog/gallery.mdx"
+        "href":"/blog/gallery"
     },
     {
         "text":"Readme",

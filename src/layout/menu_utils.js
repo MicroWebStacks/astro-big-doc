@@ -1,6 +1,10 @@
 import {config} from "@/config"
 import {dirname,basename} from 'path'
 
+function trim_ext(filename){
+    return filename.replace(/\.[^/.]+$/, "")
+}
+
 function remove_base(base,url){
     if(url.startsWith(base)){
         url = url.slice(base.length)
@@ -43,12 +47,15 @@ function url_path(url){
     return `/${str}`
 }
 
-function first_level_ignore_base(pageUrl){
+function url_to_section(pageUrl){
     let base = config.base
-    if(!base.startsWith('/')){
-        base = '/'+base
+    if(base != ''){
+        if(!base.startsWith('/')){
+            base = '/'+base
+        }
     }
     let page_url_no_base = remove_base(base,pageUrl)
+
     if(page_url_no_base.endsWith('/')){
         page_url_no_base += 'index' //to help the split dirname extraction
     }
@@ -199,7 +206,7 @@ function push_files(files_map,href_base){
             weight: data.frontmatter.weight?data.frontmatter.weight:1,
             path: path,
             depth: path.split('/').length,
-            href : href_base + path
+            href : data.url
         }
         entries.push(element)
     }
@@ -230,7 +237,7 @@ function create_parents(entries){
     entries.sort((a, b) => a.parent - b.parent);
     entries.sort((a, b) => a.depth - b.depth);
     entries.sort((a, b) => a.weight - b.weight);
-    console.log(entries)
+    //console.log(entries)
     return entries
 }
 
@@ -245,11 +252,12 @@ function file_list_to_menu_tree(files_map,href_base){
 }
 
 export{
+    trim_ext,
     process_menu_tree,
     process_toc_list,
     active_page,
     remove_base,
-    first_level_ignore_base,
+    url_to_section,
     file_list_to_menu_tree,
     set_classes_recursive
 }

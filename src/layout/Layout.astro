@@ -3,7 +3,7 @@ import AppBar from './AppBar.astro';
 import NavMenu from './NavMenu.astro';
 import ToCMenu from './ToCMenu.astro';
 import {get_nav_menu} from "./menu.js"
-import { remove_base,process_menu_tree,process_toc_list } from "../components/menu_utils";
+import { process_toc_list } from "./menu_utils";
 import {session_user} from "../../server/auth/auth_utils"
 import {config} from "@/config"
 export interface Props {
@@ -15,12 +15,7 @@ const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
-const pageUrl = remove_base(baseUrl,Astro.url.pathname)
 
-//console.log(`Layout> baseUrl = ${baseUrl} ; config.base = ${config.base}`)
-//console.log(`Layout> pageUrl=${pageUrl} ; Astro.url.pathname=${Astro.url.pathname}`)
-
-//const left_nav_menu = process_menu_tree(pageUrl,raw_menu)
 const left_nav_menu = await get_nav_menu(Astro.url.pathname)
 const right_toc_menu = process_toc_list(headings)
 
@@ -49,12 +44,12 @@ if(config.out_mode != "STATIC"){
 			</header>
 			<main>
 				{left_nav_menu.visible &&
-				<>
-					<div id="wide-nav" class="scroll">
-						<NavMenu items={left_nav_menu.items} />
-					</div>
-					<div id="resize-left" class="nav-resize active"/>
-				</>
+					<>
+						<div id="wide-nav" class="scroll">
+							<NavMenu items={left_nav_menu.items} />
+						</div>
+						<div id="resize-left" class="nav-resize active"/>
+					</>
 				}
 
 				<article class="content scroll">
@@ -89,28 +84,26 @@ body{
 	display:flex;
 	flex-direction: row;
 }
+/* Body => #fixed-left, .appbar-nav_content-footer, #fixed-right */
+.appbar-nav_content-footer{
+	flex-grow:1;
+	display:flex;
+	flex-direction: column;
+	height:100vh;
+}
+/* appbar-nav_content-footer => header, main, footer */
 header{
     flex-grow:0;
 	background-color: #3C3C3C;
     width:100%;
     user-select: none;
 }
-#wide-nav{
-	background: #252526;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-#mobile-nav{
-	display: none;
-}
 main{
 	flex-grow:1;
 	display:flex;
 	flex-direction: row;
 	height:80vh;
-	overflow: hidden;
 }
-
 footer{
 	flex-grow:0;
 	background-color: #007ACC;
@@ -118,6 +111,30 @@ footer{
 	text-align: center;
 	overflow: hidden;
 }
+/* main => #wide-nav, resize-left, article.content, #resize-right, #right-toc */
+
+#wide-nav{
+	background: #252526;
+}
+#mobile-nav{
+	display: none;
+}
+.content{
+	color:#CCCCCC;
+	background-color: #1E1E1E;
+	width:100%;
+	flex-grow: 0;
+	overflow:auto;
+	padding:10px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 10px;
+}
+#right-toc{
+	background: #252526;
+	flex-grow: 1;
+}
+
+
 footer p{
 	margin:6px;
 }
@@ -140,31 +157,16 @@ footer p{
 	background-color: #545454;
 	transition: background-color 0.3s;
 }
-.appbar-nav_content-footer{
-	flex-grow:1;
-	display:flex;
-	flex-direction: column;
-	height:100vh;
-}
-	.nav-resize{
-		width:0.5rem;
-		background-color: #1E1E1E;
-	}
-	.active.nav-resize{
-		cursor:col-resize;
-	}
-	.active.nav-resize:hover{
-		background-color: #007ACC;
-		transition: background-color 0.5s;
-	}
-.content{
-	color:#CCCCCC;
+.nav-resize{
+	width:0.5rem;
 	background-color: #1E1E1E;
-	width:100%;
-	overflow:auto;
-	padding:10px;
-    scroll-behavior: smooth;
-    scroll-padding-top: 10px;
+}
+.active.nav-resize{
+	cursor:col-resize;
+}
+.active.nav-resize:hover{
+	background-color: #007ACC;
+	transition: background-color 0.5s;
 }
 .scroll::-webkit-scrollbar {
 	width: 1rem;
@@ -179,9 +181,6 @@ footer p{
   background: #515151; 
 }
 
-#right-toc{
-	background: #252526;
-}
 @media only screen and (max-width: 700px) {
 	#fixed-left, #fixed-right, #resize-right, #resize-left, #right-toc {
 		display:none;
@@ -215,13 +214,15 @@ footer p{
 
 	function configure_nav(fixed_el,resize_el,nav_el,left_to_right){
 		fixed_el.addEventListener("click",(e)=>{
-			const current_state = nav_el.getAttribute("data-state")
+			const current_state = nav_el.classList.contains("open")?"open":"closed"
 			console.log(current_state)
 			if(current_state == "open"){
-				nav_el.setAttribute("data-state","closed")
+				nav_el.classList.remove("open")
+				nav_el.classList.add("closed")
 				nav_el.style.width = "0vw"
 			}else if(current_state == "closed"){
-				nav_el.setAttribute("data-state","open")
+				nav_el.classList.add("open")
+				nav_el.classList.remove("closed")
 				nav_el.style.width = nav_el.getAttribute("data-width")
 			}
 			e.preventDefault()
@@ -235,10 +236,12 @@ footer p{
 			global_resize_state = false
 			nav_el.style.transition = "width 0.5s"
 		if(nav_el.clientWidth < 20){
-			nav_el.setAttribute("data-state","closed")
+			nav_el.classList.add("closed")
+			nav_el.classList.remove("open")
 			nav_el.setAttribute("data-width","20vw")
 		}else{
-			nav_el.setAttribute("data-state","open")
+			nav_el.classList.add("open")
+			nav_el.classList.remove("closed")
 		}
 		resize_el.style.backgroundColor = "#1E1E1E"
 		}

@@ -1,10 +1,9 @@
 import raw_menu from './menu.json'
-import {first_level_ignore_base} from '@/components/menu_utils'
 import {promises as fs} from 'fs';
 import {resolve,join,relative} from 'path'
-import { file_list_to_menu_tree,set_classes_recursive } from '../components/menu_utils';
+import {  first_level_ignore_base,file_list_to_menu_tree,
+          set_classes_recursive } from './menu_utils';
 import matter from 'gray-matter';
-
 
 const menu_map = {}
 

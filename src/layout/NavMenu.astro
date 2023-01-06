@@ -7,19 +7,19 @@ export interface Props {
 
 let { items } = Astro.props;
 ---
-<nav class="left-nav" data-width="20vw" data-state="open">
+<nav class="left-nav open" data-width="20vw">
     <NavSubMenu items={items} />
 </nav>
 
 <style>
 nav{
     background: #252526;
-    overflow-x: hidden;
-    overflow-y: auto;
     transition: width 0.5s;
     width:20vw;
-    flex-shrink: 0;
+    height: 100%;
     scrollbar-color: rebeccapurple  green;
+
+    overflow-y: auto;
 }
 nav::-webkit-scrollbar {
   width: 1rem;

@@ -139,5 +139,6 @@ export{
     window_event,
     root_abs,
     green_log,
-    blue_log
+    blue_log,
+    cache_file_url
 }

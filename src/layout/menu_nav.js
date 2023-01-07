@@ -36,6 +36,7 @@ function process_menu_tree(url,raw_menu){
 
 function create_parent(entry){
     const path = dirname(entry.path)
+    console.log(`menu_nav> create_parent() path = '${path}'`)
     return {
         items:[
         ],
@@ -54,18 +55,25 @@ function needs_parent(entry){
     return true
 }
 
-function get_parent(entries,index){
-    const entry = entries[index]
+function get_parent(parents,entry){
     const parent_path = dirname(entry.path)
-    return entries.find((entry)=>(entry.path == parent_path))
+    console.log(`menu_nav> get_parent() searching for '${parent_path}'`)
+    const parent = parents.find((parent)=>(parent.path == parent_path))
+    if(parent != undefined){
+        return parent
+    }else{
+        const new_parent = create_parent(entry)
+        parents.push(new_parent)
+        return new_parent
+    }
 }
 
-function push_files(files_map,href_base){
+function push_files(files_map){
     let entries = []
     for (const [path, data] of Object.entries(files_map)) {
         let element = {
             parent:false,
-            text: data.frontmatter.title?data.frontmatter.title:path,
+            text: data.frontmatter.title?data.frontmatter.title:basename(path),
             weight: data.frontmatter.weight?data.frontmatter.weight:1,
             path: path,
             depth: path.split('/').length,
@@ -79,22 +87,10 @@ function push_files(files_map,href_base){
 function create_parents(entries){
     let parents = []
     console.log(`menu_utils> entries.length = ${entries.length}`)
-    for(let index=0; index<entries.length;){
-        const entry = entries[index]
-        if(needs_parent(entry)){
-            const parent_index = get_parent(entries,index)
-            if(parent_index == undefined){
-                parents.push(create_parent(entry))
-                parents[parents.length-1].items.push(entry)
-            }else{
-                entries[parent_index].items.push(entry)
-            }
-            entry.text = basename(entry.text)
-            entries.splice(index,1)
-        }else{
-            index++
-        }
-    }
+    entries.forEach((entry)=>{
+        const parent = get_parent(parents,entry)//create if not existing
+        parent.items.push(entry)
+    })
     //console.log(`parents.length = ${parents.length}`)
     entries = entries.concat(parents)
     entries.sort((a, b) => a.parent - b.parent);
@@ -104,18 +100,23 @@ function create_parents(entries){
     return entries
 }
 
-function file_list_to_menu_tree(files_map,href_base){
+function files_map_to_menu_tree(files_map){
     //console.log(`href_base = ${href_base}`)
     
-    let entries = push_files(files_map,href_base)
+    let entries = push_files(files_map) //[{parent, text, weight, path,depth, href}]
     entries.sort((a, b) => a.depth - b.depth);
     entries = create_parents(entries)
 
     return {items:entries,visible:true}
 }
 
+function set_active_expanded(url, menu){
+    if('items' in menu){
+        set_classes_recursive(url, menu.items)
+    }
+}
 
 export{
-    file_list_to_menu_tree,
-    set_classes_recursive
+    files_map_to_menu_tree,
+    set_active_expanded
 }

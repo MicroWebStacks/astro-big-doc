@@ -1,7 +1,7 @@
 import raw_menu from './menu.json'
 import {promises as fs} from 'fs';
 import {resolve,join,relative} from 'path'
-import {file_list_to_menu_tree,  set_classes_recursive} from './menu_nav'
+import {files_map_to_menu_tree,  set_active_expanded} from './menu_nav'
 import {  url_to_section,trim_ext } from './menu_utils';
 import matter from 'gray-matter';
 
@@ -59,7 +59,7 @@ async function get_section_data(section_path,href_base){
   const mdx_files = mdx_files_abs.map((file)=>(relative(search_base,file).replaceAll('\\','/')))
 
   const files_map = await file_list_to_url_map(mdx_files,section_path,href_base)
-  const section_menu = file_list_to_menu_tree(files_map,href_base)
+  const section_menu = files_map_to_menu_tree(files_map)
   const section_data = {
     menu:section_menu,
     files_list:mdx_files,
@@ -77,23 +77,21 @@ async function get_section_data(section_path,href_base){
 async function get_nav_menu(pageUrl){
   const section = url_to_section(pageUrl)
   console.log(`menu> get_nav_menu() section = ${section}`)
-  const section_menu = raw_menu.find((entry)=>(entry.href.split('/')[1] == section))
-  const section_path = section_menu.path
-  if('items' in section_menu){
-    section_menu.visible = true
-    if(section_menu.items.length ==1){
-      section_menu.visible = false
+  const raw_section_menu = raw_menu.find((entry)=>(entry.href.split('/')[1] == section))
+  if('items' in raw_section_menu){
+    raw_section_menu.visible = true
+    if(raw_section_menu.items.length ==1){
+      raw_section_menu.visible = false
     }
-    //console.log(section_menu)
-    set_classes_recursive(pageUrl,section_menu.items)
-    return section_menu
+    //console.log(raw_section_menu)
+    set_active_expanded(pageUrl,raw_section_menu)
+    return raw_section_menu
+  }else{
+    const section_data = await get_section_data(raw_section_menu.path,raw_section_menu.href_base)
+    //console.log(section_data)
+    set_active_expanded(pageUrl,section_data.menu)
+    return section_data.menu
   }
-  const section_data = await get_section_data(section_path,section_menu.href_base)
-  //console.log(section_data)
-  if('items' in section_data.menu){
-    set_classes_recursive(pageUrl,section_data.menu.items)
-  }
-  return section_data.menu
 }
 
 async function get_section_urls(section_path,href_base){

@@ -116,7 +116,6 @@ function file_list_to_menu_tree(files_map,href_base){
 
 
 export{
-    process_menu_tree,
     file_list_to_menu_tree,
     set_classes_recursive
 }

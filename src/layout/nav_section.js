@@ -77,21 +77,21 @@ async function get_section_data(section_path,href_base){
 async function get_nav_menu(pageUrl){
   const section = url_to_section(pageUrl)
   console.log(`menu> get_nav_menu() section = ${section}`)
-  const section_entry = raw_menu.find((entry)=>(entry.href.split('/')[1] == section))
-  const section_path = section_entry.path
-  if('items' in section_entry){
-    section_entry.visible = true
-    if(section_entry.items.length ==1){
-      section_entry.visible = false
+  const section_menu = raw_menu.find((entry)=>(entry.href.split('/')[1] == section))
+  const section_path = section_menu.path
+  if('items' in section_menu){
+    section_menu.visible = true
+    if(section_menu.items.length ==1){
+      section_menu.visible = false
     }
-    //console.log(section_entry)
-    set_classes_recursive(pageUrl,section_entry.items)
-    return section_entry
+    //console.log(section_menu)
+    set_classes_recursive(pageUrl,section_menu.items)
+    return section_menu
   }
-  const section_data = await get_section_data(section_path,section_entry.href_base)
+  const section_data = await get_section_data(section_path,section_menu.href_base)
   //console.log(section_data)
-  if('items' in section_data){
-    set_classes_recursive(pageUrl,section_data.items)
+  if('items' in section_data.menu){
+    set_classes_recursive(pageUrl,section_data.menu.items)
   }
   return section_data.menu
 }

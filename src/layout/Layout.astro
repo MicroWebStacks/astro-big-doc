@@ -2,8 +2,8 @@
 import AppBar from './AppBar.astro';
 import NavMenu from './NavMenu.astro';
 import ToCMenu from './ToCMenu.astro';
-import {get_nav_menu} from "./menu.js"
-import { process_toc_list } from "./menu_utils";
+import {get_nav_menu} from "./nav_section.js"
+import { process_toc_list } from "./menu_toc";
 import {session_user} from "../../server/auth/auth_utils"
 import {config} from "@/config"
 export interface Props {

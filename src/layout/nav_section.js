@@ -1,12 +1,11 @@
 import raw_menu from './menu.json'
 import {promises as fs} from 'fs';
 import {resolve,join,relative} from 'path'
-import {  url_to_section,file_list_to_menu_tree,
-          set_classes_recursive,trim_ext } from './menu_utils';
+import {file_list_to_menu_tree,  set_classes_recursive} from './menu_nav'
+import {  url_to_section,trim_ext } from './menu_utils';
 import matter from 'gray-matter';
-import {config} from '@/config'
 
-const menu_map = {}
+const sections_map = {}
 
 //https://stackoverflow.com/questions/5827612/node-js-fs-readdir-recursive-directory-search
 async function parse_dir_recursive(dir) {
@@ -24,7 +23,7 @@ function url_to_file(section_path,page){
   return page_path
 }
 
-async function file_list_to_data_map(mdx_files,section_path,href_base){
+async function file_list_to_url_map(mdx_files,section_path,href_base){
   let result = {}
   for(let file of mdx_files){
     //const url = '/'+config.base + href_base + trim_ext(file)
@@ -45,7 +44,12 @@ async function file_list_to_data_map(mdx_files,section_path,href_base){
   return result
 }
 
-async function create_section_menu(section_path,href_base){
+async function get_section_data(section_path,href_base){
+
+  if(section_path in sections_map){
+    return sections_map[section_path]
+  }
+
   const rootdir = process.cwd()
   const search_base = join(rootdir,section_path)
   console.log(`menu> section_path = ${section_path} ; search_base = ${search_base}`)
@@ -53,12 +57,10 @@ async function create_section_menu(section_path,href_base){
   //console.log(files)
   const mdx_files_abs = files.filter((file)=>(file.endsWith('.mdx')))
   const mdx_files = mdx_files_abs.map((file)=>(relative(search_base,file).replaceAll('\\','/')))
-  //mdx_files.forEach(file => {console.log(file)     });
-  //turn path results in a hierarchal menu (from list, level to Tree)
-  const files_map = await file_list_to_data_map(mdx_files,section_path,href_base)
-  const section_menu = file_list_to_menu_tree(files_map,href_base)
 
-  return {
+  const files_map = await file_list_to_url_map(mdx_files,section_path,href_base)
+  const section_menu = file_list_to_menu_tree(files_map,href_base)
+  const section_data = {
     menu:section_menu,
     files_list:mdx_files,
     section_urls_list:Object.values(files_map).map(file=>file.section_url),
@@ -66,6 +68,10 @@ async function create_section_menu(section_path,href_base){
     path:section_path,
     href:href_base
   }
+
+  sections_map[section_path] = section_data
+
+  return section_data
 }
 
 async function get_nav_menu(pageUrl){
@@ -82,32 +88,27 @@ async function get_nav_menu(pageUrl){
     set_classes_recursive(pageUrl,section_entry.items)
     return section_entry
   }
-  if(!(section_path in menu_map)){
-      menu_map[section_path] = await create_section_menu(section_path,section_entry.href_base)
+  const section_data = await get_section_data(section_path,section_entry.href_base)
+  //console.log(section_data)
+  if('items' in section_data){
+    set_classes_recursive(pageUrl,section_data.items)
   }
-  //console.log(menu_map[section_path])
-  if('items' in menu_map[section_path]){
-    set_classes_recursive(pageUrl,menu_map[section_path].items)
-  }
-  return menu_map[section_path].menu
+  return section_data.menu
 }
 
 async function get_section_urls(section_path,href_base){
-  if(!(section_path in menu_map)){
-    menu_map[section_path] = await create_section_menu(section_path,href_base)
-  }
+  const section_data = await get_section_data(section_path,href_base)
  
-  return menu_map[section_path].section_urls_list
+  return section_data.section_urls_list
 }
 
 // '/data/blog', '/blog/gallery' => 'D:\Dev\MicroWebStacks\astro-big-doc\data\blog\gallery.mdx'
 async function get_section_file_from_url(section_path,page,href_base){
-  if(!(section_path in menu_map)){
-    menu_map[section_path] = await create_section_menu(section_path,href_base)
-  }
+  const section_data = await get_section_data(section_path,href_base)
+
   page = href_base + page
-  if(page in menu_map[section_path].files_map){
-    return menu_map[section_path].files_map[page].abs_path
+  if(page in section_data.files_map){
+    return section_data.files_map[page].abs_path
   }else{
     console.warn(`menu> page '${page}' not available`)
     return null

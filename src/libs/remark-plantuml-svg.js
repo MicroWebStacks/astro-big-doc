@@ -1,43 +1,14 @@
 import {visit} from "unist-util-visit";
 import plantumlEncoder from "plantuml-encoder";
-import {existsSync,writeFileSync,statSync, readFileSync} from 'fs'
-import {basename} from 'path'
 import fetch from 'sync-fetch'
 
 const puml_server ="https://www.plantuml.com/plantuml/svg"
-
-let counter = 0
 
 function puml_text_to_svg(text){
   const url = `${puml_server}/${plantumlEncoder.encode(text)}`;
   const svg_text = fetch(url).text()
   return svg_text
 }
-
-
-function update_puml_file(file,value,meta,baseUrl){
-  const mtime = statSync(file).mtime
-  const puml_title = (meta)?meta:counter++;
-  const svg_file = file + "." + puml_title + ".svg"
-  let do_update = true
-  if(existsSync(svg_file)){
-    const pmtime = statSync(svg_file).mtime
-    if(pmtime > mtime){
-      do_update = false
-      //console.log(`svg file exist for puml ${puml_title}`)
-    }
-  }
-  if(do_update){
-    console.log(`creating svg files : ${svg_file}`)
-    const url = `${baseUrl}/${plantumlEncoder.encode(value)}`;
-    const svg_text = fetch(url).text()
-    writeFileSync(svg_file,svg_text)
-    return svg_text
-  }else{
-    return readFileSync(svg_file).toString()
-  }
-}
-
 
 /**
  * Plugin for remark-js

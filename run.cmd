@@ -1,1 +1,1 @@
-pnpm run preview
+node server/server.js

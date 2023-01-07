@@ -59,7 +59,7 @@ async function get_section_data(section_path,href_base){
   const mdx_files = mdx_files_abs.map((file)=>(relative(search_base,file).replaceAll('\\','/')))
 
   const files_map = await file_list_to_url_map(mdx_files,section_path,href_base)
-  const section_menu = files_map_to_menu_tree(files_map)
+  const section_menu = files_map_to_menu_tree(files_map,href_base)
   const section_data = {
     menu:section_menu,
     files_list:mdx_files,

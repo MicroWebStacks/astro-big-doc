@@ -1,5 +1,5 @@
 import {dirname,basename} from 'path'
-import {active_page, url_path} from './menu_utils'
+import {url_path} from './menu_utils'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
@@ -16,27 +16,12 @@ function set_classes_recursive(url,items){
     return active_descendant
 }
 
-/**  Topmenu  : depth 0
- *  Sidemenu : depths 1,2,...
- *  Sidemenu items : parent,(children)expanded
- */
-function process_menu_tree(url,raw_menu){
-    let side_menu = {items:[],visible:false}
-
-    const active_section_index = active_page(url,raw_menu)
-    side_menu.visible = ("items" in raw_menu[active_section_index])
-    if(side_menu.visible == false)    {
-        return side_menu
-    }
-    side_menu.items = raw_menu[active_section_index].items
-
-    set_classes_recursive(url,side_menu.items)
-    return side_menu
+function path_depth(path){
+    return path.split('/').length - 2 // '/blog' is root => 0
 }
 
 function create_parent(entry){
     const path = dirname(entry.path)
-    console.log(`menu_nav> create_parent() path = '${path}'`)
     return {
         items:[
         ],
@@ -44,7 +29,7 @@ function create_parent(entry){
         expanded:true,
         text:path,
         path: path,
-        depth: path.split('/').length
+        depth: path_depth(path)
     }
 }
 
@@ -52,16 +37,19 @@ function needs_parent(entry){
     if(entry.depth == 1){                 //already on root
         return false
     }
+    console.log(`menu_nav> needs_parent(${entry.text}) depth=${entry.depth} path='${entry.path}' needs parent`)
     return true
 }
 
 function get_parent(parents,entry){
     const parent_path = dirname(entry.path)
-    console.log(`menu_nav> get_parent() searching for '${parent_path}'`)
+    console.log(`menu_nav> get_parent() searching for '${parent_path}' in ${parents.length} parents`)
     const parent = parents.find((parent)=>(parent.path == parent_path))
     if(parent != undefined){
+        console.log(`menu_nav> get_parent() found parent '${parent.path}'`)
         return parent
     }else{
+        console.log(`menu_nav> get_parent() not found => cerate`)
         const new_parent = create_parent(entry)
         parents.push(new_parent)
         return new_parent
@@ -76,7 +64,7 @@ function push_files(files_map){
             text: data.frontmatter.title?data.frontmatter.title:basename(path),
             weight: data.frontmatter.weight?data.frontmatter.weight:1,
             path: path,
-            depth: path.split('/').length,
+            depth: path_depth(path),
             href : data.url
         }
         entries.push(element)
@@ -88,9 +76,15 @@ function create_parents(entries){
     let parents = []
     console.log(`menu_utils> entries.length = ${entries.length}`)
     entries.forEach((entry)=>{
-        const parent = get_parent(parents,entry)//create if not existing
-        parent.items.push(entry)
+        if(needs_parent(entry)){
+            const parent = get_parent(parents,entry)//create if not existing
+            parent.items.push(entry)
+            entry.on_root = false
+        }else{
+            entry.on_root = true
+        }
     })
+    entries = entries.filter((entry)=>(entry.on_root))
     //console.log(`parents.length = ${parents.length}`)
     entries = entries.concat(parents)
     entries.sort((a, b) => a.parent - b.parent);
@@ -100,13 +94,17 @@ function create_parents(entries){
     return entries
 }
 
-function files_map_to_menu_tree(files_map){
-    //console.log(`href_base = ${href_base}`)
+function files_map_to_menu_tree(files_map,href_base){
+    console.log(`href_base = ${href_base}`)
     
     let entries = push_files(files_map) //[{parent, text, weight, path,depth, href}]
     entries.sort((a, b) => a.depth - b.depth);
     entries = create_parents(entries)
-
+    entries.forEach((entry)=>{
+        if(entry.text.startsWith(href_base)){
+            entry.text = entry.text.replace(href_base,'')
+        }
+    })
     return {items:entries,visible:true}
 }
 

@@ -1,6 +1,6 @@
 import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
 import {basename,resolve,normalize,dirname,join,relative} from 'path'
-import {config} from '../../config'
+import {config} from '../../config.js'
 
 function root_abs(){
   let rootdir = rel_to_abs(import.meta.url,"../..")

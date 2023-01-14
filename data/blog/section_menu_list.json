@@ -82,12 +82,30 @@
   },
   {
     "parent": false,
+    "text": "prepare_middle",
+    "weight": 1,
+    "path": "/blog/prepare1/prepare2/prepare_middle",
+    "parent_path": "/blog/prepare1/prepare2",
+    "depth": 3,
+    "href": "/blog/prepare1/prepare2/prepare_middle"
+  },
+  {
+    "parent": false,
     "text": "very_deep",
     "weight": 1,
     "path": "/blog/double1/double2/double3/very_deep",
     "parent_path": "/blog/double1/double2/double3",
     "depth": 4,
     "href": "/blog/double1/double2/double3/very_deep"
+  },
+  {
+    "parent": false,
+    "text": "deepest",
+    "weight": 1,
+    "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+    "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+    "depth": 6,
+    "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest"
   },
   {
     "items": [
@@ -172,6 +190,69 @@
     "weight": 1,
     "depth": 1,
     "href": "/blog/level1"
+  },
+  {
+    "items": [
+      {
+        "parent": false,
+        "text": "deepest",
+        "weight": 1,
+        "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+        "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+        "depth": 6,
+        "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "deepest1/deepest2/deepest3",
+    "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+    "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2",
+    "weight": 1,
+    "depth": 5,
+    "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3"
+  },
+  {
+    "items": [
+      {
+        "parent": false,
+        "text": "prepare_middle",
+        "weight": 1,
+        "path": "/blog/prepare1/prepare2/prepare_middle",
+        "parent_path": "/blog/prepare1/prepare2",
+        "depth": 3,
+        "href": "/blog/prepare1/prepare2/prepare_middle"
+      },
+      {
+        "items": [
+          {
+            "parent": false,
+            "text": "deepest",
+            "weight": 1,
+            "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+            "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+            "depth": 6,
+            "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest"
+          }
+        ],
+        "parent": true,
+        "expanded": true,
+        "text": "deepest1/deepest2/deepest3",
+        "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+        "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2",
+        "weight": 1,
+        "depth": 5,
+        "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "prepare1/prepare2",
+    "path": "/blog/prepare1/prepare2",
+    "parent_path": "/blog/prepare1",
+    "weight": 1,
+    "depth": 2,
+    "href": "/blog/prepare1/prepare2"
   },
   {
     "items": [

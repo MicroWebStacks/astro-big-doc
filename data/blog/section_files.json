@@ -50,6 +50,20 @@
       "weight": 3
     }
   },
+  "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest": {
+    "path": "prepare1/prepare2/deepest1/deepest2/deepest3/deepest.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\prepare1\\prepare2\\deepest1\\deepest2\\deepest3\\deepest.mdx",
+    "url": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+    "section_url": "prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+    "frontmatter": {}
+  },
+  "/blog/prepare1/prepare2/prepare_middle": {
+    "path": "prepare1/prepare2/prepare_middle.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\prepare1\\prepare2\\prepare_middle.mdx",
+    "url": "/blog/prepare1/prepare2/prepare_middle",
+    "section_url": "prepare1/prepare2/prepare_middle",
+    "frontmatter": {}
+  },
   "/blog/static_dynamic": {
     "path": "static_dynamic.mdx",
     "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\static_dynamic.mdx",

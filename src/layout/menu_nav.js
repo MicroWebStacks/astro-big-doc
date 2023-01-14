@@ -136,16 +136,32 @@ function push_directories({files_map,href_base}){
     return directories
 }
 
-function find_parent(menu_list,parent_path){
-    //TODO if parent not found, try to find an ancestor to connect to before fallback on root
-    return menu_list.find((sub_entry)=>(sub_entry.path == parent_path))
+function find_parent(menu_list,entry){
+    let parent_path = entry.parent_path
+    const parent = menu_list.find((sub_entry)=>(sub_entry.path == parent_path))
+    if(parent != undefined){
+        return parent
+    }else{
+        let parent_depth = path_depth(parent_path)
+        while(parent_depth > 1){
+            parent_path = dirname(parent_path)
+            const parent = menu_list.find((sub_entry)=>(sub_entry.path == parent_path))
+            if(parent != undefined){
+                entry.text = entry.text.replace(parent.text+'/',"")
+                return parent
+            }else{
+                parent_depth = path_depth(parent_path)
+            }
+        }
+        return undefined
+    }
 }
 
 function menu_list_to_tree(menu_list,href_base){
     const menu_tree = []
     menu_list.forEach((entry)=>{
         if(needs_parent(entry)){
-            const entry_parent = find_parent(menu_list,entry.parent_path)
+            const entry_parent = find_parent(menu_list,entry)
             if(entry_parent != undefined){
                 entry_parent.items.push(entry)
             }else{

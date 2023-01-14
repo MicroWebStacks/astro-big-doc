@@ -13,10 +13,10 @@ UX friendly Markdown without import and referencing local images, enhancements w
 - Pure astro components (.astro) html css js
 - static or server with authentication middleware (express, passport, github strategy)
 - Menus
-  - menu generation from file system
+  - menu generation from file system, grouping of nested single intermediate directories
   - Built by astro and seen as readable html hierarchy by the client
   - Trees with unlimited depth and recursively expandable sections
-  - Can be opened, collapsed and width adjusted by the user
+  - Side menus can be opened, collapsed and width adjusted by the user
   - Navigation Menu (Left Menu)
     - can have pages or directories similar to file system browsing experience
     - Auto expands decendance of active page only
@@ -33,7 +33,10 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Gallery with json list of SVGs and images
 - Mobile layout
 ## Todos
-- generate menu from files
+- group theme colors in a single file
+- prevent SVG inline pollution and breaking of secondly open SVGs, check if it's due to style injection pollution of SVG defs
+- use declarative shadow dom to be able to retrieve data from it and reuse it
+- light and dark mode toggle
 - root dir from process not reliable use `root_abs()`
 - check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration

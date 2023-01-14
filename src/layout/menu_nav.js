@@ -1,6 +1,5 @@
 import {dirname,basename} from 'path'
 import {url_path, remove_base} from './menu_utils'
-import { blue_log,yellow_log } from '../libs/utils'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
@@ -21,40 +20,12 @@ function path_depth(path){
     return path.split('/').length - 2 // '/blog' is root => 0
 }
 
-function create_parent(entry){
-    const path = dirname(entry.path)
-    return {
-        items:[
-        ],
-        parent:true,
-        expanded:true,
-        text:path,
-        path: path,
-        depth: path_depth(path)
-    }
-}
-
 function needs_parent(entry){
     if(entry.depth == 1){                 //already on root
         return false
     }
-    console.log(`menu_nav> needs_parent(${entry.text}) depth=${entry.depth} path='${entry.path}' needs parent`)
+    //console.log(`menu_nav> needs_parent(${entry.text}) depth=${entry.depth} path='${entry.path}' needs parent`)
     return true
-}
-
-function get_parent(parents,entry){
-    const parent_path = dirname(entry.path)
-    console.log(`menu_nav> get_parent() searching for '${parent_path}' in ${parents.length} parents`)
-    const parent = parents.find((parent)=>(parent.path == parent_path))
-    if(parent != undefined){
-        console.log(`menu_nav> get_parent() found parent '${parent.path}'`)
-        return parent
-    }else{
-        console.log(`menu_nav> get_parent() not found => cerate`)
-        const new_parent = create_parent(entry)
-        parents.push(new_parent)
-        return new_parent
-    }
 }
 
 function push_files(files_map){
@@ -74,30 +45,8 @@ function push_files(files_map){
     return entries
 }
 
-function create_parents(entries){
-    let parents = []
-    console.log(`menu_utils> entries.length = ${entries.length}`)
-    entries.forEach((entry)=>{
-        if(needs_parent(entry)){
-            const parent = get_parent(parents,entry)//create if not existing
-            parent.items.push(entry)
-            entry.on_root = false
-        }else{
-            entry.on_root = true
-        }
-    })
-    entries = entries.filter((entry)=>(entry.on_root))
-    //console.log(`parents.length = ${parents.length}`)
-    entries = entries.concat(parents)
-    entries.sort((a, b) => a.parent - b.parent);
-    entries.sort((a, b) => a.depth - b.depth);
-    entries.sort((a, b) => a.weight - b.weight);
-    //console.log(entries)
-    return entries
-}
-
 function create_parent_dir(directories,href_base,path){
-    const menu_path = remove_base(href_base,path)
+    const menu_path = remove_base(href_base,path)//TODO trust remove base without the reference href_base
     const dir_menu_path = dirname(menu_path)
     const dir_path = dirname(path)
     const dir_exist = directories.find((parent)=>(parent.path == dir_path))
@@ -116,26 +65,31 @@ function create_parent_dir(directories,href_base,path){
         directories.push(element)
     }
 }
-
-function link_or_set_as_ancestor(directories,href_base,path){
-    yellow_log(`link_or_set_as_ancestor_dir() for "${path}"`)
-    //start unrolling path and check at which step a parent can be found, adjust new depth to parent depth + 1
-    //until depth == 1, then just set as root and new depth = 1, would not need a parent then
-}
-
+/**
+ * 
+ * @param {*} file_map : map of files with path as key
+ * @returns list of direct parents directories for each file without redundancies as checking before creation
+ */
 function push_directories({files_map,href_base}){
     const directories = []
 
     for (const [path, data] of Object.entries(files_map)) {
         if(path_depth(path) > 1){
-            blue_log(`${data.url} needs parent depth = ${path_depth(path)}`)
             create_parent_dir(directories,href_base,path)
         }
     }
 
     return directories
 }
-
+/**
+ * 
+ * @param {*} menu_list : the flat list of all elements files and directories 
+ * @param {*} entry : the entry for which a parent is guaranteed to be found if it exists 
+ * not only the menu_list is searched once, but if not found, and as long as depth 1 is not reached
+ * the ancestors are checked to get the first match and assign as parent, only if no ancestor found
+ * then returns undefined to place it at root level
+ * @returns parent otherwise undefined if it does not exist 
+ */
 function find_parent(menu_list,entry){
     let parent_path = entry.parent_path
     const parent = menu_list.find((sub_entry)=>(sub_entry.path == parent_path))
@@ -157,7 +111,13 @@ function find_parent(menu_list,entry){
     }
 }
 
-function menu_list_to_tree(menu_list,href_base){
+
+/**
+ * 
+ * @param {*} menu_list : contains all items files and directories on a flat level
+ * @returns menu_tree a list of root elements only each of which can be a file or directory (parent) and contains items[]
+ */
+function menu_list_to_tree(menu_list){
     const menu_tree = []
     menu_list.forEach((entry)=>{
         if(needs_parent(entry)){
@@ -176,14 +136,13 @@ function menu_list_to_tree(menu_list,href_base){
 
 function files_map_to_menu_tree(files_map,href_base){
     const menu_context = {files_map,href_base}
-    blue_log(`files_map_to_menu_tree() href_base = ${href_base}`)
     
     let menu_list = push_files(files_map) //[{parent, text, weight, path,depth, href}]
     menu_list.sort((a, b) => a.depth - b.depth);
     const directories_list = push_directories(menu_context)
     menu_list = menu_list.concat(directories_list)
 
-    const menu_tree = menu_list_to_tree(menu_list,href_base)
+    const menu_tree = menu_list_to_tree(menu_list)
 
     return {items:menu_tree,visible:true,list:menu_list}
 }

@@ -81,6 +81,36 @@
     "href": "/blog/level1/level2/deep"
   },
   {
+    "parent": false,
+    "text": "very_deep",
+    "weight": 1,
+    "path": "/blog/double1/double2/double3/very_deep",
+    "parent_path": "/blog/double1/double2/double3",
+    "depth": 4,
+    "href": "/blog/double1/double2/double3/very_deep"
+  },
+  {
+    "items": [
+      {
+        "parent": false,
+        "text": "very_deep",
+        "weight": 1,
+        "path": "/blog/double1/double2/double3/very_deep",
+        "parent_path": "/blog/double1/double2/double3",
+        "depth": 4,
+        "href": "/blog/double1/double2/double3/very_deep"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "double1/double2/double3",
+    "path": "/blog/double1/double2/double3",
+    "parent_path": "/blog/double1/double2",
+    "weight": 1,
+    "depth": 3,
+    "href": "/blog/double1/double2/double3"
+  },
+  {
     "items": [
       {
         "parent": false,

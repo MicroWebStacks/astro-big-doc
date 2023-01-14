@@ -130,6 +130,10 @@ function blue_log(text){
   console.log(colors.FgCyan,text,colors.Reset)
 }
 
+function yellow_log(text){
+  console.log(colors.FgYellow,text,colors.Reset)
+}
+
 export{
     rel_to_abs,
     relAssetToUrl,
@@ -140,5 +144,6 @@ export{
     root_abs,
     green_log,
     blue_log,
+    yellow_log,
     cache_file_url
 }

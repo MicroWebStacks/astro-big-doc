@@ -1,4 +1,11 @@
 {
+  "/blog/double1/double2/double3/very_deep": {
+    "path": "double1/double2/double3/very_deep.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\double1\\double2\\double3\\very_deep.mdx",
+    "url": "/blog/double1/double2/double3/very_deep",
+    "section_url": "double1/double2/double3/very_deep",
+    "frontmatter": {}
+  },
   "/blog/gallery": {
     "path": "gallery.mdx",
     "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\gallery.mdx",

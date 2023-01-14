@@ -1,6 +1,6 @@
 import {dirname,basename} from 'path'
 import {url_path, remove_base} from './menu_utils'
-import { blue_log } from '../libs/utils'
+import { blue_log,yellow_log } from '../libs/utils'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
@@ -96,46 +96,61 @@ function create_parents(entries){
     return entries
 }
 
+function create_parent_dir(directories,href_base,path){
+    const menu_path = remove_base(href_base,path)
+    const dir_menu_path = dirname(menu_path)
+    const dir_path = dirname(path)
+    const dir_exist = directories.find((parent)=>(parent.path == dir_path))
+    if(dir_exist == undefined){
+        let element = {
+            items:[],
+            parent:true,
+            expanded:true,
+            text: dir_menu_path,
+            path: dir_path,
+            parent_path: dirname(dir_path),
+            weight: 1,
+            depth: path_depth(dir_path),
+            href : dir_path
+        }
+        directories.push(element)
+    }
+}
+
+function link_or_set_as_ancestor(directories,href_base,path){
+    yellow_log(`link_or_set_as_ancestor_dir() for "${path}"`)
+    //start unrolling path and check at which step a parent can be found, adjust new depth to parent depth + 1
+    //until depth == 1, then just set as root and new depth = 1, would not need a parent then
+}
+
 function push_directories({files_map,href_base}){
     const directories = []
 
     for (const [path, data] of Object.entries(files_map)) {
         if(path_depth(path) > 1){
             blue_log(`${data.url} needs parent depth = ${path_depth(path)}`)
-            const menu_path = remove_base(href_base,path)
-            const dir_menu_path = dirname(menu_path)
-            const dir_path = dirname(path)
-            const dir_exist = directories.find((parent)=>(parent.path == dir_path))
-            if(dir_exist == undefined){
-                let element = {
-                    items:[],
-                    parent:true,
-                    expanded:true,
-                    text: dir_menu_path,
-                    path: dir_path,
-                    parent_path: dirname(dir_path),
-                    weight: 1,
-                    depth: path_depth(dir_path),
-                    href : dir_path
-                }
-                directories.push(element)
-            }
+            create_parent_dir(directories,href_base,path)
         }
     }
 
     return directories
 }
 
-function menu_list_to_tree(menu_list){
+function find_parent(menu_list,parent_path){
+    //TODO if parent not found, try to find an ancestor to connect to before fallback on root
+    return menu_list.find((sub_entry)=>(sub_entry.path == parent_path))
+}
+
+function menu_list_to_tree(menu_list,href_base){
     const menu_tree = []
-    //TODO loop through all items
-        //parent == false : assign to necessarily existing parent
-        //parent == true : assign to potentially existing parent, remove parent from name
-        //merge potential single directory-directories
     menu_list.forEach((entry)=>{
         if(needs_parent(entry)){
-            const entry_parent = menu_list.find((sub_entry)=>(sub_entry.path == entry.parent_path))
-            entry_parent.items.push(entry)
+            const entry_parent = find_parent(menu_list,entry.parent_path)
+            if(entry_parent != undefined){
+                entry_parent.items.push(entry)
+            }else{
+                menu_tree.push(entry)
+            }
         }else{
             menu_tree.push(entry)
         }
@@ -152,7 +167,7 @@ function files_map_to_menu_tree(files_map,href_base){
     const directories_list = push_directories(menu_context)
     menu_list = menu_list.concat(directories_list)
 
-    const menu_tree = menu_list_to_tree(menu_list)
+    const menu_tree = menu_list_to_tree(menu_list,href_base)
 
     return {items:menu_tree,visible:true,list:menu_list}
 }

@@ -1,5 +1,6 @@
 import {dirname,basename} from 'path'
-import {url_path} from './menu_utils'
+import {url_path, remove_base} from './menu_utils'
+import { blue_log } from '../libs/utils'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
@@ -64,6 +65,7 @@ function push_files(files_map){
             text: data.frontmatter.title?data.frontmatter.title:basename(path),
             weight: data.frontmatter.weight?data.frontmatter.weight:1,
             path: path,
+            parent_path: dirname(path),
             depth: path_depth(path),
             href : data.url
         }
@@ -94,18 +96,65 @@ function create_parents(entries){
     return entries
 }
 
-function files_map_to_menu_tree(files_map,href_base){
-    console.log(`href_base = ${href_base}`)
-    
-    let entries = push_files(files_map) //[{parent, text, weight, path,depth, href}]
-    entries.sort((a, b) => a.depth - b.depth);
-    entries = create_parents(entries)
-    entries.forEach((entry)=>{
-        if(entry.text.startsWith(href_base)){
-            entry.text = entry.text.replace(href_base,'')
+function push_directories({files_map,href_base}){
+    const directories = []
+
+    for (const [path, data] of Object.entries(files_map)) {
+        if(path_depth(path) > 1){
+            blue_log(`${data.url} needs parent depth = ${path_depth(path)}`)
+            const menu_path = remove_base(href_base,path)
+            const dir_menu_path = dirname(menu_path)
+            const dir_path = dirname(path)
+            const dir_exist = directories.find((parent)=>(parent.path == dir_path))
+            if(dir_exist == undefined){
+                let element = {
+                    items:[],
+                    parent:true,
+                    expanded:true,
+                    text: dir_menu_path,
+                    path: dir_path,
+                    parent_path: dirname(dir_path),
+                    weight: 1,
+                    depth: path_depth(dir_path),
+                    href : dir_path
+                }
+                directories.push(element)
+            }
+        }
+    }
+
+    return directories
+}
+
+function menu_list_to_tree(menu_list){
+    const menu_tree = []
+    //TODO loop through all items
+        //parent == false : assign to necessarily existing parent
+        //parent == true : assign to potentially existing parent, remove parent from name
+        //merge potential single directory-directories
+    menu_list.forEach((entry)=>{
+        if(needs_parent(entry)){
+            const entry_parent = menu_list.find((sub_entry)=>(sub_entry.path == entry.parent_path))
+            entry_parent.items.push(entry)
+        }else{
+            menu_tree.push(entry)
         }
     })
-    return {items:entries,visible:true}
+    return menu_tree
+}
+
+function files_map_to_menu_tree(files_map,href_base){
+    const menu_context = {files_map,href_base}
+    blue_log(`files_map_to_menu_tree() href_base = ${href_base}`)
+    
+    let menu_list = push_files(files_map) //[{parent, text, weight, path,depth, href}]
+    menu_list.sort((a, b) => a.depth - b.depth);
+    const directories_list = push_directories(menu_context)
+    menu_list = menu_list.concat(directories_list)
+
+    const menu_tree = menu_list_to_tree(menu_list)
+
+    return {items:menu_tree,visible:true,list:menu_list}
 }
 
 function set_active_expanded(url, menu){

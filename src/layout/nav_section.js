@@ -4,6 +4,7 @@ import {resolve,join,relative} from 'path'
 import {files_map_to_menu_tree,  set_active_expanded} from './menu_nav'
 import {  url_to_section,trim_ext } from './menu_utils';
 import matter from 'gray-matter';
+import { green_log } from '../libs/utils';
 
 const sections_map = {}
 
@@ -45,6 +46,7 @@ async function file_list_to_url_map(mdx_files,section_path,href_base){
 }
 
 async function get_section_data(section_path,href_base){
+  green_log("get_section_data")
 
   if(section_path in sections_map){
     return sections_map[section_path]
@@ -69,12 +71,20 @@ async function get_section_data(section_path,href_base){
     href:href_base
   }
 
+  const section_menu_tree_file = join(search_base,"section_menu_tree.json")
+  const section_menu_list_file = join(search_base,"section_menu_list.json")
+  const section_list_file = join(search_base,"section_files.json")
+  console.log(`nav_section> get_section_data() saving menu to ${section_menu_tree_file}`)
+  await fs.writeFile(section_list_file,JSON.stringify(files_map,null,2))
+  await fs.writeFile(section_menu_list_file,JSON.stringify(section_menu.list,null,2))
+  await fs.writeFile(section_menu_tree_file,JSON.stringify(section_menu.items,null,2))
   sections_map[section_path] = section_data
 
   return section_data
 }
 
 async function get_nav_menu(pageUrl){
+  green_log("get_nav_menu")
   const section = url_to_section(pageUrl)
   console.log(`menu> get_nav_menu() section = ${section}`)
   const raw_section_menu = raw_menu.find((entry)=>(entry.href.split('/')[1] == section))
@@ -95,6 +105,7 @@ async function get_nav_menu(pageUrl){
 }
 
 async function get_section_urls(section_path,href_base){
+  green_log("get_section_urls")
   const section_data = await get_section_data(section_path,href_base)
  
   return section_data.section_urls_list
@@ -102,6 +113,7 @@ async function get_section_urls(section_path,href_base){
 
 // '/data/blog', '/blog/gallery' => 'D:\Dev\MicroWebStacks\astro-big-doc\data\blog\gallery.mdx'
 async function get_section_file_from_url(section_path,page,href_base){
+  green_log("get_section_file_from_url")
   const section_data = await get_section_data(section_path,href_base)
 
   page = href_base + page

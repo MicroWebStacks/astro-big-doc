@@ -1,0 +1,83 @@
+{
+  "/blog/gallery": {
+    "path": "gallery.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\gallery.mdx",
+    "url": "/blog/gallery",
+    "section_url": "gallery",
+    "frontmatter": {
+      "title": "Gallery",
+      "weight": 1
+    }
+  },
+  "/blog/level1/level2/deep": {
+    "path": "level1/level2/deep.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\level1\\level2\\deep.mdx",
+    "url": "/blog/level1/level2/deep",
+    "section_url": "level1/level2/deep",
+    "frontmatter": {}
+  },
+  "/blog/level1/middle": {
+    "path": "level1/middle.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\level1\\middle.mdx",
+    "url": "/blog/level1/middle",
+    "section_url": "level1/middle",
+    "frontmatter": {}
+  },
+  "/blog/panzoom": {
+    "path": "panzoom.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\panzoom.mdx",
+    "url": "/blog/panzoom",
+    "section_url": "panzoom",
+    "frontmatter": {
+      "title": "Panzoom",
+      "weight": 2
+    }
+  },
+  "/blog/plantuml": {
+    "path": "plantuml.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\plantuml.mdx",
+    "url": "/blog/plantuml",
+    "section_url": "plantuml",
+    "frontmatter": {
+      "title": "Plantuml",
+      "weight": 3
+    }
+  },
+  "/blog/static_dynamic": {
+    "path": "static_dynamic.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\static_dynamic.mdx",
+    "url": "/blog/static_dynamic",
+    "section_url": "static_dynamic",
+    "frontmatter": {
+      "title": "Static vs Dynamic",
+      "weight": 4
+    }
+  },
+  "/blog/under/tester_page_1": {
+    "path": "under/tester_page_1.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\under\\tester_page_1.mdx",
+    "url": "/blog/under/tester_page_1",
+    "section_url": "under/tester_page_1",
+    "frontmatter": {
+      "title": "Tester page 1"
+    }
+  },
+  "/blog/under/tester_page_2": {
+    "path": "under/tester_page_2.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\under\\tester_page_2.mdx",
+    "url": "/blog/under/tester_page_2",
+    "section_url": "under/tester_page_2",
+    "frontmatter": {
+      "title": "Tester page 2"
+    }
+  },
+  "/blog/under/tester_page_3": {
+    "path": "under/tester_page_3.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\under\\tester_page_3.mdx",
+    "url": "/blog/under/tester_page_3",
+    "section_url": "under/tester_page_3",
+    "frontmatter": {
+      "title": "Tester page 3"
+    }
+  }
+}

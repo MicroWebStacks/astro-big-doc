@@ -1,0 +1,119 @@
+[
+  {
+    "parent": false,
+    "text": "Gallery",
+    "weight": 1,
+    "path": "/blog/gallery",
+    "parent_path": "/blog",
+    "depth": 1,
+    "href": "/blog/gallery"
+  },
+  {
+    "parent": false,
+    "text": "Panzoom",
+    "weight": 2,
+    "path": "/blog/panzoom",
+    "parent_path": "/blog",
+    "depth": 1,
+    "href": "/blog/panzoom"
+  },
+  {
+    "parent": false,
+    "text": "Plantuml",
+    "weight": 3,
+    "path": "/blog/plantuml",
+    "parent_path": "/blog",
+    "depth": 1,
+    "href": "/blog/plantuml"
+  },
+  {
+    "parent": false,
+    "text": "Static vs Dynamic",
+    "weight": 4,
+    "path": "/blog/static_dynamic",
+    "parent_path": "/blog",
+    "depth": 1,
+    "href": "/blog/static_dynamic"
+  },
+  {
+    "items": [
+      {
+        "parent": false,
+        "text": "middle",
+        "weight": 1,
+        "path": "/blog/level1/middle",
+        "parent_path": "/blog/level1",
+        "depth": 2,
+        "href": "/blog/level1/middle"
+      },
+      {
+        "items": [
+          {
+            "parent": false,
+            "text": "deep",
+            "weight": 1,
+            "path": "/blog/level1/level2/deep",
+            "parent_path": "/blog/level1/level2",
+            "depth": 3,
+            "href": "/blog/level1/level2/deep"
+          }
+        ],
+        "parent": true,
+        "expanded": true,
+        "text": "level1/level2",
+        "path": "/blog/level1/level2",
+        "parent_path": "/blog/level1",
+        "weight": 1,
+        "depth": 2,
+        "href": "/blog/level1/level2"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "level1",
+    "path": "/blog/level1",
+    "parent_path": "/blog",
+    "weight": 1,
+    "depth": 1,
+    "href": "/blog/level1"
+  },
+  {
+    "items": [
+      {
+        "parent": false,
+        "text": "Tester page 1",
+        "weight": 1,
+        "path": "/blog/under/tester_page_1",
+        "parent_path": "/blog/under",
+        "depth": 2,
+        "href": "/blog/under/tester_page_1"
+      },
+      {
+        "parent": false,
+        "text": "Tester page 2",
+        "weight": 1,
+        "path": "/blog/under/tester_page_2",
+        "parent_path": "/blog/under",
+        "depth": 2,
+        "href": "/blog/under/tester_page_2"
+      },
+      {
+        "parent": false,
+        "text": "Tester page 3",
+        "weight": 1,
+        "path": "/blog/under/tester_page_3",
+        "parent_path": "/blog/under",
+        "depth": 2,
+        "href": "/blog/under/tester_page_3"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "under",
+    "path": "/blog/under",
+    "parent_path": "/blog",
+    "weight": 1,
+    "depth": 1,
+    "href": "/blog/under"
+  }
+]

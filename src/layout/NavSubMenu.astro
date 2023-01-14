@@ -1,4 +1,5 @@
 ---
+import './dark_colors.css';
 
 export interface Props {
 	items: Array<Object>;
@@ -33,26 +34,21 @@ const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
     </ul>
 }
 <style>
-    :root {
-        --span-hover: #606060;/* #2A2D2E */
-        --svg-hover: #4d99cc;
-        --radius: 10px;
-    }
 
     a{
         padding:0px;
         padding-left:0px;
         text-decoration: none;
         user-select: none;    
-        color:#CCCCCC;
+        color:var(--content-color);
         display:block;
     }
     /* active when nav menu item is matching url */
     a.active{
-        background-color: #37373D;
+        background-color: var(--menu-active-color);
     }
     a.nav_expand:hover, a:not(.parent):hover{
-        background-color: var(--span-hover);
+        background-color: var(--menu-span-hover-color);
     }
     a.parent{
         cursor:pointer;
@@ -91,17 +87,17 @@ const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
         rotate: 90deg;
     }
     span.nav_expand:hover{
-        background-color: var(--span-hover);
+        background-color: var(--menu-span-hover-color);
     }
     span.nav_expand:hover > svg > path{
-        stroke:var(--svg-hover);
+        stroke:var(--menu-icon-hover-color);
     }
     a.nav_expand:hover > span.icon > svg > path{
-        stroke: var(--svg-hover);
+        stroke: var(--menu-icon-hover-color);
     }
 
     span.href_hover:hover{
-        background-color: var(--span-hover);
+        background-color: var(--menu-span-hover-color);
     }
     ul{
         display:flex;
@@ -113,7 +109,7 @@ const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
     ul.nested{
         padding-left: 3px;
         border-top:   0px;
-        border-left:  2px solid rgb(122, 122, 122);
+        border-left:  2px solid var(--menu-border-left-color);
         border-right: 0px;
         border-bottom:0px;
         margin-left: 8px;
@@ -136,8 +132,8 @@ const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
     }
     ul.root > li{
         margin: 5px;
-        box-shadow: 2px 2px 4px 2px rgba(145, 144, 144, 0.5);
-        border-radius: var(--radius);
+        /*box-shadow: 1px 1px 2px 1px #41414077;*/
+        border-radius: 5px;
         overflow: hidden;
     }
    

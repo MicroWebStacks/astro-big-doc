@@ -1,4 +1,5 @@
 ---
+import './dark_colors.css';
 
 export interface Props {
 	items: Array<Object>;
@@ -31,24 +32,20 @@ const { items,root=true} = Astro.props;
     </ul>
 }
 <style>
-    :root {
-        --span-hover: #606060;/* #2A2D2E */
-        --svg-hover: #4d99cc;
-    }
     a{
         padding:0px;
         padding-left:0px;
         text-decoration: none;
         user-select: none;    
-        color:#CCCCCC;
+        color:var(--content-color);
         display:block;
     }
     /* active when nav menu item is matching url */
     a.active{
-        background-color: #37373D;
+        background-color: var(--menu-active-color);
     }
     a.toc_expand:hover, a:not(.parent):hover{
-        background-color: var(--span-hover);
+        background-color: var(--menu-span-hover-color);
     }
     a.parent{
         cursor:pointer;
@@ -81,17 +78,17 @@ const { items,root=true} = Astro.props;
         rotate: 90deg;
     }
     span.toc_expand:hover{
-        background-color: var(--span-hover);
+        background-color: var(--menu-span-hover-color);
     }
     span.toc_expand:hover > svg > path{
-        stroke:var(--svg-hover);
+        stroke:var(--menu-icon-hover-color);
     }
     a.toc_expand:hover > span.icon > svg > path{
-        stroke: var(--svg-hover);
+        stroke: var(--menu-icon-hover-color);
     }
 
     span.href_hover:hover{
-        background-color: var(--span-hover);
+        background-color: var(--menu-span-hover-color);
     }
     ul{
         display:flex;
@@ -103,7 +100,7 @@ const { items,root=true} = Astro.props;
     ul.nested{
         padding-left: 3px;
         border-top:   0px;
-        border-left:  2px solid rgb(122, 122, 122);
+        border-left:  2px solid var(--menu-border-left-color);
         border-right: 0px;
         border-bottom:0px;
         margin-left: 8px;

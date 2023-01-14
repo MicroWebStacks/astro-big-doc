@@ -1,4 +1,5 @@
 ---
+import './dark_colors.css';
 import AppBar from './AppBar.astro';
 import NavMenu from './NavMenu.astro';
 import ToCMenu from './ToCMenu.astro';
@@ -77,6 +78,7 @@ if(config.out_mode != "STATIC"){
 	</body>
 </html>
 
+
 <style>
 body{
 	margin:0;
@@ -94,7 +96,7 @@ body{
 /* appbar-nav_content-footer => header, main, footer */
 header{
     flex-grow:0;
-	background-color: #3C3C3C;
+	background-color: var(--header-bg-color);
     width:100%;
     user-select: none;
 }
@@ -106,7 +108,7 @@ main{
 }
 footer{
 	flex-grow:0;
-	background-color: #007ACC;
+	background-color: var(--front-blue);
 	color:white;
 	text-align: center;
 	overflow: hidden;
@@ -114,14 +116,14 @@ footer{
 /* main => #wide-nav, resize-left, article.content, #resize-right, #right-toc */
 
 #wide-nav{
-	background: #252526;
+	background: var(--nav-bg-color);
 }
 #mobile-nav{
 	display: none;
 }
 .content{
-	color:#CCCCCC;
-	background-color: #1E1E1E;
+	color:var(--content-color);
+	background-color: var(--content-bg-color);
 	width:100%;
 	flex-grow: 0;
 	overflow:auto;
@@ -130,7 +132,7 @@ footer{
     scroll-padding-top: 10px;
 }
 #right-toc{
-	background: #252526;
+	background: var(--nav-bg-color);
 	flex-grow: 1;
 }
 
@@ -141,7 +143,7 @@ footer p{
 
 .fixed-nav{
 	width:3em;
-	background-color: #333333;
+	background-color: var(--fixed-nav-bg-color);
 	height:100vh;
     flex-shrink: 0;
 	display:flex;
@@ -154,31 +156,31 @@ footer p{
 	cursor:pointer;
 }
 .active.fixed-nav:hover{
-	background-color: #545454;
+	background-color: var(--fixed-nav-hover-color);
 	transition: background-color 0.3s;
 }
 .nav-resize{
 	width:0.5rem;
-	background-color: #1E1E1E;
+	background-color: var(--content-bg-color);
 }
 .active.nav-resize{
 	cursor:col-resize;
 }
 .active.nav-resize:hover{
-	background-color: #007ACC;
+	background-color: var(--front-blue);
 	transition: background-color 0.5s;
 }
 .scroll::-webkit-scrollbar {
 	width: 1rem;
 }
 .scroll::-webkit-scrollbar-track {
-	background: #1E1E1E; 
+	background: var(--content-bg-color); 
 }
 .scroll::-webkit-scrollbar-thumb {
-	background: #464647; 
+	background: var(--scroll-thumb-color); 
 }
 .scroll::-webkit-scrollbar-thumb:hover {
-  background: #515151; 
+  background: var(--scroll-thumb-hover-color); 
 }
 
 @media only screen and (max-width: 700px) {
@@ -194,7 +196,6 @@ footer p{
 	}
 	#mobile-nav{
 		display: block;
-		background-color: aqua;
 	}
 	.article-slot{
 
@@ -206,11 +207,16 @@ footer p{
 
 <style is:inline>
 	.article-slot * > a{
-			color:#3794FF;
+			color:var(--article-anchor-color);
 	}
 </style>
 
 <script >
+
+	const root = document.querySelector(':root');
+	//root.style.setProperty('--header-bg-color', 'blue');
+	const header_bg_color = getComputedStyle(root).getPropertyValue('--header-bg-color');
+	const content_bg_color = getComputedStyle(root).getPropertyValue('--content-bg-color');
 
 	function configure_nav(fixed_el,resize_el,nav_el,left_to_right){
 		fixed_el.addEventListener("click",(e)=>{
@@ -243,14 +249,14 @@ footer p{
 			nav_el.classList.add("open")
 			nav_el.classList.remove("closed")
 		}
-		resize_el.style.backgroundColor = "#1E1E1E"
+		resize_el.style.backgroundColor = content_bg_color
 		}
 		
 		resize_el.addEventListener("mouseenter",(e)=>{
-			resize_el.style.backgroundColor = "#007ACC"
+			resize_el.style.backgroundColor = header_bg_color
 		})
 		resize_el.addEventListener("mouseleave",(e)=>{
-			resize_el.style.backgroundColor = "#1E1E1E"
+			resize_el.style.backgroundColor = content_bg_color
 		})
 		resize_el.addEventListener("mousedown",(e)=>{
 			global_resize_state = true
@@ -272,13 +278,13 @@ footer p{
 				if(new_width <= 60){//snap effect
 					nav_el.style.width = "0px"
 					nav_el.setAttribute("data-width","0px")
-					resize_el.style.backgroundColor = "#007ACC"
+					resize_el.style.backgroundColor = header_bg_color
 				}else if(new_width < 160){
 					//do nothing here
 				}else if(new_width < (document.documentElement.clientWidth)*0.4){
 					nav_el.style.width = new_width+"px"
 					nav_el.setAttribute("data-width",new_width+"px")
-					resize_el.style.backgroundColor = "#007ACC"
+					resize_el.style.backgroundColor = header_bg_color
 				}else{
 					resize_el.style.backgroundColor = "red"
 				}

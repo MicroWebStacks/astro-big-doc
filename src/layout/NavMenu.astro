@@ -1,4 +1,5 @@
 ---
+import './dark_colors.css';
 import NavSubMenu from "./NavSubMenu.astro";
 
 export interface Props {
@@ -13,11 +14,10 @@ let { items } = Astro.props;
 
 <style>
 nav{
-    background: #252526;
+    background: var(--nav-bg-color);
     transition: width 0.5s;
     width:20vw;
     height: 100%;
-    scrollbar-color: rebeccapurple  green;
 
     overflow-y: auto;
 }
@@ -25,13 +25,13 @@ nav::-webkit-scrollbar {
   width: 1rem;
 }
 nav::-webkit-scrollbar-track {
-  background: #252526; 
+  background: var(--nav-bg-color); 
 }
 nav::-webkit-scrollbar-thumb {
-  background: #464647; 
+  background: var(--scroll-thumb-color); 
 }
 nav::-webkit-scrollbar-thumb:hover {
-  background: #515151; 
+  background: var(--scroll-thumb-hover-color); 
 }
 
 @media only screen and (max-width: 700px) {

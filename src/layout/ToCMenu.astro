@@ -1,4 +1,5 @@
 ---
+import './dark_colors.css';
 import ToCSubMenu from "./ToCSubMenu.astro";
 
 export interface Props {
@@ -13,25 +14,24 @@ let { items } = Astro.props;
 
 <style>
 nav{
-    background: #252526;
+    background: var(--nav-bg-color);
     overflow-x: hidden;
     overflow-y: auto;
     transition: width 0.5s;
     width:20vw;
     flex-shrink: 0;
-    scrollbar-color: rebeccapurple  green;
 }
 nav::-webkit-scrollbar {
   width: 1rem;
 }
 nav::-webkit-scrollbar-track {
-  background: #252526; 
+  background: var(--nav-bg-color); 
 }
 nav::-webkit-scrollbar-thumb {
-  background: #464647; 
+  background: var(--scroll-thumb-color); 
 }
 nav::-webkit-scrollbar-thumb:hover {
-  background: #515151; 
+  background: var(--scroll-thumb-hover-color);
 }
 
 @media only screen and (max-width: 700px) {

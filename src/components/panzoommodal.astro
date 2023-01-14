@@ -159,7 +159,8 @@ const uid = suid()
   close.onclick = ()=>{
     modal.classList.remove("visible")
     pzref.dispose()
-    initPanZoom()
+    const svg = center.querySelector("svg")
+    svg.remove()
   }
 
   modal.addEventListener("init",initModal  ,false)

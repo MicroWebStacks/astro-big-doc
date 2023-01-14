@@ -64,6 +64,40 @@
     "section_url": "prepare1/prepare2/prepare_middle",
     "frontmatter": {}
   },
+  "/blog/presentation/raspi": {
+    "path": "presentation/raspi.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\presentation\\raspi.mdx",
+    "url": "/blog/presentation/raspi",
+    "section_url": "presentation/raspi",
+    "frontmatter": {}
+  },
+  "/blog/presentation/tester_page_1": {
+    "path": "presentation/tester_page_1.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\presentation\\tester_page_1.mdx",
+    "url": "/blog/presentation/tester_page_1",
+    "section_url": "presentation/tester_page_1",
+    "frontmatter": {
+      "title": "Tester page 1"
+    }
+  },
+  "/blog/presentation/tester_page_2": {
+    "path": "presentation/tester_page_2.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\presentation\\tester_page_2.mdx",
+    "url": "/blog/presentation/tester_page_2",
+    "section_url": "presentation/tester_page_2",
+    "frontmatter": {
+      "title": "Tester page 2"
+    }
+  },
+  "/blog/presentation/tester_page_3": {
+    "path": "presentation/tester_page_3.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\presentation\\tester_page_3.mdx",
+    "url": "/blog/presentation/tester_page_3",
+    "section_url": "presentation/tester_page_3",
+    "frontmatter": {
+      "title": "Tester page 3"
+    }
+  },
   "/blog/static_dynamic": {
     "path": "static_dynamic.mdx",
     "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\static_dynamic.mdx",
@@ -72,33 +106,6 @@
     "frontmatter": {
       "title": "Static vs Dynamic",
       "weight": 4
-    }
-  },
-  "/blog/under/tester_page_1": {
-    "path": "under/tester_page_1.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\under\\tester_page_1.mdx",
-    "url": "/blog/under/tester_page_1",
-    "section_url": "under/tester_page_1",
-    "frontmatter": {
-      "title": "Tester page 1"
-    }
-  },
-  "/blog/under/tester_page_2": {
-    "path": "under/tester_page_2.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\under\\tester_page_2.mdx",
-    "url": "/blog/under/tester_page_2",
-    "section_url": "under/tester_page_2",
-    "frontmatter": {
-      "title": "Tester page 2"
-    }
-  },
-  "/blog/under/tester_page_3": {
-    "path": "under/tester_page_3.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\under\\tester_page_3.mdx",
-    "url": "/blog/under/tester_page_3",
-    "section_url": "under/tester_page_3",
-    "frontmatter": {
-      "title": "Tester page 3"
     }
   }
 }

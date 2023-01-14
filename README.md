@@ -33,9 +33,6 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Gallery with json list of SVGs and images
 - Mobile layout
 ## Todos
-- group theme colors in a single file
-- prevent SVG inline pollution and breaking of secondly open SVGs, check if it's due to style injection pollution of SVG defs
-- use declarative shadow dom to be able to retrieve data from it and reuse it
 - light and dark mode toggle
 - root dir from process not reliable use `root_abs()`
 - check potential replacement of scrollspy with intersection Observer API
@@ -54,6 +51,7 @@ UX friendly Markdown without import and referencing local images, enhancements w
 - menus
   - store nav menu width / prevent reset on same page reload
 ## more ideas
+- use declarative shadow dom to be able to retrieve data from it and reuse it
 - Markdown
   - add more code formats, e.g. mermaid, D2, ...
 - menus

@@ -155,8 +155,8 @@ const { items,root=true} = Astro.props;
             document.querySelector(".toc_href.active")?.classList.remove("active");
             document.querySelector(".heading.active")?.classList.remove("active");
             const id = spy.id
-            console.log(id)
-            document.querySelector(`a[href="#${id}"]`)?.classList.add("active")
+            //console.log(id)
+            document.querySelector(`a[href="#${id}"].toc_href`)?.classList.add("active")
             document.getElementById(id)?.classList.add("active")
         }
     })

@@ -1,4 +1,5 @@
 ---
+import './colors.css';
 import menu from "./menu.json"
 import { remove_base,active_page } from "./menu_utils";
 import Icon from "@/components/icon.astro"
@@ -55,17 +56,17 @@ a{
     font-size: 17px;
     padding: 14px 16px;
     text-align:center;
-    color: #CCCCCC;
+    color: var(--content-color);
 	text-decoration: none;
 
 }
 a:hover{
-    background-color: #454646;
+    background-color: var(--header-active-color);
 }
 a.active{
     border:0px;
     border-bottom:  3px solid rgb(88, 88, 88);
-    background-color: #454646;
+    background-color: var(--header-active-color);
 }
 
 .navbar-right > li > a{

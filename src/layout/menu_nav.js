@@ -1,3 +1,4 @@
+import { config } from '../../config'
 import {dirname,basename} from 'path'
 import {url_path, remove_base} from './menu_utils'
 
@@ -157,6 +158,9 @@ function files_map_to_menu_tree(files_map,href_base){
 }
 
 function set_active_expanded(url, menu){
+    if(config.base != ""){
+        url = '/'+remove_base('/'+config.base+'/',url)
+    }
     if('items' in menu){
         set_classes_recursive(url, menu.items)
     }

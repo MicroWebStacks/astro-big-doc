@@ -1,10 +1,14 @@
 import {dirname,basename} from 'path'
-import {url_path, remove_base} from './menu_utils'
+import {url_to_section,url_path, remove_base} from './menu_utils'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
     items.forEach((item)=>{
-        item.active = (url_path(url) == item.href)
+        let check_href = item.href
+        if(check_href && check_href.endsWith('/')){
+            check_href = check_href.substring(0, check_href.length - 1);
+        }
+        item.active = (remove_base(url_path(url)) == check_href)
         active_descendant ||= item.active
         if("items" in item){
             item.parent = true
@@ -46,7 +50,7 @@ function push_files(files_map){
 }
 
 function create_parent_dir(directories,href_base,path){
-    const menu_path = remove_base(href_base,path)//TODO trust remove base without the reference href_base
+    const menu_path = remove_base(path)
     const dir_menu_path = dirname(menu_path)
     const dir_path = dirname(path)
     const dir_exist = directories.find((parent)=>(parent.path == dir_path))

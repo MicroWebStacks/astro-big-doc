@@ -51,7 +51,7 @@ if(config.out_mode == "MIDDLEWARE")
   config_options   = {
     ...default_options,
     output: "static",
-    outDir: "./temp",
+    outDir: "./docs",
     site: config.site,
     base: config.base,
     trailingSlash: 'ignore'

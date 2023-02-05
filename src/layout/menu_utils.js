@@ -5,7 +5,7 @@ function trim_ext(filename){
     return filename.replace(/\.[^/.]+$/, "")
 }
 
-function remove_base(base,url){
+function remove_first(base,url){
     if(url.startsWith(base)){
         url = url.slice(base.length)
     }
@@ -47,15 +47,18 @@ function url_path(url){
     return `/${str}`
 }
 
-function url_to_section(pageUrl){
+function remove_base(pageUrl){
     let base = config.base
     if(base != ''){
         if(!base.startsWith('/')){
             base = '/'+base
         }
     }
-    let page_url_no_base = remove_base(base,pageUrl)
+    return remove_first(base,pageUrl)
+}
 
+function url_to_section(pageUrl){
+    let page_url_no_base = remove_base(pageUrl)
     if(page_url_no_base.endsWith('/')){
         page_url_no_base += 'index' //to help the split dirname extraction
     }
@@ -83,7 +86,8 @@ function active_page(url, raw_menu){
 export{
     trim_ext,
     active_page,
-    remove_base,
+    remove_first,
     url_to_section,
-    url_path
+    url_path,
+    remove_base
 }

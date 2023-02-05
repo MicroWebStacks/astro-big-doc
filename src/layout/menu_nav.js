@@ -1,3 +1,4 @@
+import { config } from '../../config'
 import {dirname,basename} from 'path'
 import {url_to_section,url_path, remove_base} from './menu_utils'
 
@@ -59,7 +60,7 @@ function create_parent_dir(directories,href_base,path){
             items:[],
             parent:true,
             expanded:true,
-            text: dir_menu_path,
+            text: basename(dir_menu_path),
             path: dir_path,
             parent_path: dirname(dir_path),
             weight: 1,
@@ -78,8 +79,17 @@ function push_directories({files_map,href_base}){
     const directories = []
 
     for (const [path, data] of Object.entries(files_map)) {
-        if(path_depth(path) > 1){
-            create_parent_dir(directories,href_base,path)
+        let depth = path_depth(path)
+        let current_path = path
+        while(depth > 1){
+            //console.log(`==> pushing depth(${depth}) path (${current_path}) length(${directories.length})`)
+            const parent = directories.find((dir)=>(dir.path == dirname(current_path)))
+            if(parent == undefined){
+                //console.log(`==> creating parent (${dirname(current_path)})`)
+                create_parent_dir(directories,href_base,current_path)
+            }
+            current_path = dirname(current_path)
+            depth = path_depth(current_path)
         }
     }
 
@@ -152,6 +162,9 @@ function files_map_to_menu_tree(files_map,href_base){
 }
 
 function set_active_expanded(url, menu){
+    if(config.base != ""){
+        url = '/'+remove_base('/'+config.base+'/',url)
+    }
     if('items' in menu){
         set_classes_recursive(url, menu.items)
     }

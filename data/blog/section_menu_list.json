@@ -140,6 +140,84 @@
   {
     "items": [
       {
+        "items": [
+          {
+            "parent": false,
+            "text": "very_deep",
+            "weight": 1,
+            "path": "/blog/double1/double2/double3/very_deep",
+            "parent_path": "/blog/double1/double2/double3",
+            "depth": 4,
+            "href": "/blog/double1/double2/double3/very_deep"
+          }
+        ],
+        "parent": true,
+        "expanded": true,
+        "text": "double3",
+        "path": "/blog/double1/double2/double3",
+        "parent_path": "/blog/double1/double2",
+        "weight": 1,
+        "depth": 3,
+        "href": "/blog/double1/double2/double3"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "double2",
+    "path": "/blog/double1/double2",
+    "parent_path": "/blog/double1",
+    "weight": 1,
+    "depth": 2,
+    "href": "/blog/double1/double2"
+  },
+  {
+    "items": [
+      {
+        "items": [
+          {
+            "items": [
+              {
+                "parent": false,
+                "text": "very_deep",
+                "weight": 1,
+                "path": "/blog/double1/double2/double3/very_deep",
+                "parent_path": "/blog/double1/double2/double3",
+                "depth": 4,
+                "href": "/blog/double1/double2/double3/very_deep"
+              }
+            ],
+            "parent": true,
+            "expanded": true,
+            "text": "double3",
+            "path": "/blog/double1/double2/double3",
+            "parent_path": "/blog/double1/double2",
+            "weight": 1,
+            "depth": 3,
+            "href": "/blog/double1/double2/double3"
+          }
+        ],
+        "parent": true,
+        "expanded": true,
+        "text": "double2",
+        "path": "/blog/double1/double2",
+        "parent_path": "/blog/double1",
+        "weight": 1,
+        "depth": 2,
+        "href": "/blog/double1/double2"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "double1",
+    "path": "/blog/double1",
+    "parent_path": "/blog",
+    "weight": 1,
+    "depth": 1,
+    "href": "/blog/double1"
+  },
+  {
+    "items": [
+      {
         "parent": false,
         "text": "deep",
         "weight": 1,
@@ -214,12 +292,90 @@
     ],
     "parent": true,
     "expanded": true,
-    "text": "deepest1/deepest2/deepest3",
+    "text": "deepest3",
     "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
     "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2",
     "weight": 1,
     "depth": 5,
     "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3"
+  },
+  {
+    "items": [
+      {
+        "items": [
+          {
+            "parent": false,
+            "text": "deepest",
+            "weight": 1,
+            "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+            "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+            "depth": 6,
+            "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest"
+          }
+        ],
+        "parent": true,
+        "expanded": true,
+        "text": "deepest3",
+        "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+        "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2",
+        "weight": 1,
+        "depth": 5,
+        "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "deepest2",
+    "path": "/blog/prepare1/prepare2/deepest1/deepest2",
+    "parent_path": "/blog/prepare1/prepare2/deepest1",
+    "weight": 1,
+    "depth": 4,
+    "href": "/blog/prepare1/prepare2/deepest1/deepest2"
+  },
+  {
+    "items": [
+      {
+        "items": [
+          {
+            "items": [
+              {
+                "parent": false,
+                "text": "deepest",
+                "weight": 1,
+                "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+                "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+                "depth": 6,
+                "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest"
+              }
+            ],
+            "parent": true,
+            "expanded": true,
+            "text": "deepest3",
+            "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+            "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2",
+            "weight": 1,
+            "depth": 5,
+            "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3"
+          }
+        ],
+        "parent": true,
+        "expanded": true,
+        "text": "deepest2",
+        "path": "/blog/prepare1/prepare2/deepest1/deepest2",
+        "parent_path": "/blog/prepare1/prepare2/deepest1",
+        "weight": 1,
+        "depth": 4,
+        "href": "/blog/prepare1/prepare2/deepest1/deepest2"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "deepest1",
+    "path": "/blog/prepare1/prepare2/deepest1",
+    "parent_path": "/blog/prepare1/prepare2",
+    "weight": 1,
+    "depth": 3,
+    "href": "/blog/prepare1/prepare2/deepest1"
   },
   {
     "items": [
@@ -235,23 +391,47 @@
       {
         "items": [
           {
-            "parent": false,
-            "text": "deepest",
+            "items": [
+              {
+                "items": [
+                  {
+                    "parent": false,
+                    "text": "deepest",
+                    "weight": 1,
+                    "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+                    "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+                    "depth": 6,
+                    "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest"
+                  }
+                ],
+                "parent": true,
+                "expanded": true,
+                "text": "deepest3",
+                "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+                "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2",
+                "weight": 1,
+                "depth": 5,
+                "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3"
+              }
+            ],
+            "parent": true,
+            "expanded": true,
+            "text": "deepest2",
+            "path": "/blog/prepare1/prepare2/deepest1/deepest2",
+            "parent_path": "/blog/prepare1/prepare2/deepest1",
             "weight": 1,
-            "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
-            "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
-            "depth": 6,
-            "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest"
+            "depth": 4,
+            "href": "/blog/prepare1/prepare2/deepest1/deepest2"
           }
         ],
         "parent": true,
         "expanded": true,
-        "text": "deepest1/deepest2/deepest3",
-        "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
-        "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2",
+        "text": "deepest1",
+        "path": "/blog/prepare1/prepare2/deepest1",
+        "parent_path": "/blog/prepare1/prepare2",
         "weight": 1,
-        "depth": 5,
-        "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3"
+        "depth": 3,
+        "href": "/blog/prepare1/prepare2/deepest1"
       }
     ],
     "parent": true,
@@ -262,6 +442,84 @@
     "weight": 1,
     "depth": 2,
     "href": "/blog/prepare1/prepare2"
+  },
+  {
+    "items": [
+      {
+        "items": [
+          {
+            "parent": false,
+            "text": "prepare_middle",
+            "weight": 1,
+            "path": "/blog/prepare1/prepare2/prepare_middle",
+            "parent_path": "/blog/prepare1/prepare2",
+            "depth": 3,
+            "href": "/blog/prepare1/prepare2/prepare_middle"
+          },
+          {
+            "items": [
+              {
+                "items": [
+                  {
+                    "items": [
+                      {
+                        "parent": false,
+                        "text": "deepest",
+                        "weight": 1,
+                        "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
+                        "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+                        "depth": 6,
+                        "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest"
+                      }
+                    ],
+                    "parent": true,
+                    "expanded": true,
+                    "text": "deepest3",
+                    "path": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+                    "parent_path": "/blog/prepare1/prepare2/deepest1/deepest2",
+                    "weight": 1,
+                    "depth": 5,
+                    "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3"
+                  }
+                ],
+                "parent": true,
+                "expanded": true,
+                "text": "deepest2",
+                "path": "/blog/prepare1/prepare2/deepest1/deepest2",
+                "parent_path": "/blog/prepare1/prepare2/deepest1",
+                "weight": 1,
+                "depth": 4,
+                "href": "/blog/prepare1/prepare2/deepest1/deepest2"
+              }
+            ],
+            "parent": true,
+            "expanded": true,
+            "text": "deepest1",
+            "path": "/blog/prepare1/prepare2/deepest1",
+            "parent_path": "/blog/prepare1/prepare2",
+            "weight": 1,
+            "depth": 3,
+            "href": "/blog/prepare1/prepare2/deepest1"
+          }
+        ],
+        "parent": true,
+        "expanded": true,
+        "text": "prepare2",
+        "path": "/blog/prepare1/prepare2",
+        "parent_path": "/blog/prepare1",
+        "weight": 1,
+        "depth": 2,
+        "href": "/blog/prepare1/prepare2"
+      }
+    ],
+    "parent": true,
+    "expanded": true,
+    "text": "prepare1",
+    "path": "/blog/prepare1",
+    "parent_path": "/blog",
+    "weight": 1,
+    "depth": 1,
+    "href": "/blog/prepare1"
   },
   {
     "items": [

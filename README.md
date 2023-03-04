@@ -32,7 +32,59 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - Panzoom for SVGs and images
   - Gallery with json list of SVGs and images
 - Mobile layout
-## Todos
+
+
+# Usage
+```
+pnpm install
+pnpm run dev
+pnpm run build
+```
+## .env config
+This project uses environment variables as unified config to astro.config.mjs and to the express server. The environment variabels are also loaded by a `config.js` to allow their usage from any file in astro including .js
+
+It is possible to build with zero config, the default mode is 'STATIC' See also an example in [.env.example](.env.example).
+
+Astro variables
+* `OUT_MODE` : STATIC or MIDDLEWARE
+* `BASE` : maps to astro.config.mjs [base](https://docs.astro.build/en/reference/configuration-reference/#base)
+* `SITE` : maps to astro.config.mjs [site](https://docs.astro.build/en/reference/configuration-reference/#site)
+* `PORT` : maps to astro.config.mjs [server.port](https://docs.astro.build/en/reference/configuration-reference/#serverport)
+
+Express general variables
+* `USE_HTTPS` : whether to use https Server or http only
+* `CERT_FILE` : required when https is used
+* `KEY_FILE` : required when https is used
+
+Express authotication variables
+* `HOST` : Express passport callbackURL
+* `PORT` : Express passport callbackURL
+* `GITHUB_CLIENT_ID`      : Express passport Github strategy configuration
+* `GITHUB_CLIENT_SECRET`  : Express passport Github strategy configuration
+* `SESSION_SECRET`        : used by 'express-session' handler
+
+
+
+## authentication doc
+- Github OAuth : https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
+- express-session : 
+  - repo https://github.com/expressjs/session
+  - doc https://expressjs.com/en/resources/middleware/session.html
+- passport OAuth doc : http://www.passportjs.org/concepts/authentication/oauth/
+- passport-github : https://github.com/jaredhanson/passport-github
+- passport-github doc : http://www.passportjs.org/packages/passport-github/
+- passport example : https://github.com/passport/todos-express-facebook/blob/master/app.js
+- jwo example : https://gist.github.com/jwo/ea79620b5229e7821e4ae61055899cf9
+
+- using self signed keys with `server/create.sh` result in browser warning 'your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID)
+- for 'Let's Encrypt' certificates, ownership has to be proven by visibility of the host from the public internet which makes it not usable for internal domains and local network hosts
+
+## plantuml SVG plugins
+* `remark-plantuml-object` : Dynamic, the client needs to wait for svg generation when the page is loaded. The plugin only replace plantuml code with html `object` tag pointing on server with encoded text in url.
+* `remark-plantuml-svg` : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal `.puml` file for vs code preview convenience and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.
+* `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
+
+# Plan
 - light and dark mode toggle
 - root dir from process not reliable use `root_abs()`
 - check potential replacement of scrollspy with intersection Observer API
@@ -64,44 +116,6 @@ UX friendly Markdown without import and referencing local images, enhancements w
   - open close on nav-resize click
   - Issue: Menu height transition MUI example is working
   - minor issue : Expand arrow rotates for nothing on page reload
-
-
-# Developer guide
-## getting started
-```
-pnpm install
-pnpm run dev
-pnpm run build
-```
-## creation
-This project was created as follows
-```
-pnpm create astro@latest
-```
- - Name, Empty Project, No Typescript
- - move to root git repo
- - delete node_modules
- - add deno and server config to `astro.config.mjs`
- - prepare `.github/workflows/deploy.yml`
-
-## plantuml SVG
-* `remark-plantuml-object` : Dynamic, the client needs to wait for svg generation when the page is loaded. The plugin only replace plantuml code with html `object` tag pointing on server with encoded text in url.
-* `remark-plantuml-svg` : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal `.puml` file for vs code preview convenience and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.
-* `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
-
-## Authentication
-- Github OAuth : https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
-- express-session : 
-  - repo https://github.com/expressjs/session
-  - doc https://expressjs.com/en/resources/middleware/session.html
-- passport OAuth doc : http://www.passportjs.org/concepts/authentication/oauth/
-- passport-github : https://github.com/jaredhanson/passport-github
-- passport-github doc : http://www.passportjs.org/packages/passport-github/
-- passport example : https://github.com/passport/todos-express-facebook/blob/master/app.js
-- jwo example : https://gist.github.com/jwo/ea79620b5229e7821e4ae61055899cf9
-
-- using self signed keys with `server/create.sh` result in browser warning 'your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID)
-- for 'Let's Encrypt' certificates, ownership has to be proven by visibility of the host from the public internet which makes it not usable for internal domains and local network hosts
 
 ## Hints
 - SVGs

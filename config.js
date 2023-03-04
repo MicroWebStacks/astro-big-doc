@@ -6,7 +6,7 @@ dotenv.config()
 const config = {
     out_mode:process.env.OUT_MODE,//STATIC,MIDDLEWARE
     site:process.env.SITE,
-    base:process.env.BASE,  //for the js code, Astro components can use imp*ort.me*ta.en*v.BA*SE_URL
+    base    :(process.env.BASE==null)?'':process.env.BASE,  //for the js code, Astro components can use imp*ort.me*ta.en*v.BA*SE_URL
     port:process.env.PORT,
 }
 

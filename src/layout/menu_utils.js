@@ -49,7 +49,7 @@ function url_path(url){
 
 function remove_base(pageUrl){
     let base = config.base
-    if(base != ''){
+    if(base){
         if(!base.startsWith('/')){
             base = '/'+base
         }

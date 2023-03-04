@@ -52,10 +52,12 @@ if(config.out_mode == "MIDDLEWARE")
     ...default_options,
     output: "static",
     outDir: "./docs",
-    site: config.site,
     base: config.base,
     trailingSlash: 'ignore'
   };
+  if(config.site != null){
+    config_options.site = config.site
+  }
 }
 
 export default defineConfig(config_options);

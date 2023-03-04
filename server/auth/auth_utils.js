@@ -20,8 +20,10 @@ function verifyUser(accessToken, refreshToken, profile, cb){
 
 function get_session_id(cookie){
     const prefix = "connect.sid=s%3A"
-    if(cookie.startsWith(prefix)){
-      return (cookie.split(prefix)[1].split(".")[0])
+    if(cookie){
+        if(cookie.startsWith(prefix)){
+          return (cookie.split(prefix)[1].split(".")[0])
+        }
     }
     return 0
 }

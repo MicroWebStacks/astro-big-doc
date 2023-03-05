@@ -25,7 +25,7 @@ try {
 
 if(found){
     const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}')//relative to this component file
-    const component_path = process.cwd()+'/src/pages/blog/'
+    const component_path = "__filedir"
     const Post_path = Object.keys(posts).find((path)=>(resolve(component_path,path) == page_path))
     
 

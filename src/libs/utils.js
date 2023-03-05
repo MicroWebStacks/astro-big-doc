@@ -2,14 +2,6 @@ import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
 import {basename,resolve,normalize,dirname,join,relative} from 'path'
 import {config} from '../../config.js'
 
-function root_abs(){
-  let rootdir = rel_to_abs(import.meta.url,"../..")
-  if(import.meta.env.PROD){
-    rootdir = rel_to_abs(import.meta.url,"..")
-  }
-  return rootdir
-}
-
 //resolve(reference,relative) does not work due to 'file:\'
 function rel_to_abs(reference,relative){
   return join(dirname(normalize(reference)),relative).replace("file:\\","")
@@ -23,10 +15,9 @@ function isNewer(filepath,targetfile){
 
 function cache_file_url(source_file){
   const source_dir = dirname(source_file)
-  const rootdir = process.cwd()
-  const targetroot = join(rootdir,"public/raw")
+  const targetroot = join(config.rootdir,"public/raw")
   const source_file_base_name = basename(source_file)
-  const file_rel_to_root = relative(rootdir,source_dir)
+  const file_rel_to_root = relative(config.rootdir,source_dir)
   const targetpath = resolve(targetroot,file_rel_to_root)
   const targetfile = join(targetpath,source_file_base_name)
 
@@ -44,10 +35,8 @@ function relAssetToUrl(relativepath,refdir,baseUrl){
     if(existsSync(filepath)){
       //console.log(`   * impo*rt.me*ta.ur*l = ${import.meta.url}`)
 
-      const rootdir = process.cwd()
-      //console.log(`   * rootdir = '${rootdir}'`)
-      const targetroot = join(rootdir,"public/raw")
-      const filerootrel = relative(rootdir,refdir)
+      const targetroot = join(config.rootdir,"public/raw")
+      const filerootrel = relative(config.rootdir,refdir)
       const targetpath = resolve(targetroot,filerootrel)
       const targetfile = join(targetpath,relativepath)
       const targetdir = dirname(targetfile)
@@ -141,7 +130,6 @@ export{
     suid,
     event,
     window_event,
-    root_abs,
     green_log,
     blue_log,
     yellow_log,

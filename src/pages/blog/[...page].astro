@@ -12,7 +12,7 @@ import {get_section_urls, get_section_file_from_url} from "@/layout/nav_section"
 
 const {page} = Astro.params;
 const page_path = await get_section_file_from_url('/data/blog',page,'/blog/')
-console.log(`Astro/blog> url: ${page} file: ${page_path}`)
+console.log(`Astro/blog> url: /blog/${page} file: ${page_path}`)
 
 let found = true
 let Post = null

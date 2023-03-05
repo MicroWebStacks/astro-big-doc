@@ -86,7 +86,6 @@ Express authotication variables
 
 # Plan
 - light and dark mode toggle
-- root dir from process not reliable use `root_abs()`
 - check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration
 ## ideas

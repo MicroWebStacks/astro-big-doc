@@ -4,6 +4,7 @@ import {resolve,join,relative} from 'path'
 import {files_map_to_menu_tree,  set_active_expanded} from './menu_nav'
 import {  url_to_section,trim_ext } from './menu_utils';
 import matter from 'gray-matter';
+import { config } from '../../config';
 
 const sections_map = {}
 
@@ -34,7 +35,7 @@ async function file_list_to_url_map(mdx_files,section_path,href_base){
     const frontmatter = matter(content).data
     result[url] = {
       path:file,
-      abs_path:abs_path,
+      path:file,
       url: url,
       section_url: section_url,
       frontmatter: frontmatter
@@ -50,8 +51,7 @@ async function get_section_data(section_path,href_base){
     return sections_map[section_path]
   }
 
-  const rootdir = process.cwd()
-  const search_base = join(rootdir,section_path)
+  const search_base = join(config.rootdir,section_path)
   console.log(`menu> section_path = ${section_path} ; search_base = ${search_base}`)
   const files = await parse_dir_recursive(search_base)
   //console.log(files)
@@ -113,7 +113,7 @@ async function get_section_file_from_url(section_path,page,href_base){
 
   page = href_base + page
   if(page in section_data.files_map){
-    return section_data.files_map[page].abs_path
+    return join(config.rootdir,section_path,section_data.files_map[page].path)
   }else{
     console.warn(`menu> page '${page}' not available`)
     return null

@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layout/Layout.astro";
-import {promises as fs} from 'fs';
-import {resolve} from 'path';
+import {promises as fs} from 'node:fs';
+import {resolve} from 'node:path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
 import Page_404 from "@/components/404.astro"
@@ -24,7 +24,9 @@ try {
 }
 
 if(found){
+    //console.time('glob')
     const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}')//relative to this component file
+    //console.timeEnd('glob')
     const component_path = "__filedir"
     const Post_path = Object.keys(posts).find((path)=>(resolve(component_path,path) == page_path))
     
@@ -34,7 +36,9 @@ if(found){
         found = false
     }
     if(found){
+        //console.time('import')
         Post = await posts[Post_path]()
+        //console.timeEnd('import')
     }
 }
 

@@ -1,14 +1,14 @@
 {
   "/blog/double1/double2/double3/very_deep": {
     "path": "double1/double2/double3/very_deep.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\double1\\double2\\double3\\very_deep.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\double1\\double2\\double3\\very_deep.mdx",
     "url": "/blog/double1/double2/double3/very_deep",
     "section_url": "double1/double2/double3/very_deep",
     "frontmatter": {}
   },
   "/blog/gallery": {
     "path": "gallery.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\gallery.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\gallery.mdx",
     "url": "/blog/gallery",
     "section_url": "gallery",
     "frontmatter": {
@@ -18,21 +18,21 @@
   },
   "/blog/level1/level2/deep": {
     "path": "level1/level2/deep.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\level1\\level2\\deep.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\level1\\level2\\deep.mdx",
     "url": "/blog/level1/level2/deep",
     "section_url": "level1/level2/deep",
     "frontmatter": {}
   },
   "/blog/level1/middle": {
     "path": "level1/middle.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\level1\\middle.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\level1\\middle.mdx",
     "url": "/blog/level1/middle",
     "section_url": "level1/middle",
     "frontmatter": {}
   },
   "/blog/panzoom": {
     "path": "panzoom.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\panzoom.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\panzoom.mdx",
     "url": "/blog/panzoom",
     "section_url": "panzoom",
     "frontmatter": {
@@ -42,7 +42,7 @@
   },
   "/blog/plantuml": {
     "path": "plantuml.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\plantuml.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\plantuml.mdx",
     "url": "/blog/plantuml",
     "section_url": "plantuml",
     "frontmatter": {
@@ -52,28 +52,28 @@
   },
   "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest": {
     "path": "prepare1/prepare2/deepest1/deepest2/deepest3/deepest.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\prepare1\\prepare2\\deepest1\\deepest2\\deepest3\\deepest.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\prepare1\\prepare2\\deepest1\\deepest2\\deepest3\\deepest.mdx",
     "url": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
     "section_url": "prepare1/prepare2/deepest1/deepest2/deepest3/deepest",
     "frontmatter": {}
   },
   "/blog/prepare1/prepare2/prepare_middle": {
     "path": "prepare1/prepare2/prepare_middle.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\prepare1\\prepare2\\prepare_middle.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\prepare1\\prepare2\\prepare_middle.mdx",
     "url": "/blog/prepare1/prepare2/prepare_middle",
     "section_url": "prepare1/prepare2/prepare_middle",
     "frontmatter": {}
   },
   "/blog/presentation/raspi": {
     "path": "presentation/raspi.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\presentation\\raspi.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\presentation\\raspi.mdx",
     "url": "/blog/presentation/raspi",
     "section_url": "presentation/raspi",
     "frontmatter": {}
   },
   "/blog/presentation/tester_page_1": {
     "path": "presentation/tester_page_1.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\presentation\\tester_page_1.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\presentation\\tester_page_1.mdx",
     "url": "/blog/presentation/tester_page_1",
     "section_url": "presentation/tester_page_1",
     "frontmatter": {
@@ -82,7 +82,7 @@
   },
   "/blog/presentation/tester_page_2": {
     "path": "presentation/tester_page_2.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\presentation\\tester_page_2.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\presentation\\tester_page_2.mdx",
     "url": "/blog/presentation/tester_page_2",
     "section_url": "presentation/tester_page_2",
     "frontmatter": {
@@ -91,7 +91,7 @@
   },
   "/blog/presentation/tester_page_3": {
     "path": "presentation/tester_page_3.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\presentation\\tester_page_3.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\presentation\\tester_page_3.mdx",
     "url": "/blog/presentation/tester_page_3",
     "section_url": "presentation/tester_page_3",
     "frontmatter": {
@@ -100,7 +100,7 @@
   },
   "/blog/static_dynamic": {
     "path": "static_dynamic.mdx",
-    "abs_path": "D:\\Dev\\MicroWebStacks\\astro-big-doc\\data\\blog\\static_dynamic.mdx",
+    "abs_path": "D:\\Dev\\MicroWebStacks\\astro\\tests\\astro-big-doc\\data\\blog\\static_dynamic.mdx",
     "url": "/blog/static_dynamic",
     "section_url": "static_dynamic",
     "frontmatter": {

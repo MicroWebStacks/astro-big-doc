@@ -14,18 +14,17 @@ export interface Props {
 
 const {url} = Astro.props as Props;
 
-const isSvg = url.endsWith(".svg")
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const uid = suid()
 
 ---
-<div class="modal-background" data-uid={uid}>
+<div class="modal-background" data-uid={uid} data-state={"init"}>
   <div class="modal">
     <div class="modal-header close">
       <span class="close-x">&times;</span>
     </div>
     <div class="modal-content">
-      <div class="modal-center">
+      <div class="modal-center" data-url={url}>
         <!-- injected svg or img on modal init -->
       </div>
     </div>
@@ -107,8 +106,10 @@ const uid = suid()
 
 </style>
 
-<script define:vars={{url,uid,isSvg,baseUrl}} type="module">
+<script type="module">
+  const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
   await import(`${baseUrl}/panzoom.js`)
+  //await import(`/astro-big-doc/panzoom.js`)
   let pzref = null
   const zoomOptions = {
     minZoom: 0.1,
@@ -116,10 +117,12 @@ const uid = suid()
     //autocenter:true
     }
 
-  const modal = document.querySelector(`.modal-background[data-uid="${uid}"]`)
-  const close = modal.querySelector(".close")
-  const center = modal.querySelector(".modal-center")
-  function initPanZoom(){
+  async function initPanZoom(center){
+    await fetchAsset(center)
+
+    const url = center.getAttribute("data-url")
+    const isSvg = url.endsWith(".svg")
+    console.log("creating panzoom")
     if(isSvg){
       const svg = center.querySelector("svg")
       pzref = panzoom(svg,zoomOptions)
@@ -128,7 +131,12 @@ const uid = suid()
       pzref = panzoom(image,zoomOptions)
     }
   }
-  async function fetchAsset(){
+
+  async function fetchAsset(center){
+    console.log("fetching asset")
+    const url = center.getAttribute("data-url")
+    console.log(url)
+    const isSvg = url.endsWith(".svg")
     if(isSvg){
       const svg = center.querySelector("svg")
       if(!svg){
@@ -148,20 +156,41 @@ const uid = suid()
       }
     }
   }
-  function initModal(){
-    fetchAsset().then(initPanZoom)
+
+  async function initModal(event){
+    console.log("initModal start")
+    if(pzref){
+      pzref.dispose()
+    }
+    const modal = event.target
+    const close = modal.querySelector(".close")
+    const center = modal.querySelector(".modal-center")
+    await initPanZoom(center)
     modal.classList.add("visible")
-      if(pzref){
-        pzref.dispose()
+    close.onclick = ()=>{
+      console.log("closed click")
+      modal.classList.remove("visible")
+      pzref.dispose()
+      const svg = center.querySelector("svg")
+      if(svg){
+        svg.remove()
       }
+      const img = center.querySelector("img")
+      if(img){
+        img.remove()
+      }
+    }
+    console.log("initModal end")
   }
 
-  close.onclick = ()=>{
-    modal.classList.remove("visible")
-    pzref.dispose()
-    const svg = center.querySelector("svg")
-    svg.remove()
+  const modalsbkgs = document.querySelectorAll(`.modal-background`)
+  const modals = [...modalsbkgs]
+  for(let el in modals){
+    const modal = modals[el]
+    if(modal.getAttribute("data-state") == "init"){
+      modal.addEventListener("init",initModal  ,false)
+      modal.setAttribute("data-state","run")
+    }
   }
 
-  modal.addEventListener("init",initModal  ,false)
 </script>

@@ -2,7 +2,6 @@
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
 import PanZoomModal from './panzoommodal.astro'
 import SvgIcons from '@/components/svgicons.astro'
-import {relAssetToUrl,suid} from '@/libs/utils'
 
 export interface Props {
   'data-url': string;
@@ -10,12 +9,10 @@ export interface Props {
 
 const { 'data-url':asseturl } = Astro.props as Props;
 
-const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
-const uid = suid()
 //console.log(` * panzoom : '${asseturl}'`)
 
 ---
-<div class="container" data-uid={uid}>
+<div class="container">
   <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>
@@ -77,15 +74,18 @@ object{
 
 </style>
 
-<script define:vars={{ uid,baseUrl }} type="module" >
+<script type="module" >
+  const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
   const {event} = await import(`${baseUrl}/utils.js`)
 
-  const container = document.querySelector(`.container[data-uid="${uid}"]`)
-  const open = container.querySelector(".open")
-
-  open.onclick = ()=>{
-    const modal = container.querySelector(".modal-background")
-    event(modal,"init")
+  const containers_els = document.querySelectorAll(".container")
+  const containers = [...containers_els]
+  for(let el in containers){
+    const container = containers[el]
+    const open = container.querySelector(".open")
+    open.onclick = ()=>{
+      const modal = container.querySelector(".modal-background")
+      event(modal,"init")
+    }
   }
-
 </script>

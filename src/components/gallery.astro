@@ -108,7 +108,8 @@ object{
 }
 </style>
 
-<script define:vars={{ filename,baseUrl }} type="module" >
+<script define:vars={{ filename }} type="module" >
+    const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
     const {event} = await import(`${baseUrl}/utils.js`)
 
     const container = document.querySelector(`.container[data-filename="${filename}"]`)

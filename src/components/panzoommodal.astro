@@ -115,19 +115,32 @@ const uid = suid()
     minZoom: 0.1,
     maxZoom:4,
     //autocenter:true
-    }
+  }
+
+  function appendShadowSVG(center,text){
+    const shadowRoot = center.attachShadow({mode: 'open'});
+    const div = document.createElement("div")
+    shadowRoot.appendChild(div)
+    div.insertAdjacentHTML( 'beforeend', text )
+    const svg = div.querySelector("svg")
+    svg.setAttribute("style","user-select: none; cursor:grab;")
+    svg.querySelectorAll('tspan,text').forEach((el)=>{
+        el.style.cursor = "pointer";
+    });    
+  }
 
   async function initPanZoom(center){
     await fetchAsset(center)
 
+    const shadowRoot = center.shadowRoot
     const url = center.getAttribute("data-url")
     const isSvg = url.endsWith(".svg")
     //console.log("creating panzoom")
     if(isSvg){
-      const svg = center.querySelector("svg")
+      const svg = shadowRoot.querySelector("svg")
       pzref = panzoom(svg,zoomOptions)
     }else{
-      const image = center.querySelector("img")
+      const image = shadowRoot.querySelector("img")
       pzref = panzoom(image,zoomOptions)
     }
   }
@@ -142,7 +155,7 @@ const uid = suid()
       if(!svg){
         const resp = await fetch(url)
         const text = await resp.text()
-        center.insertAdjacentHTML( 'beforeend', text )
+        appendShadowSVG(center,text)
       }
     }else{
       const img = center.querySelector("img")

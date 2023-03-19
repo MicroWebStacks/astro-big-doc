@@ -38,6 +38,17 @@ function cloneAsset(center){
     }
 }
 
+function window_url_add_modal(center){
+    const container = center.parentElement.parentElement.parentElement.parentElement
+    const pz_name = container.getAttribute("data-name")
+    const new_href = window.location.origin+window.location.pathname+`?modal=${pz_name}`
+    window.history.pushState({},"",new_href)
+}
+function window_url_remove_modal(){
+    const new_href = window.location.origin+window.location.pathname
+    window.history.pushState({},"",new_href)
+}
+
 function initModal(event){
 
   const modal = event.target
@@ -62,17 +73,25 @@ function initModal(event){
       const svg = shadowRoot.querySelector("svg")
       svg.parentElement.remove()
     }
+    window_url_remove_modal()
   }
-
+  window_url_add_modal(center)
   modal.classList.add("visible")
 }
 
-const modalsbkgs = document.querySelectorAll(`.modal-background`)
-const modals = [...modalsbkgs]
-for(let el in modals){
-  const modal = modals[el]
-  if(modal.getAttribute("data-state") == "init"){
-    modal.addEventListener("init",initModal  ,false)
-    modal.setAttribute("data-state","run")
-  }
+function init(){
+    const modalsbkgs = document.querySelectorAll(`.modal-background`)
+    if(modalsbkgs.length == 0){//prevent irrelvant page execution
+        return
+    }
+    const modals = [...modalsbkgs]
+    for(let el in modals){
+      const modal = modals[el]
+      if(modal.getAttribute("data-state") == "init"){
+        modal.addEventListener("init",initModal  ,false)
+        modal.setAttribute("data-state","run")
+      }
+    }
 }
+
+init()

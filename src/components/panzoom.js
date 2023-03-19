@@ -23,9 +23,21 @@ function add_links(container,url_map){
   })
 }
 
+function checkModal(){
+  //check if any modal needs to be opened
+  const params = new URL(location.href).searchParams;
+  const modal_name = params.get('modal');
+  if(modal_name){
+    console.log(`opening modal for ${modal_name}`)
+    const container = document.querySelector(`.container.panzoom[data-name="${modal_name}"]`)
+    const modal = container.querySelector(".modal-background")
+    event(modal,"init")
+  }
+}
+
 function init(){
   const containers_els = document.querySelectorAll(".container.panzoom")
-  if(containers_els.length == 0){//prevent irrelvant paeg execution
+  if(containers_els.length == 0){//prevent irrelvant page execution
     return
   }
   const containers = [...containers_els]
@@ -45,7 +57,9 @@ function init(){
       const modal = container.querySelector(".modal-background")
       event(modal,"init")
     }
-    }
+  }
+  //allow the modal to init and register its listener before throwing the open event
+  setTimeout(checkModal,10)
 }
 
 init()

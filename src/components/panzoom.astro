@@ -2,19 +2,20 @@
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
 import PanZoomModal from './panzoommodal.astro'
 import SvgIcons from '@/components/svgicons.astro'
-
+import { get_map } from '@/libs/tags_map';
 export interface Props {
   'data-url': string;
 }
 
 const { 'data-url':asseturl } = Astro.props as Props;
+const assetname = asseturl.split(".mdx.")[1]
 console.log(` * panzoom : '${asseturl}'`)
 
 const isSvg = asseturl.endsWith(".svg")
 const isImg = !isSvg
-
+const url_map = get_map(asseturl)
 ---
-<div class="container panzoom" data-type={isSvg?"svg":"img"}>
+<div class="container panzoom" data-type={isSvg?"svg":"img"} data-name={assetname} data-url-map={url_map}>
   <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>

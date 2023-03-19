@@ -1,12 +1,7 @@
 import { SVG as SVGjs } from '@svgdotjs/svg.js'
 import {event} from '../libs/client_utils'
 
-const json_data = {
-  "Michael" : "https://github.com/MicroWebStacks",
-  "Maria":"/astro-big-doc/blog/plantuml#large-sequence"
-}
-
-function add_links(container){
+function add_links(container,url_map){
   const obj = container.querySelector("object")
   const svg = obj.contentDocument.querySelector("svg")
 
@@ -15,12 +10,12 @@ function add_links(container){
   let text_array = [ ...text_nodes ];
   text_array.forEach((text)=>{
     const key = text.node.innerHTML
-    if(key in json_data){
+    if(key in url_map){
       var isAbs = new RegExp('^(?:[a-z+]+:)?//', 'i');//isAbsolute https://stackoverflow.com/questions/10687099/how-to-test-if-a-url-string-is-absolute-or-relative
-      if(isAbs.test(json_data[key])){
-        text.linkTo((link)=>{link.to(json_data[key]).target('_blank')})//link in new page
+      if(isAbs.test(url_map[key])){
+        text.linkTo((link)=>{link.to(url_map[key]).target('_blank')})//link in new page
       }else{
-        text.linkTo((link)=>{link.to(json_data[key]).target('_top')})//link outside the shadow DOM
+        text.linkTo((link)=>{link.to(url_map[key]).target('_top')})//link outside the shadow DOM
       }
       text.css({'text-decoration': 'underline'})  
       //text.fill('#f06')
@@ -38,17 +33,19 @@ function init(){
     const container = containers[el]
     const eltype = container.getAttribute("data-type")
     if(eltype == "svg"){
-      add_links(container)
+      const url_map_string = container.getAttribute("data-url-map")
+      if(url_map_string){
+        const url_map = JSON.parse(url_map_string)
+        add_links(container,url_map)
+      }
     }
 
     const open = container.querySelector(".open")
-    if(open){
-      open.onclick = ()=>{
-        const modal = container.querySelector(".modal-background")
-        event(modal,"init")
-      }
+    open.onclick = ()=>{
+      const modal = container.querySelector(".modal-background")
+      event(modal,"init")
     }
-  }
+    }
 }
 
 init()

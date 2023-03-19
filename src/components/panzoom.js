@@ -1,13 +1,9 @@
 import { SVG as SVGjs } from '@svgdotjs/svg.js'
+import {event} from '../libs/client_utils'
 
 const json_data = {
   "Michael" : "https://github.com/MicroWebStacks",
   "Maria":"/astro-big-doc/blog/plantuml#large-sequence"
-}
-
-function event(element,event_name,data=null){
-	var event = new CustomEvent(event_name, {detail:data});
-	element.dispatchEvent(event);
 }
 
 function add_links(container){
@@ -24,7 +20,7 @@ function add_links(container){
       if(isAbs.test(json_data[key])){
         text.linkTo((link)=>{link.to(json_data[key]).target('_blank')})//link in new page
       }else{
-        text.linkTo(json_data[key])//link in same page
+        text.linkTo((link)=>{link.to(json_data[key]).target('_top')})//link outside the shadow DOM
       }
       text.css({'text-decoration': 'underline'})  
       //text.fill('#f06')
@@ -33,7 +29,10 @@ function add_links(container){
 }
 
 function init(){
-  const containers_els = document.querySelectorAll(".container")
+  const containers_els = document.querySelectorAll(".container.panzoom")
+  if(containers_els.length == 0){//prevent irrelvant paeg execution
+    return
+  }
   const containers = [...containers_els]
   for(let el in containers){
     const container = containers[el]
@@ -43,9 +42,11 @@ function init(){
     }
 
     const open = container.querySelector(".open")
-    open.onclick = ()=>{
-      const modal = container.querySelector(".modal-background")
-      event(modal,"init")
+    if(open){
+      open.onclick = ()=>{
+        const modal = container.querySelector(".modal-background")
+        event(modal,"init")
+      }
     }
   }
 }

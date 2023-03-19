@@ -14,7 +14,7 @@ const isSvg = asseturl.endsWith(".svg")
 const isImg = !isSvg
 
 ---
-<div class="container" data-type={isSvg?"svg":"img"}>
+<div class="container panzoom" data-type={isSvg?"svg":"img"}>
   <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>
@@ -81,5 +81,5 @@ object{
 
 </style>
 
-<script src="./panzoom_init.js" />
+<script src="./panzoom.js" />
 

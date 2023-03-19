@@ -37,6 +37,15 @@
   },
   {
     "parent": false,
+    "text": "test",
+    "weight": 1,
+    "path": "/blog/test",
+    "parent_path": "/blog",
+    "depth": 1,
+    "href": "/blog/test"
+  },
+  {
+    "parent": false,
     "text": "middle",
     "weight": 1,
     "path": "/blog/level1/middle",

@@ -36,6 +36,15 @@
     "href": "/blog/static_dynamic"
   },
   {
+    "parent": false,
+    "text": "test",
+    "weight": 1,
+    "path": "/blog/test",
+    "parent_path": "/blog",
+    "depth": 1,
+    "href": "/blog/test"
+  },
+  {
     "items": [
       {
         "items": [

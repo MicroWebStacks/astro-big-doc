@@ -17,7 +17,8 @@ function appendShadowSVG(center,svg){
   shadowRoot.appendChild(div)
   const new_svg = svg.cloneNode(true)
   div.appendChild(new_svg)
-  new_svg.setAttribute("style","user-select: none; cursor:grab;")
+  const oldstyle = new_svg.getAttribute("style")
+  new_svg.setAttribute("style",`${oldstyle};user-select: none; cursor:grab;`)
   new_svg.querySelectorAll('tspan,text').forEach((el)=>{
       el.style.cursor = "pointer";
   });

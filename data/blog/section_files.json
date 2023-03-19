@@ -94,5 +94,11 @@
       "title": "Static vs Dynamic",
       "weight": 4
     }
+  },
+  "/blog/test": {
+    "path": "test.mdx",
+    "url": "/blog/test",
+    "section_url": "test",
+    "frontmatter": {}
   }
 }

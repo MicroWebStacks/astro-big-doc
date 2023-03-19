@@ -2,33 +2,31 @@
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
 import PanZoomModal from './panzoommodal.astro'
 import SvgIcons from '@/components/svgicons.astro'
-import Svg from '@/components/svgurl.astro'
 
 export interface Props {
   'data-url': string;
 }
 
 const { 'data-url':asseturl } = Astro.props as Props;
-
 console.log(` * panzoom : '${asseturl}'`)
+
 const isSvg = asseturl.endsWith(".svg")
 const isImg = !isSvg
 
+const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 ---
 <div class="container">
   <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>
-  {isImg&&
-    <img src={asseturl}/>
-  }
-  {isSvg&&
-    <div class="shadow">
-      <template shadowrootmode="open">
-        <Svg url={asseturl} />
-      </template>
-    </div>
-  }
+  <div class="figure">
+    {isSvg&&
+      <object data={asseturl} />
+    }
+    {isImg&&
+      <img src={asseturl} />
+    }
+  </div>
   <PanZoomModal url={asseturl} />
 </div>
 
@@ -84,27 +82,5 @@ object{
 
 </style>
 
-<script type="module" >
-  const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
-  const {event} = await import(`${baseUrl}/utils.js`)
+<script type="module" src={`${baseUrl}/panzoom_init.js`} />
 
-  function add_link(container){
-    const shadow_continer = container.querySelector(".shadow")
-    const shadow = shadow_continer.shadowRoot
-    const svg = shadow.querySelector("svg")
-    console.log(svg)
-  }
-
-
-  const containers_els = document.querySelectorAll(".container")
-  const containers = [...containers_els]
-  for(let el in containers){
-    const container = containers[el]
-    const open = container.querySelector(".open")
-    open.onclick = ()=>{
-      const modal = container.querySelector(".modal-background")
-      event(modal,"init")
-      add_link(container)
-    }
-  }
-</script>

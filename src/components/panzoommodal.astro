@@ -111,73 +111,49 @@ const {url} = Astro.props as Props;
     //autocenter:true
   }
 
-  function appendShadowSVG(center,text){
+  function appendShadowSVG(center,svg){
     //cannot detatch a shadow root, so check existing before creation
     let shadowRoot = center.shadowRoot
     if(!shadowRoot){
       shadowRoot = center.attachShadow({mode: 'open'});
     }
-    const div = document.createElement("div")
+    const div = document.createElement("div")//needed for the panzoom as it takes the parent
     shadowRoot.appendChild(div)
-    div.insertAdjacentHTML( 'beforeend', text )
-    const svg = div.querySelector("svg")
-    svg.setAttribute("style","user-select: none; cursor:grab;")
-    svg.querySelectorAll('tspan,text').forEach((el)=>{
+    const new_svg = svg.cloneNode(true)
+    div.appendChild(new_svg)
+    new_svg.setAttribute("style","user-select: none; cursor:grab;")
+    new_svg.querySelectorAll('tspan,text').forEach((el)=>{
         el.style.cursor = "pointer";
-    });    
+    });
+    return new_svg
   }
 
-  async function initPanZoom(center){
-    await fetchAsset(center)
-
-    const shadowRoot = center.shadowRoot
-    const url = center.getAttribute("data-url")
-    const isSvg = url.endsWith(".svg")
-    //console.log("creating panzoom")
-    if(isSvg){
-      const svg = shadowRoot.querySelector("svg")
-      pzref = panzoom(svg,zoomOptions)
-    }else{
-      const image = center.querySelector("img")
-      pzref = panzoom(image,zoomOptions)
-    }
-  }
-
-  async function fetchAsset(center){
-    //console.log("fetching asset")
-    const url = center.getAttribute("data-url")
-    //console.log(url)
-    const isSvg = url.endsWith(".svg")
-    if(isSvg){
-      const svg = center.querySelector("svg")
-      if(!svg){
-        const resp = await fetch(url)
-        const text = await resp.text()
-        appendShadowSVG(center,text)
+  function cloneAsset(center){
+      const container = center.parentElement.parentElement.parentElement.parentElement
+      const obj = container.querySelector("object")
+      if(obj){
+        const svg = obj.contentDocument.querySelector("svg")
+        return appendShadowSVG(center,svg)
+      }else{
+        const img = container.querySelector("img")
+        const new_img = img.cloneNode(true)
+        center.appendChild(new_img)
+        return new_img
       }
-    }else{
-      const img = center.querySelector("img")
-      if(!img){
-        const resp = await fetch(url)
-        const blob = await resp.blob()
-        const imgObjURL = URL.createObjectURL(blob)
-        const imgElement = document.createElement('img')
-        imgElement.src = imgObjURL
-        center.appendChild(imgElement)
-      }
-    }
   }
 
-  async function initModal(event){
-    //console.log("initModal start")
-    if(pzref){
-      pzref.dispose()
-    }
+  function initModal(event){
+
     const modal = event.target
     const close = modal.querySelector(".close")
     const center = modal.querySelector(".modal-center")
-    await initPanZoom(center)
-    modal.classList.add("visible")
+
+    const svg_img = cloneAsset(center)
+    if(pzref){
+      pzref.dispose()
+    }
+    pzref = panzoom(svg_img,zoomOptions)
+
     close.onclick = ()=>{
       //console.log("closed click")
       modal.classList.remove("visible")
@@ -185,13 +161,14 @@ const {url} = Astro.props as Props;
       const img = center.querySelector("img")
       if(img){
         img.remove()
-      }else{// SVG
+      }else{// SVG - remove the parent div and leave the shadowRoot for reuse
         const shadowRoot = center.shadowRoot
         const svg = shadowRoot.querySelector("svg")
         svg.parentElement.remove()
       }
     }
-    //console.log("initModal end")
+
+    modal.classList.add("visible")
   }
 
   const modalsbkgs = document.querySelectorAll(`.modal-background`)

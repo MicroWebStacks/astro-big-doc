@@ -1,4 +1,5 @@
 ---
+import { url } from '@/dist/server/chunks/very_deep.23f95693.mjs';
 import {existsSync,readFileSync} from 'fs';
 import {relAssetToUrl} from '../libs/utils'
 import PanZoomModal from './panzoommodal.astro'
@@ -16,7 +17,8 @@ const json_text = existsSync(filepath)?readFileSync(filepath).toString():"[]"
 const relImages = JSON.parse(json_text)
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const imagesUrls = relImages.map((relFile)=>({
-        url:relAssetToUrl(relFile,filedir,import.meta.env.BASE_URL)
+        url:relAssetToUrl(relFile,filedir,import.meta.env.BASE_URL),
+        isSVG:relAssetToUrl(relFile,filedir,import.meta.env.BASE_URL).endsWith(".svg")
     }))
 
 ---
@@ -30,7 +32,12 @@ const imagesUrls = relImages.map((relFile)=>({
             {imagesUrls.map((image)=>(
                 <div class="item">
                     <div class="itemimage">
-                        <object data={image.url} />
+                        {image.isSVG&&
+                            <object data={image.url} />
+                        }
+                        {(!image.isSVG)&&
+                            <img src={image.url} />
+                        }
                     </div>
                     <div class="overlay">{image.file}</div>
                     <PanZoomModal url={image.url} />
@@ -102,6 +109,11 @@ const imagesUrls = relImages.map((relFile)=>({
     max-width: 150px;
 }
 object{
+    pointer-events: none;
+    max-height: 100%;
+    max-width: 100%;
+}
+img{
     pointer-events: none;
     max-height: 100%;
     max-width: 100%;

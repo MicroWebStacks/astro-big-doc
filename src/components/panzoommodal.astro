@@ -1,7 +1,4 @@
 ---
-import {existsSync,readFileSync} from 'fs'
-import { suid } from '@/libs/utils';
-
 
 export interface Props {
     url: string;
@@ -14,11 +11,8 @@ export interface Props {
 
 const {url} = Astro.props as Props;
 
-const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
-const uid = suid()
-
 ---
-<div class="modal-background" data-uid={uid} data-state={"init"}>
+<div class="modal-background" data-state={"init"}>
   <div class="modal">
     <div class="modal-header close">
       <span class="close-x">&times;</span>
@@ -118,7 +112,11 @@ const uid = suid()
   }
 
   function appendShadowSVG(center,text){
-    const shadowRoot = center.attachShadow({mode: 'open'});
+    //cannot detatch a shadow root, so check existing before creation
+    let shadowRoot = center.shadowRoot
+    if(!shadowRoot){
+      shadowRoot = center.attachShadow({mode: 'open'});
+    }
     const div = document.createElement("div")
     shadowRoot.appendChild(div)
     div.insertAdjacentHTML( 'beforeend', text )
@@ -140,7 +138,7 @@ const uid = suid()
       const svg = shadowRoot.querySelector("svg")
       pzref = panzoom(svg,zoomOptions)
     }else{
-      const image = shadowRoot.querySelector("img")
+      const image = center.querySelector("img")
       pzref = panzoom(image,zoomOptions)
     }
   }
@@ -184,13 +182,13 @@ const uid = suid()
       //console.log("closed click")
       modal.classList.remove("visible")
       pzref.dispose()
-      const svg = center.querySelector("svg")
-      if(svg){
-        svg.remove()
-      }
       const img = center.querySelector("img")
       if(img){
         img.remove()
+      }else{// SVG
+        const shadowRoot = center.shadowRoot
+        const svg = shadowRoot.querySelector("svg")
+        svg.parentElement.remove()
       }
     }
     //console.log("initModal end")

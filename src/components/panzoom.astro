@@ -2,6 +2,7 @@
 //https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/
 import PanZoomModal from './panzoommodal.astro'
 import SvgIcons from '@/components/svgicons.astro'
+import Svg from '@/components/svgurl.astro'
 
 export interface Props {
   'data-url': string;
@@ -9,16 +10,25 @@ export interface Props {
 
 const { 'data-url':asseturl } = Astro.props as Props;
 
-//console.log(` * panzoom : '${asseturl}'`)
+console.log(` * panzoom : '${asseturl}'`)
+const isSvg = asseturl.endsWith(".svg")
+const isImg = !isSvg
 
 ---
 <div class="container">
   <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>
-  <div class="figure">
-    <object data={asseturl} />
-  </div>
+  {isImg&&
+    <img src={asseturl}/>
+  }
+  {isSvg&&
+    <div class="shadow">
+      <template shadowrootmode="open">
+        <Svg url={asseturl} />
+      </template>
+    </div>
+  }
   <PanZoomModal url={asseturl} />
 </div>
 
@@ -78,6 +88,14 @@ object{
   const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
   const {event} = await import(`${baseUrl}/utils.js`)
 
+  function add_link(container){
+    const shadow_continer = container.querySelector(".shadow")
+    const shadow = shadow_continer.shadowRoot
+    const svg = shadow.querySelector("svg")
+    console.log(svg)
+  }
+
+
   const containers_els = document.querySelectorAll(".container")
   const containers = [...containers_els]
   for(let el in containers){
@@ -86,6 +104,7 @@ object{
     open.onclick = ()=>{
       const modal = container.querySelector(".modal-background")
       event(modal,"init")
+      add_link(container)
     }
   }
 </script>

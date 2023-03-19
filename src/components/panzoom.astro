@@ -13,7 +13,6 @@ console.log(` * panzoom : '${asseturl}'`)
 const isSvg = asseturl.endsWith(".svg")
 const isImg = !isSvg
 
-const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 ---
 <div class="container">
   <div class="header open">
@@ -82,5 +81,5 @@ object{
 
 </style>
 
-<script type="module" src={`${baseUrl}/panzoom_init.js`} />
+<script src="./panzoom_init.js" />
 

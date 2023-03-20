@@ -1,4 +1,4 @@
-import * as panzoom from 'panzoom'
+import panzoom from 'panzoom'
 
 let pzref = null
 const zoomOptions = {
@@ -95,4 +95,4 @@ function init(){
     }
 }
 
-init()
+document.addEventListener('DOMContentLoaded', init, false);

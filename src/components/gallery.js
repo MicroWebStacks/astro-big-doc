@@ -58,4 +58,5 @@ function init(){
   setTimeout(checkModal,10)
 }
 
-init()
+document.addEventListener('DOMContentLoaded', init, false);
+

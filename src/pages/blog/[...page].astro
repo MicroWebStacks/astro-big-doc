@@ -27,9 +27,11 @@ try {
 }
 
 if(found){
-    //console.time('glob')
-    const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}', { eager: true })
-    //console.timeEnd('glob')
+    console.time('glob')
+    //const posts = get_posts() //no improvements by caching in a file
+    const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}')
+    //
+    console.timeEnd('glob')
     const component_path = "__filedir"
     const Post_path = Object.keys(posts).find((path)=>(resolve(component_path,path) == page_path))
     
@@ -40,7 +42,7 @@ if(found){
     }
     if(found){
         //console.time('import')
-        Post = posts[Post_path]
+        Post = await posts[Post_path]()
         //console.timeEnd('import')
     }
 }

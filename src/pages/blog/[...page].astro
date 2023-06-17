@@ -9,10 +9,13 @@ import H1 from "@/components/headings/H1.astro"
 import H2 from "@/components/headings/H2.astro"
 import H3 from "@/components/headings/H3.astro"
 import {get_section_urls, get_section_file_from_url} from "@/layout/nav_section"
+import {get_posts} from "./page"
 
 const {page} = Astro.params;
 const page_path = await get_section_file_from_url('/data/blog',page,'/blog/')
 console.log(`Astro/blog> url: /blog/${page} file: ${page_path}`)
+console.timeEnd('page')
+console.time('page')
 
 let found = true
 let Post = null
@@ -25,7 +28,7 @@ try {
 
 if(found){
     //console.time('glob')
-    const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}')//relative to this component file
+    const posts = import.meta.glob('../../../data/blog/**/*.{md,mdx}', { eager: true })
     //console.timeEnd('glob')
     const component_path = "__filedir"
     const Post_path = Object.keys(posts).find((path)=>(resolve(component_path,path) == page_path))
@@ -37,7 +40,7 @@ if(found){
     }
     if(found){
         //console.time('import')
-        Post = await posts[Post_path]()
+        Post = posts[Post_path]
         //console.timeEnd('import')
     }
 }

@@ -16,6 +16,7 @@ const page_path = await get_section_file_from_url('/data/blog',page,'/blog/')
 console.log(`Astro/blog> url: /blog/${page} file: ${page_path}`)
 console.timeEnd('page')
 console.time('page')
+console.time('inside')
 
 let found = true
 let Post = null
@@ -62,3 +63,4 @@ export async function getStaticPaths(){
 {!found &&
 <Page_404 target={page}/>
 }
+{console.timeEnd('inside')}

@@ -1,3 +1,10 @@
+https://stackblitz.com/github/MicroWebStacks/astro-big-doc/tree/md_scale
+ 
+ ~ 3000 : 2 sec
+ ~ 2200 : 1.5 s
+ ~ 1100 : 700 ms
+
+
 # astro big doc
 
 Live demo : https://microwebstacks.github.io/astro-big-doc/

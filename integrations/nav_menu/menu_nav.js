@@ -1,8 +1,8 @@
 import { config } from '../../config'
-import {dirname,basename,join} from 'node:path'
+import {dirname,basename,join,resolve} from 'node:path'
 import {url_path, remove_base,remove_first} from './menu_utils'
 import {promises as fs} from 'fs';
-import raw_menu from '../../menu.json'
+import menu from '../../menu.json'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
@@ -172,21 +172,66 @@ function set_active_expanded(url, menu){
     }
 }
 
-async function parse_directories_recursive(path){
-    return []
+function depth_url(url,depth){
+    const elements =  url.split("/")
+    const non_empty = elements.filter(el=>el)
+    let result = ""
+    for(let i = 0;i<depth;i++){
+        result += "/"+non_empty[i]
+    }
+    return result
+}
+
+async function parse_directories_recursive(parent){
+    let result = []
+    const abs_path = join(config.rootdir,parent.path)
+    let parent_href = depth_url(parent.href,parent.level)
+    const subdirs = await fs.readdir(abs_path);
+    console.log(` => subdirs for : ${abs_path} : `)
+    for (const subdir of subdirs){
+        const res = resolve(abs_path, subdir);
+        if((await fs.stat(res)).isDirectory()){
+            const new_entry = {
+                text: subdir,
+                path: join(parent.path,subdir).replaceAll("\\","/"),
+                href: join(parent_href,subdir).replaceAll("\\","/"),
+                href_base: parent.href_base,
+                level: parent.level + 1
+            }
+            const readme = join(res,"readme.mdx")
+            let found = true
+            try {
+                await fs.access(readme)
+            } catch {
+                found = false
+            }
+            new_entry.readme = found
+            const items = await parse_directories_recursive(new_entry)
+            if(items.length > 0){
+                new_entry.items = items
+            }
+            //if(found){
+            //    console.log(`   found readme.mdx in ${abs_path} - ${subdir}`)
+            //}
+            result.push(new_entry)
+        }
+    }
+    return result
 }
 
 async function generate_nav_menu(){
 
-    const sections = raw_menu.filter((entry)=>(entry.path))
-    for(const section of sections){
-        const items = await parse_directories_recursive(section.path)
-        if(items){
-            section.items = items
-            console.log(`generated items for ${section.href_base}`)
+    for(const section of menu){
+        if(section.path){
+            section.level = 1
+            const items = await parse_directories_recursive(section)
+            if(items){
+                section.items = items
+                console.log(`generated items for ${section.href_base}`)
+            }
         }
     }
-    await fs.writeFile(join(config.rootdir,'public/menu.json'),JSON.stringify(sections,undefined, 2))
+    await fs.writeFile(join(config.rootdir,'public/menu.json'),JSON.stringify(menu,undefined, 2))
 }
 
 export{

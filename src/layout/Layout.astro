@@ -43,12 +43,12 @@ console.log(` => using menu (${menu.hash})`)
 			</header>
 			<main>
 				<div id="wide-nav" class="scroll">
-					<NavMenu/>
+					<NavMenu hash={menu.hash}/>
 				</div>
 				<div id="resize-left" class="nav-resize active"/>
 				<article class="content scroll">
 					<div id="mobile-nav">
-						<NavMenu/>
+						<NavMenu hash={menu.hash}/>
 					</div>
 					<div class="article-slot">
 						<slot/>
@@ -201,7 +201,7 @@ footer p{
 </style>
 
 <script >
-
+	console.log("Layout script")
 	const root = document.querySelector(':root');
 	//root.style.setProperty('--header-bg-color', 'blue');
 	const header_bg_color = getComputedStyle(root).getPropertyValue('--header-bg-color');
@@ -215,10 +215,12 @@ footer p{
 				nav_el.classList.remove("open")
 				nav_el.classList.add("closed")
 				nav_el.style.width = "0vw"
+	            localStorage.setItem("left_open","false")
 			}else if(current_state == "closed"){
 				nav_el.classList.add("open")
 				nav_el.classList.remove("closed")
 				nav_el.style.width = nav_el.getAttribute("data-width")
+	            localStorage.setItem("left_open","true")
 			}
 			e.preventDefault()
 		})

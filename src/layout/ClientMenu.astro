@@ -112,18 +112,6 @@ import './colors.css';
 
 
 <script>
-    //This script is here and not under Submenu to make it run only once
-    let toggler = document.getElementsByClassName("nav_expand");
-    for (let i = 0; i < toggler.length; i++) {
-      toggler[i].addEventListener("click", function(e) {
-        const ul = this.parentElement.querySelector("ul")
-        ul.classList.toggle("hidden");
-        if(ul.classList.contains("hidden")){
-            this.classList.remove("expanded");
-        }else{
-            this.classList.add("expanded");
-        }
-        e.preventDefault()
-      });
-    }
+    import {inject_menu} from "./client_menu"
+    await inject_menu()
 </script>

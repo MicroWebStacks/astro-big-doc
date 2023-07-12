@@ -2,8 +2,13 @@
 import './colors.css';
 import ClientMenu from "./ClientMenu.astro";
 
+export interface Props {
+	hash: string;
+}
+
+const {hash} = Astro.props;
 ---
-<nav class="left-nav open" data-width="20vw">
+<nav class="left-nav open" data-width="20vw" data-hash={hash}>
     <ClientMenu />
 </nav>
 

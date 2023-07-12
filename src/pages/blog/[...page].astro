@@ -43,7 +43,7 @@ if(found){
 }
 
 export async function getStaticPaths(){
-    const static_files_paths = ["","panzoom","gallery"]// TODO
+    const static_files_paths = ["panzoom","gallery"]// TODO
     return static_files_paths.map((url)=>({params:{page:url}}))
 }
 

@@ -1,194 +1,197 @@
-[
-  {
-    "text": "Home",
-    "path": "/data/blog",
-    "href_base": "/blog/",
-    "href": "/blog/gallery",
-    "level": 1,
-    "items": [
-      {
-        "text": "double1",
-        "path": "/data/blog/double1",
-        "href": "/blog/double1",
-        "href_base": "/blog/",
-        "level": 2,
-        "readme": false,
-        "items": [
-          {
-            "text": "double2",
-            "path": "/data/blog/double1/double2",
-            "href": "/blog/double1/double2",
-            "href_base": "/blog/",
-            "level": 3,
-            "readme": false,
-            "items": [
-              {
-                "text": "double3",
-                "path": "/data/blog/double1/double2/double3",
-                "href": "/blog/double1/double2/double3",
-                "href_base": "/blog/",
-                "level": 4,
-                "readme": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "text": "gallery",
-        "path": "/data/blog/gallery",
-        "href": "/blog/gallery",
-        "href_base": "/blog/",
-        "level": 2,
-        "readme": true
-      },
-      {
-        "text": "level1",
-        "path": "/data/blog/level1",
-        "href": "/blog/level1",
-        "href_base": "/blog/",
-        "level": 2,
-        "readme": true,
-        "items": [
-          {
-            "text": "level2",
-            "path": "/data/blog/level1/level2",
-            "href": "/blog/level1/level2",
-            "href_base": "/blog/",
-            "level": 3,
-            "readme": true
-          }
-        ]
-      },
-      {
-        "text": "panzoom",
-        "path": "/data/blog/panzoom",
-        "href": "/blog/panzoom",
-        "href_base": "/blog/",
-        "level": 2,
-        "readme": true
-      },
-      {
-        "text": "plantuml",
-        "path": "/data/blog/plantuml",
-        "href": "/blog/plantuml",
-        "href_base": "/blog/",
-        "level": 2,
-        "readme": true
-      },
-      {
-        "text": "prepare1",
-        "path": "/data/blog/prepare1",
-        "href": "/blog/prepare1",
-        "href_base": "/blog/",
-        "level": 2,
-        "readme": false,
-        "items": [
-          {
-            "text": "prepare2",
-            "path": "/data/blog/prepare1/prepare2",
-            "href": "/blog/prepare1/prepare2",
-            "href_base": "/blog/",
-            "level": 3,
-            "readme": true,
-            "items": [
-              {
-                "text": "deepest1",
-                "path": "/data/blog/prepare1/prepare2/deepest1",
-                "href": "/blog/prepare1/prepare2/deepest1",
-                "href_base": "/blog/",
-                "level": 4,
-                "readme": false,
-                "items": [
-                  {
-                    "text": "deepest2",
-                    "path": "/data/blog/prepare1/prepare2/deepest1/deepest2",
-                    "href": "/blog/prepare1/prepare2/deepest1/deepest2",
-                    "href_base": "/blog/",
-                    "level": 5,
-                    "readme": false,
-                    "items": [
-                      {
-                        "text": "deepest3",
-                        "path": "/data/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
-                        "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
-                        "href_base": "/blog/",
-                        "level": 6,
-                        "readme": true
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "text": "presentation",
-        "path": "/data/blog/presentation",
-        "href": "/blog/presentation",
-        "href_base": "/blog/",
-        "level": 2,
-        "readme": false,
-        "items": [
-          {
-            "text": "raspi",
-            "path": "/data/blog/presentation/raspi",
-            "href": "/blog/presentation/raspi",
-            "href_base": "/blog/",
-            "level": 3,
-            "readme": true
-          },
-          {
-            "text": "tester_page_1",
-            "path": "/data/blog/presentation/tester_page_1",
-            "href": "/blog/presentation/tester_page_1",
-            "href_base": "/blog/",
-            "level": 3,
-            "readme": true
-          },
-          {
-            "text": "tester_page_2",
-            "path": "/data/blog/presentation/tester_page_2",
-            "href": "/blog/presentation/tester_page_2",
-            "href_base": "/blog/",
-            "level": 3,
-            "readme": true
-          },
-          {
-            "text": "tester_page_3",
-            "path": "/data/blog/presentation/tester_page_3",
-            "href": "/blog/presentation/tester_page_3",
-            "href_base": "/blog/",
-            "level": 3,
-            "readme": true
-          }
-        ]
-      },
-      {
-        "text": "static_dynamic",
-        "path": "/data/blog/static_dynamic",
-        "href": "/blog/static_dynamic",
-        "href_base": "/blog/",
-        "level": 2,
-        "readme": true
-      }
-    ]
-  },
-  {
-    "text": "About",
-    "href_base": "/about/",
-    "href": "/about/",
-    "items": [
-      {
-        "text": "About page",
-        "href": "/about/"
-      }
-    ]
-  },
-  {
-    "icon": "github",
-    "href": "https://github.com/MicroWebStacks/astro-big-doc"
-  }
-]
+{
+  "hash": "c9e7d17e",
+  "items": [
+    {
+      "text": "Home",
+      "path": "/data/blog",
+      "href_base": "/blog/",
+      "href": "/blog/gallery",
+      "level": 1,
+      "items": [
+        {
+          "text": "double1",
+          "path": "/data/blog/double1",
+          "href": "/blog/double1",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": false,
+          "items": [
+            {
+              "text": "double2",
+              "path": "/data/blog/double1/double2",
+              "href": "/blog/double1/double2",
+              "href_base": "/blog/",
+              "level": 3,
+              "readme": false,
+              "items": [
+                {
+                  "text": "double3",
+                  "path": "/data/blog/double1/double2/double3",
+                  "href": "/blog/double1/double2/double3",
+                  "href_base": "/blog/",
+                  "level": 4,
+                  "readme": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "text": "gallery",
+          "path": "/data/blog/gallery",
+          "href": "/blog/gallery",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": true
+        },
+        {
+          "text": "level1",
+          "path": "/data/blog/level1",
+          "href": "/blog/level1",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": true,
+          "items": [
+            {
+              "text": "level2",
+              "path": "/data/blog/level1/level2",
+              "href": "/blog/level1/level2",
+              "href_base": "/blog/",
+              "level": 3,
+              "readme": true
+            }
+          ]
+        },
+        {
+          "text": "panzoom",
+          "path": "/data/blog/panzoom",
+          "href": "/blog/panzoom",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": true
+        },
+        {
+          "text": "plantuml",
+          "path": "/data/blog/plantuml",
+          "href": "/blog/plantuml",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": true
+        },
+        {
+          "text": "prepare1",
+          "path": "/data/blog/prepare1",
+          "href": "/blog/prepare1",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": false,
+          "items": [
+            {
+              "text": "prepare2",
+              "path": "/data/blog/prepare1/prepare2",
+              "href": "/blog/prepare1/prepare2",
+              "href_base": "/blog/",
+              "level": 3,
+              "readme": true,
+              "items": [
+                {
+                  "text": "deepest1",
+                  "path": "/data/blog/prepare1/prepare2/deepest1",
+                  "href": "/blog/prepare1/prepare2/deepest1",
+                  "href_base": "/blog/",
+                  "level": 4,
+                  "readme": false,
+                  "items": [
+                    {
+                      "text": "deepest2",
+                      "path": "/data/blog/prepare1/prepare2/deepest1/deepest2",
+                      "href": "/blog/prepare1/prepare2/deepest1/deepest2",
+                      "href_base": "/blog/",
+                      "level": 5,
+                      "readme": false,
+                      "items": [
+                        {
+                          "text": "deepest3",
+                          "path": "/data/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+                          "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+                          "href_base": "/blog/",
+                          "level": 6,
+                          "readme": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "text": "presentation",
+          "path": "/data/blog/presentation",
+          "href": "/blog/presentation",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": false,
+          "items": [
+            {
+              "text": "raspi",
+              "path": "/data/blog/presentation/raspi",
+              "href": "/blog/presentation/raspi",
+              "href_base": "/blog/",
+              "level": 3,
+              "readme": true
+            },
+            {
+              "text": "tester_page_1",
+              "path": "/data/blog/presentation/tester_page_1",
+              "href": "/blog/presentation/tester_page_1",
+              "href_base": "/blog/",
+              "level": 3,
+              "readme": true
+            },
+            {
+              "text": "tester_page_2",
+              "path": "/data/blog/presentation/tester_page_2",
+              "href": "/blog/presentation/tester_page_2",
+              "href_base": "/blog/",
+              "level": 3,
+              "readme": true
+            },
+            {
+              "text": "tester_page_3",
+              "path": "/data/blog/presentation/tester_page_3",
+              "href": "/blog/presentation/tester_page_3",
+              "href_base": "/blog/",
+              "level": 3,
+              "readme": true
+            }
+          ]
+        },
+        {
+          "text": "static_dynamic",
+          "path": "/data/blog/static_dynamic",
+          "href": "/blog/static_dynamic",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": true
+        }
+      ]
+    },
+    {
+      "text": "About",
+      "href_base": "/about/",
+      "href": "/about/",
+      "items": [
+        {
+          "text": "About page",
+          "href": "/about/"
+        }
+      ]
+    },
+    {
+      "icon": "github",
+      "href": "https://github.com/MicroWebStacks/astro-big-doc"
+    }
+  ]
+}

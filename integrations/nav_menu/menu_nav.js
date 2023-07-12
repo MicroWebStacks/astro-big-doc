@@ -3,6 +3,7 @@ import {dirname,basename,join,resolve} from 'node:path'
 import {url_path, remove_base,remove_first} from './menu_utils'
 import {promises as fs} from 'fs';
 import menu from '../../menu.json'
+import {createHash} from 'crypto'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
@@ -187,7 +188,7 @@ async function parse_directories_recursive(parent){
     const abs_path = join(config.rootdir,parent.path)
     let parent_href = depth_url(parent.href,parent.level)
     const subdirs = await fs.readdir(abs_path);
-    console.log(` => subdirs for : ${abs_path} : `)
+    //console.log(` => subdirs for : ${abs_path} : `)
     for (const subdir of subdirs){
         const res = resolve(abs_path, subdir);
         if((await fs.stat(res)).isDirectory()){
@@ -231,7 +232,13 @@ async function generate_nav_menu(){
             }
         }
     }
-    await fs.writeFile(join(config.rootdir,'public/menu.json'),JSON.stringify(menu,undefined, 2))
+    const menu_text = JSON.stringify(menu)
+    const hash = createHash('md5').update(menu_text).digest('hex').substring(0,8)
+    const meta_menu = {
+        hash:hash,
+        items:menu
+    }
+    await fs.writeFile(join(config.rootdir,'public/menu.json'),JSON.stringify(meta_menu,undefined, 2))
 }
 
 export{

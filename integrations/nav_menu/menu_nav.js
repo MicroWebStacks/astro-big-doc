@@ -1,6 +1,8 @@
 import { config } from '../../config'
-import {dirname,basename} from 'path'
+import {dirname,basename,join} from 'node:path'
 import {url_path, remove_base,remove_first} from './menu_utils'
+import {promises as fs} from 'fs';
+import raw_menu from '../../menu.json'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
@@ -170,8 +172,21 @@ function set_active_expanded(url, menu){
     }
 }
 
-function generate_nav_menu(){
-    console.log("hello from menu generation")
+async function parse_directories_recursive(path){
+    return []
+}
+
+async function generate_nav_menu(){
+
+    const sections = raw_menu.filter((entry)=>(entry.path))
+    for(const section of sections){
+        const items = await parse_directories_recursive(section.path)
+        if(items){
+            section.items = items
+            console.log(`generated items for ${section.href_base}`)
+        }
+    }
+    await fs.writeFile(join(config.rootdir,'public/menu.json'),JSON.stringify(sections,undefined, 2))
 }
 
 export{

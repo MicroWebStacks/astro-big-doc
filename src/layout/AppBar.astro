@@ -4,7 +4,6 @@ import menu from "@/menu.json"
 import { active_page } from "../../integrations/nav_menu/menu_utils";
 import Icon from "@/components/icon.astro"
 
-const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 const pageUrl = Astro.url.pathname
 const active_page_index = active_page(pageUrl,menu)
 menu.forEach((item,index)=>{
@@ -15,7 +14,7 @@ menu.forEach((item,index)=>{
 <div class="navbar">
     <ul class="navbar-left">
             {menu.filter(item=>!item.icon).map((item)=>(
-            <li><a href={baseUrl+item.href} class={item.active_class}>{item.text}</a></li>
+            <li><a href={item.href} class={item.active_class}>{item.text}</a></li>
             ))}
     </ul>
     <ul class="navbar-right">

@@ -4,7 +4,7 @@ import { generate_nav_menu } from './menu_nav';
 
 async function config_setup({ updateConfig, config, addPageExtension, command }) {
 	green_log(`astro:config:setup> running (${command})`)
-	generate_nav_menu()
+	await generate_nav_menu()
 }
 
 function generate_menu(options){

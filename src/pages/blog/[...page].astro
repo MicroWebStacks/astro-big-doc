@@ -12,7 +12,7 @@ import {get_section_urls, get_section_file_from_url} from "@/layout/nav_section"
 import { config } from '@/config';
 
 const {page} = Astro.params;
-const page_path = join(config.rootdir,`/data/blog/${page}/readme.mdx`)//TODO await get_section_file_from_url('/data/blog',page,'/blog/')
+const page_path = join(config.rootdir,"data/blog",page,"readme.mdx")//TODO await get_section_file_from_url('/data/blog',page,'/blog/')
 console.log(`Astro/blog> url: /blog/${page} file: ${page_path}`)
 
 let found = true
@@ -44,7 +44,7 @@ if(found){
 }
 
 export async function getStaticPaths(){
-    const static_files_paths = ["panzoom","gallery"]// TODO
+    const static_files_paths = ["","panzoom","gallery"]// TODO
     return static_files_paths.map((url)=>({params:{page:url}}))
 }
 

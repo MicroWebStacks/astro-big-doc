@@ -7,7 +7,6 @@
     },
     {
         "text":"About",
-        "path": "/pages/about",
         "href_base": "/about/",
         "href":"/about/",
         "items"        :[

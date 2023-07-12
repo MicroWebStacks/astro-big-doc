@@ -6,6 +6,7 @@ import ToCMenu from './ToCMenu.astro';
 import { process_toc_list } from "./menu_toc";
 import {session_user} from "../../server/auth/auth_utils"
 import {config} from "@/config"
+import menu from '../../public/menu.json'
 export interface Props {
 	title: string;
 	headings: Array<Object>;
@@ -23,6 +24,7 @@ if(config.out_mode != "STATIC"){
 	}
 }
 
+console.log(` => using menu (${menu.hash})`)
 
 ---
 <html lang="en">

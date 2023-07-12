@@ -9,6 +9,7 @@ import {remarkPanzoom} from './src/libs/remark-panzoom'
 import {remarkGallery} from './src/libs/remark-gallery'
 import {config} from './config'
 import {replaceFiledir} from './src/libs/vite-plugin-filedir'
+import {generate_menu} from './src/libs/integration-generate-menu'
 
 const default_options = {
   markdown:{
@@ -25,7 +26,7 @@ const default_options = {
     ],
     extendDefaultPlugins: true
   },
-  integrations: [mdx()],
+  integrations: [mdx(),generate_menu()],
   vite:{
     plugins:[
       replaceFiledir()

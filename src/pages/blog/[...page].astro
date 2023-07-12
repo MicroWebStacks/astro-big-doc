@@ -9,11 +9,13 @@ import H1 from "@/components/headings/H1.astro"
 import H2 from "@/components/headings/H2.astro"
 import H3 from "@/components/headings/H3.astro"
 import {get_section_urls, get_section_file_from_url} from "@/layout/nav_section"
+import {manage_state} from '@/layout/menu_utils'
 
 const {page} = Astro.params;
 const page_path = await get_section_file_from_url('/data/blog',page,'/blog/')
 console.log(`Astro/blog> url: /blog/${page} file: ${page_path}`)
-
+const menu_state = manage_state(Astro.cookies)
+console.log(menu_state)
 let found = true
 let Post = null
 try {
@@ -50,7 +52,7 @@ export async function getStaticPaths(){
 
 ---
 {Post &&
-<Layout title={Post.frontmatter.title} headings={Post.getHeadings()}>
+<Layout title={Post.frontmatter.title} headings={Post.getHeadings()} menu_state={menu_state}>
         <Post.Content components={{...Post.components, Gallery,Panzoom,data:Panzoom,h1:H1,h2:H2,h3:H3 }}/>
 </Layout>
 }

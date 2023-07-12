@@ -82,6 +82,41 @@ function active_page(url, raw_menu){
     return active_page_index
 }
 
+//menu cookie format "4515;true;-1;true;-1"
+function manage_state(cookies){
+    const magic_number = 4515
+    const default_menu = {
+        pages:{visible:true,width:-1},
+        toc:{visible:true,width:-1}
+    }
+    function parse_menu_state(state_text){
+        const values = state_text.split(';')
+        if((parseInt(values[0]) != magic_number)||(values.length != 5)){
+            return default_menu
+        }else{
+            const result = {
+                pages:{visible:(values[1] == true),width:parseInt(values[2])},
+                toc:{visible:(values[3] == true),width:parseInt(values[4])}
+            }
+        }
+    }
+    function serialize_menu_state(menu){
+        return `${magic_number};${menu.pages.visible};${menu.pages.width};${menu.toc.visible};${menu.toc.width}`
+    }
+
+    let menu = default_menu
+    if(cookies.has("menus_state")){
+        const cookie_text = cookies.get("menus_state").value
+        menu = parse_menu_state(cookie_text)
+        console.log(`index> menus_state (${state_text})`)
+    }else{
+        console.log("index> menus_state does not exist starting from default")
+    }
+    //enforce format in both cases
+    const state_text = serialize_menu_state(menu)
+    cookies.set("menus_state",state_text)
+    return menu
+}
 
 export{
     trim_ext,
@@ -89,5 +124,6 @@ export{
     remove_first,
     url_to_section,
     url_path,
-    remove_base
+    remove_base,
+    manage_state
 }

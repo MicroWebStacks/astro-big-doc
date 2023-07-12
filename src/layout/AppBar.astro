@@ -1,11 +1,11 @@
 ---
 import './colors.css';
-import menu from "./menu.json"
-import { remove_base,active_page } from "./menu_utils";
+import menu from "@/menu.json"
+import { active_page } from "../../integrations/nav_menu/menu_utils";
 import Icon from "@/components/icon.astro"
 
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
-const pageUrl = remove_base(Astro.url.pathname)
+const pageUrl = Astro.url.pathname
 const active_page_index = active_page(pageUrl,menu)
 menu.forEach((item,index)=>{
     item.active_class = (index == active_page_index)?"active":""

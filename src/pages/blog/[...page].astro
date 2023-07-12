@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layout/Layout.astro";
 import {promises as fs} from 'node:fs';
-import {resolve} from 'node:path';
+import {resolve,join} from 'node:path';
 import Panzoom from "@/components/panzoom.astro"
 import Gallery from "@/components/gallery.astro"
 import Page_404 from "@/components/404.astro"
@@ -9,13 +9,12 @@ import H1 from "@/components/headings/H1.astro"
 import H2 from "@/components/headings/H2.astro"
 import H3 from "@/components/headings/H3.astro"
 import {get_section_urls, get_section_file_from_url} from "@/layout/nav_section"
-import {manage_state} from '@/layout/menu_utils'
+import { config } from '@/config';
 
 const {page} = Astro.params;
-const page_path = await get_section_file_from_url('/data/blog',page,'/blog/')
+const page_path = join(config.rootdir,`/data/blog/${page}/readme.mdx`)//TODO await get_section_file_from_url('/data/blog',page,'/blog/')
 console.log(`Astro/blog> url: /blog/${page} file: ${page_path}`)
-const menu_state = manage_state(Astro.cookies)
-console.log(menu_state)
+
 let found = true
 let Post = null
 try {
@@ -45,14 +44,14 @@ if(found){
 }
 
 export async function getStaticPaths(){
-    const static_files_paths = await get_section_urls('/data/blog','/blog/')
+    const static_files_paths = ["panzoom","gallery"]// TODO
     return static_files_paths.map((url)=>({params:{page:url}}))
 }
 
 
 ---
 {Post &&
-<Layout title={Post.frontmatter.title} headings={Post.getHeadings()} menu_state={menu_state}>
+<Layout title={Post.frontmatter.title} headings={Post.getHeadings()} >
         <Post.Content components={{...Post.components, Gallery,Panzoom,data:Panzoom,h1:H1,h2:H2,h3:H3 }}/>
 </Layout>
 }

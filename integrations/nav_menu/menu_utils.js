@@ -1,4 +1,4 @@
-import {config} from "@/config"
+import {config} from "../../config"
 import {dirname} from 'path'
 
 function trim_ext(filename){

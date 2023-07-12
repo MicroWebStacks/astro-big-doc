@@ -8,7 +8,7 @@
       "@/layout/*": ["src/layout/*"],
       "@/svg/*": ["src/svg/*"],
       "@/libs/*": ["src/libs/*"],
-      "@/img/*": ["src/img/*"],
+      "@/assets/*": ["src/assets/*"],
       "@/*": ["./*"],
     }
   }  

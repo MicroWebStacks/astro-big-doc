@@ -3,21 +3,17 @@ import './colors.css';
 import AppBar from './AppBar.astro';
 import NavMenu from './NavMenu.astro';
 import ToCMenu from './ToCMenu.astro';
-import {get_nav_menu} from "./nav_section.js"
 import { process_toc_list } from "./menu_toc";
 import {session_user} from "../../server/auth/auth_utils"
 import {config} from "@/config"
 export interface Props {
 	title: string;
 	headings: Array<Object>;
-	menu_state:Object;
 }
 
 const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
-const {menu_state} = Astro.props;
 
-const left_nav_menu = await get_nav_menu(Astro.url.pathname)
 const right_toc_menu = process_toc_list(headings)
 
 if(config.out_mode != "STATIC"){
@@ -38,21 +34,16 @@ if(config.out_mode != "STATIC"){
 		<title>{title}</title>
 	</head>
 	<body >
-		<div id="fixed-left" class={`fixed-nav ${menu_state.pages.visible?"active":""}`} />
+		<div id="fixed-left" class="fixed-nav active" />
 		<div class="appbar-nav_content-footer">
 			<header>
 				<AppBar/>
 			</header>
 			<main>
-				{menu_state.pages.visible &&
-					<>
-						<div id="wide-nav" class="scroll">
-							<NavMenu/>
-						</div>
-						<div id="resize-left" class="nav-resize active"/>
-					</>
-				}
-
+				<div id="wide-nav" class="scroll">
+					<NavMenu/>
+				</div>
+				<div id="resize-left" class="nav-resize active"/>
 				<article class="content scroll">
 					<div id="mobile-nav">
 						<NavMenu/>
@@ -61,14 +52,10 @@ if(config.out_mode != "STATIC"){
 						<slot/>
 					</div>
 				</article>
-				{right_toc_menu.visible &&
-				<>
-					<div id="resize-right" class="nav-resize active"/>
-					<div id="right-toc">
-						<ToCMenu items={right_toc_menu.items} />
-					</div>
-				</>
-				}
+				<div id="resize-right" class="nav-resize active"/>
+				<div id="right-toc">
+					<ToCMenu items={right_toc_menu.items} />
+				</div>
 			</main>
 			<footer>
 				<p>footer</p>

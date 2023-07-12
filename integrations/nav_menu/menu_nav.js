@@ -170,7 +170,12 @@ function set_active_expanded(url, menu){
     }
 }
 
+function generate_nav_menu(){
+    console.log("hello from menu generation")
+}
+
 export{
     files_map_to_menu_tree,
-    set_active_expanded
+    set_active_expanded,
+    generate_nav_menu
 }

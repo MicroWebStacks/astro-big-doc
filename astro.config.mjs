@@ -54,7 +54,6 @@ if(config.out_mode == "MIDDLEWARE")
     ...default_options,
     output: "static",
     outDir: "./temp",
-    base: config.base,
     trailingSlash: 'ignore'
   };
   if(config.site != null){

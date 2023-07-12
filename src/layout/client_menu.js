@@ -26,9 +26,7 @@ async function get_menu(){
     return menu
 }
 
-async function inject_menu(){
-    const menu = await get_menu()
-    console.log(menu)
+function restore_menu_state(){
     let left_open = localStorage.getItem("left_open")
     if(left_open != null){
         const left_nav = document.querySelector("nav.left-nav")
@@ -55,6 +53,33 @@ async function inject_menu(){
             localStorage.setItem("left_open","false")
         }
     }
+}
+
+function inject_menu_elements(menu){
+    console.log(window.location.pathname)
+    const section = menu.items.find(el=>(window.location.pathname.startsWith(el.href_base)))
+    console.log(section)
+    const left_nav = document.querySelector("nav.left-nav")
+    let ul = document.createElement('ul')
+    ul.classList.add("root")
+    section.items.forEach(item => {
+        let li = document.createElement('li')
+        let a = document.createElement('a')
+        if(item.readme){
+            a.href = item.href || '#';
+        }
+        a.textContent = item.text
+        li.appendChild(a);
+        ul.appendChild(li)
+    });
+    left_nav.appendChild(ul)
+}
+
+async function inject_menu(){
+    restore_menu_state()
+    const menu = await get_menu()
+    console.log(menu)
+    inject_menu_elements(menu)
     enable_clicks()
 }
 

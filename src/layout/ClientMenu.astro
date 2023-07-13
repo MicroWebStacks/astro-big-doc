@@ -18,15 +18,12 @@ import './colors.css';
     a.menu-nav.active{
         background-color: var(--menu-active-color);
     }
-    a.menu-nav.nav_expand:hover, a.menu-nav:not(.parent):hover{
-        background-color: var(--menu-span-hover-color);
-    }
     a.menu-nav.parent{
-        cursor:pointer;
         display:flex;
         align-items:center;
     }
     span.menu-nav.icon{
+        cursor:pointer;
         padding:10px;
         padding-top:5px;
         padding-bottom:5px;
@@ -37,34 +34,31 @@ import './colors.css';
         padding-top:5px;
         padding-bottom:5px;
         flex-grow:1;
-        display:block;
+        display:flex;
+        align-items: center;
     }
     a.menu-nav.parent > span.text{
         padding-left: 0px;
     }
 
-    span.menu-nav.icon > svg{
+    span:not(.text).menu-nav.icon > svg{
         width:16px;
         height:16px;
         rotate: 0deg;
         transition: rotate .4s ease-in-out;
     }
-    object.menu-nav.icon{
+    span.menu-nav.icon > svg{
         width:16px;
         height:16px;
-        padding-bottom:5px;
     }
-    a.menu-nav.parent.expanded > span > svg{
+    a.menu-nav.parent.expanded > span:not(.text) > svg{
         rotate: 90deg;
     }
-    span.menu-nav.nav_expand:hover{
+    span.menu-nav.icon:hover{
         background-color: var(--menu-span-hover-color);
     }
     span.menu-nav.nav_expand:hover > svg > path{
         stroke:var(--menu-icon-hover-color);
-    }
-    a.menu-nav.nav_expand:hover > span.icon > svg > path{
-        stroke: var(--menu-icon-hover-color);
     }
 
     span.menu-nav.href_hover:hover{

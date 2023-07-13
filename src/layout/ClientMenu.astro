@@ -24,9 +24,7 @@ import './colors.css';
     }
     span.menu-nav.icon{
         cursor:pointer;
-        padding:10px;
-        padding-top:5px;
-        padding-bottom:5px;
+        padding:5px;
         flex-grow:0;
     }
     span.menu-nav.text{
@@ -42,8 +40,8 @@ import './colors.css';
     }
 
     span:not(.text).menu-nav.icon > svg{
-        width:16px;
-        height:16px;
+        width:10px;
+        height:10px;
         rotate: 0deg;
         transition: rotate .4s ease-in-out;
     }
@@ -57,9 +55,6 @@ import './colors.css';
     span.menu-nav.icon:hover{
         background-color: var(--menu-span-hover-color);
     }
-    span.menu-nav.nav_expand:hover > svg > path{
-        stroke:var(--menu-icon-hover-color);
-    }
 
     span.menu-nav.href_hover:hover{
         background-color: var(--menu-span-hover-color);
@@ -72,12 +67,11 @@ import './colors.css';
         padding: 0px;
     }
     ul.menu-nav.nested{
-        padding-left: 3px;
         border-top:   0px;
-        border-left:  2px solid var(--menu-border-left-color);
+        border-left:  1px solid var(--menu-border-left-color);
         border-right: 0px;
         border-bottom:0px;
-        margin-left: 8px;
+        margin-left: 9px;
         overflow: hidden;
         max-height: 200vh;
         transition-property: max-height;

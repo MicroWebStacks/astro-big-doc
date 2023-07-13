@@ -5,6 +5,33 @@ const svg_icon = `<svg viewBox="0 0 100 100" width="60" height="60" fill="#00000
 <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>`
 
+function get_expand(){
+    let expand_map = {}
+    let expand_text = localStorage.getItem("expand")
+    if(expand_text != undefined){
+        expand_map = JSON.parse(expand_text)
+    }
+    console.log(expand_map)
+    return expand_map
+}
+
+function save_expand(expand_map){
+    localStorage.setItem("expand",JSON.stringify(expand_map))
+}
+
+function save_menu(menu){
+    localStorage.setItem("menu",JSON.stringify(menu))
+}
+
+function expand_toggle_save(path){
+    if(Object.hasOwn(expand_map,path)){
+        expand_map[path] = !expand_map[path]
+    }else{
+        expand_map[path] = false
+    }
+    save_expand(expand_map)
+}
+
 async function get_menu(){
     let needs_fetch = false
     let menu = {}
@@ -27,7 +54,7 @@ async function get_menu(){
     if(needs_fetch){
         const resp = await fetch("/menu.json")
         menu = await resp.json()
-        localStorage.setItem("menu",JSON.stringify(menu))
+        save_menu(menu)
     }
     return menu
 }
@@ -61,9 +88,13 @@ function restore_menu_state(){
     }
 }
 
-function create_ul_from_items(items,root){
+function create_ul_from_items(items,root,expanded){
     let ul = document.createElement('ul')
     ul.classList.add("menu-nav","root")
+    if(expanded == false){
+        console.log(expanded)
+        ul.classList.add("hidden")
+    }
     if(root){
         ul.classList.add("root")
     }else{
@@ -77,10 +108,17 @@ function create_ul_from_items(items,root){
         if(item.readme){
             a.href = item.href;
         }
+        if(item.active){
+            a.classList.add("active")
+        }
         if(item.items){
-            a.classList.add("parent","expanded")
+            a.classList.add("parent")
+            if(item.expanded){
+                a.classList.add("expanded")
+            }
             let span_icon = document.createElement('span')
             span_icon.classList.add("menu-nav","icon","nav_expand")
+            span_icon.setAttribute("data-path",item.path)
             span_icon.innerHTML = svg_icon
             a.appendChild(span_icon)
         }
@@ -98,15 +136,34 @@ function create_ul_from_items(items,root){
         }
         a.appendChild(span_text)
         li.appendChild(a);
-        recursive_update_element(li,item,item.level==1)
+        recursive_update_element(li,item,item.expanded)
         ul.appendChild(li)
     });
     return ul
 }
 
-function recursive_update_element(element,menu_entry){
+function set_active_expanded(items,pathname){
+    console.log(pathname)
+    for(let item of items){
+        if(Object.hasOwn(expand_map,item.path)){
+            item.expanded = expand_map[item.path]
+        }else{
+            if(!Object.hasOwn(item,"expanded")){//only added if not already set
+                item.expanded = true
+            }
+        }
+        if(item.href == pathname){
+            item.active = true
+        }
+        if(item.items){
+            set_active_expanded(item.items,pathname)
+        }
+    }
+}
+
+function recursive_update_element(element,menu_entry,expanded){
     if(menu_entry.items){
-        const ul = create_ul_from_items(menu_entry.items,menu_entry.level == 1)
+        const ul = create_ul_from_items(menu_entry.items,menu_entry.level == 1,expanded)
         element.appendChild(ul)
     }
 }
@@ -116,13 +173,14 @@ function inject_menu_elements(menu){
     const section = menu.items.find(el=>(window.location.pathname.startsWith(el.href_base)))
     //console.log(section)
     const menu_nav = document.querySelector("nav.menu-nav")
-    recursive_update_element(menu_nav,section)
+    recursive_update_element(menu_nav,section,true)
 }
 
 async function inject_menu(){
     restore_menu_state()
     const menu = await get_menu()
-    //console.log(menu)
+    set_active_expanded(menu.items,window.location.pathname)
+    console.log(menu.items)
     inject_menu_elements(menu)
     enable_clicks()
 }
@@ -134,10 +192,13 @@ function enable_clicks(){
       toggler[i].addEventListener("click", function(e) {
         this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
         this.parentElement.classList.toggle("expanded");
+        expand_toggle_save(toggler[i].getAttribute("data-path"))
         e.preventDefault()
       });
     }
 }
+
+let expand_map = get_expand()
 
 export{
     inject_menu

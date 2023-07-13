@@ -1,5 +1,10 @@
 import {config} from "../../config"
-import {dirname} from 'path'
+import {dirname,join} from 'node:path'
+import {promises as fs} from 'fs';
+
+async function save_json(root_path,data){
+    await fs.writeFile(join(config.rootdir,root_path),JSON.stringify(data,undefined, 2))
+}
 
 function trim_ext(filename){
     return filename.replace(/\.[^/.]+$/, "")
@@ -125,5 +130,6 @@ export{
     url_to_section,
     url_path,
     remove_base,
-    manage_state
+    manage_state,
+    save_json
 }

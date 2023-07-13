@@ -4,9 +4,9 @@ import './colors.css';
 ---
 
 
-<style>
+<style is:global>
 
-    a{
+    a.menu-nav{
         padding:0px;
         padding-left:0px;
         text-decoration: none;
@@ -15,69 +15,69 @@ import './colors.css';
         display:block;
     }
     /* active when nav menu item is matching url */
-    a.active{
+    a.menu-nav.active{
         background-color: var(--menu-active-color);
     }
-    a.nav_expand:hover, a:not(.parent):hover{
+    a.menu-nav.nav_expand:hover, a.menu-nav:not(.parent):hover{
         background-color: var(--menu-span-hover-color);
     }
-    a.parent{
+    a.menu-nav.parent{
         cursor:pointer;
         display:flex;
         align-items:center;
     }
-    span.icon{
+    span.menu-nav.icon{
         padding:10px;
         padding-top:5px;
         padding-bottom:5px;
         flex-grow:0;
     }
-    span.text{
+    span.menu-nav.text{
         padding:10px;
         padding-top:5px;
         padding-bottom:5px;
         flex-grow:1;
         display:block;
     }
-    a.parent > span.text{
+    a.menu-nav.parent > span.text{
         padding-left: 0px;
     }
 
-    span.icon > svg{
+    span.menu-nav.icon > svg{
         width:16px;
         height:16px;
         rotate: 0deg;
         transition: rotate .4s ease-in-out;
     }
-    object.icon{
+    object.menu-nav.icon{
         width:16px;
         height:16px;
         padding-bottom:5px;
     }
-    a.parent.expanded > span > svg{
+    a.menu-nav.parent.expanded > span > svg{
         rotate: 90deg;
     }
-    span.nav_expand:hover{
+    span.menu-nav.nav_expand:hover{
         background-color: var(--menu-span-hover-color);
     }
-    span.nav_expand:hover > svg > path{
+    span.menu-nav.nav_expand:hover > svg > path{
         stroke:var(--menu-icon-hover-color);
     }
-    a.nav_expand:hover > span.icon > svg > path{
+    a.menu-nav.nav_expand:hover > span.icon > svg > path{
         stroke: var(--menu-icon-hover-color);
     }
 
-    span.href_hover:hover{
+    span.menu-nav.href_hover:hover{
         background-color: var(--menu-span-hover-color);
     }
-    ul{
+    ul.menu-nav{
         display:flex;
         flex-direction: column;
         list-style: none;
         margin:0px;
         padding: 0px;
     }
-    ul.nested{
+    ul.menu-nav.nested{
         padding-left: 3px;
         border-top:   0px;
         border-left:  2px solid var(--menu-border-left-color);
@@ -89,19 +89,19 @@ import './colors.css';
         transition-property: max-height;
         transition-duration: 0.4s;
     }
-    ul.nested.hidden{
+    ul.menu-nav.nested.hidden{
         max-height: 0px;
         transition-property: max-height;
         transition-duration: 0.4s;
     }
-    li{
+    li.menu-nav{
         min-width: 130px;
     }
-    object.hidden{
+    object.menu-nav.hidden{
         display:flex;
         visibility: collapse;
     }
-    ul.root > li{
+    ul.menu-nav.root > li{
         margin: 5px;
         /*box-shadow: 1px 1px 2px 1px #41414077;*/
         border-radius: 5px;

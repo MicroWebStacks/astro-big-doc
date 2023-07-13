@@ -9,6 +9,7 @@ import H1 from "@/components/headings/H1.astro"
 import H2 from "@/components/headings/H2.astro"
 import H3 from "@/components/headings/H3.astro"
 import { config } from '@/config';
+import pages from '@/public/pages.json'
 
 const {page} = Astro.params;
 const page_path = join(config.rootdir,"data/blog",page,"readme.mdx")//TODO await get_section_file_from_url('/data/blog',page,'/blog/')
@@ -43,8 +44,8 @@ if(found){
 }
 
 export async function getStaticPaths(){
-    const static_files_paths = ["panzoom","gallery"]// TODO
-    return static_files_paths.map((url)=>({params:{page:url}}))
+    const blog_paths = pages.filter(page=>page.startsWith('/blog/')).map(page=>page.slice(6))
+    return blog_paths.map((url)=>({params:{page:url}}))
 }
 
 

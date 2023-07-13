@@ -8,8 +8,8 @@ async function get_menu(){
         needs_fetch = true
     }else{
         console.log("in storage, checking hash")
-        const left_nav = document.querySelector("nav.left-nav")
-        const new_hash = left_nav.getAttribute("data-hash")
+        const menu_nav = document.querySelector("nav.menu-nav")
+        const new_hash = menu_nav.getAttribute("data-hash")
         menu = JSON.parse(menu_text)
         if(menu.hash == new_hash){
             console.log(`new html menu hash ${new_hash} matching local Storage`)
@@ -29,25 +29,25 @@ async function get_menu(){
 function restore_menu_state(){
     let left_open = localStorage.getItem("left_open")
     if(left_open != null){
-        const left_nav = document.querySelector("nav.left-nav")
-        left_nav.style.transition = "width 0s"
+        const menu_nav = document.querySelector("nav.menu-nav")
+        menu_nav.style.transition = "width 0s"
         if(left_open == "true"){
-            left_nav.style.width = "20vw"
-            left_nav.setAttribute("data-width","20vw")
-			left_nav.classList.add("open")
-			left_nav.classList.remove("closed")
+            menu_nav.style.width = "20vw"
+            menu_nav.setAttribute("data-width","20vw")
+			menu_nav.classList.add("open")
+			menu_nav.classList.remove("closed")
             console.log("open nav")
         }else{
-            left_nav.style.width = "0vw"
-			left_nav.classList.add("closed")
-			left_nav.classList.remove("open")
+            menu_nav.style.width = "0vw"
+			menu_nav.classList.add("closed")
+			menu_nav.classList.remove("open")
             console.log("close nav")
         }
         setTimeout(()=>{
-            left_nav.style.transition = "width 0.5s"
+            menu_nav.style.transition = "width 0.5s"
         },100)
     }else{
-        if(left_nav.classList.contains("open")){
+        if(menu_nav.classList.contains("open")){
             localStorage.setItem("left_open","true")
         }else{
             localStorage.setItem("left_open","false")
@@ -59,12 +59,14 @@ function inject_menu_elements(menu){
     console.log(window.location.pathname)
     const section = menu.items.find(el=>(window.location.pathname.startsWith(el.href_base)))
     console.log(section)
-    const left_nav = document.querySelector("nav.left-nav")
+    const menu_nav = document.querySelector("nav.menu-nav")
     let ul = document.createElement('ul')
-    ul.classList.add("root")
+    ul.classList.add("menu-nav","root")
     section.items.forEach(item => {
         let li = document.createElement('li')
+        li.classList.add("menu-nav")
         let a = document.createElement('a')
+        a.classList.add("menu-nav")
         if(item.readme){
             a.href = item.href || '#';
         }
@@ -72,7 +74,7 @@ function inject_menu_elements(menu){
         li.appendChild(a);
         ul.appendChild(li)
     });
-    left_nav.appendChild(ul)
+    menu_nav.appendChild(ul)
 }
 
 async function inject_menu(){

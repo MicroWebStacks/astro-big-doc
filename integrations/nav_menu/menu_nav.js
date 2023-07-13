@@ -1,6 +1,6 @@
 import { config } from '../../config'
 import {dirname,basename,join,resolve} from 'node:path'
-import {url_path, remove_base,remove_first} from './menu_utils'
+import {url_path, remove_base,remove_first,save_json} from './menu_utils'
 import {promises as fs} from 'fs';
 import menu from '../../menu.json'
 import {createHash} from 'crypto'
@@ -220,6 +220,26 @@ async function parse_directories_recursive(parent){
     return result
 }
 
+function menu_tree_to_list(menu_tree){
+    let items_list = []
+
+    function traverse(node) {
+        items_list.push(node);
+        if (node.items) {
+            for (let child of node.items) {
+                traverse(child);
+            }
+        }
+    }
+    for (let node of menu_tree) {
+        traverse(node);
+    }
+
+    const pages_list = items_list.filter(item=>item.readme).map(item=>item.href)
+
+    return pages_list
+}
+
 async function generate_nav_menu(){
 
     for(const section of menu){
@@ -238,7 +258,9 @@ async function generate_nav_menu(){
         hash:hash,
         items:menu
     }
-    await fs.writeFile(join(config.rootdir,'public/menu.json'),JSON.stringify(meta_menu,undefined, 2))
+    await save_json('public/menu.json',meta_menu)
+    const static_pages = menu_tree_to_list(menu)
+    await save_json('public/pages.json',static_pages)
 }
 
 export{

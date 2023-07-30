@@ -2,7 +2,8 @@ import {visit} from "unist-util-visit";
 import plantumlEncoder from "plantuml-encoder";
 import {writeFileSync} from 'fs'
 import fetch from 'sync-fetch'
-import {existsSync,statSync} from 'fs'
+import {mkdirSync,existsSync,statSync} from 'fs'
+import {dirname} from 'path'
 import { cache_file_url } from './utils'
 
 const puml_server ="https://www.plantuml.com/plantuml/svg"
@@ -12,11 +13,15 @@ let counter = 0
 function puml_text_to_svg_file(text,svg_file){
   const url = `${puml_server}/${plantumlEncoder.encode(text)}`;
   const svg_text = fetch(url).text()
+  const targetdir = dirname(svg_file)
+  if(!existsSync(targetdir)){
+    mkdirSync(targetdir,{ recursive: true })
+  }
   writeFileSync(svg_file,svg_text)
 }
 
 function update_puml_file(file,value,meta){
-  //console.log("file = " + file)
+  console.log("file = " + file)
   const mtime = statSync(file).mtime
   const puml_title = (meta)?meta:counter++;
   const svg_file = file + "." + puml_title + ".svg"
@@ -28,11 +33,10 @@ function update_puml_file(file,value,meta){
     const pmtime = statSync(svg_target_file).mtime
     if(pmtime > mtime){
       do_update = false
-      //console.log(`svg file exist for puml ${puml_title}`)
+      console.log(`svg file exist for puml ${puml_title}`)
     }
   }
   if(do_update){
-    //console.log(`creating puml+svg files : ${puml_file} + .svg`)
     puml_text_to_svg_file(value,svg_target_file)
     console.log(`generated svg_file = ${svg_target_file} for url '${url}'`)
   }
@@ -53,7 +57,7 @@ function update_puml_file(file,value,meta){
  */
 function remarkPUMLAstro(pluginOptions) {
   return function transformer(syntaxTree,file) {
-    //console.log(` 'remarkPUMLAstro' * in file '${file.history}'`)
+    console.log(` 'remarkPUMLAstro' * in file '${file.history}'`)
     visit(syntaxTree, "code", node => {
       if (!node.lang || !node.value || node.lang !== "plantuml") return;
       const url = update_puml_file(file.history[0],node.value,node.meta)

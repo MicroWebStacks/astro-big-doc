@@ -183,3 +183,4 @@ built upon astro-docs with differences :
 - https://www.svgrepo.com/svg/400563/openfilefolder
 - https://freesvg.org/1542512156 : tree
 - https://www.svgrepo.com/svg/75085/full-screen
+- https://uxwing.com/text-file-icon/

@@ -1,4 +1,4 @@
-import raw_menu from './menu.json'
+import raw_menu from '../../menu.json'
 import {promises as fs} from 'fs';
 import {resolve,join,relative} from 'path'
 import {files_map_to_menu_tree,  set_active_expanded} from './menu_nav'

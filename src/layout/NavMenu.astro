@@ -1,15 +1,15 @@
 ---
 import './colors.css';
-import NavSubMenu from "./NavSubMenu.astro";
+import ClientMenu from "./ClientMenu.astro";
 
 export interface Props {
-  items: Array<Object>;
+	hash: string;
 }
 
-let { items } = Astro.props;
+const {hash} = Astro.props;
 ---
-<nav class="left-nav open" data-width="20vw">
-    <NavSubMenu items={items} />
+<nav class="menu-nav open" data-width="20vw" data-hash={hash}>
+    <ClientMenu />
 </nav>
 
 <style>

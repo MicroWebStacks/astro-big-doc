@@ -1,6 +1,9 @@
 import { config } from '../../config'
-import {dirname,basename} from 'path'
-import {url_path, remove_base,remove_first} from './menu_utils'
+import {dirname,basename,join,resolve} from 'node:path'
+import {url_path, remove_base,remove_first,save_json} from './menu_utils'
+import {promises as fs} from 'fs';
+import menu from '../../menu.json'
+import {createHash} from 'crypto'
 
 function set_classes_recursive(url,items){
     let active_descendant = false
@@ -170,7 +173,98 @@ function set_active_expanded(url, menu){
     }
 }
 
+function depth_url(url,depth){
+    const elements =  url.split("/")
+    const non_empty = elements.filter(el=>el)
+    let result = ""
+    for(let i = 0;i<depth;i++){
+        result += "/"+non_empty[i]
+    }
+    return result
+}
+
+async function parse_directories_recursive(parent){
+    let result = []
+    const abs_path = join(config.rootdir,parent.path)
+    let parent_href = depth_url(parent.href,parent.level)
+    const subdirs = await fs.readdir(abs_path);
+    //console.log(` => subdirs for : ${abs_path} : `)
+    for (const subdir of subdirs){
+        const res = resolve(abs_path, subdir);
+        if((await fs.stat(res)).isDirectory()){
+            const new_entry = {
+                text: subdir,
+                path: join(parent.path,subdir).replaceAll("\\","/"),
+                href: join(parent_href,subdir).replaceAll("\\","/"),
+                href_base: parent.href_base,
+                level: parent.level + 1
+            }
+            const readme = join(res,"readme.mdx")
+            let found = true
+            try {
+                await fs.access(readme)
+            } catch {
+                found = false
+            }
+            new_entry.readme = found
+            const items = await parse_directories_recursive(new_entry)
+            if(items.length > 0){
+                new_entry.items = items
+            }
+            //if(found){
+            //    console.log(`   found readme.mdx in ${abs_path} - ${subdir}`)
+            //}
+            result.push(new_entry)
+        }
+    }
+    return result
+}
+
+function menu_tree_to_list(menu_tree){
+    let items_list = []
+
+    function traverse(node) {
+        items_list.push(node);
+        if (node.items) {
+            for (let child of node.items) {
+                traverse(child);
+            }
+        }
+    }
+    for (let node of menu_tree) {
+        traverse(node);
+    }
+
+    const pages_list = items_list.filter(item=>item.readme).map(item=>item.href)
+
+    return pages_list
+}
+
+async function generate_nav_menu(){
+
+    for(const section of menu){
+        if(section.path){
+            section.level = 1
+            const items = await parse_directories_recursive(section)
+            if(items){
+                section.items = items
+                console.log(`generated items for ${section.href_base}`)
+            }
+        }
+    }
+    const menu_text = JSON.stringify(menu)
+    const hash = createHash('md5').update(menu_text).digest('hex').substring(0,8)
+    const meta_menu = {
+        hash:hash,
+        items:menu
+    }
+    await save_json('public/menu.json',meta_menu)
+    const static_pages = menu_tree_to_list(menu)
+    await save_json('public/pages.json',static_pages)
+}
+
 export{
     files_map_to_menu_tree,
-    set_active_expanded
+    set_active_expanded,
+    generate_nav_menu
 }

@@ -21,10 +21,9 @@ function cache_file_url(source_file){
   const targetpath = resolve(targetroot,file_rel_to_root)
   const targetfile = join(targetpath,source_file_base_name)
 
-  const baseUrl = "/" + (config.base?(config.base+'/'):'')
   const relativepath = basename(source_file)
   const newpath = join("raw/",file_rel_to_root,relativepath)
-  const url = baseUrl+ newpath.replaceAll('\\','/')
+  const url = "/"+ newpath.replaceAll('\\','/')
   return {targetfile,url}
 }
 

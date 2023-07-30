@@ -61,8 +61,8 @@ async function get_menu(){
 
 function restore_menu_state(){
     let left_open = localStorage.getItem("left_open")
+    const menu_nav = document.querySelector("nav.menu-nav")
     if(left_open != null){
-        const menu_nav = document.querySelector("nav.menu-nav")
         menu_nav.style.transition = "width 0s"
         if(left_open == "true"){
             menu_nav.style.width = "20vw"

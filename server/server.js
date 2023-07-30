@@ -29,7 +29,7 @@ if(use_https){
     const cert = readFileSync(join(__dirname, process.env.CERT_FILE),'utf8')
     const httpsServer = https.createServer({key,cert},app)
     console.log(`listening on ${process.env.HOST}:${process.env.PORT}`)
-    httpsServer.listen(3000);//443 for clear url
+    httpsServer.listen(process.env.PORT);//443 for clear url
 }else{
-    app.listen(3000);
+    app.listen(process.env.PORT);
 }

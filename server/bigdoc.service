@@ -1,0 +1,12 @@
+[Unit]
+Description=Astro big doc site template signin with github
+After=multi-user.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/user/astro-big-doc
+ExecStart=node /home/user/astro-big-doc/server/server.js
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

@@ -1,6 +1,5 @@
 import express from 'express';
 import https from 'https'
-import { handler as ssrHandler } from '../dist/server/entry.mjs';
 import {authRouter} from './auth/auth_router.js'
 import { fileURLToPath } from 'url';
 import { join, dirname } from 'path';
@@ -12,11 +11,11 @@ dotenv.config()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const outdir = (process.env.OUT_DIR==null)?"temp":process.env.OUT_DIR
+
 const app = express();
-app.use(express.static('dist/client/'))
-app.use(express.static('dist/client/raw'))
 app.use(authRouter)
-app.use(ssrHandler);
+app.use(express.static(outdir))
 app.use((req, res, next) => {
     res.status(404).send("Sorry can't find that!")
   })

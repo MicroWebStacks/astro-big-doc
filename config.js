@@ -4,10 +4,10 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const config = {
-    out_mode:process.env.OUT_MODE,//STATIC,MIDDLEWARE
     site:process.env.SITE,
     port:process.env.PORT,
-    rootdir: (process.env.ROOTDIR==null)?process.cwd():process.env.ROOTDIR
+    rootdir: (process.env.ROOT_DIR==null)?process.cwd():process.env.ROOT_DIR,
+    outdir: (process.env.OUT_DIR==null)?"./temp":process.env.OUT_DIR
 }
 
 export {

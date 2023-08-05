@@ -4,8 +4,6 @@ import AppBar from './AppBar.astro';
 import NavMenu from './NavMenu.astro';
 import ToCMenu from './ToCMenu.astro';
 import { process_toc_list } from "./layout_menu_toc";
-import {session_user} from "../../server/auth/auth_utils"
-import {config} from "@/config"
 import menu from '../../public/menu.json'
 export interface Props {
 	title: string;
@@ -16,13 +14,6 @@ const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
 
 const right_toc_menu = process_toc_list(headings)
-
-if(config.out_mode != "STATIC"){
-	const user = session_user(Astro.request) //also adds .user to Astro.request
-	if(user){
-		console.log(`Layout> [...page] hello user ${user}`)
-	}
-}
 
 console.log(` => using menu (${menu.hash})`)
 

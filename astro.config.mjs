@@ -11,7 +11,8 @@ import {config} from './config'
 import {replaceFiledir} from './src/libs/vite-plugin-filedir'
 import {generate_menu} from './integrations/nav_menu/integration-generate-menu'
 
-const default_options = {
+
+var config_options = {
   markdown:{
     syntaxHighlight: false,
     remarkPlugins: [
@@ -31,34 +32,14 @@ const default_options = {
     plugins:[
       replaceFiledir()
     ]
-  }
-}
+  },
+  output: "static",
+  outDir: config.outdir,
+  trailingSlash: 'ignore'
+};
 
-var config_options = {}
-
-if(config.out_mode == "MIDDLEWARE")
-{
-  config_options = {
-    ...default_options,
-    output: "server",
-    server:{
-      port:parseInt(config.port)
-    },
-    adapter: node({
-      mode: 'middleware'
-    })
-  };
-}else// if(config.out_mode == "STATIC")
-{
-  config_options   = {
-    ...default_options,
-    output: "static",
-    outDir: "./temp",
-    trailingSlash: 'ignore'
-  };
-  if(config.site != null){
-    config_options.site = config.site
-  }
+if(config.site != null){
+  config_options.site = config.site
 }
 
 export default defineConfig(config_options);

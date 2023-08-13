@@ -15,7 +15,11 @@ function isNewer(filepath,targetfile){
 
 function cache_file_url(source_file){
   const source_dir = dirname(source_file)
-  const targetroot = join(config.rootdir,config.outdir,"raw")
+  let outdir = config.outdir
+  if(import.meta.env.MODE == "development"){
+    outdir = "public"
+  }
+  const targetroot = join(config.rootdir,outdir,"raw")
   const source_file_base_name = basename(source_file)
   const file_rel_to_root = relative(config.rootdir,source_dir)
   const targetpath = resolve(targetroot,file_rel_to_root)
@@ -34,7 +38,11 @@ function relAssetToUrl(relativepath,refdir,baseUrl){
     if(existsSync(filepath)){
       //console.log(`   * impo*rt.me*ta.ur*l = ${import.meta.url}`)
 
-      const targetroot = join(config.rootdir,config.outdir,"raw")
+      let outdir = config.outdir
+      if(import.meta.env.MODE == "development"){
+        outdir = "public"
+      }
+      const targetroot = join(config.rootdir,outdir,"raw")
       const filerootrel = relative(config.rootdir,refdir)
       const targetpath = resolve(targetroot,filerootrel)
       const targetfile = join(targetpath,relativepath)

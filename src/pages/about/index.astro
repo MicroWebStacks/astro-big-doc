@@ -1,19 +1,25 @@
 ---
 import Layout from "@/layout/Layout.astro";
+import { config } from "@/config";
 const title = "About"
 console.log("Hello About")
-
 ---
 <Layout title={title}>
 	<h1>About</h1>
 	<a>This is 'About' page</a>
 </Layout>
-
+<div id="data-url" style="display: none;" data-url={config.url}></div>
 
 <script>
-	if(false){//test forward api
-		const test_api = await fetch("https://127.0.0.1:3000/api/test")
+	if(import.meta.env.MODE != "development"){
+		console.log("production mode")
+		const url = document.getElementById("data-url").getAttribute("data-url")
+		console.log(url)
+		const test_api = await fetch(`${url}/api/test`)
 		const data = await test_api.json()
 		console.log(data)
+	}
+	else{
+		console.log("development mode")
 	}
 </script>

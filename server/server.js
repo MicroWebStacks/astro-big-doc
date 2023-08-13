@@ -23,13 +23,12 @@ app.use((req, res, next) => {
   })
 
 
-const use_https = ["true","1"].includes(process.env.USE_HTTPS.toLowerCase())
+console.log(`listening on ${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}`)
 
-if(use_https){
+if(process.env.PROTOCOL == "https"){
     const key = readFileSync(join(__dirname, process.env.KEY_FILE),'utf8')
     const cert = readFileSync(join(__dirname, process.env.CERT_FILE),'utf8')
     const httpsServer = https.createServer({key,cert},app)
-    console.log(`listening on ${process.env.HOST}:${process.env.PORT}`)
     httpsServer.listen(process.env.PORT);//443 for clear url
 }else{
     app.listen(process.env.PORT);

@@ -3,7 +3,9 @@ import {dirname,join} from 'node:path'
 import {promises as fs} from 'fs';
 
 async function save_json(root_path,data){
-    await fs.writeFile(join(config.rootdir,root_path),JSON.stringify(data,undefined, 2))
+    const filepath = join(config.rootdir,root_path)
+    await fs.writeFile(filepath,JSON.stringify(data,undefined, 2))
+    console.log(` saved json file ${filepath}`)
 }
 
 function trim_ext(filename){

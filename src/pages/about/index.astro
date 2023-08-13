@@ -2,8 +2,18 @@
 import Layout from "@/layout/Layout.astro";
 const title = "About"
 console.log("Hello About")
+
 ---
 <Layout title={title}>
 	<h1>About</h1>
 	<a>This is 'About' page</a>
 </Layout>
+
+
+<script>
+	if(false){//test forward api
+		const test_api = await fetch("https://127.0.0.1:3000/api/test")
+		const data = await test_api.json()
+		console.log(data)
+	}
+</script>

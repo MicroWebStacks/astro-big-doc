@@ -1,0 +1,25 @@
+---
+import Layout from "@/layout/Layout.astro";
+import { config } from "@/config";
+const title = "Search"
+console.log("Hello Search")
+---
+<Layout title={title}>
+	<h1>Search</h1>
+	<a>This is a search page</a>
+</Layout>
+<div id="data-url" style="display: none;" data-url={config.url}></div>
+
+<script>
+	if(import.meta.env.MODE != "development"){
+		console.log("production mode")
+		const url = document.getElementById("data-url").getAttribute("data-url")
+		console.log(url)
+		const test_api = await fetch(`${url}/api/test`)
+		const data = await test_api.json()
+		console.log(data)
+	}
+	else{
+		console.log("development mode")
+	}
+</script>

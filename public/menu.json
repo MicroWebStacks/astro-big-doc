@@ -1,5 +1,5 @@
 {
-  "hash": "c9e7d17e",
+  "hash": "1e77ee8e",
   "items": [
     {
       "text": "Home",
@@ -190,6 +190,13 @@
       ]
     },
     {
+      "align": "right",
+      "icon": "search",
+      "href_base": "/search/",
+      "href": "/search/"
+    },
+    {
+      "align": "right",
       "icon": "github",
       "href": "https://github.com/MicroWebStacks/astro-big-doc"
     }

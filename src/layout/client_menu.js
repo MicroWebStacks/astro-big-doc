@@ -59,26 +59,31 @@ async function get_menu(){
     return menu
 }
 
+function set_menu_state(left_open){
+    const menu_nav = document.querySelector("nav.menu-nav")
+    menu_nav.style.transition = "width 0s"
+    if(left_open == "true"){
+        menu_nav.style.width = "20vw"
+        menu_nav.setAttribute("data-width","20vw")
+        menu_nav.classList.add("open")
+        menu_nav.classList.remove("closed")
+        console.log("open nav")
+    }else{
+        menu_nav.style.width = "0vw"
+        menu_nav.classList.add("closed")
+        menu_nav.classList.remove("open")
+        console.log("close nav")
+    }
+    setTimeout(()=>{
+        menu_nav.style.transition = "width 0.5s"
+    },100)
+}
+
 function restore_menu_state(){
     let left_open = localStorage.getItem("left_open")
     const menu_nav = document.querySelector("nav.menu-nav")
     if(left_open != null){
-        menu_nav.style.transition = "width 0s"
-        if(left_open == "true"){
-            menu_nav.style.width = "20vw"
-            menu_nav.setAttribute("data-width","20vw")
-			menu_nav.classList.add("open")
-			menu_nav.classList.remove("closed")
-            console.log("open nav")
-        }else{
-            menu_nav.style.width = "0vw"
-			menu_nav.classList.add("closed")
-			menu_nav.classList.remove("open")
-            console.log("close nav")
-        }
-        setTimeout(()=>{
-            menu_nav.style.transition = "width 0.5s"
-        },100)
+        set_menu_state(left_open)
     }else{
         if(menu_nav.classList.contains("open")){
             localStorage.setItem("left_open","true")
@@ -171,8 +176,17 @@ function recursive_update_element(element,menu_entry,expanded){
 function inject_menu_elements(menu){
     //console.log(window.location.pathname)
     const section = menu.items.find(el=>(window.location.pathname.startsWith(el.href_base)))
+
     //console.log(section)
     const menu_nav = document.querySelector("nav.menu-nav")
+
+    if(!section.items){
+        set_menu_state(false)
+        console.log("closing")
+    }else{
+        console.log("not closing")
+    }
+
     recursive_update_element(menu_nav,section,true)
 }
 

@@ -12,9 +12,7 @@ export interface Props {
 
 const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
-
 const right_toc_menu = process_toc_list(headings)
-
 console.log(` => using menu (${menu.hash})`)
 
 ---
@@ -47,7 +45,9 @@ console.log(` => using menu (${menu.hash})`)
 				</article>
 				<div id="resize-right" class="nav-resize active"/>
 				<div id="toc-nav-div">
-					<ToCMenu items={right_toc_menu.items} />
+					{right_toc_menu.visible && 
+						<ToCMenu items={right_toc_menu.items} />
+					}
 				</div>
 			</main>
 			<footer>

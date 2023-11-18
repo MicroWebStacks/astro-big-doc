@@ -11,10 +11,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.19.7",
-    "@astrojs/node": "^5.3.0",
+    "@google/model-viewer": "^3.3.0",
     "@svgdotjs/svg.js": "^3.1.2",
-    "astro": "^2.8.1",
+    "astro": "^3.5.3",
+    "content-structure": "^0.6.4",
+    "datatables.net-dt": "^1.13.7",
+    "hast-util-to-html": "^9.0.0",
+    "js-yaml": "^4.1.0",
+    "marked": "^9.1.0",
+    "mdast-util-to-hast": "^13.0.2",
+    "remark": "^15.0.1",
+    "shikiji": "^0.6.10",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -25,8 +33,6 @@
     "passport": "^0.6.0",
     "passport-github": "^1.1.0",
     "plantuml-encoder": "^1.4.0",
-    "shiki": "^0.11.1",
-    "sync-fetch": "^0.4.2",
     "unist-util-visit": "^4.1.1"
   }
 }

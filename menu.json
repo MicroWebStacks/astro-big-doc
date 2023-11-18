@@ -1,7 +1,7 @@
 [
     {
         "text":"Home",
-        "path": "/data/blog",
+        "path": "content",
         "href_base": "/blog/",
         "href":"/blog/gallery"
     },

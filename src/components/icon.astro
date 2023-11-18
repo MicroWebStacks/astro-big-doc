@@ -9,5 +9,5 @@ export interface Props {
 const { filename } = Astro.props as Props;
 
 ---
-{(filename == "github") &&<img src={githubImg} height="32px"/>}
-{(filename == "search") &&<img src={search} height="32px"/>}
+{(filename == "github") &&<img src={githubImg.src} height="32px"/>}
+{(filename == "search") &&<img src={search.src} height="32px"/>}

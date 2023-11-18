@@ -107,21 +107,8 @@ async function get_section_urls(section_path,href_base){
   return section_data.section_urls_list
 }
 
-// '/data/blog', '/blog/gallery' => 'D:\Dev\MicroWebStacks\astro-big-doc\data\blog\gallery.mdx'
-async function get_section_file_from_url(section_path,page,href_base){
-  const section_data = await get_section_data(section_path,href_base)
-
-  page = href_base + page
-  if(page in section_data.files_map){
-    return join(config.rootdir,section_path,section_data.files_map[page].path)
-  }else{
-    console.warn(`menu> page '${page}' not available`)
-    return null
-  }
-}
 
 export{
     get_nav_menu,
-    get_section_urls,
-    get_section_file_from_url
+    get_section_urls
 }

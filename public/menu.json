@@ -1,16 +1,16 @@
 {
-  "hash": "1e77ee8e",
+  "hash": "a88959cb",
   "items": [
     {
       "text": "Home",
-      "path": "/data/blog",
+      "path": "content",
       "href_base": "/blog/",
       "href": "/blog/gallery",
       "level": 1,
       "items": [
         {
           "text": "double1",
-          "path": "/data/blog/double1",
+          "path": "content/double1",
           "href": "/blog/double1",
           "href_base": "/blog/",
           "level": 2,
@@ -18,69 +18,67 @@
           "items": [
             {
               "text": "double2",
-              "path": "/data/blog/double1/double2",
+              "path": "content/double1/double2",
               "href": "/blog/double1/double2",
               "href_base": "/blog/",
               "level": 3,
-              "readme": false,
-              "items": [
-                {
-                  "text": "double3",
-                  "path": "/data/blog/double1/double2/double3",
-                  "href": "/blog/double1/double2/double3",
-                  "href_base": "/blog/",
-                  "level": 4,
-                  "readme": true
-                }
-              ]
+              "readme": false
             }
           ]
         },
         {
+          "text": "double3",
+          "path": "content/double3",
+          "href": "/blog/double3",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": false
+        },
+        {
           "text": "gallery",
-          "path": "/data/blog/gallery",
+          "path": "content/gallery",
           "href": "/blog/gallery",
           "href_base": "/blog/",
           "level": 2,
-          "readme": true
+          "readme": false
         },
         {
           "text": "level1",
-          "path": "/data/blog/level1",
+          "path": "content/level1",
           "href": "/blog/level1",
           "href_base": "/blog/",
           "level": 2,
-          "readme": true,
+          "readme": false,
           "items": [
             {
               "text": "level2",
-              "path": "/data/blog/level1/level2",
+              "path": "content/level1/level2",
               "href": "/blog/level1/level2",
               "href_base": "/blog/",
               "level": 3,
-              "readme": true
+              "readme": false
             }
           ]
         },
         {
           "text": "panzoom",
-          "path": "/data/blog/panzoom",
+          "path": "content/panzoom",
           "href": "/blog/panzoom",
           "href_base": "/blog/",
           "level": 2,
-          "readme": true
+          "readme": false
         },
         {
           "text": "plantuml",
-          "path": "/data/blog/plantuml",
+          "path": "content/plantuml",
           "href": "/blog/plantuml",
           "href_base": "/blog/",
           "level": 2,
-          "readme": true
+          "readme": false
         },
         {
           "text": "prepare1",
-          "path": "/data/blog/prepare1",
+          "path": "content/prepare1",
           "href": "/blog/prepare1",
           "href_base": "/blog/",
           "level": 2,
@@ -88,15 +86,15 @@
           "items": [
             {
               "text": "prepare2",
-              "path": "/data/blog/prepare1/prepare2",
+              "path": "content/prepare1/prepare2",
               "href": "/blog/prepare1/prepare2",
               "href_base": "/blog/",
               "level": 3,
-              "readme": true,
+              "readme": false,
               "items": [
                 {
                   "text": "deepest1",
-                  "path": "/data/blog/prepare1/prepare2/deepest1",
+                  "path": "content/prepare1/prepare2/deepest1",
                   "href": "/blog/prepare1/prepare2/deepest1",
                   "href_base": "/blog/",
                   "level": 4,
@@ -104,7 +102,7 @@
                   "items": [
                     {
                       "text": "deepest2",
-                      "path": "/data/blog/prepare1/prepare2/deepest1/deepest2",
+                      "path": "content/prepare1/prepare2/deepest1/deepest2",
                       "href": "/blog/prepare1/prepare2/deepest1/deepest2",
                       "href_base": "/blog/",
                       "level": 5,
@@ -112,11 +110,11 @@
                       "items": [
                         {
                           "text": "deepest3",
-                          "path": "/data/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+                          "path": "content/prepare1/prepare2/deepest1/deepest2/deepest3",
                           "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
                           "href_base": "/blog/",
                           "level": 6,
-                          "readme": true
+                          "readme": false
                         }
                       ]
                     }
@@ -128,7 +126,7 @@
         },
         {
           "text": "presentation",
-          "path": "/data/blog/presentation",
+          "path": "content/presentation",
           "href": "/blog/presentation",
           "href_base": "/blog/",
           "level": 2,
@@ -136,45 +134,45 @@
           "items": [
             {
               "text": "raspi",
-              "path": "/data/blog/presentation/raspi",
+              "path": "content/presentation/raspi",
               "href": "/blog/presentation/raspi",
               "href_base": "/blog/",
               "level": 3,
-              "readme": true
+              "readme": false
             },
             {
               "text": "tester_page_1",
-              "path": "/data/blog/presentation/tester_page_1",
+              "path": "content/presentation/tester_page_1",
               "href": "/blog/presentation/tester_page_1",
               "href_base": "/blog/",
               "level": 3,
-              "readme": true
+              "readme": false
             },
             {
               "text": "tester_page_2",
-              "path": "/data/blog/presentation/tester_page_2",
+              "path": "content/presentation/tester_page_2",
               "href": "/blog/presentation/tester_page_2",
               "href_base": "/blog/",
               "level": 3,
-              "readme": true
+              "readme": false
             },
             {
               "text": "tester_page_3",
-              "path": "/data/blog/presentation/tester_page_3",
+              "path": "content/presentation/tester_page_3",
               "href": "/blog/presentation/tester_page_3",
               "href_base": "/blog/",
               "level": 3,
-              "readme": true
+              "readme": false
             }
           ]
         },
         {
           "text": "static_dynamic",
-          "path": "/data/blog/static_dynamic",
+          "path": "content/static_dynamic",
           "href": "/blog/static_dynamic",
           "href_base": "/blog/",
           "level": 2,
-          "readme": true
+          "readme": false
         }
       ]
     },

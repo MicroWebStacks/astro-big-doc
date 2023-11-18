@@ -1,0 +1,20 @@
+---
+import Layout from "@/layout/Layout.astro"
+import AstroMarkdown from '@/components/AstroMarkdown.astro'
+import {getDocuments, getEntry} from 'content-structure'
+
+
+const {uid} = Astro.params;
+console.log(`in [...uid] > uid = ${uid}`)
+
+const entry = await getEntry({uid:uid})
+
+export async function getStaticPaths(){
+	const documents = await getDocuments({format:"markdown"})
+	return documents.map((entry)=>({params:{uid:entry.uid}}))
+}
+
+---
+<Layout title={entry.title} headings={entry.data.headings} >
+    <AstroMarkdown node={entry.tree} data={entry.data} />
+</Layout>

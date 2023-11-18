@@ -1,0 +1,119 @@
+---
+import {config} from '@/config.js'
+import {bundledLanguages, getHighlighter} from 'shikiji';
+import { save_file, generateShortMD5 } from '@/libs/utils.js';
+import Svgicons from '@/components/svgicons.astro';
+import {join} from 'path'
+
+export interface Props {
+    code: string;
+    language: string;
+    params: object;
+}
+
+const { code, language, params } = Astro.props as Props;
+
+const highlighter = await getHighlighter({theme:'dark-plus'})
+
+await highlighter.loadTheme('dark-plus')
+
+
+let lang = language
+if(!Object.keys(bundledLanguages).includes(language)){
+    console.warn(` (X) ${language} is not available, fall back on js`)
+    lang = 'js'
+}
+if (!highlighter.getLoadedLanguages().includes(lang)) {
+    await highlighter.loadLanguage(lang)
+}
+
+const html = highlighter.codeToHtml(code, { lang: lang, theme:'dark-plus' })
+const hash = generateShortMD5(code)
+const file_path = join(config.rootdir,config.content_out,"codes",hash,"code.txt")
+await save_file(file_path,code)
+---
+<div class="highlighter container" data-hash={hash}>
+    <Fragment set:html={html}></Fragment>
+    <button class="copy-btn" data-hash={hash}><Svgicons filename="copy" /></button>
+    <span class="copy-message" data-hash={hash}>Copied!</span>
+</div>
+
+<style>
+.highlighter.container {
+    position: relative;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.copy-btn {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    cursor: pointer;
+    display: none;
+    background: transparent;
+    border-width: 1px;
+    border-color: #bbb;
+    border-radius: 3px;
+    padding: 5px;
+    outline: none;
+}
+.container:hover .copy-btn {
+    display: block;
+}
+
+.copy-message {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 40px;
+    background-color: #000;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: opacity 0.3s;
+}
+</style>
+
+<style is:global>
+pre{
+    padding:10px;
+}
+.copy-btn > svg{
+  height: 16px;
+  width: 16px;
+  margin:0px;
+  padding-top: 2px;
+  padding-left: 2px;
+  fill:#bbb;
+}
+</style>
+
+<script>
+const buttons = document.querySelectorAll('button.copy-btn');
+buttons.forEach(button => {
+    button.addEventListener('click', async () => {
+        const hash = button.getAttribute('data-hash');
+        const message = document.querySelector(`.copy-message[data-hash="${hash}"]`);
+        
+        try {
+            const response = await fetch(`/codes/${hash}/code.txt`);
+            if (response.ok) {
+                const codeText = await response.text();
+                await navigator.clipboard.writeText(codeText);
+                
+                // Show the "Copied!" message and hide it after 1 second
+                message.style.display = 'block';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 1000);
+                
+            } else {
+                console.error('Failed to fetch code content');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+});
+</script>

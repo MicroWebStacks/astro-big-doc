@@ -1,5 +1,5 @@
 {
-  "hash": "a88959cb",
+  "hash": "e87bc61f",
   "items": [
     {
       "text": "Home",
@@ -9,30 +9,12 @@
       "level": 1,
       "items": [
         {
-          "text": "double1",
-          "path": "content/double1",
-          "href": "/blog/double1",
-          "href_base": "/blog/",
-          "level": 2,
-          "readme": false,
-          "items": [
-            {
-              "text": "double2",
-              "path": "content/double1/double2",
-              "href": "/blog/double1/double2",
-              "href_base": "/blog/",
-              "level": 3,
-              "readme": false
-            }
-          ]
-        },
-        {
           "text": "double3",
           "path": "content/double3",
           "href": "/blog/double3",
           "href_base": "/blog/",
           "level": 2,
-          "readme": false
+          "readme": true
         },
         {
           "text": "gallery",
@@ -40,7 +22,7 @@
           "href": "/blog/gallery",
           "href_base": "/blog/",
           "level": 2,
-          "readme": false
+          "readme": true
         },
         {
           "text": "level1",
@@ -48,7 +30,7 @@
           "href": "/blog/level1",
           "href_base": "/blog/",
           "level": 2,
-          "readme": false,
+          "readme": true,
           "items": [
             {
               "text": "level2",
@@ -56,7 +38,7 @@
               "href": "/blog/level1/level2",
               "href_base": "/blog/",
               "level": 3,
-              "readme": false
+              "readme": true
             }
           ]
         },
@@ -66,7 +48,7 @@
           "href": "/blog/panzoom",
           "href_base": "/blog/",
           "level": 2,
-          "readme": false
+          "readme": true
         },
         {
           "text": "plantuml",
@@ -74,7 +56,7 @@
           "href": "/blog/plantuml",
           "href_base": "/blog/",
           "level": 2,
-          "readme": false
+          "readme": true
         },
         {
           "text": "prepare1",
@@ -90,7 +72,7 @@
               "href": "/blog/prepare1/prepare2",
               "href_base": "/blog/",
               "level": 3,
-              "readme": false,
+              "readme": true,
               "items": [
                 {
                   "text": "deepest1",
@@ -114,7 +96,7 @@
                           "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
                           "href_base": "/blog/",
                           "level": 6,
-                          "readme": false
+                          "readme": true
                         }
                       ]
                     }
@@ -138,7 +120,7 @@
               "href": "/blog/presentation/raspi",
               "href_base": "/blog/",
               "level": 3,
-              "readme": false
+              "readme": true
             },
             {
               "text": "tester_page_1",
@@ -146,7 +128,7 @@
               "href": "/blog/presentation/tester_page_1",
               "href_base": "/blog/",
               "level": 3,
-              "readme": false
+              "readme": true
             },
             {
               "text": "tester_page_2",
@@ -154,7 +136,7 @@
               "href": "/blog/presentation/tester_page_2",
               "href_base": "/blog/",
               "level": 3,
-              "readme": false
+              "readme": true
             },
             {
               "text": "tester_page_3",
@@ -162,7 +144,7 @@
               "href": "/blog/presentation/tester_page_3",
               "href_base": "/blog/",
               "level": 3,
-              "readme": false
+              "readme": true
             }
           ]
         },
@@ -172,7 +154,7 @@
           "href": "/blog/static_dynamic",
           "href_base": "/blog/",
           "level": 2,
-          "readme": false
+          "readme": true
         }
       ]
     },

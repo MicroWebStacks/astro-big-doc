@@ -2,7 +2,6 @@
 import * as dotenv from 'dotenv'
 import { fileURLToPath } from 'url';
 import {join,dirname} from 'path'
-import {set_config} from 'content-structure'
 
 const __filename = fileURLToPath(import.meta.url);
 let __dirname = dirname(__filename);

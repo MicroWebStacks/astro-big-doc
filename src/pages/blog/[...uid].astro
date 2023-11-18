@@ -2,16 +2,16 @@
 import Layout from "@/layout/Layout.astro"
 import AstroMarkdown from '@/components/AstroMarkdown.astro'
 import {getDocuments, getEntry} from 'content-structure'
-
+import {join,dirname} from 'path'
 
 const {uid} = Astro.params;
-console.log(`in [...uid] > uid = ${uid}`)
+console.log(`in [...path] > path = ${uid}`)
 
-const entry = await getEntry({uid:uid})
+const entry = await getEntry({path:`${uid}/readme.md`})
 
 export async function getStaticPaths(){
 	const documents = await getDocuments({format:"markdown"})
-	return documents.map((entry)=>({params:{uid:entry.uid}}))
+	return documents.map((entry)=>({params:{uid:join(dirname(entry.path)).replaceAll('\\','/')}}))
 }
 
 ---

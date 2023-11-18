@@ -199,7 +199,7 @@ async function parse_directories_recursive(parent){
                 href_base: parent.href_base,
                 level: parent.level + 1
             }
-            const readme = join(res,"readme.mdx")
+            const readme = join(res,"readme.md")
             let found = true
             try {
                 await fs.access(readme)

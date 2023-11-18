@@ -1,7 +1,7 @@
 import {promises as fs} from 'fs';
 import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
 import {normalize,resolve,dirname,join,relative, basename, extname} from 'path'
-import {config} from '@/config.js'
+import {config} from '../../config.js'
 import {createHash} from 'crypto';
 
 //resolve(reference,relative) does not work due to 'file:\'
@@ -93,6 +93,12 @@ function assetUrlToPath(src){
     rel_outdir = "public"
   }
   return join(config.rootdir,rel_outdir,src)
+}
+
+function contentPathToStaticPath(section,entry_path){
+  const p1 = join(dirname(entry_path))
+  const p2 = p1.replaceAll('\\','/')
+  return p2
 }
 
 async function load_json(rel_path){
@@ -209,5 +215,6 @@ export{
   window_event,
   green_log,
   blue_log,
-  yellow_log
+  yellow_log,
+  contentPathToStaticPath
 }

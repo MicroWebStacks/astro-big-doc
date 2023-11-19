@@ -10,4 +10,11 @@ This is a Gallery Astro component, a relative file is provided with the list of 
 <Gallery src="gallery-images.json" />
 ```
 
-TBD
+```yaml gallery
+- tree.svg
+- gallery-tiger.svg
+- gallery-long_diag.svg
+- gallery-Linux_kernel_map.svg
+- gallery-tiger.svg
+- github-dark.png
+```

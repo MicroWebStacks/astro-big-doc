@@ -1,8 +1,7 @@
 ---
 import './colors.css';
 import SideMenu from './SideMenu.astro';
-import { process_pages_list } from "./side_menu";
-import {getDocuments} from 'content-structure'
+import { get_section_menu } from "./side_menu";
 
 export interface Props {
 	section: string;
@@ -10,8 +9,8 @@ export interface Props {
 
 const {section} = Astro.props;
 
-const documents = await getDocuments()
-const menu_items = process_pages_list(documents,section)
+const menu_items = await get_section_menu(section)
 console.log("NavMenu>")
+console.log(menu_items)
 ---
 <SideMenu items={menu_items}/>

@@ -18,8 +18,8 @@ function find_parent(index,headings){
 
 /* not recursive o(n²)
 */
-function elements_list_to_tree(elements,is_toc){
-    for(let element of elements){
+function headings_list_to_tree(headings,is_toc){
+    for(let element of headings){
         element.items=[]
         element.parent=true
         element.expanded=true
@@ -32,9 +32,9 @@ function elements_list_to_tree(elements,is_toc){
 
     let tree = []
 
-    for(let index=0; index<elements.length;index++){
-        let element = elements[index]
-        let parent = find_parent(index,elements)
+    for(let index=0; index<headings.length;index++){
+        let element = headings[index]
+        let parent = find_parent(index,headings)
         if(parent){
             parent.items.push(element)
         }else{
@@ -42,7 +42,7 @@ function elements_list_to_tree(elements,is_toc){
         }
     }
 
-    for(let element of elements){
+    for(let element of headings){
         if (element.items.length == 0){
             element.parent = false
             delete element.items
@@ -61,26 +61,28 @@ function process_toc_list(headings){
     }
 
     let side_menu = {items:[],visible:false}
-    side_menu.items = elements_list_to_tree(headings,true)//also .slug=>.href
+    side_menu.items = headings_list_to_tree(headings,true)//also .slug=>.href
     side_menu.visible = true
     return side_menu
 }
 
-async function get_section_menu(section){
-    function content_entry_to_href(entry){
-        if(entry.url_type == "dir"){
-            return join(dirname(dirname(entry.path)), entry.slug)
-        }else{
-            const parsedPath = parse(entry.path)
-            return join(parsedPath.dir, entry.slug)
-        }
+function entry_to_href(entry){
+    if(entry.url_type == "dir"){
+        const dir = dirname(dirname(entry.path))
+        return join(dir, entry.slug).replaceAll('\\','/')
+    }else{
+        const parsedPath = parse(entry.path)
+        return join(parsedPath.dir, entry.slug).replaceAll('\\','/')
     }
+}
+
+async function get_section_menu(section){
     function content_entry_to_level(entry){
         const base_level = 1
         let level = 0
         const directory = dirname(entry.path)
         if(directory != ""){
-            console.log(directory.split('/'))
+            //console.log(directory.split('/'))
             const path_level = directory.split('/').length
             if(entry.url_type == "file"){
                 level = base_level + path_level + 1
@@ -88,7 +90,7 @@ async function get_section_menu(section){
                 level = base_level + path_level
             }
         }
-        console.log(`level:(${level}) path:${entry.path}`)
+        //console.log(`level:(${level}) path:${entry.path}`)
         return level
     }
 
@@ -107,13 +109,13 @@ async function get_section_menu(section){
         const items = filtered_entries.map((entry)=>(
             {
                 text:entry.title,
-                href:`/${section}/${content_entry_to_href(entry)}`,
+                href:`/${section}/${entry_to_href(entry)}`,
                 level:content_entry_to_level(entry),
                 format: entry.format,
                 weight: Object.hasOwn(entry,"weight")?entry.weight:1
             }
         ))
-        return elements_list_to_tree(items,false)
+        return headings_list_to_tree(items,false)
         //return items
     }else if(Object.hasOwn(section_menu,"items")){
         return section_menu.items
@@ -131,5 +133,6 @@ async function get_section_menu(section){
 
 export{
     process_toc_list,
-    get_section_menu
+    get_section_menu,
+    entry_to_href
 }

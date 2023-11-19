@@ -131,6 +131,11 @@ async function save_file(filePath,content){
   return fs.writeFile(filePath,content)
 }
 
+async function save_json(data,file_path){
+  const filepath = join(config.rootdir,file_path)
+  await fs.writeFile(filepath,JSON.stringify(data,undefined, 2))
+}
+
 async function load_yaml(rel_path){
   const path = join(config.rootdir,rel_path)
   const fileContent = await readFile(path,'utf-8')
@@ -209,6 +214,7 @@ export{
   generateShortMD5,
   exists,
   save_file,
+  save_json,
   load_yaml,
   rel_to_abs,
   uid,

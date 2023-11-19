@@ -1,5 +1,5 @@
 import {getDocuments} from 'content-structure'
-import { load_yaml } from '@/libs/utils';
+import { load_yaml, save_json } from '@/libs/utils';
 import {section_from_pathname} from '@/layout/layout_utils.js'
 import {parse, join, dirname} from 'path'
 
@@ -66,14 +66,92 @@ function process_toc_list(headings){
     return side_menu
 }
 
-function entry_to_href(entry){
-    if(entry.url_type == "dir"){
-        const dir = dirname(dirname(entry.path))
-        return join(dir, entry.slug).replaceAll('\\','/')
-    }else{
-        const parsedPath = parse(entry.path)
-        return join(parsedPath.dir, entry.slug).replaceAll('\\','/')
+function add_folder_parent(entry){
+    const folderParents = {};
+
+    for (let entry of entries) {
+        let paths = entry.href.split('/').slice(0, -1); // Remove the file part, leave the folder path
+        let path = '';
+
+        for (let segment of paths) {
+            if (segment) {
+                path += '/' + segment;
+                if (!folderParents[path]) {
+                    folderParents[path] = {
+                        text: segment,
+                        href: path,
+                        items: [],
+                        parent: true,
+                        expanded: true
+                    };
+                }
+            }
+        }
     }
+
+    return Object.values(folderParents);
+}
+
+function get_folder_parent(entry){
+
+}
+
+
+function get_parent(index,entries){
+
+}
+
+async function add_parents(entries){
+    function get_parent_path(entry){
+        if(entry.url_type == "dir"){
+            return dirname(dirname(entry.path))
+        }else{
+            return dirname(entry.path)
+        }
+    }
+    let new_parents = []
+    entries.forEach((entry)=>{
+        const parent_url = get_parent_path(entry)
+        //console.log(`path:${entry.path}/${entry.url_type} => parent_url:${parent_url}`)
+        if(!new_parents.some(parent=>parent.url === parent_url)){
+            new_parents.push({
+                url:parent_url,
+                format:"folder"
+            })
+        }
+    })
+    await save_json(new_parents,"new_parents.json")
+    entries = entries.concat(new_parents)
+}
+
+async function pages_list_to_tree(entries){
+    for(let element of entries){
+        element.items=[]
+        element.parent=true
+        element.expanded=true
+    }
+    await add_parents(entries)
+    let tree = []
+
+    for(let index=0; index<entries.length;index++){
+        let element = entries[index]
+        let parent = get_folder_parent(index,entries)//guaranteed to return a parent, create one if needed
+        if(parent){
+            parent.items.push(element)
+        }else{
+            tree.push(element)
+        }
+    }
+
+    for(let element of entries){
+        if (element.items.length == 0){
+            element.parent = false
+            delete element.items
+            delete element.expanded
+        }
+    }
+    return tree
+
 }
 
 async function get_section_menu(section){
@@ -109,30 +187,27 @@ async function get_section_menu(section){
         const items = filtered_entries.map((entry)=>(
             {
                 text:entry.title,
-                href:`/${section}/${entry_to_href(entry)}`,
+                path:entry.path,
+                url_type:entry.url_type,
+                href:`/${section}/${entry.url}`,
                 level:content_entry_to_level(entry),
                 format: entry.format,
                 weight: Object.hasOwn(entry,"weight")?entry.weight:1
             }
         ))
-        return headings_list_to_tree(items,false)
+        await save_json(items,"menu_items_list.json")
+        const menu_tree = await pages_list_to_tree(items)
+        await save_json(menu_tree,"menu_tree.json")
+        return 
         //return items
     }else if(Object.hasOwn(section_menu,"items")){
         return section_menu.items
     }else{
         return []
     }
-
-    //[{
-    //        text : "Test entry",
-    //        href : "/blog/double3",
-    //        level : 2,
-    //        readme : true
-    //}]
 }
 
 export{
     process_toc_list,
-    get_section_menu,
-    entry_to_href
+    get_section_menu
 }

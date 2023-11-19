@@ -1,0 +1,22 @@
+[
+  {
+    "url": ".",
+    "format": "folder"
+  },
+  {
+    "url": "presentation",
+    "format": "folder"
+  },
+  {
+    "url": "prepare1",
+    "format": "folder"
+  },
+  {
+    "url": "level1",
+    "format": "folder"
+  },
+  {
+    "url": "prepare1/prepare2/deepest1/deepest2",
+    "format": "folder"
+  }
+]

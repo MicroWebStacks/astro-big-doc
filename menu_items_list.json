@@ -1,0 +1,128 @@
+[
+  {
+    "text": "Home",
+    "path": "readme.md",
+    "url_type": "dir",
+    "href": "/blog/home",
+    "level": 2,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "Static vs Dynamic",
+    "path": "static_dynamic/readme.md",
+    "url_type": "dir",
+    "href": "/blog/static-vs-dynamic",
+    "level": 2,
+    "format": "markdown",
+    "weight": 4
+  },
+  {
+    "text": "Plantuml",
+    "path": "plantuml/readme.md",
+    "url_type": "dir",
+    "href": "/blog/plantuml",
+    "level": 2,
+    "format": "markdown",
+    "weight": 3
+  },
+  {
+    "text": "Panzoom",
+    "path": "panzoom/readme.md",
+    "url_type": "dir",
+    "href": "/blog/panzoom",
+    "level": 2,
+    "format": "markdown",
+    "weight": 2
+  },
+  {
+    "text": "level1",
+    "path": "level1/readme.md",
+    "url_type": "dir",
+    "href": "/blog/level1",
+    "level": 2,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "Gallery",
+    "path": "gallery/readme.md",
+    "url_type": "dir",
+    "href": "/blog/gallery",
+    "level": 2,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "double3",
+    "path": "double3/readme.md",
+    "url_type": "dir",
+    "href": "/blog/double3",
+    "level": 2,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "Tester page 3",
+    "path": "presentation/tester_page_3/readme.md",
+    "url_type": "dir",
+    "href": "/blog/presentation/tester-page-3",
+    "level": 3,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "Tester page 2",
+    "path": "presentation/tester_page_2/readme.md",
+    "url_type": "dir",
+    "href": "/blog/presentation/tester-page-2",
+    "level": 3,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "Tester page 1",
+    "path": "presentation/tester_page_1/readme.md",
+    "url_type": "dir",
+    "href": "/blog/presentation/tester-page-1",
+    "level": 3,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "raspi",
+    "path": "presentation/raspi/readme.md",
+    "url_type": "dir",
+    "href": "/blog/presentation/raspi",
+    "level": 3,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "prepare2",
+    "path": "prepare1/prepare2/readme.md",
+    "url_type": "dir",
+    "href": "/blog/prepare1/prepare2",
+    "level": 3,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "level2",
+    "path": "level1/level2/readme.md",
+    "url_type": "dir",
+    "href": "/blog/level1/level2",
+    "level": 3,
+    "format": "markdown",
+    "weight": 1
+  },
+  {
+    "text": "deepest3",
+    "path": "prepare1/prepare2/deepest1/deepest2/deepest3/readme.md",
+    "url_type": "dir",
+    "href": "/blog/prepare1/prepare2/deepest1/deepest2/deepest3",
+    "level": 6,
+    "format": "markdown",
+    "weight": 1
+  }
+]

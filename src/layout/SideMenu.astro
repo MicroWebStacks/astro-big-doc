@@ -1,6 +1,6 @@
 ---
 import './colors.css';
-import ToCSubMenu from "./ToCSubMenu.astro";
+import SubMenu from "./SubMenu.astro";
 
 export interface Props {
   items: Array<Object>;
@@ -9,7 +9,7 @@ export interface Props {
 let { items } = Astro.props;
 ---
 <nav class="toc-nav open" data-width="20vw">
-    <ToCSubMenu items={items} />
+    <SubMenu items={items} />
 </nav>
 
 <style>

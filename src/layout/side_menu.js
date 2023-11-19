@@ -58,6 +58,18 @@ function process_toc_list(headings){
     return side_menu
 }
 
+function process_pages_list(documents,section){
+    return [
+        {
+            text : "Test entry",
+            href : "/blog/double3",
+            level : 2,
+            readme : true
+        }
+    ]
+}
+
 export{
-    process_toc_list
+    process_toc_list,
+    process_pages_list
 }

@@ -1,5 +1,5 @@
 {
-  "hash": "e87bc61f",
+  "hash": "1a244c9a",
   "items": [
     {
       "text": "Home",
@@ -20,6 +20,14 @@
           "text": "gallery",
           "path": "content/gallery",
           "href": "/blog/gallery",
+          "href_base": "/blog/",
+          "level": 2,
+          "readme": true
+        },
+        {
+          "text": "home",
+          "path": "content/home",
+          "href": "/blog/home",
           "href_base": "/blog/",
           "level": 2,
           "readme": true

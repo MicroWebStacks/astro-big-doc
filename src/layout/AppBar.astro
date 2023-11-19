@@ -1,32 +1,34 @@
 ---
 import './colors.css';
-import menu from "@/menu.json"
-import { active_page } from "../../integrations/nav_menu/menu_utils";
 import Icon from "@/components/icon.astro"
+import { load_yaml } from '@/libs/utils';
+import {get_active_menu} from './layout_utils.js'
 
-const pageUrl = Astro.url.pathname
-const active_page_index = active_page(pageUrl,menu)
-menu.forEach((item,index)=>{
-    item.active_class = (index == active_page_index)?"active":""
-})
+const raw_menu = await load_yaml("menu.yaml")
+const menu = get_active_menu(raw_menu,Astro.url.pathname)
+const left_side  = menu.filter((item)=>(!Object.hasOwn(item,"align") || !(item.align=="right")))
+const right_side = menu.filter((item)=>(Object.hasOwn(item,"align") && (item.align=="right")))
 
 ---
 <div class="navbar">
     <ul class="navbar-left">
-            {menu.filter(item=>!(item.align=="right")).map((item)=>(
-            <li><a href={item.href} class={item.active_class}>{item.text}
+        {left_side.map((item)=>(
+        <li>
+            <a href={item.href} class={item.active_class}>
+                {item.text}
                 {item.icon && <Icon filename={item.icon} />}
-                </a></li>
-            ))}
+            </a>
+        </li>
+        ))}
     </ul>
     <ul class="navbar-right">
-        {menu.filter(item=>item.align=="right").map((item)=>(
+        {right_side.map((item)=>(
             <li>
                 <a href={item.href} target={item.href.startsWith('/')?"":"_blank"}>
-                    <Icon filename={item.icon} />
-                    </a>
-                    </li>
-                    ))}
+                    {item.icon && <Icon filename={item.icon} />}
+                </a>
+            </li>
+        ))}
     </ul>
 </div>
 

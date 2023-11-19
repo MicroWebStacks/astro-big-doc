@@ -1,42 +1,17 @@
 ---
 import './colors.css';
-import ClientMenu from "./ClientMenu.astro";
+import SideMenu from './SideMenu.astro';
+import { process_pages_list } from "./side_menu";
+import {getDocuments} from 'content-structure'
 
 export interface Props {
-	hash: string;
+	section: string;
 }
 
-const {hash} = Astro.props;
+const {section} = Astro.props;
+
+const documents = await getDocuments()
+const menu_items = process_pages_list(documents,section)
+console.log("NavMenu>")
 ---
-<nav class="menu-nav open" data-width="20vw" data-hash={hash}>
-    <ClientMenu />
-</nav>
-
-<style>
-nav{
-    background: var(--nav-bg-color);
-    transition: width 0.5s;
-    width:20vw;
-    height: 100%;
-    overflow-y: auto;
-}
-nav::-webkit-scrollbar {
-  width: 1rem;
-}
-nav::-webkit-scrollbar-track {
-  background: var(--nav-bg-color); 
-}
-nav::-webkit-scrollbar-thumb {
-  background: var(--scroll-thumb-color); 
-}
-nav::-webkit-scrollbar-thumb:hover {
-  background: var(--scroll-thumb-hover-color); 
-}
-
-@media only screen and (max-width: 700px) {
-	nav {
-    width:100%;
-  }
-}
-
-</style>
+<SideMenu items={menu_items}/>

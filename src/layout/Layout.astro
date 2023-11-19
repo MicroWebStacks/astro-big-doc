@@ -1,10 +1,12 @@
 ---
 import './colors.css';
 import AppBar from './AppBar.astro';
+import Cache from './Cache.astro'
 import NavMenu from './NavMenu.astro';
-import ToCMenu from './ToCMenu.astro';
-import { process_toc_list } from "./layout_menu_toc";
-import menu from '../../public/menu.json'
+import SideMenu from './SideMenu.astro';
+import { process_toc_list } from "./side_menu";
+import {section_from_pathname} from './layout_utils.js'
+
 export interface Props {
 	title: string;
 	headings: Array<Object>;
@@ -13,8 +15,8 @@ export interface Props {
 const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
 const right_toc_menu = process_toc_list(headings)
-console.log(` => using menu (${menu.hash})`)
-
+const section = section_from_pathname(Astro.url.pathname);
+console.log(`Layout> sectiom = '${section}'`)
 ---
 <html lang="en">
 	<head>
@@ -32,13 +34,17 @@ console.log(` => using menu (${menu.hash})`)
 			</header>
 			<main>
 				<div id="wide-nav" class="scroll">
-					<NavMenu hash={menu.hash}/>
+					<Cache name={section}>
+						<NavMenu section={section}/>
+					</Cache>
 				</div>
 				<div id="resize-left" class="nav-resize active"/>
 				<article class="content scroll">
 					<div id="mobile-nav">
-						<NavMenu hash={menu.hash}/>
-					</div>
+						<Cache name={section}>
+							<NavMenu section={section}/>
+						</Cache>
+						</div>
 					<div class="article-slot">
 						<slot/>
 					</div>
@@ -46,7 +52,7 @@ console.log(` => using menu (${menu.hash})`)
 				<div id="resize-right" class="nav-resize active"/>
 				<div id="toc-nav-div">
 					{right_toc_menu.visible && 
-						<ToCMenu items={right_toc_menu.items} />
+						<SideMenu items={right_toc_menu.items} />
 					}
 				</div>
 			</main>
@@ -191,7 +197,4 @@ footer p{
 	}
 </style>
 
-<script >
-	import {menu_interactions_activation} from './layout'
-	menu_interactions_activation()
-</script>
+<script src="./layout.js" />

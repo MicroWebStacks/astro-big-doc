@@ -1,5 +1,12 @@
 ---
+import Layout from "@/layout/Layout.astro"
+import AstroMarkdown from '@/components/AstroMarkdown.astro'
+import {getEntry} from 'content-structure'
+
+console.log(`index> home page`)
+const entry = await getEntry({path:"home/readme.md"})
+
 ---
-<head>
-	<meta http-equiv="refresh" content="0; url=/blog/gallery" />
-</head>
+<Layout title={entry.title} headings={entry.data.headings} >
+    <AstroMarkdown node={entry.tree} data={entry.data} />
+</Layout>

@@ -1,0 +1,12 @@
+- text: Home
+  href: /
+- text: Blog
+  href: /blog/gallery
+- text: About
+  href: /about/
+- align: right
+  href: /search/
+  icon: search
+- align: right
+  href: https://github.com/MicroWebStacks/astro-big-doc
+  icon: github

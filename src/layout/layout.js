@@ -98,6 +98,5 @@ function menu_interactions_activation(){
 	}
 }
 
-export{
-    menu_interactions_activation
-}
+document.addEventListener('DOMContentLoaded', menu_interactions_activation, false);
+

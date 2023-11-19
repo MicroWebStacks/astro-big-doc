@@ -6,7 +6,6 @@ export interface Props {
     root:boolean;
 }
 const { items,root=true} = Astro.props;
-
 ---
 {items &&
     <ul class={root?"root":"nested"}>

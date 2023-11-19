@@ -1,8 +1,10 @@
 import {promises as fs} from 'fs';
 import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
+import { readFile } from 'fs/promises';
 import {normalize,resolve,dirname,join,relative, basename, extname} from 'path'
 import {config} from '../../config.js'
 import {createHash} from 'crypto';
+import yaml from 'js-yaml';
 
 //resolve(reference,relative) does not work due to 'file:\'
 function rel_to_abs(reference,relative){
@@ -131,7 +133,7 @@ async function save_file(filePath,content){
 
 async function load_yaml(rel_path){
   const path = join(config.rootdir,rel_path)
-  const fileContent = await fs.readFile(path,'utf-8')
+  const fileContent = await readFile(path,'utf-8')
   const data = yaml.load(fileContent);
   return data;
 }

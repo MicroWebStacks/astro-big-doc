@@ -176,7 +176,20 @@ async function pages_list_to_tree(entries){
 
 }
 
-async function get_section_menu(section){
+function get_active_submenu(raw_menu,section,pathname){
+    return raw_menu.map((entry)=>{
+        //console.log(`/${section}/${entry.url} == '${pathname}'`)
+        entry.active = (`/${section}/${entry.url}` == pathname)
+        if(Object.hasOwn(entry,"items")){
+            entry.items = get_active_submenu(entry.items,section,pathname)
+        }
+        return entry
+    })
+}
+
+async function get_section_menu(pathname){
+    const section = section_from_pathname(pathname);
+
     function content_entry_to_level(entry){
         const base_level = 1
         let level = 0
@@ -194,6 +207,7 @@ async function get_section_menu(section){
         return level
     }
 
+    let result_items = []
     const raw_menu = await load_yaml("menu.yaml")
     const section_menu = raw_menu.find((item)=>(section_from_pathname(item.href) == section))
     if(Object.hasOwn(section_menu,"content") && (section_menu.content == true)){
@@ -211,12 +225,12 @@ async function get_section_menu(section){
             }
         ))
         const menu_tree = await pages_list_to_tree(items)
-        return menu_tree
+        result_items = menu_tree
     }else if(Object.hasOwn(section_menu,"items")){
-        return section_menu.items
-    }else{
-        return []
+        result_items = section_menu.items
     }
+    
+    return get_active_submenu(result_items,section,pathname)
 }
 
 export{

@@ -4,7 +4,7 @@ import AppBar from './AppBar.astro';
 import Cache from './Cache.astro'
 import SideMenu from './SideMenu.astro';
 import { get_section_menu,process_toc_list } from "./side_menu";
-import {section_from_pathname} from './layout_utils.js'
+import { section_from_pathname } from './layout_utils';
 
 export interface Props {
 	title: string;
@@ -14,8 +14,8 @@ export interface Props {
 const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
 const right_toc_menu = process_toc_list(headings)
-const section = section_from_pathname(Astro.url.pathname);
-const pages_menu_items = await get_section_menu(section)
+const pages_menu_items = await get_section_menu(Astro.url.pathname)
+const section = section_from_pathname(Astro.url.pathname)
 
 console.log(`Layout> sectiom = '${section}'`)
 ---

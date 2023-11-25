@@ -2,10 +2,10 @@
 import './colors.css';
 import Icon from "@/components/icon.astro"
 import { load_yaml } from '@/libs/utils';
-import { get_active_menu } from './app_bar.js';
+import { get_active_appbar_menu } from './layout_utils.js';
 
 const raw_menu = await load_yaml("menu.yaml")
-const menu = get_active_menu(raw_menu,Astro.url.pathname)
+const menu = get_active_appbar_menu(raw_menu,Astro.url.pathname)
 const left_side  = menu.filter((item)=>(!Object.hasOwn(item,"align") || !(item.align=="right")))
 const right_side = menu.filter((item)=>(Object.hasOwn(item,"align") && (item.align=="right")))
 

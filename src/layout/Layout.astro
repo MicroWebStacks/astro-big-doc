@@ -3,8 +3,8 @@ import './colors.css';
 import AppBar from './AppBar.astro';
 import Cache from './Cache.astro'
 import SideMenu from './SideMenu.astro';
-import { get_generated_section_menu,process_toc_list } from "./side_menu";
-import { section_from_pathname } from './layout_utils';
+import { section_from_pathname } from '@/libs/utils';
+import { get_generated_section_menu,process_toc_list } from "./layout_utils";
 
 export interface Props {
 	title: string;
@@ -13,7 +13,7 @@ export interface Props {
 
 const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
-const right_toc_menu = process_toc_list(headings)
+const toc_menu_items = process_toc_list(headings)
 const pages_menu_items = await get_generated_section_menu(Astro.url.pathname)
 const section = section_from_pathname(Astro.url.pathname)
 
@@ -52,8 +52,8 @@ console.log(`Layout> sectiom = '${section}'`)
 				</article>
 				<div id="resize-right" class="nav-resize active"/>
 				<div id="toc-nav-div">
-					{right_toc_menu.visible && 
-						<SideMenu items={right_toc_menu.items} category="toc_menu"/>
+					{toc_menu_items.visible && 
+						<SideMenu items={toc_menu_items.items} category="toc_menu"/>
 					}
 				</div>
 			</main>
@@ -61,7 +61,7 @@ console.log(`Layout> sectiom = '${section}'`)
 				<p>footer</p>
 			</footer>
 		</div>
-		<div id="fixed-right" class={`fixed-nav ${right_toc_menu.visible?"active":""}`}/>
+		<div id="fixed-right" class={`fixed-nav ${toc_menu_items.visible?"active":""}`}/>
 	</body>
 </html>
 
@@ -198,4 +198,4 @@ footer p{
 	}
 </style>
 
-<script src="./layout_client.js" />
+<script src="./menu_interactions_activation.js" />

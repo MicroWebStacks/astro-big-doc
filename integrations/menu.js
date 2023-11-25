@@ -1,21 +1,7 @@
 import {dirname, join} from 'path'
-import { load_yaml, save_json } from '../src/libs/utils.js';
+import { load_yaml, save_json, section_from_pathname } from '../src/libs/utils.js';
 import {pages_list_to_tree} from './pages_menu.js'
 import {getDocuments} from 'content-structure'
-
-function section_from_pathname(pathname){
-    if(pathname.startsWith('http')){
-        return 'external'
-    }
-    const sections = pathname.split('/')
-    if(sections.length < 2){
-        return "home"
-    }else if(sections[1] == ""){
-        return "home"
-    }else{
-        return sections[1]
-    }
-}
 
 function content_entry_to_level(entry){
     const base_level = 1

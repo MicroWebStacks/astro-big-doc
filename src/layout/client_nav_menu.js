@@ -114,40 +114,39 @@ function create_ul_from_items(items,root,expanded){
     items.forEach(item => {
         let li = document.createElement('li')
         li.classList.add("pages_menu")
-        let a = document.createElement('a')
-        a.classList.add("pages_menu")
-        if(item.readme){
-            a.href = item.href;
-        }
+        let div = document.createElement('div')
+        div.classList.add("pages_menu","entry_container")
         if(item.active){
-            a.classList.add("active")
+            div.classList.add("active")
         }
-        if(item.items){
-            a.classList.add("parent")
-            if(item.expanded){
-                a.classList.add("expanded")
-            }
+        if(item.expanded){
+            div.classList.add("expanded")
+        }
+        if(item.parent){
+            div.classList.add("parent")
             let span_icon = document.createElement('span')
-            span_icon.classList.add("pages_menu","icon","nav_expand")
+            span_icon.classList.add("pages_menu","icon","expand")
             span_icon.setAttribute("data-path",item.path)
             span_icon.innerHTML = svg_icon
-            a.appendChild(span_icon)
+            div.appendChild(span_icon)
         }
         let span_text = document.createElement('span')
         span_text.classList.add("pages_menu","text")
-        if(item.readme){
-            span_text.classList.add("href_hover")
-        }
         span_text.textContent = item.text
-        if(item.readme){
-            let text_icon = document.createElement('span')
-            text_icon.classList.add("pages_menu","text","icon","href_hover")
-            text_icon.innerHTML = svg_text_icon
-            span_text.appendChild(text_icon)
+        if(item.parent){
+            span_text.classList.add("parent")
         }
-        a.appendChild(span_text)
-        li.appendChild(a);
-        recursive_update_element(li,item,item.expanded)
+        if(Object.hasOwn(item,"href")){
+            let a = document.createElement('a')
+            a.classList.add("pages_menu")
+            a.setAttribute("href",item.href)
+            a.appendChild(span_text)
+            div.appendChild(a)
+        }else{
+            div.appendChild(span_text)
+        }
+        li.appendChild(div);
+        recursive_update_element(li,item.items,item.expanded)
         ul.appendChild(li)
     });
     return ul
@@ -180,14 +179,14 @@ function recursive_update_element(element,menu_entry_items,expanded){
 }
 
 function section_from_pathname(pathname){
-const sections = pathname.split('/')
-if(sections.length < 2){
-    return "home"
-}else if(sections[1] == ""){
-    return "home"
-}else{
-    return sections[1]
-}
+    const sections = pathname.split('/')
+    if(sections.length < 2){
+        return "home"
+    }else if(sections[1] == ""){
+        return "home"
+    }else{
+        return sections[1]
+    }
 }
   
 function inject_menu_elements(section_items){

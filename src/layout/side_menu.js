@@ -1,7 +1,7 @@
 import {getDocuments} from 'content-structure'
 import { load_yaml, save_json } from '@/libs/utils';
 import {section_from_pathname} from '@/layout/layout_utils.js'
-import {parse, join, dirname} from 'path'
+import {dirname} from 'path'
 
 function find_parent(index,headings){
     const element_depth = headings[index].depth
@@ -92,36 +92,38 @@ function add_folder_parent(entry){
     return Object.values(folderParents);
 }
 
-function get_folder_parent(entry){
-
-}
-
-
-function get_parent(index,entries){
-
-}
-
-async function add_parents(entries){
-    function get_parent_path(entry){
-        if(entry.url_type == "dir"){
-            return dirname(dirname(entry.path))
-        }else{
-            return dirname(entry.path)
-        }
+function get_parent_path(entry){
+    if(entry.url_type == "dir"){
+        return dirname(dirname(entry.path))
+    }else{
+        return dirname(entry.path)
     }
+}
+
+function get_parent(entry,entries){
+    const parent_url = get_parent_path(entry)
+    return entries.find(parent=>parent.url === parent_url)
+}
+
+async function get_new_parents(entries){
     let new_parents = []
+
     entries.forEach((entry)=>{
-        const parent_url = get_parent_path(entry)
-        //console.log(`path:${entry.path}/${entry.url_type} => parent_url:${parent_url}`)
-        if(!new_parents.some(parent=>parent.url === parent_url)){
-            new_parents.push({
-                url:parent_url,
-                format:"folder"
-            })
+        if(entry.level > 2){
+            const parent_url = get_parent_path(entry)
+            console.log(`path:${entry.path}/${entry.url_type} => parent_url:${parent_url}`)
+            if( !entries.some(parent=>parent.url === parent_url) &&
+                !new_parents.some(parent=>parent.url === parent_url)){
+                    //console.log(`parent_url:${parent_url} not found, creating new parent`)
+                    new_parents.push({
+                        url:parent_url,
+                        format:"folder"
+                    })
+            }
         }
     })
-    await save_json(new_parents,"new_parents.json")
-    entries = entries.concat(new_parents)
+    //await save_json(new_parents,"new_parents.json")
+    return new_parents
 }
 
 async function pages_list_to_tree(entries){
@@ -130,19 +132,28 @@ async function pages_list_to_tree(entries){
         element.parent=true
         element.expanded=true
     }
-    await add_parents(entries)
-    let tree = []
-
-    for(let index=0; index<entries.length;index++){
-        let element = entries[index]
-        let parent = get_folder_parent(index,entries)//guaranteed to return a parent, create one if needed
-        if(parent){
-            parent.items.push(element)
+    let might_need_new_parents = true
+    while(might_need_new_parents){
+        const new_parents = await get_new_parents(entries)
+        if(new_parents.length > 0){
+            might_need_new_parents = true
+            entries = entries.concat(new_parents)
         }else{
-            tree.push(element)
+            might_need_new_parents = false
         }
     }
+    let tree = []
 
+    //assign to parents or place in root
+    entries.forEach(entry=>{
+        if(entry.level > 2){
+                get_parent(entry,entries).items.push(entry)
+            }else{
+                tree.push(entry)
+            }
+        })
+    
+    //adjust parents fields 
     for(let element of entries){
         if (element.items.length == 0){
             element.parent = false
@@ -174,32 +185,24 @@ async function get_section_menu(section){
 
     const raw_menu = await load_yaml("menu.yaml")
     const section_menu = raw_menu.find((item)=>(section_from_pathname(item.href) == section))
-    if(Object.hasOwn(section_menu,"content")){
+    if(Object.hasOwn(section_menu,"content") && (section_menu.content == true)){
         const documents = await getDocuments({format:"markdown"})
-        let filtered_entries = documents
-        if(!["","/"].includes(section_menu.content)){
-            let path_filter = section_menu.content
-            if(path_filter.startsWith("/")){
-                path_filter = path_filter.substring(1)
-            }
-            filtered_entries = documents.map((entry)=>(entry.path.startsWith(path_filter)))
-        }
-        const items = filtered_entries.map((entry)=>(
+        const items = documents.map((entry)=>(
             {
-                text:entry.title,
-                path:entry.path,
-                url_type:entry.url_type,
+                text:       entry.title,
+                path:       entry.path,
+                url:        entry.url,
+                url_type:   entry.url_type,
                 href:`/${section}/${entry.url}`,
                 level:content_entry_to_level(entry),
                 format: entry.format,
                 weight: Object.hasOwn(entry,"weight")?entry.weight:1
             }
         ))
-        await save_json(items,"menu_items_list.json")
+        //await save_json(items,"menu_items_list.json")
         const menu_tree = await pages_list_to_tree(items)
-        await save_json(menu_tree,"menu_tree.json")
-        return 
-        //return items
+        //await save_json(menu_tree,"menu_tree.json")
+        return menu_tree
     }else if(Object.hasOwn(section_menu,"items")){
         return section_menu.items
     }else{

@@ -2,7 +2,7 @@
   href: /
 - text: Blog
   href: /blog/gallery
-  content: /
+  content: true
 - text: About
   href: /about/
 - align: right

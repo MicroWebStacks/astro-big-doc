@@ -4,11 +4,12 @@ import SubMenu from "./SubMenu.astro";
 
 export interface Props {
   items: Array<Object>;
+  category: string;
 }
 
-let { items } = Astro.props;
+let { items,category } = Astro.props;
 ---
-<nav class="open" data-width="20vw">
+<nav class={`open ${category}`} data-width="20vw">
     <SubMenu items={items} />
 </nav>
 

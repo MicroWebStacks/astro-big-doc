@@ -1,10 +1,12 @@
 import {collect} from 'content-structure'
+import { create_menu } from './menu.js'
 
 let collect_config = {}
 
 async function config_setup({ updateConfig, config, addPageExtension, command }) {
 	console.log(`astro:config:setup> running (${command})`)
 	await collect(collect_config)
+	await create_menu(collect_config)
 }
 
 function collect_content(options){

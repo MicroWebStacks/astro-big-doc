@@ -1,7 +1,7 @@
-import {getDocuments} from 'content-structure'
-import { load_yaml, save_json } from '@/libs/utils';
-import {section_from_pathname} from '@/layout/layout_utils.js'
-import {dirname} from 'path'
+import {section_from_pathname} from './layout_utils.js'
+import { load_json } from '@/libs/utils.js'
+import { config } from '@/config.js'
+import {join} from 'path'
 
 function find_parent(index,headings){
     const element_depth = headings[index].depth
@@ -66,116 +66,6 @@ function process_toc_list(headings){
     return side_menu
 }
 
-function add_folder_parent(entry){
-    const folderParents = {};
-
-    for (let entry of entries) {
-        let paths = entry.href.split('/').slice(0, -1); // Remove the file part, leave the folder path
-        let path = '';
-
-        for (let segment of paths) {
-            if (segment) {
-                path += '/' + segment;
-                if (!folderParents[path]) {
-                    folderParents[path] = {
-                        text: segment,
-                        href: path,
-                        items: [],
-                        parent: true,
-                        expanded: true
-                    };
-                }
-            }
-        }
-    }
-
-    return Object.values(folderParents);
-}
-
-function get_parent_path(entry){
-    if(entry.url_type == "dir"){
-        return dirname(dirname(entry.path))
-    }else{
-        return dirname(entry.path)
-    }
-}
-
-function get_parent(entry,entries){
-    const parent_url = get_parent_path(entry)
-    return entries.find(parent=>parent.url === parent_url)
-}
-
-async function get_new_parents(entries){
-    function url_to_name(url){
-        let parts = url.split('/')
-        return parts[parts.length-1]
-    }
-    let new_parents = []
-
-    entries.forEach((entry)=>{
-        if(entry.level > 2){
-            const parent_url = get_parent_path(entry)
-            //console.log(`path:${entry.path}/${entry.url_type} => parent_url:${parent_url}`)
-            if( !entries.some(parent=>parent.url === parent_url) &&
-                !new_parents.some(parent=>parent.url === parent_url)){
-                    //console.log(`parent_url:${parent_url} not found, creating new parent`)
-                    new_parents.push({
-                        text:url_to_name(parent_url),
-                        path:parent_url,
-                        url:parent_url,
-                        url_type:"dir",
-                        format:"folder",
-                        level: entry.level - 1
-                    })
-            }
-        }
-    })
-    return new_parents
-}
-
-async function pages_list_to_tree(entries){
-    let might_need_new_parents = true
-    while(might_need_new_parents){
-        const new_parents = await get_new_parents(entries)
-        if(new_parents.length > 0){
-            might_need_new_parents = true
-            entries = entries.concat(new_parents)
-        }else{
-            might_need_new_parents = false
-        }
-    }
-
-    for(let element of entries){
-        element.items=[]
-        element.parent=true
-        element.expanded=true
-    }
-
-    let tree = []
-
-    //assign to parents or place in root
-    entries.forEach(entry=>{
-        if(entry.level > 2){
-                //console.log(`- assigning ${entry.path} to parent`)
-                get_parent(entry,entries).items.push(entry)
-            }else{
-                //console.log(`- pushing ${entry.path} to root`)
-                tree.push(entry)
-            }
-        })
-    
-    //adjust parents fields 
-    for(let element of entries){
-        if (element.items.length == 0){
-            element.parent = false
-            delete element.items
-            delete element.expanded
-        }
-    }
-    return tree
-
-}
-
 function get_active_submenu(raw_menu,section,pathname){
     return raw_menu.map((entry)=>{
         //console.log(`/${section}/${entry.url} == '${pathname}'`)
@@ -187,53 +77,15 @@ function get_active_submenu(raw_menu,section,pathname){
     })
 }
 
-async function get_section_menu(pathname){
+const generated_menu = await load_json(join(config.collect_content.rel_outdir,"menu.json"))
+
+async function get_generated_section_menu(pathname){
     const section = section_from_pathname(pathname);
-
-    function content_entry_to_level(entry){
-        const base_level = 1
-        let level = 0
-        const directory = dirname(entry.path)
-        if(directory != ""){
-            //console.log(directory.split('/'))
-            const path_level = directory.split('/').length
-            if(entry.url_type == "file"){
-                level = base_level + path_level + 1
-            }else{
-                level = base_level + path_level
-            }
-        }
-        //console.log(`level:(${level}) path:${entry.path}`)
-        return level
-    }
-
-    let result_items = []
-    const raw_menu = await load_yaml("menu.yaml")
-    const section_menu = raw_menu.find((item)=>(section_from_pathname(item.href) == section))
-    if(Object.hasOwn(section_menu,"content") && (section_menu.content == true)){
-        const documents = await getDocuments({format:"markdown"})
-        const items = documents.map((entry)=>(
-            {
-                text:       entry.title,
-                path:       entry.path,
-                url:        entry.url,
-                url_type:   entry.url_type,
-                href:`/${section}/${entry.url}`,
-                level:content_entry_to_level(entry),
-                format: entry.format,
-                weight: Object.hasOwn(entry,"weight")?entry.weight:1
-            }
-        ))
-        const menu_tree = await pages_list_to_tree(items)
-        result_items = menu_tree
-    }else if(Object.hasOwn(section_menu,"items")){
-        result_items = section_menu.items
-    }
-    
-    return get_active_submenu(result_items,section,pathname)
+    const section_menu = generated_menu[section]
+    return get_active_submenu(section_menu,section,pathname)
 }
 
 export{
     process_toc_list,
-    get_section_menu
+    get_generated_section_menu
 }

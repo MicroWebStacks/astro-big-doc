@@ -36,6 +36,7 @@ config.collect_content = {
     rootdir:config.rootdir,
     rel_contentdir:config.content,
     rel_outdir:config.content_out,
+    raw_menu:"menu.yaml",
     debug:true,
     tags:{
         page:'page::([\\w-.]+)'

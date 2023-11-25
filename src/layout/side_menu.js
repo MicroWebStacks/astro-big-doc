@@ -106,32 +106,34 @@ function get_parent(entry,entries){
 }
 
 async function get_new_parents(entries){
+    function url_to_name(url){
+        let parts = url.split('/')
+        return parts[parts.length-1]
+    }
     let new_parents = []
 
     entries.forEach((entry)=>{
         if(entry.level > 2){
             const parent_url = get_parent_path(entry)
-            console.log(`path:${entry.path}/${entry.url_type} => parent_url:${parent_url}`)
+            //console.log(`path:${entry.path}/${entry.url_type} => parent_url:${parent_url}`)
             if( !entries.some(parent=>parent.url === parent_url) &&
                 !new_parents.some(parent=>parent.url === parent_url)){
                     //console.log(`parent_url:${parent_url} not found, creating new parent`)
                     new_parents.push({
+                        text:url_to_name(parent_url),
+                        path:parent_url,
                         url:parent_url,
-                        format:"folder"
+                        url_type:"dir",
+                        format:"folder",
+                        level: entry.level - 1
                     })
             }
         }
     })
-    //await save_json(new_parents,"new_parents.json")
     return new_parents
 }
 
 async function pages_list_to_tree(entries){
-    for(let element of entries){
-        element.items=[]
-        element.parent=true
-        element.expanded=true
-    }
     let might_need_new_parents = true
     while(might_need_new_parents){
         const new_parents = await get_new_parents(entries)
@@ -142,13 +144,22 @@ async function pages_list_to_tree(entries){
             might_need_new_parents = false
         }
     }
+
+    for(let element of entries){
+        element.items=[]
+        element.parent=true
+        element.expanded=true
+    }
+
     let tree = []
 
     //assign to parents or place in root
     entries.forEach(entry=>{
         if(entry.level > 2){
+                //console.log(`- assigning ${entry.path} to parent`)
                 get_parent(entry,entries).items.push(entry)
             }else{
+                //console.log(`- pushing ${entry.path} to root`)
                 tree.push(entry)
             }
         })
@@ -199,9 +210,7 @@ async function get_section_menu(section){
                 weight: Object.hasOwn(entry,"weight")?entry.weight:1
             }
         ))
-        //await save_json(items,"menu_items_list.json")
         const menu_tree = await pages_list_to_tree(items)
-        //await save_json(menu_tree,"menu_tree.json")
         return menu_tree
     }else if(Object.hasOwn(section_menu,"items")){
         return section_menu.items

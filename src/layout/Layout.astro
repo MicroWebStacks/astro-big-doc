@@ -2,9 +2,8 @@
 import './colors.css';
 import AppBar from './AppBar.astro';
 import Cache from './Cache.astro'
-import NavMenu from './NavMenu.astro';
 import SideMenu from './SideMenu.astro';
-import { process_toc_list } from "./side_menu";
+import { get_section_menu,process_toc_list } from "./side_menu";
 import {section_from_pathname} from './layout_utils.js'
 
 export interface Props {
@@ -16,6 +15,7 @@ const { headings } = Astro.props;
 const { title } = Astro.props.frontmatter || Astro.props;
 const right_toc_menu = process_toc_list(headings)
 const section = section_from_pathname(Astro.url.pathname);
+const pages_menu_items = await get_section_menu(section)
 console.log(`Layout> sectiom = '${section}'`)
 ---
 <html lang="en">
@@ -35,14 +35,14 @@ console.log(`Layout> sectiom = '${section}'`)
 			<main>
 				<div id="wide-nav" class="scroll">
 					<Cache name={section}>
-						<NavMenu section={section}/>
+						<SideMenu items={pages_menu_items}/>
 					</Cache>
 				</div>
 				<div id="resize-left" class="nav-resize active"/>
 				<article class="content scroll">
 					<div id="mobile-nav">
 						<Cache name={section}>
-							<NavMenu section={section}/>
+							<SideMenu items={pages_menu_items}/>
 						</Cache>
 						</div>
 					<div class="article-slot">

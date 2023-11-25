@@ -11,84 +11,27 @@ const { items,root=true} = Astro.props;
     <ul class={root?"root":"nested"}>
         {items.map((item)=>(
             <li >
-                <a  href={item.href}
-                    class:list={[{toc_href:true, active:item.active, parent:item.parent, expanded:item.expanded}]}
-                    >
+                <div class:list={[{entry_container:true, active:item.active, parent:item.parent, expanded:item.expanded}]}>
                     {item.parent &&
-                        <span class="icon toc_expand">
+                        <span class="icon expand">
                             <svg viewBox="0 0 100 100" width="60" height="60" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#d0d0d0" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </span>
                     }
-                    <span class:list={[{"text":true,href_hover:item.parent}]}>
-                        {item.text}
-                    </span>
-                </a>
+                    {Object.hasOwn(item,"href")?
+                        <a  href={item.href}>
+                            <span class:list={["text href_hover",{parent:item.parent}]}>{item.text}</span>
+                        </a>:
+                        <span class:list={["text",{parent:item.parent}]}>{item.text}</span>
+                    }
+                </div>
                 <Astro.self items={item.items} root={false} />
             </li>
         ))}
     </ul>
 }
 <style>
-    a{
-        padding:0px;
-        padding-left:0px;
-        text-decoration: none;
-        user-select: none;    
-        color:var(--content-color);
-        display:block;
-    }
-    /* active when nav menu item is matching url */
-    a.active{
-        background-color: var(--menu-active-color);
-    }
-    a.toc_expand:hover, a:not(.parent):hover{
-        background-color: var(--menu-span-hover-color);
-    }
-    a.parent{
-        cursor:pointer;
-        display:flex;
-    }
-    span.icon{
-        padding:10px;
-        padding-top:5px;
-        padding-bottom:5px;
-        flex-grow:0;
-    }
-    span.text{
-        padding:10px;
-        padding-top:5px;
-        padding-bottom:5px;
-        flex-grow:1;
-        display:block;
-    }
-    a.parent > span.text{
-        padding-left: 0px;
-    }
-
-    span.icon > svg{
-        width:16px;
-        height:16px;
-        rotate: 0deg;
-        transition: rotate .4s ease-in-out;
-    }
-    a.parent.expanded > span > svg{
-        rotate: 90deg;
-    }
-    span.toc_expand:hover{
-        background-color: var(--menu-span-hover-color);
-    }
-    span.toc_expand:hover > svg > path{
-        stroke:var(--menu-icon-hover-color);
-    }
-    a.toc_expand:hover > span.icon > svg > path{
-        stroke: var(--menu-icon-hover-color);
-    }
-
-    span.href_hover:hover{
-        background-color: var(--menu-span-hover-color);
-    }
     ul{
         display:flex;
         flex-direction: column;
@@ -97,9 +40,9 @@ const { items,root=true} = Astro.props;
         padding: 0px;
     }
     ul.nested{
-        padding-left: 3px;
+        padding-left: 8px;
         border-top:   0px;
-        border-left:  2px solid var(--menu-border-left-color);
+        border-left:  1px solid var(--menu-border-left-color);
         border-right: 0px;
         border-bottom:0px;
         margin-left: 8px;
@@ -116,13 +59,64 @@ const { items,root=true} = Astro.props;
     li{
         min-width: 130px;
     }
+    .entry_container{
+        padding:0px;
+        padding-left:0px;
+        user-select: none;    
+        color:var(--content-color);
+        display:flex;
+        align-items: center;
+    }
+    .entry_container>a{
+        text-decoration: none;
+        flex-grow: 1;
+    }
+    /* active when nav menu item is matching url */
+    .entry_container.active{
+        background-color: var(--menu-active-color);
+    }
+    span.icon{
+        padding:3px;
+        padding-right:5px;
+        flex-grow: 0;
+    }
+    span.text{
+        padding:2px;
+        padding-top:3px;
+        padding-bottom:3px;
+        color:#bbb;
+        display: block;
+        flex-grow: 1;
+    }
+    span.text:not(.parent){
+        padding:10px;
+        padding-top:4px;
+        padding-bottom:4px;
+    }
+
+    span.icon > svg{
+        width:10px;
+        height:10px;
+        rotate: 0deg;
+        transition: rotate .4s ease-in-out;
+    }
+    .entry_container.parent.expanded > span > svg{
+        rotate: 90deg;
+    }
+    span.icon.expand:hover{
+        background-color: var(--menu-span-hover-color);
+        cursor: pointer;
+    }
+    span.text.href_hover:hover{
+        background-color: var(--menu-span-hover-color);
+    }
 
 </style>
 
 
 <script>
     //---------------   Click Expand   ---------------
-    let toggler = document.getElementsByClassName("toc_expand");
+    let toggler = document.getElementsByClassName("expand");
     for (let i = 0; i < toggler.length; i++) {
       toggler[i].addEventListener("click", function(e) {
         this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");

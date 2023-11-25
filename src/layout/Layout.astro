@@ -3,8 +3,11 @@ import './colors.css';
 import AppBar from './AppBar.astro';
 import Cache from './Cache.astro'
 import SideMenu from './SideMenu.astro';
+import ClientNavMenu from './ClientNavMenu.astro';
 import { section_from_pathname } from '@/libs/utils';
-import { get_generated_section_menu,process_toc_list } from "./layout_utils";
+import { get_menu_hash,get_generated_section_menu,process_toc_list } from "./layout_utils";
+import {config} from '@/config'
+
 
 export interface Props {
 	title: string;
@@ -16,6 +19,7 @@ const { title } = Astro.props.frontmatter || Astro.props;
 const toc_menu_items = process_toc_list(headings)
 const pages_menu_items = await get_generated_section_menu(Astro.url.pathname)
 const section = section_from_pathname(Astro.url.pathname)
+const menu_hash = get_menu_hash()
 
 console.log(`Layout> sectiom = '${section}'`)
 ---
@@ -35,17 +39,23 @@ console.log(`Layout> sectiom = '${section}'`)
 			</header>
 			<main>
 				<div id="wide-nav" class="scroll">
-					<Cache name={section}>
-						<SideMenu items={pages_menu_items} category="pages_menu"/>
-					</Cache>
+					{config.client_menu?
+						<ClientNavMenu hash={menu_hash}/>:
+						<Cache name={section}>
+							<SideMenu items={pages_menu_items} category="pages_menu"/>
+						</Cache>
+					}
 				</div>
 				<div id="resize-left" class="nav-resize active"/>
 				<article class="content scroll">
 					<div id="mobile-nav">
-						<Cache name={section}>
-							<SideMenu items={pages_menu_items} category="pages_menu"/>
-						</Cache>
-						</div>
+						{config.client_menu?
+							<ClientNavMenu hash={menu_hash}/>:
+							<Cache name={section}>
+								<SideMenu items={pages_menu_items} category="pages_menu"/>
+							</Cache>
+						}
+					</div>
 					<div class="article-slot">
 						<slot/>
 					</div>

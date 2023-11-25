@@ -1,6 +1,10 @@
 dist/
 public/raw/
 temp/
+public/menu.json
+public/index.json
+public/codes/
+public/documents/
 
 # dependencies
 node_modules/

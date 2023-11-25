@@ -2,6 +2,7 @@ import {dirname, join} from 'path'
 import { load_yaml, save_json, section_from_pathname } from '../src/libs/utils.js';
 import {pages_list_to_tree} from './process_menu.js'
 import {getDocuments} from 'content-structure'
+import {createHash} from 'crypto'
 
 function content_entry_to_level(entry){
     const base_level = 1
@@ -47,14 +48,26 @@ async function get_section_menu(section,raw_menu){
 }
 
 async function create_menu(collect_config){
-    let menu = {}
     console.log(`create_menu> ${collect_config.raw_menu}`)
     const raw_menu = await load_yaml(collect_config.raw_menu)
+    let menu = {
+        raw_menu:raw_menu,
+        sections:{}
+    }
     for(const menu_entry of raw_menu){
         const section = section_from_pathname(menu_entry.href);
-        menu[section] = await get_section_menu(section,raw_menu)
+        menu.sections[section] = await get_section_menu(section,raw_menu)
     }
-    await save_json(menu,join(collect_config.rel_outdir,"menu.json"))
+
+    const menu_text = JSON.stringify(menu)
+    const hash = createHash('md5').update(menu_text).digest('hex').substring(0,8)
+    
+    menu = {hash:hash,...menu}
+    if(import.meta.env.DEV){
+        await save_json(menu,join("public","menu.json"))
+    }else{
+        await save_json(menu,join(config.outDir,"menu.json"))
+    }
 }
 
 export{

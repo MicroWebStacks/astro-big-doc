@@ -1,0 +1,126 @@
+---
+import './colors.css';
+
+export interface Props {
+	hash: string;
+}
+
+const {hash} = Astro.props;
+---
+<nav class="open pages_menu client" data-width="20vw" data-hash={hash}>
+</nav>
+
+<style>
+nav{
+    background: var(--nav-bg-color);
+    transition: width 0.5s;
+    width:20vw;
+    height: 100%;
+    overflow-y: auto;
+}
+nav::-webkit-scrollbar {
+  width: 1rem;
+}
+nav::-webkit-scrollbar-track {
+  background: var(--nav-bg-color); 
+}
+nav::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-color); 
+}
+nav::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb-hover-color); 
+}
+
+@media only screen and (max-width: 700px) {
+	nav {
+    width:100%;
+  }
+}
+
+</style>
+
+
+<style is:global>
+    ul.pages_menu{
+        display:flex;
+        flex-direction: column;
+        list-style: none;
+        margin:0px;
+        padding: 0px;
+    }
+    ul.nested.pages_menu{
+        padding-left: 8px;
+        border-top:   0px;
+        border-left:  1px solid var(--menu-border-left-color);
+        border-right: 0px;
+        border-bottom:0px;
+        margin-left: 8px;
+        overflow: hidden;
+        max-height: 200vh;
+        transition-property: max-height;
+        transition-duration: 0.4s;
+    }
+    ul.nested.hidden.pages_menu{
+        max-height: 0px;
+        transition-property: max-height;
+        transition-duration: 0.4s;
+    }
+    li.pages_menu{
+        min-width: 130px;
+    }
+    .entry_container.pages_menu{
+        padding:0px;
+        padding-left:0px;
+        user-select: none;    
+        color:var(--content-color);
+        display:flex;
+        align-items: center;
+    }
+    .entry_container.pages_menu>a{
+        text-decoration: none;
+        flex-grow: 1;
+    }
+    /* active when nav menu item is matching url */
+    .entry_container.active.pages_menu{
+        background-color: var(--menu-active-color);
+    }
+    span.icon.pages_menu{
+        padding:3px;
+        padding-right:5px;
+        flex-grow: 0;
+    }
+    span.text.pages_menu{
+        padding:2px;
+        padding-top:3px;
+        padding-bottom:3px;
+        color:#bbb;
+        display: block;
+        flex-grow: 1;
+    }
+    span.text.pages_menu:not(.parent){
+        padding:10px;
+        padding-top:4px;
+        padding-bottom:4px;
+    }
+
+    span.icon.pages_menu > svg{
+        width:10px;
+        height:10px;
+        rotate: 0deg;
+        transition: rotate .4s ease-in-out;
+    }
+    .entry_container.parent.expanded.pages_menu > span > svg{
+        rotate: 90deg;
+    }
+    span.icon.expand.pages_menu:hover{
+        background-color: var(--menu-span-hover-color);
+        cursor: pointer;
+    }
+    span.text.href_hover.pages_menu:hover{
+        background-color: var(--menu-span-hover-color);
+    }
+
+</style>
+
+
+<script src="./client_nav_menu.js" />

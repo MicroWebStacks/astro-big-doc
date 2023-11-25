@@ -13,21 +13,22 @@ if(import.meta.env?.MODE == "production"){
 dotenv.config()
 
 let protocol = process.env.PROTOCOL
-
-if(import.meta.env.MODE == "development"){
+let content_out = "dist"
+if(import.meta.env.DEV){
     protocol = "http"
+    content_out = "public"
 }
 
 const config = {
-    site:process.env.SITE,
     port:process.env.PORT,
     url:`${protocol}://${process.env.HOST}:${process.env.PORT}`,
     rootdir: __dirname,
     outDir: "dist",
     content: "content",
-    content_out: "dist",
+    content_out: content_out,
     plantuml_server: "https://www.plantuml.com/plantuml/svg",
     kroki_server: "https://kroki.io",
+    client_menu:false,
     hashed_assets:false,
     copy_astro:false,
 }

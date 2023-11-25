@@ -101,7 +101,7 @@ function restore_menu_state(){
 
 function create_ul_from_items(items,root,expanded){
     let ul = document.createElement('ul')
-    ul.classList.add("pages_menu","root")
+    ul.classList.add("pages_menu")
     if(expanded == false){
         console.log(expanded)
         ul.classList.add("hidden")
@@ -146,7 +146,7 @@ function create_ul_from_items(items,root,expanded){
             div.appendChild(span_text)
         }
         li.appendChild(div);
-        recursive_update_element(li,item.items,item.expanded)
+        recursive_update_element(li,item.items,(item.level==1),item.expanded)
         ul.appendChild(li)
     });
     return ul
@@ -171,9 +171,9 @@ function set_active_expanded(items,pathname){
     }
 }
 
-function recursive_update_element(element,menu_entry_items,expanded){
+function recursive_update_element(element,menu_entry_items,root,expanded){
     if(menu_entry_items){
-        const ul = create_ul_from_items(menu_entry_items,true,expanded)
+        const ul = create_ul_from_items(menu_entry_items,root,expanded)
         element.appendChild(ul)
     }
 }
@@ -199,7 +199,7 @@ function inject_menu_elements(section_items){
         console.log("not closing")
     }
 
-    recursive_update_element(menu_nav,section_items,true)
+    recursive_update_element(menu_nav,section_items,true,true)
 }
 
 function enable_clicks(){

@@ -28,7 +28,7 @@ const config = {
     content_out: content_out,
     plantuml_server: "https://www.plantuml.com/plantuml/svg",
     kroki_server: "https://kroki.io",
-    client_menu:false,
+    client_menu:true,
     hashed_assets:false,
     copy_astro:false,
 }

@@ -1,5 +1,5 @@
 import {collect} from 'content-structure'
-import { create_menu } from './menu.js'
+import { create_menu } from './create_menu.js'
 
 let collect_config = {}
 

@@ -2,7 +2,7 @@
 import './colors.css';
 import Icon from "@/components/icon.astro"
 import { load_yaml } from '@/libs/utils';
-import {get_active_menu} from './layout_utils.js'
+import { get_active_menu } from './app_bar.js';
 
 const raw_menu = await load_yaml("menu.yaml")
 const menu = get_active_menu(raw_menu,Astro.url.pathname)

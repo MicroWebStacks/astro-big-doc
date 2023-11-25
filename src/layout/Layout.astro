@@ -16,6 +16,7 @@ const { title } = Astro.props.frontmatter || Astro.props;
 const right_toc_menu = process_toc_list(headings)
 const section = section_from_pathname(Astro.url.pathname);
 const pages_menu_items = await get_section_menu(section)
+
 console.log(`Layout> sectiom = '${section}'`)
 ---
 <html lang="en">
@@ -197,4 +198,4 @@ footer p{
 	}
 </style>
 
-<script src="./layout.js" />
+<script src="./layout_client.js" />

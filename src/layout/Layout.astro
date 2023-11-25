@@ -20,6 +20,7 @@ const toc_menu_items = process_toc_list(headings)
 const pages_menu_items = await get_generated_section_menu(Astro.url.pathname)
 const section = section_from_pathname(Astro.url.pathname)
 const menu_hash = get_menu_hash()
+const left_menu_open = (pages_menu_items.length > 0)
 
 console.log(`Layout> sectiom = '${section}'`)
 ---
@@ -40,7 +41,7 @@ console.log(`Layout> sectiom = '${section}'`)
 			<main>
 				<div id="wide-nav" class="scroll">
 					{config.client_menu?
-						<ClientNavMenu hash={menu_hash}/>:
+						<ClientNavMenu open={left_menu_open} hash={menu_hash}/>:
 						<Cache name={section}>
 							<SideMenu items={pages_menu_items} category="pages_menu"/>
 						</Cache>
@@ -50,7 +51,7 @@ console.log(`Layout> sectiom = '${section}'`)
 				<article class="content scroll">
 					<div id="mobile-nav">
 						{config.client_menu?
-							<ClientNavMenu hash={menu_hash}/>:
+							<ClientNavMenu open={left_menu_open} hash={menu_hash}/>:
 							<Cache name={section}>
 								<SideMenu items={pages_menu_items} category="pages_menu"/>
 							</Cache>

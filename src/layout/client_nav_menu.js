@@ -34,7 +34,7 @@ async function get_menu(){
 
 function get_menu_state(){
     let menu_state = {
-        left_open:true,
+        left_open:null,
         expand_map:{},
         scroll_position:0
     }
@@ -66,9 +66,10 @@ function expand_toggle_save(path){
 }
 
 function set_open_state(left_open){
+    console.log(`left_open = ${left_open}`)
     const menu_nav = document.querySelector("nav.pages_menu")
     menu_nav.style.transition = "width 0s"
-    if(left_open == "true"){
+    if(left_open){
         menu_nav.style.width = "20vw"
         menu_nav.setAttribute("data-width","20vw")
         menu_nav.classList.add("open")
@@ -85,17 +86,22 @@ function set_open_state(left_open){
     },100)
 }
 
+function persist_menu_state(){
+    const menu_nav = document.querySelector("nav.pages_menu")
+    if(menu_nav.classList.contains("open")){
+        menu_state.left_open = true
+    }else{
+        menu_state.left_open = false
+    }
+    save_menu_state()
+}
+
 function restore_menu_state(){
     let left_open = menu_state.left_open
-    const menu_nav = document.querySelector("nav.pages_menu")
     if(left_open != null){
         set_open_state(left_open)
     }else{
-        if(menu_nav.classList.contains("open")){
-            localStorage.setItem("left_open","true")
-        }else{
-            localStorage.setItem("left_open","false")
-        }
+        persist_menu_state()
     }
 }
 
@@ -213,6 +219,11 @@ function enable_clicks(){
         e.preventDefault()
       });
     }
+    const fixed_left = document.getElementById("fixed-left")
+    fixed_left.addEventListener("click",(e)=>{
+        persist_menu_state()
+    })
+
 }
 
 let menu_state = {}
@@ -223,7 +234,7 @@ async function inject_menu(){
         return
     }
     menu_state = get_menu_state()
-
+    console.log(`left_open = ${menu_state.left_open}`)
     restore_menu_state()
     const menu = await get_menu()
     const section_name = section_from_pathname(window.location.pathname)

@@ -5,6 +5,7 @@ public/menu.json
 public/index.json
 public/codes/
 public/documents/
+public/diagrams
 
 # dependencies
 node_modules/

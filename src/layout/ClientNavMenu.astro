@@ -2,19 +2,22 @@
 import './colors.css';
 
 export interface Props {
+    open: boolean;
 	hash: string;
 }
 
-const {hash} = Astro.props;
+const {hash, open} = Astro.props;
+const open_class = open?"open":"closed"
+const data_width = open?"20vw":"0vw"
 ---
-<nav class="open pages_menu client" data-width="20vw" data-hash={hash}>
+<nav class={`${open_class} pages_menu client`} data-width={data_width} data-hash={hash}>
 </nav>
 
-<style>
+<style define:vars={{ data_width }}>
 nav{
     background: var(--nav-bg-color);
     transition: width 0.5s;
-    width:20vw;
+    width:var(--data_width);
     height: 100%;
     overflow-y: auto;
 }

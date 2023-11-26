@@ -1,7 +1,6 @@
 import {config} from '@/config.js'
 import {exists, generateShortMD5, save_file} from '@/libs/utils'
 import {join} from 'path'
-import {promises as fs} from 'fs';
 
 async function diagram_cache(code,generator){
     const hash = generateShortMD5(code)

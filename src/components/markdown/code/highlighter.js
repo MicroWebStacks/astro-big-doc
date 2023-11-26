@@ -3,8 +3,11 @@ import {join} from 'path'
 import {bundledLanguages, getHighlighter} from 'shikiji';
 import { save_file, generateShortMD5 } from '@/libs/utils.js';
 
-const highlighter = await getHighlighter({theme:'dark-plus'})
-await highlighter.loadTheme('dark-plus')
+const highlighter = await getHighlighter({
+    themes:[config.highlighter.theme],
+    langs:config.highlighter.langs,
+})
+await highlighter.loadTheme(config.highlighter.theme)
 
 async function codeToHtml(code, highlighter_config){
     const requested_language = highlighter_config.lang
@@ -18,7 +21,7 @@ async function codeToHtml(code, highlighter_config){
     }
     
 
-    const html = highlighter.codeToHtml(code, { lang: lang, theme:'dark-plus' })
+    const html = highlighter.codeToHtml(code, { lang: lang, theme:config.highlighter.theme })
     const hash = generateShortMD5(code)
     const file_path = join(config.rootdir,config.content_out,"codes",hash,"code.txt")
     await save_file(file_path,code)

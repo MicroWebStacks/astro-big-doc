@@ -11,7 +11,7 @@ export interface Props {
 const { src, alt, title } = Astro.props as Props;
 const asseturl = src;
 const assetname = asseturl.substring(asseturl.lastIndexOf('/') + 1)
-console.log(` * panzoom : '${asseturl}'`)
+console.log(` * panzoom : '${src}' : '${asseturl}'`)
 
 const isSvg = asseturl.endsWith(".svg")
 const isImg = !isSvg

@@ -8,7 +8,7 @@ export interface Props {
     params: object;
 }
 
-const {hash, svg, code, params} = Astro.props as Props;
+const {hash, code, params} = Astro.props as Props;
 const diagram_url = `/diagrams/${hash}/diagram.svg`
 let alt = ""
 let title = ""

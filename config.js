@@ -31,6 +31,10 @@ const config = {
     client_menu:true,
     hashed_assets:false,
     copy_astro:false,
+    highlighter:{
+        theme:"dark-plus",
+        langs:['javascript','js','python','yaml']
+    }
 }
 
 config.collect_content = {

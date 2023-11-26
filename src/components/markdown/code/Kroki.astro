@@ -25,6 +25,7 @@ async function generator(code){
 }
 
 const hash = await diagram_cache(code, generator)
+console.log(` => kroki '${hash}'`)
 
 ---
-<DiagramCode code={code} hash={hash} params={params}/>
+<DiagramCode hash={hash} code={code} params={params}/>

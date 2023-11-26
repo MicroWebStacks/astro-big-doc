@@ -66,7 +66,7 @@ async function create_menu(collect_config){
     if(import.meta.env.DEV){
         await save_json(menu,join("public","menu.json"))
     }else{
-        await save_json(menu,join(config.outDir,"menu.json"))
+        await save_json(menu,join(collect_config.rel_outdir,"menu.json"))
     }
 }
 

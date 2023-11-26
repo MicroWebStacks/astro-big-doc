@@ -4,7 +4,7 @@ import AstroMarkdown from '@/components/markdown/AstroMarkdown.astro'
 import {getEntry} from 'content-structure'
 
 console.log(`index> home page`)
-const entry = await getEntry({path:"readme.md"})
+const entry = await getEntry({path:"main/readme.md"})
 
 ---
 <Layout title={entry.title} headings={entry.data.headings} >

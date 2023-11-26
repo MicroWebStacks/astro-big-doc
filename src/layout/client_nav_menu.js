@@ -104,7 +104,7 @@ function create_ul_from_items(items,root,expanded){
             div.classList.add("parent")
             let span_icon = document.createElement('span')
             span_icon.classList.add("pages_menu","icon","expand")
-            span_icon.setAttribute("data-href",item.href)
+            span_icon.setAttribute("data-url",item.url)
             span_icon.innerHTML = svg_icon
             div.appendChild(span_icon)
         }
@@ -133,16 +133,18 @@ function create_ul_from_items(items,root,expanded){
 
 function set_active_expanded(items,section_name,pathname){
     for(let item of items){
-        if(Object.hasOwn(menu.sections_expand[section_name],item.href)){
-            item.expanded = menu.sections_expand[section_name][item.href]
+        if(Object.hasOwn(menu.sections_expand[section_name],item.url)){
+            item.expanded = menu.sections_expand[section_name][item.url]
         }else{
             if(!Object.hasOwn(item,"expanded")){//only added if not already set
                 item.expanded = true
             }
-            menu.sections_expand[section_name][item.href] = item.expanded
+            menu.sections_expand[section_name][item.url] = item.expanded
         }
         if(item.href == pathname){
             item.active = true
+        }else{
+            item.active = false
         }
         if(item.items){
             set_active_expanded(item.items,section_name,pathname)
@@ -180,7 +182,7 @@ function enable_clicks(){
         this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
         this.parentElement.classList.toggle("expanded");
         const section_name = section_from_pathname(window.location.pathname)
-        expand_toggle_save(section_name,toggler[i].getAttribute("data-href"))
+        expand_toggle_save(section_name,toggler[i].getAttribute("data-url"))
         e.preventDefault()
       });
     }
@@ -207,8 +209,8 @@ async function inject_menu(){
     set_open_state(section_name)
     const menu_section_items = menu.sections[section_name]
     const menu_nav = document.querySelector("nav.pages_menu")
-    recursive_update_element(menu_nav,menu_section_items,true,true)
     set_active_expanded(menu_section_items,section_name,window.location.pathname)
+    recursive_update_element(menu_nav,menu_section_items,true,true)
     enable_clicks()
 }
 

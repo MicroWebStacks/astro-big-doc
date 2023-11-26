@@ -40,7 +40,7 @@ const config = {
 config.collect_content = {
     rootdir:config.rootdir,
     rel_contentdir:config.content,
-    rel_outdir:config.content_out,
+    rel_outdir:"public",//because integrations cannot persist on dist before start of build
     raw_menu:"menu.yaml",
     debug:true,
     tags:{

@@ -63,11 +63,7 @@ async function create_menu(collect_config){
     const hash = createHash('md5').update(menu_text).digest('hex').substring(0,8)
     
     menu = {hash:hash,...menu}
-    if(import.meta.env.DEV){
-        await save_json(menu,join("public","menu.json"))
-    }else{
-        await save_json(menu,join(collect_config.rel_outdir,"menu.json"))
-    }
+    await save_json(menu,join(collect_config.rel_outdir,"menu.json"))
 }
 
 export{

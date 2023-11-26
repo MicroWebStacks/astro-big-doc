@@ -5,9 +5,17 @@ const svg_icon = `<svg viewBox="0 0 100 100" width="60" height="60" fill="#00000
 <path d="M 20,10 L 70,50 L 20,90" stroke-width="20px" stroke="#a0a0a0" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>`
 
+function add_side_open_state(){
+    menu.sections_open = {}
+    menu.sections_expand = {}
+    for(const section in menu.sections){
+        menu.sections_open[section] = (menu.sections[section].length>0)?true:false
+        menu.sections_expand[section] = {}
+    }
+}
+
 async function get_menu(){
     let needs_fetch = false
-    let menu = {}
     let menu_text = localStorage.getItem("menu")
     if(!menu_text){
         console.log("not in storage, fetching")
@@ -27,45 +35,28 @@ async function get_menu(){
     if(needs_fetch){
         const resp = await fetch("/menu.json")
         menu = await resp.json()
-        save_menu(menu)
+        add_side_open_state()
+        save_menu()
     }
-    return menu
 }
 
-function get_menu_state(){
-    let menu_state = {
-        left_open:null,
-        expand_map:{},
-        scroll_position:0
-    }
-    let menu_state_text = localStorage.getItem("menu_state")
-    if(menu_state_text != undefined){
-        menu_state = JSON.parse(menu_state_text)
-    }
-    console.log(menu_state)
-    return menu_state
-}
-
-function save_menu_state(){
-    localStorage.setItem("menu_state",JSON.stringify(menu_state))
-}
-
-function save_menu(menu){
+function save_menu(){
     localStorage.setItem("menu",JSON.stringify(menu))
 }
 
-function expand_toggle_save(path){
-    let expand_map = menu_state.expand_map
-    if(Object.hasOwn(expand_map,path)){
-        expand_map[path] = !expand_map[path]
+function expand_toggle_save(section_name,href){
+    let expand_map = menu.sections_expand[section_name]
+    if(Object.hasOwn(expand_map,href)){
+        expand_map[href] = !expand_map[href]
     }else{
-        expand_map[path] = false
+        expand_map[href] = false
     }
-    menu_state.expand_map = expand_map
-    save_menu_state()
+    menu.sections_expand[section_name] = expand_map
+    save_menu()
 }
 
-function set_open_state(left_open){
+function set_open_state(section_name){
+    const left_open = menu.sections_open[section_name]
     console.log(`left_open = ${left_open}`)
     const menu_nav = document.querySelector("nav.pages_menu")
     menu_nav.style.transition = "width 0s"
@@ -84,25 +75,6 @@ function set_open_state(left_open){
     setTimeout(()=>{
         menu_nav.style.transition = "width 0.5s"
     },100)
-}
-
-function persist_menu_state(){
-    const menu_nav = document.querySelector("nav.pages_menu")
-    if(menu_nav.classList.contains("open")){
-        menu_state.left_open = true
-    }else{
-        menu_state.left_open = false
-    }
-    save_menu_state()
-}
-
-function restore_menu_state(){
-    let left_open = menu_state.left_open
-    if(left_open != null){
-        set_open_state(left_open)
-    }else{
-        persist_menu_state()
-    }
 }
 
 function create_ul_from_items(items,root,expanded){
@@ -132,7 +104,7 @@ function create_ul_from_items(items,root,expanded){
             div.classList.add("parent")
             let span_icon = document.createElement('span')
             span_icon.classList.add("pages_menu","icon","expand")
-            span_icon.setAttribute("data-path",item.path)
+            span_icon.setAttribute("data-href",item.href)
             span_icon.innerHTML = svg_icon
             div.appendChild(span_icon)
         }
@@ -143,6 +115,7 @@ function create_ul_from_items(items,root,expanded){
             span_text.classList.add("parent")
         }
         if(Object.hasOwn(item,"href")){
+            span_text.classList.add("href_hover")
             let a = document.createElement('a')
             a.classList.add("pages_menu")
             a.setAttribute("href",item.href)
@@ -158,21 +131,21 @@ function create_ul_from_items(items,root,expanded){
     return ul
 }
 
-function set_active_expanded(items,pathname){
-    console.log(pathname)
+function set_active_expanded(items,section_name,pathname){
     for(let item of items){
-        if(Object.hasOwn(menu_state.expand_map,item.path)){
-            item.expanded = menu_state.expand_map[item.path]
+        if(Object.hasOwn(menu.sections_expand[section_name],item.href)){
+            item.expanded = menu.sections_expand[section_name][item.href]
         }else{
             if(!Object.hasOwn(item,"expanded")){//only added if not already set
                 item.expanded = true
             }
+            menu.sections_expand[section_name][item.href] = item.expanded
         }
         if(item.href == pathname){
             item.active = true
         }
         if(item.items){
-            set_active_expanded(item.items,pathname)
+            set_active_expanded(item.items,section_name,pathname)
         }
     }
 }
@@ -197,15 +170,6 @@ function section_from_pathname(pathname){
   
 function inject_menu_elements(section_items){
     //console.log(section)
-    const menu_nav = document.querySelector("nav.pages_menu")
-    if(!section_items){
-        set_open_state(false)
-        console.log("closing")
-    }else{
-        console.log("not closing")
-    }
-
-    recursive_update_element(menu_nav,section_items,true,true)
 }
 
 function enable_clicks(){
@@ -215,32 +179,36 @@ function enable_clicks(){
       toggler[i].addEventListener("click", function(e) {
         this.parentElement.parentElement.querySelector("ul")?.classList.toggle("hidden");
         this.parentElement.classList.toggle("expanded");
-        expand_toggle_save(toggler[i].getAttribute("data-path"))
+        const section_name = section_from_pathname(window.location.pathname)
+        expand_toggle_save(section_name,toggler[i].getAttribute("data-href"))
         e.preventDefault()
       });
     }
     const fixed_left = document.getElementById("fixed-left")
     fixed_left.addEventListener("click",(e)=>{
-        persist_menu_state()
+        const section_name = section_from_pathname(window.location.pathname)
+        const menu_nav = document.querySelector("nav.pages_menu")
+        menu.sections_open[section_name] = menu_nav.classList.contains("open")
+        save_menu()        
     })
 
 }
 
-let menu_state = {}
+let menu = {}
 
 async function inject_menu(){
     const pages_menu_elements = document.querySelectorAll(".pages_menu.client")
     if(pages_menu_elements.length == 0){
         return
     }
-    menu_state = get_menu_state()
-    console.log(`left_open = ${menu_state.left_open}`)
-    restore_menu_state()
-    const menu = await get_menu()
+    await get_menu()
+    console.log(menu)
     const section_name = section_from_pathname(window.location.pathname)
+    set_open_state(section_name)
     const menu_section_items = menu.sections[section_name]
-    set_active_expanded(menu_section_items,window.location.pathname)
-    inject_menu_elements(menu_section_items)
+    const menu_nav = document.querySelector("nav.pages_menu")
+    recursive_update_element(menu_nav,menu_section_items,true,true)
+    set_active_expanded(menu_section_items,section_name,window.location.pathname)
     enable_clicks()
 }
 

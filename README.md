@@ -1,6 +1,6 @@
 # astro big doc
 
-Live demo : astro-big-doc.netlify.app/
+Live demo : https://astro-big-doc.netlify.app
 
 Astro Theme that can scale for big documentation websites. Includes an unimited depth config menu that starts with a top appbar for sections navigation, then continues on a tree left  menu for pages. Each page then has a tree right menu for its table of content.
 

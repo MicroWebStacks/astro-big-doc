@@ -1,19 +1,26 @@
 ---
 import Highlighter from './Highlighter.astro'
+import Panzoom from '@/components/panzoom/panzoom.astro'
 
 export interface Props {
     hash:string;
-    svg: string;
     code: string;
     params: object;
 }
 
 const {hash, svg, code, params} = Astro.props as Props;
+const diagram_url = `/diagrams/${hash}/diagram.svg`
+let alt = ""
+let title = ""
+if(params && (params.length > 0)){
+    alt = params[0]
+    title = params[0]
+}
 
 ---
 <button class="toggler" data-hash={hash}>code/diagram</button>
 <div class="diagram visible" data-hash={hash}>
-    <Fragment set:html={svg}></Fragment>
+    <Panzoom src={diagram_url} alt={alt} title={title} />
 </div>
 <div class="code hidden" data-hash={hash}>
     <Highlighter code={code} language={"javascript"} params={params} />

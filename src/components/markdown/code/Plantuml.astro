@@ -18,7 +18,7 @@ async function generator(code){
     return svg_text
 }
 
-const {svg_text,hash} = await diagram_cache(code, generator)
+const hash = await diagram_cache(code, generator)
 ---
-<DiagramCode svg={svg_text} code={code} hash={hash}/>
+<DiagramCode hash={hash} code={code} params={params} />
 

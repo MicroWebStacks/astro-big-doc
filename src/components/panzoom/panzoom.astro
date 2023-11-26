@@ -10,12 +10,7 @@ export interface Props {
 
 const { src, alt, title } = Astro.props as Props;
 const asseturl = src;
-let assetname = ""
-if(asseturl.includes(".mdx.")){
-  assetname = asseturl.split(".mdx.")[1]
-}else{
-  assetname = asseturl.substring(asseturl.lastIndexOf('/') + 1)
-}
+const assetname = asseturl.substring(asseturl.lastIndexOf('/') + 1)
 console.log(` * panzoom : '${asseturl}'`)
 
 const isSvg = asseturl.endsWith(".svg")

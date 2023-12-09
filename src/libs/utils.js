@@ -234,8 +234,6 @@ export{
   rel_to_abs,
   uid,
   suid,
-  event,
-  window_event,
   green_log,
   blue_log,
   yellow_log,

@@ -19,6 +19,13 @@ function astToDataTable(tableNode) {
     return data;
 }
 
+function xlsxJson_to_DataTable(xlsxJson){
+    const headers = Object.keys(xlsxJson[0]);
+    const rows = xlsxJson.map(rowObject => headers.map(header => rowObject[header]));
+    return [headers, ...rows];
+}
+
 export{
-    astToDataTable
+    astToDataTable,
+    xlsxJson_to_DataTable
 }

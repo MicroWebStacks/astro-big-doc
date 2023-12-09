@@ -114,7 +114,7 @@ It is also possible to create tables in xlsx format. This link of `.xlsx` extens
 ```markdown
 [Table1](./Table1.xlsx)
 ```
-will generate this table. Which will be soon ported to be rebdered as an interactive table.
+will generate this data table
 
 [Table1](./Table1.xlsx)
 
@@ -137,7 +137,7 @@ for item in my_list:
 # Links
 * external link Astro Markdown Render [github repo](https://github.com/MicroWebStacks/astro-markdown-render) link is external and opens in a new page.
 
-* Link to the [Image](/image) entry opens in the same page
+* Link to the [Panzoom](/blog/panzoom) entry opens in the same page
 
 # Diagrams from code
 This is a concept where diagrams are generated from a code block that witholds the description needed to generate them. Note these sorts of diagrams are much more informative for automation and LLMs processing than usual bitmaps or vectorial images.

@@ -1,5 +1,5 @@
 import { SVG as SVGjs } from '@svgdotjs/svg.js'
-import {event} from '@/libs/client_utils'
+import {event} from './client_utils.js'
 
 function add_links(container,url_map){
   const obj = container.querySelector("object")

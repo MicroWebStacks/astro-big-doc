@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { readFile, set_fs } from "xlsx";
 import {join,dirname} from 'path'
 import {config} from '@/config.js'
+import {xlsxJson_to_DataTable} from './table.js'
 
 export interface Props {
     src: string;
@@ -20,30 +21,32 @@ const workbook = readFile(abs_file);
 
 const sheet_name = workbook.SheetNames[0]
 const worksheet = workbook.Sheets[sheet_name]
-const html = XLSX.utils.sheet_to_html(worksheet);
-
+//const html = XLSX.utils.sheet_to_html(worksheet);
+const xlsxJson = XLSX.utils.sheet_to_json(worksheet);
+const [table_head, ...table_rows] = xlsxJson_to_DataTable(xlsxJson)
+const table_string = JSON.stringify(table_rows)
 ---
-<div class="scoped table">
-    <div class="title">{title} - {sheet_name}</div>
-    <Fragment set:html={html}></Fragment>
+<div class="container">
+    <table class="data-table" data-table={table_string}>
+        <thead>
+            <tr>
+            {table_head.map((cell)=>(
+                <th>{cell}</th>
+            ))}
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be populated dynamically using JavaScript -->
+        </tbody>
+    </table>
 </div>
 
-<style is:global>
-.table{
-    margin-bottom: 20px;
-}
-.title{
-    font-size: large;
-    font-weight: bold;
-}
-.scoped.table > table,.scoped.table th,.scoped.table td {
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgb(195, 195, 195);
-  border-spacing: 0;
-}
-
-.scoped.table th, .scoped.table td{
-    padding: 2px;
+<style>
+.container{
+    padding:5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px 3px #ccc;
 }
 </style>
+
+<script src="./data-tables.js" />

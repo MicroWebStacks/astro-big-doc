@@ -1,5 +1,5 @@
 ---
-import {astToDataTable} from '@/libs/table.js'
+import {astToDataTable} from './table.js'
 
 export interface Props {
     node: object;
@@ -10,7 +10,6 @@ const { node } = Astro.props as Props;
 const data = astToDataTable(node)
 const [table_head, ...table_rows] = data;
 const table_string = JSON.stringify(table_rows)
-
 ---
 <div class="container">
     <table class="data-table" data-table={table_string}>

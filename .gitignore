@@ -5,7 +5,11 @@ public/menu.json
 public/index.json
 public/codes/
 public/documents/
-public/diagrams
+public/codes
+
+document_list.json
+code_list.json
+image_list.json
 
 # dependencies
 node_modules/

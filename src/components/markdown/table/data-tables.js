@@ -22,7 +22,9 @@ function init(){
         const data_table_text = table_element.getAttribute("data-table")
         const data_table = JSON.parse(data_table_text)
 
-        const table = new DataTable(table_element);
+        const table = new DataTable(table_element,{
+            order:[]
+        });
         table.rows.add(data_table).draw();
         checkEntries(table, table_element);
     })

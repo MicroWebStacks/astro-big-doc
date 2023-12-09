@@ -1,4 +1,5 @@
-import {constants, access, stat, copyFile, mkdir, readFile, writeFile} from 'fs/promises'
+import {copyFileSync} from 'fs'
+import {constants, access, stat, mkdir, readFile, writeFile} from 'fs/promises'
 import {dirname,join, basename, extname} from 'path'
 import {config} from '../../config.js'
 import {createHash} from 'crypto';
@@ -16,7 +17,8 @@ async function copy_if_newer(file_abs,targetfile){
       await mkdir(targetdir,{ recursive: true })
   }
   if((!await exists(targetfile)) || (await isNewer(file_abs,targetfile))){
-    await copyFile(file_abs,targetfile)
+    //async here is causing a race condition, a mem cache need to take mod time in account
+    copyFileSync(file_abs,targetfile)
     console.log(`copied '${file_abs}' to '${targetfile}'`)
   }
 }

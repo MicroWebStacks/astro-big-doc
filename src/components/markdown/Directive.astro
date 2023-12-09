@@ -1,6 +1,6 @@
 ---
 import {relAssetToUrl} from '@/libs/utils'
-import AstroImageNode from './image/AstroImageNode.astro';
+import ImageDirective from './image/ImageDirective.astro';
 
 export interface Props {
     node: object;
@@ -14,12 +14,12 @@ const is_other = !is_image
 
 let asseturl = ""
 if(is_image){
-  asseturl = relAssetToUrl(node.attributes.src, filepath)
+  asseturl = await relAssetToUrl(node.attributes.src, filepath)
 }
 
 ---
 {is_image &&
-  <AstroImageNode src={asseturl} node={node} />
+  <ImageDirective src={asseturl} node={node} />
 }
 {is_other &&
   <div>{node.name}

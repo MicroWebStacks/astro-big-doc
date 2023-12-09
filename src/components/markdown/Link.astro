@@ -17,7 +17,7 @@ console.log(`* link '${node.url}' (external:${external}) `)
 let src = node.url
 if(!external){
   if(!node.url.startsWith("/")){
-    src = relAssetToUrl(node.url,filepath)
+    src = await relAssetToUrl(node.url,filepath)
   }
 }
 const is_model3d = node.url.endsWith(".glb")

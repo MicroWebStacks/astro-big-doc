@@ -1,9 +1,9 @@
 import {config} from '@/config.js'
-import {exists, generateShortMD5, save_file} from '@/libs/utils'
+import {exists, shortMD5, save_file} from '@/libs/utils'
 import {join} from 'path'
 
 async function diagram_cache(code,generator){
-    const hash = generateShortMD5(code)
+    const hash = shortMD5(code)
     const file_path = join(config.rootdir,config.content_out,"codes",hash,"diagram.svg")
     const file_exists = await exists(file_path)
     if(file_exists){

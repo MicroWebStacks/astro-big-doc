@@ -1,7 +1,7 @@
 import {config} from '@/config.js'
 import {join} from 'path'
 import {bundledLanguages, getHighlighter} from 'shikiji';
-import { exists,save_file, generateShortMD5 } from '@/libs/utils.js';
+import { exists,save_file, shortMD5 } from '@/libs/utils.js';
 
 const highlighter = await getHighlighter({
     themes:[config.highlighter.theme],
@@ -22,7 +22,7 @@ async function codeToHtml(code, highlighter_config){
     
 
     const html = highlighter.codeToHtml(code, { lang: lang, theme:config.highlighter.theme })
-    const hash = generateShortMD5(code)
+    const hash = shortMD5(code)
     const file_path = join(config.rootdir,config.content_out,"codes",hash,"code.txt")
     //persist for highlighter copy, for code not saved by a diag gen
     if(!await exists(file_path)){

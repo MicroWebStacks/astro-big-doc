@@ -19,7 +19,7 @@ let environment_image = ""
 let error_text = ""
 //mandatory params
 if(Object.hasOwn(data,"src")){
-  src = assetToUrl(data.src,filepath)
+  src = await assetToUrl(data.src,filepath)
 }else{
   should_render = false
   const err = "ModelViewerCode missing 'src' param ; "
@@ -36,10 +36,10 @@ if(Object.hasOwn(data,"title")){
 }
 //optional params
 if(Object.hasOwn(data,"poster")){
-  poster = assetToUrl(data.poster,filepath)
+  poster = await assetToUrl(data.poster,filepath)
 }
 if(Object.hasOwn(data,"environment-image")){
-  environment_image = assetToUrl(data["environment-image"],filepath)
+  environment_image = await assetToUrl(data["environment-image"],filepath)
 }
 
 //potential additional params

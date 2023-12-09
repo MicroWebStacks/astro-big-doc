@@ -1,100 +1,68 @@
-import {promises as fs} from 'fs';
-import {existsSync,copyFileSync,mkdirSync,statSync} from 'fs'
-import { readFile } from 'fs/promises';
-import {normalize,resolve,dirname,join,relative, basename, extname} from 'path'
+import {constants, access, stat, copyFile, mkdir, readFile, writeFile} from 'fs/promises'
+import {dirname,join, basename, extname} from 'path'
 import {config} from '../../config.js'
 import {createHash} from 'crypto';
 import yaml from 'js-yaml';
 
-//resolve(reference,relative) does not work due to 'file:\'
-function rel_to_abs(reference,relative){
-  return join(dirname(normalize(reference)),relative).replace("file:\\","")
-}
-
-function isNewer(filepath,targetfile){
-  const t1 = statSync(filepath).mtime
-  const t2 = statSync(targetfile).mtime
+async function isNewer(file_abs,targetfile){
+  const t1 = await stat(file_abs).mtime
+  const t2 = await stat(targetfile).mtime
   return (t1>t2)
 }
 
+async function copy_if_newer(file_abs,targetfile){
+  const targetdir = dirname(targetfile)
+  if(!await exists(targetdir)){
+      await mkdir(targetdir,{ recursive: true })
+  }
+  if((!await exists(targetfile)) || (await isNewer(file_abs,targetfile))){
+    await copyFile(file_abs,targetfile)
+    console.log(`copied '${file_abs}' to '${targetfile}'`)
+  }
+}
 
-function hashed_filename(filename){
-  const dir = dirname(filename)
+function hashed_filename(filename,hash_text){
   const name = basename(filename, extname(filename))
-  const hash = generateShortMD5(filename)
+  const hash = shortMD5(hash_text)
   const ext = extname(filename)
-  const hashed_file = `${dir}/${name}-${hash}${ext}`
+  const hashed_file = `${name}-${hash}${ext}`
   //console.log(`file: ${filename}`)
   //console.log(`hashedfile: ${hashed_file}`)
   return hashed_file
 }
 
-//Note 'imp*ort.me*ta.en*v.BA*SE_URL' only works from Astro component not from remark-rel-asset plugin
-function relAssetToUrl(relativepath,refFile){
-  const refdir = join(config.rootdir,"content",dirname(refFile))
-    const filepath = join(refdir,relativepath)
-    console.log(`relAssetToUrl> filepath = ${filepath}`)
-    if(existsSync(filepath)){
-      //console.log(`   * impo*rt.me*ta.ur*l = ${import.meta.url}`)
-
-      let rel_outdir = config.outDir
-      if(import.meta.env.MODE == "development"){
-        rel_outdir = "public"
-      }
-      const targetroot = join(config.rootdir,rel_outdir,"raw")
-      const filerootrel = relative(config.rootdir,refdir)
-      const targetpath = resolve(targetroot,filerootrel)
-      const new_relativepath = config.hashed_assets?hashed_filename(relativepath):relativepath
-      const targetfile = join(targetpath,new_relativepath)
-      //add hash to target filename
-      const targetdir = dirname(targetfile)
-      //console.log(`copy from '${filepath}' to '${targetfile}'`)
-      const newpath = join("/raw/",filerootrel,new_relativepath)
-      const newurl = newpath.replaceAll('\\','/')
-      if(!existsSync(targetdir)){
-        mkdirSync(targetdir,{ recursive: true })
-      }
-      if(!existsSync(targetfile)){
-        copyFileSync(filepath,targetfile)
-        console.log(`utils.js> * new asset url = '${newurl}'`)
-      }
-      else if(isNewer(filepath,targetfile)){
-        copyFileSync(filepath,targetfile)
-        console.log(`utils.js> * updated asset url = '${newurl}'`)
-      }else{
-        console.log(`utils.js> * existing asset url = '${newurl}'`)
-      }
-      if((config.copy_astro)&&(import.meta.env.MODE != "development")){
-        if([".png","jpg","jpeg"].includes(extname(new_relativepath))){
-          const file_base_name = basename(new_relativepath)
-          const target_astro_file = join(config.rootdir,config.outDir,"_astro",file_base_name)
-          copyFileSync(filepath,target_astro_file)
-          console.log(` ==> copied for astro ${target_astro_file}`)
-        }
-      }
-      return newurl
+async function relAssetToUrl(relativepath,refFile){
+  const dir_rel = dirname(refFile)
+  const dir_abs = join(config.rootdir,config.content,dir_rel)
+  const file_abs = join(dir_abs,relativepath)
+  if(await exists(file_abs)){
+    if(config.assets_hash_dir){
+      const target_filename =  hashed_filename(relativepath,join(dir_rel,relativepath))
+      const target_file_abs = join(config.rootdir,config.content_out,"raw",target_filename)
+      await copy_if_newer(file_abs,target_file_abs)
+      const newurl = join("raw",target_filename)
+      return "/"+newurl.replaceAll('\\','/')
     }else{
-      return relativepath
+      const target_file_abs = join(config.rootdir,config.content_out,"raw",dir_rel,relativepath)
+      await copy_if_newer(file_abs,target_file_abs)
+      const newurl = join("raw",dir_rel,relativepath)
+      return "/"+newurl.replaceAll('\\','/')
     }
+  }else{
+    console.warn(`relativepath does not exist ${relativepath}`)
+    return relativepath
+  }
 }
 
-function assetToUrl(path,refFile){
-  const external = path.startsWith('http')
+async function assetToUrl(path,refFile){
   let src = path
+  const external = path.startsWith('http')
   if(!external){
     if(!path.startsWith("/")){
-      src = relAssetToUrl(path,refFile)
+      src = await relAssetToUrl(path,refFile)
     }
   }
   return src
-}
-
-function assetUrlToPath(src){
-  let rel_outdir = config.outDir
-  if(import.meta.env.MODE == "development"){
-    rel_outdir = "public"
-  }
-  return join(config.rootdir,rel_outdir,src)
 }
 
 function contentPathToStaticPath(section,entry_path){
@@ -105,18 +73,18 @@ function contentPathToStaticPath(section,entry_path){
 
 async function load_json(rel_path){
   const path = join(config.rootdir,rel_path)
-  const text = await fs.readFile(path,'utf-8')
+  const text = await readFile(path,'utf-8')
   return JSON.parse(text)
 }
 
-function generateShortMD5(text) {
+function shortMD5(text) {
   const hash = createHash('md5').update(text, 'utf8').digest('hex');
   return hash.substring(0, 8);
 }
 
 async function exists(filePath) {
   try {
-    await fs.access(filePath, fs.constants.F_OK);
+    await access(filePath, constants.F_OK);
     return true;
   } catch (error) {
     return false;
@@ -126,14 +94,14 @@ async function exists(filePath) {
 async function save_file(filePath,content){
   const directory = dirname(filePath)
   if(!await exists(directory)){
-    await fs.mkdir(directory, { recursive: true });
+    await mkdir(directory, { recursive: true });
   }
-  return fs.writeFile(filePath,content)
+  return writeFile(filePath,content)
 }
 
 async function save_json(data,file_path){
-  const filepath = join(config.rootdir,file_path)
-  await fs.writeFile(filepath,JSON.stringify(data,undefined, 2))
+  const file_abs = join(config.rootdir,file_path)
+  await writeFile(file_abs,JSON.stringify(data,undefined, 2))
 }
 
 async function load_yaml(rel_path){
@@ -142,29 +110,6 @@ async function load_yaml(rel_path){
   const data = yaml.load(fileContent);
   return data;
 }
-
-
-function uid(){
-  return Date.now()+"_"+Math.floor(Math.random() * 10000)
-}
-
-function suid(){
-  let date = (Date.now()).toString();
-  const sub = date.substring(date.length-6,date.length-1);
-  return sub+"_"+Math.floor(Math.random() * 10000)
-}
-
-
-function event(element,event_name,data=null){
-	var event = new CustomEvent(event_name, {detail:data});
-	element.dispatchEvent(event);
-}
-
-function window_event(event_name,data){
-	var event = new CustomEvent(event_name, {detail:data});
-	window.dispatchEvent(event);
-}
-
 
 const colors = {
   Reset:"\x1b[0m",
@@ -224,16 +169,12 @@ function section_from_pathname(pathname){
 export{
   assetToUrl,
   relAssetToUrl,
-  assetUrlToPath,
-  generateShortMD5,
+  shortMD5,
   exists,
   load_json,
   load_yaml,
   save_json,
   save_file,
-  rel_to_abs,
-  uid,
-  suid,
   green_log,
   blue_log,
   yellow_log,

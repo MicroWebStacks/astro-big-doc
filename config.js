@@ -22,8 +22,7 @@ const config = {
     plantuml_server: "https://www.plantuml.com/plantuml/svg",
     kroki_server: "https://kroki.io",
     client_menu:true,
-    hashed_assets:false,
-    copy_astro:false,
+    assets_hash_dir:false,
     highlighter:{
         theme:"dark-plus",
         langs:['javascript','js','python','yaml']

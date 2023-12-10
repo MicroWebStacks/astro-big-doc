@@ -41,7 +41,7 @@ function hashed_filename(filename,hash_text){
     return hashed_file
 }
 
-async function relAssetToUrl(relativepath,refFile){
+async function relAssetToUrlCopy(relativepath,refFile){
     const dir_rel = dirname(refFile)
     const dir_abs = join(config.rootdir,config.content,dir_rel)
     const file_abs = join(dir_abs,relativepath)
@@ -62,6 +62,12 @@ async function relAssetToUrl(relativepath,refFile){
     console.warn(`relativepath does not exist ${relativepath}`)
     return relativepath
     }
+}
+
+async function relAssetToUrl(relativepath,refFile){
+    const dir_rel = dirname(refFile)
+    const newurl = join("assets",dir_rel,relativepath)
+    return "/"+newurl.replaceAll('\\','/')
 }
 
 async function assetToUrl(path,refFile){
@@ -116,6 +122,9 @@ function file_mime(path){
     }
     else if(ext == ".webp"){
         return 'image/webp'
+    }
+    else if(ext == ".txt"){
+        return 'text/plain'
     }
 }
 

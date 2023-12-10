@@ -65,6 +65,10 @@ async function relAssetToUrlCopy(relativepath,refFile){
 }
 
 async function relAssetToUrl(relativepath,refFile){
+    console.log(relativepath)
+    if(relativepath.startsWith("/")){
+        return relativepath
+    }
     const dir_rel = dirname(refFile)
     const newurl = join("assets",dir_rel,relativepath)
     return "/"+newurl.replaceAll('\\','/')

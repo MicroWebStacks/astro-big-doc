@@ -6,7 +6,7 @@ import {file_mime} from '@/libs/assets.js'
 
 export async function GET({params}){
     const imagePath = resolve(join(config.rootdir,config.content_out,"codes",params.path));
-    console.log(`assets> serving '${imagePath}'`)
+    console.log(`codes> serving '${imagePath}'`)
     try {
         const stream = createReadStream(imagePath);
         const contentType = file_mime(imagePath)
@@ -27,9 +27,7 @@ export async function getStaticPaths(){
         ).map((entry)=>(`${entry.hash}/diagram.svg`))
     console.log(`serving API endpoit ${diagrams.length} svg code diagrams`)
 
-    const codes = asset_list.filter((asset)=>
-            ((asset.type == "code"))
-        ).map((entry)=>(`${entry.hash}/code.txt`))
+    const codes = asset_list.filter((asset)=>((asset.type == "code"))).map((entry)=>(`${entry.hash}/code.txt`))
     console.log(`serving API endpoit ${codes.length} text code blocks`)
     const paths = [...diagrams, ...codes]
     return paths.map((path)=>({params:{path:path}}))

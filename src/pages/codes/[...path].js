@@ -20,15 +20,19 @@ export async function GET({params}){
 }
 
 export async function getStaticPaths(){
-    const asset_list = await load_json('public/asset_list.json')
-
-    const diagrams = asset_list.filter((asset)=>
-            ((asset.type == "code") && (asset.language == "plantuml"))
-        ).map((entry)=>(`${entry.hash}/diagram.svg`))
-    console.log(`serving API endpoit ${diagrams.length} svg code diagrams`)
-
-    const codes = asset_list.filter((asset)=>((asset.type == "code"))).map((entry)=>(`${entry.hash}/code.txt`))
-    console.log(`serving API endpoit ${codes.length} text code blocks`)
-    const paths = [...diagrams, ...codes]
-    return paths.map((path)=>({params:{path:path}}))
+    if(import.meta.env.DEV){
+        const asset_list = await load_json('public/asset_list.json')
+        const codes_diagrams = ["plantuml", "blockdiag", "mermaid"]
+        const diagrams = asset_list.filter((asset)=>
+                ((asset.type == "code") && (codes_diagrams.includes(asset.language)))
+            ).map((entry)=>(`${entry.hash}/diagram.svg`))
+        console.log(`serving API endpoit ${diagrams.length} svg code diagrams`)
+    
+        const codes = asset_list.filter((asset)=>((asset.type == "code"))).map((entry)=>(`${entry.hash}/code.txt`))
+        console.log(`serving API endpoit ${codes.length} text code blocks`)
+        const paths = [...diagrams, ...codes]
+        return paths.map((path)=>({params:{path:path}}))
+    }else{
+        return []
+    }
 }

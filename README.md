@@ -2,37 +2,24 @@
 
 Live demo : https://astro-big-doc.netlify.app
 
-Astro Theme that can scale for big documentation websites. Includes an unimited depth config menu that starts with a top appbar for sections navigation, then continues on a tree left  menu for pages. Each page then has a tree right menu for its table of content.
+Astro Theme for big documentation websites. Hierarchical pages menu from files structure and table of content, Markdown rendered as CMS with Astro components for panzoom, 3D, links, interactive tables, diagrams from code, VSCode like highlighter.
 
-User friendly even for large menus as both left and right ones are collapsible and width adjustable by the user.
+Enhances native markdown '.md' files with Astro components, enables parsing of content from a configurable directory in the file system, and allows relative assets paths usage.
 
-Performance oriented, using astro components only, no virtual DOM, no extenal css framework (you can add your own though). Focus on static generation on build time, no client side rendering. Javascript is for minial manipulations connecting events and classes.
+User friendly side menus collapsible and width adjustable with the mouse.
 
-UX friendly Markdown without import and referencing local images, enhancements with components for panzoom, gallery, and code embeds.
-## Features
-- Pure astro components (.astro) html css js
-- static or server with authentication middleware (express, passport, github strategy)
-- Menus
-  - menu generation from file system, grouping of nested single intermediate directories
-  - Built by astro and seen as readable html hierarchy by the client
-  - Trees with unlimited depth and recursively expandable sections
-  - Side menus can be opened, collapsed and width adjusted by the user
-  - Navigation Menu (Left Menu)
-    - can have pages or directories similar to file system browsing experience
-    - Auto expands decendance of active page only
-  - Table Of Content (Right Menu)
-    - ScrollSpy highlight of current section
-- Markdown
-  - Supports md and mdx
-  - Automatic Right Menu ToC generation for all markdown pages
-  - Markdown pages can be either in `scr/pages` or on any other server local path e.g. `data/blog` or `../../content/markdown`
-  - Plantuml with dynamic and static Svg in MD, Astro component in MDX
-  - allows local file referencing with automatic assets management
-- components
-  - Panzoom for SVGs and images
-  - Gallery with json list of SVGs and images
-- Mobile layout
-
+## Features list
+- enhance images with panzoom function
+- image directive for images size defintion in markdown
+- use relative assets in markdown
+- Active data tables with [DataTables](https://datatables.net/)
+  - from Markdown table
+  - from xlsx file link
+- 3D Model viewer
+  - from .glb link
+  - from yaml parameters
+- external links identification and rendering with an arrow
+- VSCode like highlighting using [Shikiji](https://github.com/antfu/shikiji)
 
 # Usage
 ```
@@ -46,24 +33,20 @@ This project uses environment variables as unified config to astro.config.mjs an
 It is possible to build with zero config, the default mode is 'STATIC' See also an example in [.env.example](.env.example).
 
 Astro variables
-* `OUT_MODE` : STATIC or MIDDLEWARE
-* `BASE` : maps to astro.config.mjs [base](https://docs.astro.build/en/reference/configuration-reference/#base)
-* `SITE` : maps to astro.config.mjs [site](https://docs.astro.build/en/reference/configuration-reference/#site)
+* `OUT_DIR` : directory where the build will be genrated
 * `PORT` : maps to astro.config.mjs [server.port](https://docs.astro.build/en/reference/configuration-reference/#serverport)
 
 Express general variables
-* `USE_HTTPS` : whether to use https Server or http only
+* `PROTOCOL` : either of htp or https for express server usage
 * `CERT_FILE` : required when https is used
 * `KEY_FILE` : required when https is used
 
-Express authotication variables
+Express authentication variables
 * `HOST` : Express passport callbackURL
 * `PORT` : Express passport callbackURL
 * `GITHUB_CLIENT_ID`      : Express passport Github strategy configuration
 * `GITHUB_CLIENT_SECRET`  : Express passport Github strategy configuration
 * `SESSION_SECRET`        : used by 'express-session' handler
-
-
 
 ## authentication doc
 - Github OAuth : https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
@@ -89,18 +72,15 @@ Express authotication variables
 - check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration
 ## ideas
-- Markdown
-  - pass MD as MDX (workaround, rename .md to .mdx)
+- menus
+  - store menu scroll position
+  - store menus width
+  - use view transition to give menu persistence impression on page navigation
 - content Structure
   - parse yaml tags and orgnaize menu with tags order hierarchy
-  - Structure : generation of left nav menu from src/pages
-  - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
-  - support slugs for pages instead of filenames
 - caching
   - SSR render on page hash condition, using ETag
   - page hash with depndencies hashes, include assets hash as attribute
-- menus
-  - store nav menu width / prevent reset on same page reload
 ## more ideas
 - use declarative shadow dom to be able to retrieve data from it and reuse it
 - Markdown
@@ -115,6 +95,9 @@ Express authotication variables
   - open close on nav-resize click
   - Issue: Menu height transition MUI example is working
   - minor issue : Expand arrow rotates for nothing on page reload
+
+## issues
+- trailingSlash does not identify page when availabe e.g. `blog/gallery/` does not activate the page menu entry
 
 ## Hints
 - SVGs
@@ -132,15 +115,6 @@ Express authotication variables
     - max-height adjusting with js requires high complexity depending on state of expanded children hierarchy
     - clip also needs defined start stop
     - flex can also animate but then the flex container height must be set explicitely
-- node js modules filename not in `__filename` but in `import.meta.url`
-- Markdown
-  - It is not possible to handle a custom code section with an Astro component in native Astro markdown integration (unless you rewrite the Astro component in remark and rehype). It is only possible in imported markdown where remarked custom components e.g. `<data />` can be replaced on the custom render call with an Astro component. see `blog/[...page].astro`. Fix RFC : https://github.com/withastro/rfcs/pull/285
-  - `<Content components={{}}/>` only replaces html items injected from plugins and not items written in markdown page
-  - `<Content components={{}}/>` does not replace Astro components in MD, only in MDX
-  - `import.meta.glob('./file1.md',{as:'mdx'})` => error despite correct file?mdx `no such file or directory`
-  - ``await import(`file:///file.mdx`)`` works ``await import(`file:///${page}.mdx`)`` does not, cannot find file that actuall exist
-  - `import 'module.js'` instead of `import 'module'` takes `import.meta.env.PROD` away, env becomes undefined
-- baseUrl usage on hoisted script only possible with Dynamic import : https://github.com/withastro/astro/issues/5381
 
 # References
 * https://github.com/syntax-tree/mdast

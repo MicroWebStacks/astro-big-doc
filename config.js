@@ -32,7 +32,8 @@ const config = {
 config.collect_content = {
     rootdir:config.rootdir,
     rel_contentdir:config.content,
-    extensions:["md"],
+    content_ext:["md"],
+    assets_ext:["svg","webp","png","jpeg","jpg","xlsx","glb"],
     rel_outdir:"public",//because integrations cannot persist on dist before start of build
     raw_menu:"menu.yaml",
     debug:true,

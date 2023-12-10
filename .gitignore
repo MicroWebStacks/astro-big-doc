@@ -8,8 +8,7 @@ public/documents/
 public/codes
 
 document_list.json
-code_list.json
-image_list.json
+asset_list.json
 
 # dependencies
 node_modules/

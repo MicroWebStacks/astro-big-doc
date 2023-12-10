@@ -1,5 +1,6 @@
 import {dirname, join} from 'path'
-import { load_yaml, save_json, section_from_pathname } from '../src/libs/utils.js';
+import { load_yaml, save_json } from '../src/libs/utils.js';
+import { section_from_pathname } from '../src/libs/assets.js';
 import {pages_list_to_tree} from './process_menu.js'
 import {getDocuments} from 'content-structure'
 import {createHash} from 'crypto'

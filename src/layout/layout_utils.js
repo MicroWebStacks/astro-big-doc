@@ -1,4 +1,5 @@
-import { load_json, section_from_pathname } from '@/libs/utils.js'
+import { load_json } from '@/libs/utils.js'
+import { section_from_pathname } from '@/libs/assets.js'
 import { config } from '@/config.js'
 import {join} from 'path'
 

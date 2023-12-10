@@ -1,5 +1,5 @@
 import {config} from '@/config.js'
-import {exists, shortMD5, save_file} from '@/libs/utils'
+import {exists, save_file, shortMD5} from '@/libs/utils.js'
 import {join} from 'path'
 
 async function diagram_cache(code,generator){

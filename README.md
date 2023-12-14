@@ -97,7 +97,6 @@ Express authentication variables
   - minor issue : Expand arrow rotates for nothing on page reload
 
 ## issues
-- trailingSlash does not identify page when availabe e.g. `blog/gallery/` does not activate the page menu entry
 
 ## Hints
 - SVGs

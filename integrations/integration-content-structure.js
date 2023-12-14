@@ -4,8 +4,9 @@ import { create_menu } from './create_menu.js'
 let collect_config = {}
 
 async function config_setup({ updateConfig, config, addPageExtension, command }) {
-	console.log(`astro:config:setup> running (${command})`)
+	console.log(`content-structure integration : astro:config:setup> running collect() in '${command}'`)
 	await collect(collect_config)
+	console.log(`content-structure integration : astro:config:setup> running create_menu() in '${command}'`)
 	await create_menu(collect_config)
 }
 

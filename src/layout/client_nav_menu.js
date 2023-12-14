@@ -205,11 +205,12 @@ async function inject_menu(){
     }
     await get_menu()
     console.log(menu)
-    const section_name = section_from_pathname(window.location.pathname)
+    const pathname = window.location.pathname.endsWith('/')?window.location.pathname.slice(0,-1):window.location.pathname
+    const section_name = section_from_pathname(pathname)
     set_open_state(section_name)
     const menu_section_items = menu.sections[section_name]
     const menu_nav = document.querySelector("nav.pages_menu")
-    set_active_expanded(menu_section_items,section_name,window.location.pathname)
+    set_active_expanded(menu_section_items,section_name,pathname)
     recursive_update_element(menu_nav,menu_section_items,true,true)
     enable_clicks()
 }

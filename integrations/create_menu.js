@@ -49,7 +49,6 @@ async function get_section_menu(section,raw_menu){
 }
 
 async function create_menu(collect_config){
-    console.log(`create_menu> ${collect_config.raw_menu}`)
     const raw_menu = await load_yaml(collect_config.raw_menu)
     let menu = {
         raw_menu:raw_menu,
@@ -59,12 +58,14 @@ async function create_menu(collect_config){
         const section = section_from_pathname(menu_entry.href);
         menu.sections[section] = await get_section_menu(section,raw_menu)
     }
-
+    
     const menu_text = JSON.stringify(menu)
     const hash = createHash('md5').update(menu_text).digest('hex').substring(0,8)
     
     menu = {hash:hash,...menu}
-    await save_json(menu,join(collect_config.rel_outdir,"menu.json"))
+    const new_manu_path = join(collect_config.rel_outdir,"menu.json")
+    await save_json(menu,new_manu_path)
+    console.log(`create_menu> ${collect_config.raw_menu} -> saved new menu in '${new_manu_path}' `)
 }
 
 export{

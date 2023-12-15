@@ -160,20 +160,22 @@ Mario -> Mathilda: Message(Hallo)
 this is how you can reference a page
 
 ```markdown
-Link to page::image-svg
+Link to page::<page-uid>
+Link to page::panzoom
 ```
 will produce this
 
-Link to page::image-svg
+
+Link to page::panzoom
 
 ## deep path reference
 A slug is only unique within a content type, therefore in case of multiple files with the same folder name and title, it is possible to use the automatically generated unique identifier available in the `index.json`
 
 ```markdown
-Link to page::trees.image-svg
+Link to page::<page-uid>
+Link to page::deepest2.deepest3
 ```
 
 will link the correct url of the item in path `folder/trees/image-svg/readme.md`
 
-Link to page::trees.image-svg
-
+Link to page::deepest2.deepest3

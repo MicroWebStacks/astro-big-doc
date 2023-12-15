@@ -36,10 +36,7 @@ config.collect_content = {
     assets_ext:["svg","webp","png","jpeg","jpg","xlsx","glb","hdr"],
     rel_outdir:"public",//because integrations cannot persist on dist before start of build
     raw_menu:"menu.yaml",
-    debug:false,
-    tags:{
-        page:'page::([\\w-.]+)'
-    }
+    debug:false
 }
 
 console.log(config)

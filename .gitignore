@@ -6,6 +6,8 @@ public/index.json
 public/codes/
 public/documents/
 public/codes
+public/ids.json
+public/reference_list.json
 
 document_list.json
 asset_list.json

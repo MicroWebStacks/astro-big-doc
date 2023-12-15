@@ -8,7 +8,8 @@ export interface Props {
 const {node} = Astro.props;
 
 const entry = await getEntry({uid:node.tag_value})
-const url = "/docs/"+entry.data.uid
+const url = "/blog/"+entry.data.url
+
 ---
 {(node.tag_type == "page")&&
     <a href={url}>{node.tag_value}</a>

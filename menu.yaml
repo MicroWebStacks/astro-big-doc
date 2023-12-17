@@ -2,6 +2,7 @@
   link: /
 - label: Blog
   link: /blog/gallery
+  base: /blog
   autogenerate:
     directory: "."
 - label: About

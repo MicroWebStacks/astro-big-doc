@@ -190,7 +190,7 @@ function enable_clicks(){
     fixed_left.addEventListener("click",(e)=>{
         const section_name = section_from_pathname(window.location.pathname)
         const menu_nav = document.querySelector("nav.pages_menu")
-        menu.sections_open[section_name] = menu_nav.classList.contains("open")
+        menu.sections_open[section_name] = (menu.sections[section_name].length==0)?false:menu_nav.classList.contains("open")
         save_menu()        
     })
 

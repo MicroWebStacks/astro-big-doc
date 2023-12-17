@@ -22,7 +22,7 @@ function content_entry_to_level(entry){
     return level
 }
 
-async function get_section_menu(section,raw_menu){
+async function get_section_menu(section,raw_menu,base){
     let result_items = []
     const section_menu = raw_menu.find((item)=>(section_from_pathname(item.link) == section))
 
@@ -38,7 +38,7 @@ async function get_section_menu(section,raw_menu){
                 path:       entry.path,
                 url:        entry.url,
                 url_type:   entry.url_type,
-                link:`/${section}/${entry.url}`,
+                link:`${base}/${entry.url}`,
                 level:content_entry_to_level(entry),
                 format: entry.format,
                 order: Object.hasOwn(entry,"order")?entry.order:1
@@ -60,7 +60,8 @@ async function create_menu(collect_config){
     }
     for(const menu_entry of raw_menu){
         const section = section_from_pathname(menu_entry.link);
-        menu.sections[section] = await get_section_menu(section,raw_menu)
+        const base = Object.hasOwn(menu_entry,"base")?menu_entry.base:""
+        menu.sections[section] = await get_section_menu(section,raw_menu,base)
     }
     
     const menu_text = JSON.stringify(menu)

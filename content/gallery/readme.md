@@ -1,6 +1,6 @@
 ---
 title: Gallery
-weight: 1
+order: 1
 ---
 # Gallery
 

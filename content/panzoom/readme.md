@@ -1,6 +1,6 @@
 ---
 title: Panzoom
-weight: 2
+order: 2
 ---
 
 # Panzoom

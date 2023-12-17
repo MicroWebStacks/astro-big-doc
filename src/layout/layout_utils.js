@@ -24,9 +24,9 @@ function headings_list_to_tree(headings,is_toc){
         element.parent=true
         element.expanded=true
         if(is_toc){
-            element.href = `#${element.slug}`
+            element.link = `#${element.slug}`
         }else{
-            element.href = element.href
+            element.link = element.link
         }
     }
 
@@ -61,7 +61,7 @@ function process_toc_list(headings){
     }
 
     let side_menu = {items:[],visible:false}
-    side_menu.items = headings_list_to_tree(headings,true)//also .slug=>.href
+    side_menu.items = headings_list_to_tree(headings,true)//also .slug=>.link
     side_menu.visible = true
     return side_menu
 }
@@ -89,7 +89,7 @@ function get_active_appbar_menu(raw_menu,pathname){
     const current_section = section_from_pathname(pathname)
     console.log(`current_section = '${current_section}'`)
     return raw_menu.map((item)=>{
-        item.active_class = (section_from_pathname(item.href) == current_section)?"active":""
+        item.active_class = (section_from_pathname(item.link) == current_section)?"active":""
         return item
     })
 }

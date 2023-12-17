@@ -1,15 +1,15 @@
 ---
 import Layout from "@/layout/Layout.astro"
 import AstroMarkdown from '@/components/markdown/AstroMarkdown.astro'
-import {getDocuments, getEntry} from 'content-structure'
+import {getEntry} from 'content-structure'
+import { get_section_pages } from "@/integrations/get_menu.js";
 
 const {url} = Astro.params;
 console.log(`in [...path] > path = ${url}`)
 const entry = await getEntry({url:url})
 export async function getStaticPaths(){
-	const documents = await getDocuments({format:"markdown"})
-	const pages = documents.map((entry)=>({params:{url:entry.url}}))
-	return pages
+	const urls = await get_section_pages("blog")
+	return urls.map((url)=>({params:{url:url}}))
 }
 
 ---

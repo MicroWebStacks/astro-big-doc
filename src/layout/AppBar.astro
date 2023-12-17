@@ -14,8 +14,8 @@ const right_side = menu.filter((item)=>(Object.hasOwn(item,"align") && (item.ali
     <ul class="navbar-left">
         {left_side.map((item)=>(
         <li>
-            <a href={item.href} class={item.active_class}>
-                {item.text}
+            <a href={item.link} class={item.active_class}>
+                {item.label}
                 {item.icon && <Icon filename={item.icon} />}
             </a>
         </li>
@@ -24,7 +24,7 @@ const right_side = menu.filter((item)=>(Object.hasOwn(item,"align") && (item.ali
     <ul class="navbar-right">
         {right_side.map((item)=>(
             <li>
-                <a href={item.href} target={item.href.startsWith('/')?"":"_blank"}>
+                <a href={item.link} target={item.link.startsWith('/')?"":"_blank"}>
                     {item.icon && <Icon filename={item.icon} />}
                 </a>
             </li>

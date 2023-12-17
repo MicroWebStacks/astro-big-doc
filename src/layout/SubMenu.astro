@@ -19,11 +19,11 @@ const { items,root=true} = Astro.props;
                             </svg>
                         </span>
                     }
-                    {Object.hasOwn(item,"href")?
-                        <a  href={item.href}>
-                            <span class:list={["text href_hover",{parent:item.parent}]}>{item.text}</span>
+                    {Object.hasOwn(item,"link")?
+                        <a  href={item.link}>
+                            <span class:list={["text href_hover",{parent:item.parent}]}>{item.label}</span>
                         </a>:
-                        <span class:list={["text",{parent:item.parent}]}>{item.text}</span>
+                        <span class:list={["text",{parent:item.parent}]}>{item.label}</span>
                     }
                 </div>
                 <Astro.self items={item.items} root={false} />

@@ -110,15 +110,15 @@ function create_ul_from_items(items,root,expanded){
         }
         let span_text = document.createElement('span')
         span_text.classList.add("pages_menu","text")
-        span_text.textContent = item.text
+        span_text.textContent = item.label
         if(item.parent){
             span_text.classList.add("parent")
         }
-        if(Object.hasOwn(item,"href")){
+        if(Object.hasOwn(item,"link")){
             span_text.classList.add("href_hover")
             let a = document.createElement('a')
             a.classList.add("pages_menu")
-            a.setAttribute("href",item.href)
+            a.setAttribute("href",item.link)
             a.appendChild(span_text)
             div.appendChild(a)
         }else{
@@ -141,7 +141,7 @@ function set_active_expanded(items,section_name,pathname){
             }
             menu.sections_expand[section_name][item.url] = item.expanded
         }
-        if(item.href == pathname){
+        if(item.link == pathname){
             item.active = true
         }else{
             item.active = false

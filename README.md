@@ -96,6 +96,10 @@ Express authentication variables
   - Issue: Menu height transition MUI example is working
   - minor issue : Expand arrow rotates for nothing on page reload
 
+- tried to serve different directories on different bas without modifying website build base path
+  - used referrer to differentiate requests, and created a middleware preceesing the static use that redirects to base
+  - failed due to some fetches still fail, not clear why as not reported without referer
+
 ## issues
 
 ## Hints
@@ -114,6 +118,27 @@ Express authentication variables
     - max-height adjusting with js requires high complexity depending on state of expanded children hierarchy
     - clip also needs defined start stop
     - flex can also animate but then the flex container height must be set explicitely
+
+- express subdomain usage
+instead of
+```javascript
+app.use(express.static(outdir))
+```
+use
+```javascript
+app.use(testRouter)
+app.set('subdomain offset', 1); // Adjust based on your domain structure
+app.use((req, res, next) => {
+  const subdomain = req.subdomains[0]; // Get the first subdomain
+  switch (subdomain) {
+    case 'website1':
+      express.static(outdir)(req, res, next);
+      break;
+    default:
+      next(); // Continue to other routes if no subdomain matches
+  }
+});
+```
 
 # References
 * https://github.com/syntax-tree/mdast

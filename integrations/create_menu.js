@@ -24,20 +24,24 @@ function content_entry_to_level(entry){
 
 async function get_section_menu(section,raw_menu){
     let result_items = []
-    const section_menu = raw_menu.find((item)=>(section_from_pathname(item.href) == section))
+    const section_menu = raw_menu.find((item)=>(section_from_pathname(item.link) == section))
 
-    if(Object.hasOwn(section_menu,"content") && (section_menu.content == true)){
-        const documents = await getDocuments({format:"markdown"})
+    if(Object.hasOwn(section_menu,"autogenerate")){
+        const dir = section_menu.autogenerate.directory
+        let documents = await getDocuments({format:"markdown"})
+        if(dir != "."){
+            documents = documents.filter((entry)=>(entry.path.startsWith(dir)))
+        }
         const items = documents.map((entry)=>(
             {
-                text:       entry.title,
+                label:       entry.title,
                 path:       entry.path,
                 url:        entry.url,
                 url_type:   entry.url_type,
-                href:`/${section}/${entry.url}`,
+                link:`/${section}/${entry.url}`,
                 level:content_entry_to_level(entry),
                 format: entry.format,
-                weight: Object.hasOwn(entry,"weight")?entry.weight:1
+                order: Object.hasOwn(entry,"order")?entry.order:1
             }
         ))
         const menu_tree = await pages_list_to_tree(items)
@@ -55,7 +59,7 @@ async function create_menu(collect_config){
         sections:{}
     }
     for(const menu_entry of raw_menu){
-        const section = section_from_pathname(menu_entry.href);
+        const section = section_from_pathname(menu_entry.link);
         menu.sections[section] = await get_section_menu(section,raw_menu)
     }
     
@@ -63,9 +67,9 @@ async function create_menu(collect_config){
     const hash = createHash('md5').update(menu_text).digest('hex').substring(0,8)
     
     menu = {hash:hash,...menu}
-    const new_manu_path = join(collect_config.rel_outdir,"menu.json")
-    await save_json(menu,new_manu_path)
-    console.log(`create_menu> ${collect_config.raw_menu} -> saved new menu in '${new_manu_path}' `)
+    const new_menu_path = join(collect_config.rel_outdir,"menu.json")
+    await save_json(menu,new_menu_path)
+    console.log(`create_menu> ${collect_config.raw_menu} -> saved new menu in '${new_menu_path}' `)
 }
 
 export{

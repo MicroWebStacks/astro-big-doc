@@ -1,7 +1,6 @@
 import express from 'express';
 import https from 'https'
 import {authRouter} from './auth/auth_router.js'
-import {testRouter} from './api/test_router.js'
 import { fileURLToPath } from 'url';
 import { join, dirname } from 'path';
 import { readFileSync, } from 'fs';
@@ -13,7 +12,7 @@ dotenv.config()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const outdir = (process.env.OUT_DIR==null)?"temp":process.env.OUT_DIR
+const outdir = (process.env.OUT_DIR==null)?"dist":process.env.OUT_DIR
 
 const app = express();
 if(process.env.ENABLE_CORS == "true"){
@@ -27,9 +26,8 @@ if(process.env.DISABLE_AUTH != "true"){
 }else{
     console.log("\n -- !!! no auth !!! -- Authentication is disabled -- \n")
 }
-app.use(testRouter)
-
 app.use(express.static(outdir))
+
 app.use((req, res, next) => {
     res.status(404).send("Sorry can't find that!")
   })

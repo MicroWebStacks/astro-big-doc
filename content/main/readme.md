@@ -1,7 +1,7 @@
 ---
 title: Main Examples
 slug: main
-weight: 1
+order: 1
 ---
 **Astro Big Doc** uses Markdown as CMS rendered with Astro components
 

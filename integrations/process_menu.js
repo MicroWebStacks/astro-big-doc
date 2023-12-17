@@ -28,7 +28,7 @@ async function get_new_parents(entries){
                 !new_parents.some(parent=>parent.url === parent_url)){
                     //console.log(`parent_url:${parent_url} not found, creating new parent`)
                     new_parents.push({
-                        text:url_to_name(parent_url),
+                        label:url_to_name(parent_url),
                         path:parent_url,
                         url:parent_url,
                         url_type:"dir",
@@ -80,6 +80,7 @@ async function pages_list_to_tree(entries){
             delete element.expanded
         }
     }
+    //TODO sort with element.order
     return tree
 
 }

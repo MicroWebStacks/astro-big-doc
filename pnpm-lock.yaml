@@ -15,8 +15,8 @@ dependencies:
     specifier: ^4.0.3
     version: 4.0.3
   content-structure:
-    specifier: ^0.8.2
-    version: 0.8.2
+    specifier: ^0.9.0
+    version: 0.9.0
   cookie-parser:
     specifier: ^1.4.6
     version: 1.4.6
@@ -1330,8 +1330,8 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
-  /content-structure@0.8.2:
-    resolution: {integrity: sha512-BTi8TuWCia7mhrbeRt1upy4/4jri+ar9FuaSfZWxCAuUr2eQb+w06FGUOsdwZUgrMkzt5UuS6u15IiKcnfTNuw==}
+  /content-structure@0.9.0:
+    resolution: {integrity: sha512-kpFQTxmLD6Aza8v6JS/PlakHPlGMDgkMux4AU4Z1kEP21g8UWn/iYblwxMSCr9PddOPQoTFFQXBIxYiiAP0WBw==}
     dependencies:
       glob: 10.3.10
       gray-matter: 4.0.3

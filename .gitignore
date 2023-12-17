@@ -1,16 +1,11 @@
 dist/
-public/raw/
-temp/
 public/menu.json
-public/index.json
 public/codes/
 public/documents/
-public/codes
 public/ids.json
 public/reference_list.json
-
-document_list.json
-asset_list.json
+public/document_list.json
+public/asset_list.json
 
 # dependencies
 node_modules/

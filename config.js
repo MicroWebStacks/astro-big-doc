@@ -5,18 +5,15 @@ const rootdir = process.cwd()
 
 dotenv.config()
 
-let protocol = process.env.PROTOCOL
-let content_out = process.env.OUT_DIR
+const outdir = (process.env.OUT_DIR==null)?"dist":process.env.OUT_DIR
+let content_out = outdir
 if(import.meta.env.DEV){
-    protocol = "http"
     content_out = "public"
 }
 
 const config = {
-    port:process.env.PORT,
-    url:`${protocol}://${process.env.HOST}:${process.env.PORT}`,
     rootdir: rootdir,
-    outDir: process.env.OUT_DIR,
+    outDir: outdir,
     content: "content",
     content_out: content_out,
     plantuml_server: "https://www.plantuml.com/plantuml/svg",

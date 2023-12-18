@@ -1,10 +1,6 @@
-dist/
-public/_astro
-public/raw
-public/menu.json
-public/codes/
 .structure/
-
+dist/
+public/menu.json
 
 # dependencies
 node_modules/

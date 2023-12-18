@@ -42,17 +42,17 @@ function hashed_filename(filename,hash_text){
 }
 
 async function relAssetToUrlCopy(relativepath,dirpath){
-    const dir_abs = join(config.rootdir,config.content,dirpath)
+    const dir_abs = join(config.content_path,dirpath)
     const file_abs = join(dir_abs,relativepath)
     if(await exists(file_abs)){
     if(config.assets_hash_dir){
         const target_filename =  hashed_filename(relativepath,join(dirpath,relativepath))
-        const target_file_abs = join(config.rootdir,config.content_out,config.copy_assets_dir,target_filename)
+        const target_file_abs = join(config.rootdir,config.outDir,config.copy_assets_dir,target_filename)
         await copy_if_newer(file_abs,target_file_abs)
         const newurl = join(config.copy_assets_dir,target_filename)
         return "/"+newurl.replaceAll('\\','/')
     }else{
-        const target_file_abs = join(config.rootdir,config.content_out,config.copy_assets_dir,dirpath,relativepath)
+        const target_file_abs = join(config.rootdir,config.outDir,config.copy_assets_dir,dirpath,relativepath)
         await copy_if_newer(file_abs,target_file_abs)
         const newurl = join(config.copy_assets_dir,dirpath,relativepath)
         return "/"+newurl.replaceAll('\\','/')
@@ -70,7 +70,7 @@ async function relAssetToUrl(relativepath,dirpath){
     if(relativepath.startsWith("/")){
         return relativepath
     }
-    //handled by /assets/[...path].js to config.rootdir / config.content
+    //handled by /assets/[...path].js to config.rootdir / config.content_path
     const newurl = join("assets",dirpath,relativepath)
     return "/"+newurl.replaceAll('\\','/')
 }
@@ -87,7 +87,7 @@ async function assetToUrl(path,dirpath){
 }
 
 function relAssetToPath(relativepath,dirpath){
-    const dir_abs = join(config.rootdir,config.content,dirpath)
+    const dir_abs = join(config.content_path,dirpath)
     return join(dir_abs,relativepath)
 }
   

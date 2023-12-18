@@ -13,7 +13,7 @@ export interface Props {
 }
 
 const { 'src':filename,'data-filedir':filedir,expanded } = Astro.props as Props;
-const gallery_list_path = join(config.rootdir,config.content,filedir,filename)
+const gallery_list_path = join(config.content_path,filedir,filename)
 const relImages = await exists(gallery_list_path)?await load_json_abs(gallery_list_path):[]
 
 let imagesUrls = []

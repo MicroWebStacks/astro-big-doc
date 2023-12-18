@@ -23,7 +23,7 @@ async function codeToHtml(code, highlighter_config){
 
     const html = highlighter.codeToHtml(code, { lang: lang, theme:config.highlighter.theme })
     const hash = shortMD5(code)
-    const file_path = join(config.rootdir,config.content_out,config.code_dir,hash,"code.txt")
+    const file_path = join(config.code_path,hash,"code.txt")
     //persist for highlighter copy, for code not saved by a diag gen
     if(!await exists(file_path)){
         await save_file(file_path,code)

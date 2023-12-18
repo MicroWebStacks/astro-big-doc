@@ -15,9 +15,9 @@ export interface Props {
 const { code, params } = Astro.props as Props;
 
 async function generator(code){
-    const temp_file = join(config.rootdir,config.content_out,config.code_dir,"temp.mmd")
+    const temp_file = join(config.code_path,"temp.mmd")
     await fs.writeFile(temp_file,code)
-    const out_file = join(config.rootdir,config.content_out,config.code_dir,"mmd.svg")
+    const out_file = join(config.code_path,"mmd.svg")
     await run(temp_file, out_file);
     const svg_text = await fs.readFile(out_file,'utf-8')
     await fs.unlink(temp_file)

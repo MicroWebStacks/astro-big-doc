@@ -5,7 +5,7 @@ import {load_json} from '@/libs/utils.js'
 import {file_mime} from '@/libs/assets.js'
 
 export async function GET({params}){
-    const imagePath = resolve(join(config.rootdir,config.content_out,config.code_dir,params.path));
+    const imagePath = resolve(join(config.code_path,params.path));
     console.log(`codes> serving '${imagePath}'`)
     try {
         const stream = createReadStream(imagePath);

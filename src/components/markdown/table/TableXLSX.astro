@@ -15,7 +15,7 @@ export interface Props {
 const { src, title, dirpath } = Astro.props as Props;
 
 set_fs(fs);
-const abs_file = join(config.rootdir,config.content,dirpath,src)
+const abs_file = join(config.content_path,dirpath,src)
 console.log(` * loading xlsx file '${abs_file}'`)
 const workbook = readFile(abs_file);
 

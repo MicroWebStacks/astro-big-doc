@@ -6,10 +6,10 @@ import ModelViewerCode from '../model/ModelViewerCode.astro';
 
 export interface Props {
     node: object;
-    filepath: object;
+    dirpath: object;
 }
 
-const { node, filepath } = Astro.props as Props;
+const { node, dirpath } = Astro.props as Props;
 
 const code = node.value
 const language = node.lang
@@ -31,7 +31,7 @@ const other_language = (!custom_languages.includes(language) && !yaml_glb)
     <Kroki language="mermaid" code={code} params={params} />
 }
 {yaml_glb &&
-    <ModelViewerCode code={code} filepath={filepath}/>
+    <ModelViewerCode code={code} dirpath={dirpath}/>
 }
 {other_language&&
     <Highlighter code={code} language={language} params={params} />

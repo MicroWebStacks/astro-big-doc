@@ -1,0 +1,40 @@
+---
+export interface Props {
+  label: string;
+  link: string;
+}
+
+const { label, link } = Astro.props as Props;
+console.log(link)
+const external = link.startsWith('http')
+
+---
+<div class="container">
+  <a href={link} class={`link ${external?"external":""}`} target={external?"_blank":"_self"}>
+    <span class="button text">{label}</span>
+  </a>
+</div>
+
+<style>
+.container{
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+}
+a{
+  text-decoration: none;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #729ef7;
+  padding: 10px;
+  border-radius: 5px;
+  margin:10px;
+}
+a:hover{
+  box-shadow: 2px 2px 3px 3px #333;
+}
+.button.text{
+  color: #729ef7;
+}
+</style>

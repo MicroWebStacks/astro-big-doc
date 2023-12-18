@@ -10,6 +10,11 @@ async function load_json(rel_path){
   return JSON.parse(text)
 }
 
+async function load_json_abs(abs_path){
+  const text = await readFile(abs_path,'utf-8')
+  return JSON.parse(text)
+}
+
 function shortMD5(text) {
   const hash = createHash('md5').update(text, 'utf8').digest('hex');
   return hash.substring(0, 8);
@@ -49,6 +54,7 @@ export{
   shortMD5,
   exists,
   load_json,
+  load_json_abs,
   load_yaml,
   save_json,
   save_file

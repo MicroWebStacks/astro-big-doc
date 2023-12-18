@@ -7,17 +7,17 @@ import TableXLSX from './table/TableXLSX.astro';
 
 export interface Props {
     node: object;
-    filepath: string;
+    dirpath: string;
 }
 
-const { node, filepath} = Astro.props as Props;
+const { node, dirpath} = Astro.props as Props;
 
 const external = node.url.startsWith('http')
 console.log(`* link '${node.url}' (external:${external}) `)
 let src = node.url
 if(!external){
   if(!node.url.startsWith("/")){
-    src = await relAssetToUrl(node.url,filepath)
+    src = await relAssetToUrl(node.url,dirpath)
   }
 }
 const is_model3d = node.url.endsWith(".glb")
@@ -33,7 +33,7 @@ if((node.children.length>0)&&(node.children[0].type == "text")){
   <ModelViewer src={src} title={title} />
 }
 {is_table &&
-  <TableXLSX src={node.url} title={title} filepath={filepath} />
+  <TableXLSX src={node.url} title={title} dirpath={dirpath} />
 }
 {is_link &&
   <a href={src} class={`link ${external?"external":""}`} target={external?"_blank":"_self"}>

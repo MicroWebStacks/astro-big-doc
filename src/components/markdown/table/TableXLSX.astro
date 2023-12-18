@@ -9,13 +9,13 @@ import {xlsxJson_to_DataTable} from './table.js'
 export interface Props {
     src: string;
     title: string;
-    filepath: string;
+    dirpath: string;
 }
 
-const { src, title, filepath } = Astro.props as Props;
+const { src, title, dirpath } = Astro.props as Props;
 
 set_fs(fs);
-const abs_file = join(config.rootdir,config.content,dirname(filepath),src)
+const abs_file = join(config.rootdir,config.content,dirpath,src)
 console.log(` * loading xlsx file '${abs_file}'`)
 const workbook = readFile(abs_file);
 

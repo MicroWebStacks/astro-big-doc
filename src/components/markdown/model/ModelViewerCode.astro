@@ -5,10 +5,10 @@ import {assetToUrl} from '@/libs/assets.js'
 
 export interface Props {
   code: string;
-  filepath: string;
+  dirpath: string;
 }
 
-const { code, filepath } = Astro.props as Props;
+const { code, dirpath } = Astro.props as Props;
 
 const data = yaml.load(code)
 let should_render = true
@@ -19,7 +19,7 @@ let environment_image = ""
 let error_text = ""
 //mandatory params
 if(Object.hasOwn(data,"src")){
-  src = await assetToUrl(data.src,filepath)
+  src = await assetToUrl(data.src,dirpath)
 }else{
   should_render = false
   const err = "ModelViewerCode missing 'src' param ; "
@@ -36,10 +36,10 @@ if(Object.hasOwn(data,"title")){
 }
 //optional params
 if(Object.hasOwn(data,"poster")){
-  poster = await assetToUrl(data.poster,filepath)
+  poster = await assetToUrl(data.poster,dirpath)
 }
 if(Object.hasOwn(data,"environment-image")){
-  environment_image = await assetToUrl(data["environment-image"],filepath)
+  environment_image = await assetToUrl(data["environment-image"],dirpath)
 }
 
 //potential additional params

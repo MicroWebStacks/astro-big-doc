@@ -1,9 +1,9 @@
 //in DEV Mode process.env does not have .env content
 import * as dotenv from 'dotenv'
-
-const rootdir = process.cwd()
+import {join} from 'path'
 
 dotenv.config()
+const rootdir = process.cwd()
 
 const outdir = (process.env.OUT_DIR==null)?"dist":process.env.OUT_DIR
 let content_out = outdir
@@ -15,10 +15,12 @@ const config = {
     rootdir: rootdir,
     outDir: outdir,
     content: "content",
-    content_out: content_out,
+    code_out: join(content_out,"codes"),
     plantuml_server: "https://www.plantuml.com/plantuml/svg",
     kroki_server: "https://kroki.io",
     client_menu:true,
+    copy_assets:false,
+    copy_assets_path: join(content_out,"raw"),
     assets_hash_dir:false,
     highlighter:{
         theme:"dark-plus",

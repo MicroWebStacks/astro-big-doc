@@ -41,21 +41,20 @@ function hashed_filename(filename,hash_text){
     return hashed_file
 }
 
-async function relAssetToUrlCopy(relativepath,refFile){
-    const dir_rel = dirname(refFile)
-    const dir_abs = join(config.rootdir,config.content,dir_rel)
+async function relAssetToUrlCopy(relativepath,dirpath){
+    const dir_abs = join(config.rootdir,config.content,dirpath)
     const file_abs = join(dir_abs,relativepath)
     if(await exists(file_abs)){
     if(config.assets_hash_dir){
-        const target_filename =  hashed_filename(relativepath,join(dir_rel,relativepath))
-        const target_file_abs = join(config.rootdir,config.content_out,"raw",target_filename)
+        const target_filename =  hashed_filename(relativepath,join(dirpath,relativepath))
+        const target_file_abs = join(config.rootdir,config.copy_assets_path,target_filename)
         await copy_if_newer(file_abs,target_file_abs)
         const newurl = join("raw",target_filename)
         return "/"+newurl.replaceAll('\\','/')
     }else{
-        const target_file_abs = join(config.rootdir,config.content_out,"raw",dir_rel,relativepath)
+        const target_file_abs = join(config.rootdir,config.copy_assets_path,dirpath,relativepath)
         await copy_if_newer(file_abs,target_file_abs)
-        const newurl = join("raw",dir_rel,relativepath)
+        const newurl = join("raw",dirpath,relativepath)
         return "/"+newurl.replaceAll('\\','/')
     }
     }else{
@@ -65,6 +64,9 @@ async function relAssetToUrlCopy(relativepath,refFile){
 }
 
 async function relAssetToUrl(relativepath,dirpath){
+    if(config.copy_assets){
+        return relAssetToUrlCopy(relativepath,dirpath)
+    }
     if(relativepath.startsWith("/")){
         return relativepath
     }
@@ -84,8 +86,9 @@ async function assetToUrl(path,dirpath){
     return src
 }
 
-function assetUrlToPath(src){
-    return join(config.rootdir,config.content_out,src)
+function relAssetToPath(relativepath,dirpath){
+    const dir_abs = join(config.rootdir,config.content,dirpath)
+    return join(dir_abs,relativepath)
 }
   
 function contentPathToStaticPath(section,entry_path){
@@ -138,7 +141,7 @@ function file_mime(path){
 export{
   assetToUrl,
   relAssetToUrl,
-  assetUrlToPath,
+  relAssetToPath,
   shortMD5,
   exists,
   contentPathToStaticPath,

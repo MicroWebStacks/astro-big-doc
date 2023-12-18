@@ -20,7 +20,7 @@ const config = {
     plantuml_server: "https://www.plantuml.com/plantuml/svg",
     kroki_server: "https://kroki.io",
     client_menu:true,
-    copy_assets:true,
+    copy_assets:false,
     copy_assets_dir: "_astro",
     assets_hash_dir:true,
     highlighter:{

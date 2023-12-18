@@ -6,7 +6,7 @@ import {file_mime} from '@/libs/assets.js'
 
 export async function GET({params}){
     let imagePath = resolve(join(config.rootdir,config.content,params.path));
-    if(import.meta.env.DEV && config.copy_assets){
+    if(config.copy_assets){
         imagePath = resolve(join(config.rootdir,config.content_out,config.copy_assets_dir,params.path));
     }
     console.log(`assets> serving '${imagePath}'`)
@@ -23,8 +23,12 @@ export async function GET({params}){
 }
 
 export async function getStaticPaths(){
-    const asset_list = await load_json(join(config.collect_content.rel_outdir,'asset_list.json'))
-    const paths = asset_list.filter((asset)=>(Object.hasOwn(asset,"path"))).map((entry)=>(entry.path))
-    console.log(`serving API endpoit ${paths.length} assets`)
-    return paths.map((path)=>({params:{path:path}}))
+    if(!config.copy_assets){
+        const asset_list = await load_json(join(config.collect_content.rel_outdir,'asset_list.json'))
+        const paths = asset_list.filter((asset)=>(Object.hasOwn(asset,"path"))).map((entry)=>(entry.path))
+        console.log(`serving API endpoit ${paths.length} assets`)
+        return paths.map((path)=>({params:{path:path}}))
+    }else{
+        return []
+    }
 }

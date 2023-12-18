@@ -47,14 +47,14 @@ async function relAssetToUrlCopy(relativepath,dirpath){
     if(await exists(file_abs)){
     if(config.assets_hash_dir){
         const target_filename =  hashed_filename(relativepath,join(dirpath,relativepath))
-        const target_file_abs = join(config.rootdir,config.copy_assets_path,target_filename)
+        const target_file_abs = join(config.rootdir,config.content_out,config.copy_assets_dir,target_filename)
         await copy_if_newer(file_abs,target_file_abs)
-        const newurl = join("raw",target_filename)
+        const newurl = join(config.copy_assets_dir,target_filename)
         return "/"+newurl.replaceAll('\\','/')
     }else{
-        const target_file_abs = join(config.rootdir,config.copy_assets_path,dirpath,relativepath)
+        const target_file_abs = join(config.rootdir,config.content_out,config.copy_assets_dir,dirpath,relativepath)
         await copy_if_newer(file_abs,target_file_abs)
-        const newurl = join("raw",dirpath,relativepath)
+        const newurl = join(config.copy_assets_dir,dirpath,relativepath)
         return "/"+newurl.replaceAll('\\','/')
     }
     }else{

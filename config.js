@@ -15,13 +15,14 @@ const config = {
     rootdir: rootdir,
     outDir: outdir,
     content: "content",
-    code_out: join(content_out,"codes"),
+    content_out: content_out,
+    code_dir: "codes",
     plantuml_server: "https://www.plantuml.com/plantuml/svg",
     kroki_server: "https://kroki.io",
     client_menu:true,
-    copy_assets:false,
-    copy_assets_path: join(content_out,"raw"),
-    assets_hash_dir:false,
+    copy_assets:true,
+    copy_assets_dir: "_astro",
+    assets_hash_dir:true,
     highlighter:{
         theme:"dark-plus",
         langs:['javascript','js','python','yaml']

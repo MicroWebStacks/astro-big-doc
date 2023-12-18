@@ -1,5 +1,12 @@
 ---
-import ImageDirective from './ImageDirective.astro';
+//to use Optimized Images, do the following :
+// - uncomment import line with OptimizedImageDirective.astro
+// - set config.copy_assets = true
+// - set config.copy_assets_path = join(content_out,"_astro")
+// - set assets_hash_dir = true
+
+//import ImageDirective from './ImageDirective.astro';
+import ImageDirective from './OptimizedImageDirective.astro';
 import ButtonDirective from './ButtonDirective.astro'
 
 export interface Props {

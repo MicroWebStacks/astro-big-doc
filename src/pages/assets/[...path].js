@@ -5,7 +5,10 @@ import {load_json} from '@/libs/utils.js'
 import {file_mime} from '@/libs/assets.js'
 
 export async function GET({params}){
-    const imagePath = resolve(join(config.rootdir,config.content,params.path));
+    let imagePath = resolve(join(config.rootdir,config.content,params.path));
+    if(import.meta.env.DEV && config.copy_assets){
+        imagePath = resolve(join(config.rootdir,config.content_out,config.copy_assets_dir,params.path));
+    }
     console.log(`assets> serving '${imagePath}'`)
     try {
         const stream = createReadStream(imagePath);

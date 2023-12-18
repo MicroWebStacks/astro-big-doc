@@ -2,11 +2,7 @@ dist/
 public/raw
 public/menu.json
 public/codes/
-public/documents/
-public/ids.json
-public/reference_list.json
-public/document_list.json
-public/asset_list.json
+.structure/
 
 # dependencies
 node_modules/

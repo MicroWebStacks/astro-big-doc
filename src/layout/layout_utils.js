@@ -77,7 +77,7 @@ function get_active_submenu(raw_menu,section,pathname){
     })
 }
 
-const generated_menu = await load_json(join(config.content_out,"menu.json"))
+const generated_menu = await load_json(config.collect_content.out_menu)
 
 async function get_generated_section_menu(pathname){
     const section = section_from_pathname(pathname);

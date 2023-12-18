@@ -27,51 +27,20 @@ pnpm install
 pnpm run dev
 pnpm run build
 ```
-## .env config
-This project uses environment variables as unified config to astro.config.mjs and to the express server. The environment variabels are also loaded by a `config.js` to allow their usage from any file in astro including .js
 
-It is possible to build with zero config, the default mode is 'STATIC' See also an example in [.env.example](.env.example).
-
-Astro variables
-* `OUT_DIR` : directory where the build will be genrated
-* `PORT` : maps to astro.config.mjs [server.port](https://docs.astro.build/en/reference/configuration-reference/#serverport)
-
-Express general variables
-* `PROTOCOL` : either of htp or https for express server usage
-* `CERT_FILE` : required when https is used
-* `KEY_FILE` : required when https is used
-
-Express authentication variables
-* `HOST` : Express passport callbackURL
-* `PORT` : Express passport callbackURL
-* `GITHUB_CLIENT_ID`      : Express passport Github strategy configuration
-* `GITHUB_CLIENT_SECRET`  : Express passport Github strategy configuration
-* `SESSION_SECRET`        : used by 'express-session' handler
-
-## authentication doc
-- Github OAuth : https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
-- express-session : 
-  - repo https://github.com/expressjs/session
-  - doc https://expressjs.com/en/resources/middleware/session.html
-- passport OAuth doc : http://www.passportjs.org/concepts/authentication/oauth/
-- passport-github : https://github.com/jaredhanson/passport-github
-- passport-github doc : http://www.passportjs.org/packages/passport-github/
-- passport example : https://github.com/passport/todos-express-facebook/blob/master/app.js
-- jwo example : https://gist.github.com/jwo/ea79620b5229e7821e4ae61055899cf9
-
-- using self signed keys with `server/create.sh` result in browser warning 'your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID)
-- for 'Let's Encrypt' certificates, ownership has to be proven by visibility of the host from the public internet which makes it not usable for internal domains and local network hosts
-
-## plantuml SVG plugins
-* `remark-plantuml-object` : Dynamic, the client needs to wait for svg generation when the page is loaded. The plugin only replace plantuml code with html `object` tag pointing on server with encoded text in url.
-* `remark-plantuml-svg` : Static, svg generated on build time. The plugin extracts plantuml code, place it on extrnal `.puml` file for vs code preview convenience and convert it to `.svg` on build time. The puml and svg files are cached and only regenerated on new builds if the md file has been changed.
-* `remark-plantuml-astro` : Same as svg, adds an Astro component with top right button to open svg in modal
-
-# Plan
+# Ideas
 - light and dark mode toggle
 - check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration
-## ideas
+
+- Cards as a yaml code
+  - markdown format : for referencing existing pages through their front matter
+  - markdown_card format : for rendering markdown with body
+- Details
+- Gallery
+  - svg, images with panzoom
+  - lightbox integration
+  - slides presentation
 - menus
   - store menu scroll position
   - store menus width
@@ -81,7 +50,8 @@ Express authentication variables
 - caching
   - SSR render on page hash condition, using ETag
   - page hash with depndencies hashes, include assets hash as attribute
-## more ideas
+
+
 - use declarative shadow dom to be able to retrieve data from it and reuse it
 - Markdown
   - add more code formats, e.g. mermaid, D2, ...
@@ -100,9 +70,22 @@ Express authentication variables
   - used referrer to differentiate requests, and created a middleware preceesing the static use that redirects to base
   - failed due to some fetches still fail, not clear why as not reported without referer
 
-## issues
+## assets management
+* User content can be placed in a configurable relative path to the repo root usually `./content` set in these variables
+  * config.content
+  * config.collect_content.rel_contentdir
+* Zerop copy assets management
+  * during dev, an API endpoint exposes `./content/*` under `/assets/*`
+* Generated content by pages frontmatter (e.g. svg diagrams from code and text code for highlighter client copy) :
+  * `./public/codes/*` during dev, served under `/codes/*` with `./src/pages/codes/[...path].js`
+  * `./dist/codes` during build, served under `/codes/*`
+  * Note : since Astro4/Vite5 `./public/*` does not watch and serve newly generated content by pages frontmatter, that's why an endpoint API is needed
+* Generated content by integrations
+  * if only needed by the integration or pages build then gets generated in `.structure/` folder (e.g.`documents_list.json`,...)
+  * the menu needed by the client gets generated in config.collect_content.out_menu `./public/menu.json` for both dev and build served on `/menu.json`
+    * Note : integrations cannot directly generate on `dist` because they cannot persist there before start of build
 
-## Hints
+# Notes
 - SVGs
   - missing viewbox canot be resized
   - should not have `preserveAspectRatio="none"`
@@ -139,6 +122,44 @@ app.use((req, res, next) => {
   }
 });
 ```
+# Express Server guide
+Express server in `server\server.js` can optionally be used to serve the generated static site. It adds an authentication layer on top using Express passport.
+
+## .env config
+This project uses environment variables as unified config to astro.config.mjs and to the express server. The environment variabels are also loaded by a `config.js` to allow their usage from any file in astro including .js
+
+It is possible to build with zero config, the default mode is 'STATIC' See also an example in [.env.example](.env.example).
+
+Astro variables
+* `OUT_DIR` : directory where the build will be genrated
+* `PORT` : maps to astro.config.mjs [server.port](https://docs.astro.build/en/reference/configuration-reference/#serverport)
+
+Express general variables
+* `PROTOCOL` : either of htp or https for express server usage
+* `CERT_FILE` : required when https is used
+* `KEY_FILE` : required when https is used
+
+Express authentication variables
+* `HOST` : Express passport callbackURL
+* `PORT` : Express passport callbackURL
+* `GITHUB_CLIENT_ID`      : Express passport Github strategy configuration
+* `GITHUB_CLIENT_SECRET`  : Express passport Github strategy configuration
+* `SESSION_SECRET`        : used by 'express-session' handler
+
+## authentication doc
+- Github OAuth : https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
+- express-session : 
+  - repo https://github.com/expressjs/session
+  - doc https://expressjs.com/en/resources/middleware/session.html
+- passport OAuth doc : http://www.passportjs.org/concepts/authentication/oauth/
+- passport-github : https://github.com/jaredhanson/passport-github
+- passport-github doc : http://www.passportjs.org/packages/passport-github/
+- passport example : https://github.com/passport/todos-express-facebook/blob/master/app.js
+- jwo example : https://gist.github.com/jwo/ea79620b5229e7821e4ae61055899cf9
+
+- using self signed keys with `server/create.sh` result in browser warning 'your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID)
+- for 'Let's Encrypt' certificates, ownership has to be proven by visibility of the host from the public internet which makes it not usable for internal domains and local network hosts
+
 
 # References
 * https://github.com/syntax-tree/mdast
@@ -148,32 +169,6 @@ app.use((req, res, next) => {
 * https://github.com/syntax-tree/unist-util-visit
 * https://github.com/akebifiky/remark-simple-plantuml
 
-## astro docs
-https://github.com/withastro/astro/tree/main/examples/docs
-
-Advantages :
-
-Official example, clean html structure, light and dark toggle, left side pages and right side Table Of Content.
-
-Limitations :
- - react and preact dependencies, despite island architecture this can exclude potential use cases
- - Left Menu
-   - handcoded `SIDEBAR` in `config.ts`
-   - first level is map and not list so relying on ordered map
-   - fixed 2 levels structure
- - ToC is dynamically parsing the DOM on client side, this reduces astro's advantage of zero js and server side generation and rendering
- - ToC does not take h1 and limited down to h4
-
-## hello astro
-
-https://github.com/hellotham/hello-astro
-
-built upon astro-docs with differences :
- 
- - advantage : right side ToC is not DOM client side like astro-docs but built with native astro component taking the `headings` Markdown Layout Prop https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props
-
- - limitation: all svg integrations are either hardcoded or wrapped in images through svgimg
-
 # License
 - MIT
 ## images
@@ -182,3 +177,5 @@ built upon astro-docs with differences :
 - https://freesvg.org/1542512156 : tree
 - https://www.svgrepo.com/svg/75085/full-screen
 - https://uxwing.com/text-file-icon/
+
+# Issues

@@ -68,9 +68,8 @@ async function create_menu(collect_config){
     const hash = createHash('md5').update(menu_text).digest('hex').substring(0,8)
     
     menu = {hash:hash,...menu}
-    const new_menu_path = join(collect_config.rel_outdir,"menu.json")
-    await save_json(menu,new_menu_path)
-    console.log(`create_menu> ${collect_config.raw_menu} -> saved new menu in '${new_menu_path}' `)
+    await save_json(menu,collect_config.out_menu)
+    console.log(`create_menu> ${collect_config.raw_menu} -> saved new menu in '${collect_config.out_menu}' `)
 }
 
 export{

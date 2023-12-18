@@ -20,7 +20,7 @@ export async function GET({params}){
 }
 
 export async function getStaticPaths(){
-    const asset_list = await load_json('public/asset_list.json')
+    const asset_list = await load_json(join(config.collect_content.rel_outdir,'asset_list.json'))
     const paths = asset_list.filter((asset)=>(Object.hasOwn(asset,"path"))).map((entry)=>(entry.path))
     console.log(`serving API endpoit ${paths.length} assets`)
     return paths.map((path)=>({params:{path:path}}))

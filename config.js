@@ -31,9 +31,10 @@ config.collect_content = {
     rel_contentdir:config.content,
     content_ext:["md"],
     assets_ext:["svg","webp","png","jpeg","jpg","xlsx","glb","hdr"],
-    rel_outdir:"public",//because integrations cannot persist on dist before start of build
+    rel_outdir:".structure",//dist does not persist before build
     raw_menu:"menu.yaml",
-    debug:false
+    out_menu:"public/menu.json",//used by src\layout\client_nav_menu.js
+    debug:true
 }
 
 console.log(config)

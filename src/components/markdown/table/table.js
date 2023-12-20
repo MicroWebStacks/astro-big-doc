@@ -1,3 +1,4 @@
+//also in //also in (content-structure)src\md_utils.js
 function astToDataTable(tableNode) {
     const data = [];
     for (const row of tableNode.children) {

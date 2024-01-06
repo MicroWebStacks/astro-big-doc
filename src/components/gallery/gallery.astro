@@ -1,11 +1,7 @@
 ---
-import {existsSync,readFileSync} from 'fs';
-import {relAssetToUrl, exists} from '@/libs/assets.js'
-import PanZoomModal from './panzoom/panzoommodal.astro'
-import { config } from '@/config';
-import {join} from 'path'
+import {relAssetToUrl} from '@/libs/assets.js'
+import PanZoomModal from '../panzoom/panzoommodal.astro'
 import yaml from 'js-yaml'
-import { load_json_abs } from '@/libs/utils';
 
 export interface Props {
   code: string;

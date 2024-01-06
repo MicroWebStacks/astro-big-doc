@@ -1,4 +1,4 @@
-import {event} from './panzoom/client_utils'
+import {event} from '../panzoom/client_utils'
 
 function init_container(container){
     if(container.getAttribute("data-state") != "init"){

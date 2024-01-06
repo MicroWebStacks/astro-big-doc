@@ -1,0 +1,97 @@
+---
+import {relAssetToUrl} from '@/libs/assets.js'
+import yaml from 'js-yaml'
+
+export interface Props {
+  code: string;
+  dirpath: string;
+}
+
+const { code, dirpath } = Astro.props as Props;
+const relImages = yaml.load(code)
+
+let imagesUrls = []
+for(const relFile of relImages){
+    const url = await relAssetToUrl(relFile,dirpath)
+    imagesUrls.push({
+        url:url,
+        isSVG:url.endsWith(".svg"),
+        name:relFile
+    })
+}
+
+---
+
+<div class="swiper-container">
+    <div class="swiper main">
+        <div class="swiper-wrapper">
+            {imagesUrls.map((image)=>(
+                <div class="swiper-slide">
+                    <div class="itemimage">
+                        {image.isSVG&&
+                            <object data={image.url} />
+                        }
+                        {(!image.isSVG)&&
+                            <img src={image.url} />
+                        }
+                    </div>
+                </div>
+            ))}
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    <div class="swiper thumbs">
+        <div class="swiper-wrapper">
+            {imagesUrls.map((image)=>(
+                <div class="swiper-slide">
+                    <div class="itemimage">{image.name}</div>
+                </div>
+            ))}
+        </div>
+    </div>
+</div>
+
+<style>
+	.swiper-container{
+		height: 600px;
+	}
+	.swiper.main {
+		width: 70vw;
+		height: 80%;
+	}
+	.swiper.thumbs {
+		width: 70vw;
+		height: 20%;
+		box-sizing: border-box;
+	    padding: 10px 0;
+	}
+	.swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+	  background-size: cover;
+      background-position: center;
+    }
+	.thumbs .swiper-slide{
+		width: 25%;
+    	height: 100%;
+    	opacity: 0.4;
+	}
+	
+	.thumbs .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+</style>
+
+<script src="./swiper.js" />

@@ -5,7 +5,6 @@ import MarkdownImage from './image/MarkdownImage.astro'
 import Code from './code/Code.astro'
 import Tag from './Tag.astro'
 import Link from './Link.astro'
-import Cards from './cards/Cards.astro'
 import Directive from './directive/Directive.astro'
 import {toHast} from 'mdast-util-to-hast'
 import {toHtml} from 'hast-util-to-html'
@@ -25,9 +24,6 @@ data.dirpath = dirname(data.path)
 ---
 {(node.type == "root") &&
     <>
-    {(Object.hasOwn(data,"cards"))&&
-            <Cards cards={data.cards} />
-        }
         {node.children.map((node)=>(
             <Astro.self node={node} data={data} />
         ))}

@@ -17,7 +17,7 @@ This is a Gallery Astro component, a yaml Code block with metadata 'gallery' is 
 ```
 ``````
 
-will generate this gallery (Not yet available)
+will generate this gallery
 
 ```yaml gallery
 - tree.svg

@@ -3,6 +3,8 @@ import Highlighter from './Highlighter.astro'
 import Plantuml from './Plantuml.astro'
 import Kroki from './Kroki.astro'
 import ModelViewerCode from '../model/ModelViewerCode.astro';
+import Cards from '../cards/Cards.astro'
+import Gallery from '../../gallery.astro';
 
 export interface Props {
     node: object;
@@ -17,9 +19,12 @@ const params = node.meta?node.meta.split(' '):[]
 
 const custom_languages = ["plantuml","mermaid","blockdiag"]
 
-const yaml_glb = ((language == "yaml") && (node.meta?.startsWith("glb")))
+const yaml_glb      = ((language == "yaml") && (node.meta?.startsWith("glb")))
+const yaml_cards    = ((language == "yaml") && (node.meta?.startsWith("cards")))
+const yaml_gallery  = ((language == "yaml") && (node.meta?.startsWith("gallery")))
+const custom_yaml = yaml_glb || yaml_cards || yaml_gallery
 
-const other_language = (!custom_languages.includes(language) && !yaml_glb)
+const other_language = (!custom_languages.includes(language) && !custom_yaml)
 ---
 {(language == "plantuml")&&
     <Plantuml code={code} params={params} />
@@ -32,6 +37,12 @@ const other_language = (!custom_languages.includes(language) && !yaml_glb)
 }
 {yaml_glb &&
     <ModelViewerCode code={code} dirpath={dirpath}/>
+}
+{yaml_cards &&
+    <Cards code={code} dirpath={dirpath}/>
+}
+{yaml_gallery &&
+    <Gallery code={code} dirpath={dirpath}/>
 }
 {other_language&&
     <Highlighter code={code} language={language} params={params} />

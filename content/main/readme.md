@@ -33,6 +33,57 @@ will generate this image height adjusted image with respect to the aspect ratio
 ![Tree](./tree.svg)
 
 
+## Gallery
+
+This is a Gallery Astro component, a yaml Code block with metadata 'gallery' is provided with a list of images like this
+
+``````
+```yaml gallery
+- tree.svg
+- gallery-tiger.svg
+- gallery-long_diag.svg
+- gallery-Linux_kernel_map.svg
+- gallery-tiger.svg
+- github-dark.png
+```
+``````
+
+will generate this gallery
+
+```yaml gallery
+- tree.svg
+- images/gallery-tiger.svg
+- images/gallery-long_diag.svg
+- images/gallery-Linux_kernel_map.svg
+- images/gallery-tiger.svg
+- images/github-dark.png
+```
+
+## Cards
+It is also possible to create cards from a yaml code block list. The following list where uid points to an existing document of format `markdown` or `markdown_card`
+
+``````
+```yaml cards
+-   uid: cards.card-1
+    body: true
+    width: 300
+-   uid: cards.card-2
+    body: true
+    width: 300
+```
+``````
+
+Will generate the following cards
+
+```yaml cards
+-   uid: cards.card-1
+    body: true
+    width: 300
+-   uid: cards.card-2
+    body: true
+    width: 300
+```
+
 
 # 3D Model viewer
 [Model Viewer](https://modelviewer.dev/) Makrdown plugin

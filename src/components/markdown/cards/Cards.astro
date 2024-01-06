@@ -1,16 +1,20 @@
 ---
 import {getEntry} from 'content-structure'
 import AstroMarkdown from '@/components/markdown/AstroMarkdown.astro'
+import yaml from 'js-yaml'
 
 export interface Props {
-    cards: object;
+  code: string;
+  dirpath: string;
 }
 
-const {cards} = Astro.props;
+const { code, dirpath } = Astro.props as Props;
+
+const cards = yaml.load(code)
+
 console.log("----------------- cards ------------------")
 const promises = cards.map(entry => getEntry({ uid: entry.uid }));
 const entries = await Promise.all(promises);
-console.log(cards)
 ---
 <div class="cards container">
     {

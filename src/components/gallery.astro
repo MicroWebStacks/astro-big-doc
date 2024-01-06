@@ -1,24 +1,24 @@
 ---
 import {existsSync,readFileSync} from 'fs';
 import {relAssetToUrl, exists} from '@/libs/assets.js'
-import PanZoomModal from './panzoommodal.astro'
+import PanZoomModal from './panzoom/panzoommodal.astro'
 import { config } from '@/config';
 import {join} from 'path'
+import yaml from 'js-yaml'
 import { load_json_abs } from '@/libs/utils';
 
 export interface Props {
-  'src': string;
-  'data-filedir': string;
-    expanded: boolean;
+  code: string;
+  dirpath: string;
+  expanded: boolean;
 }
 
-const { 'src':filename,'data-filedir':filedir,expanded } = Astro.props as Props;
-const gallery_list_path = join(config.content_path,filedir,filename)
-const relImages = await exists(gallery_list_path)?await load_json_abs(gallery_list_path):[]
+const { code, dirpath, expanded=true } = Astro.props as Props;
+const relImages = yaml.load(code)
 
 let imagesUrls = []
 for(const relFile of relImages){
-    const url = await relAssetToUrl(relFile,filedir)
+    const url = await relAssetToUrl(relFile,dirpath)
     imagesUrls.push({
         url:url,
         isSVG:url.endsWith(".svg"),

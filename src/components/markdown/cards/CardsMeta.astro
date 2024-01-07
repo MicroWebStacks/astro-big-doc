@@ -1,0 +1,103 @@
+---
+import {relAssetToUrl} from '@/libs/assets.js'
+import Button from '@/components/markdown/directive/ButtonDirective.astro'
+export interface Props {
+  data: object;
+  dirpath: string;
+}
+
+const { data, dirpath } = Astro.props as Props;
+
+
+let isSvg = false
+let isImg = false
+let asseturl = ""
+if(data.image){
+    asseturl = await relAssetToUrl(data.image, dirpath)
+    isSvg = data.image.endsWith(".svg")
+    isImg = !isSvg
+}
+const url = "/blog/"+data.url
+let hasFeatures = Object.hasOwn(data,"features") && (data.features.length > 0)
+let hasTags = Object.hasOwn(data,"tags") && (data.tags.length > 0)
+
+---
+<div class="card meta container">
+    <div class="itemimage">
+        {isSvg&&
+            <object data={asseturl} name={data.title} data-alt={data.title} />
+        }
+        {isImg&&
+            <img src={asseturl} title={data.title} alt={data.title} />
+        }
+    </div>
+    <h1 class="title">{data.title}</h1>
+    {hasFeatures&&
+        <ul>
+            {data.features.map((feature)=>(
+                <li><div class="check" /><div>{feature}</div></li>
+            ))}
+        </ul>
+    }
+    <Button label="Details..." link={url} />
+    {hasTags&&
+    <div class="tags container">
+        {data.tags.map((tag)=>(
+            <div class="tag">{tag}</div>
+        ))}
+    </div>
+    }
+</div>
+
+<style>
+.card.meta.container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    width:100%;
+}
+.itemimage{
+    width:90%;
+}
+object{
+    pointer-events: none;
+    max-height: 100%;
+    max-width: 100%;
+}
+img{
+    pointer-events: none;
+    max-height: 100%;
+    max-width: 100%;
+}
+ul{
+    width:100%;
+    margin: 0px;
+    padding: 0px;
+}
+li{
+    list-style-type: none;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+}
+.check{
+    margin-right: 5px;
+    background-color: #555;
+    padding: 5px;
+    width:5px;
+    height:5px;
+    border-radius: 30%;
+}
+.tags.container{
+    display: flex;
+    gap:5px;
+}
+.tag{
+    background-color: #444;
+    padding: 5px;
+    border-radius: 5px;
+    color: #aaa;
+}
+</style>

@@ -64,10 +64,10 @@ It is also possible to create cards from a yaml code block list. The following l
 
 ``````
 ```yaml cards
--   uid: cards.card-1
+-   uid: cards-body.card-1
     body: true
     width: 300
--   uid: cards.card-2
+-   uid: cards-body.card-2
     body: true
     width: 300
 ```
@@ -76,10 +76,10 @@ It is also possible to create cards from a yaml code block list. The following l
 Will generate the following cards
 
 ```yaml cards
--   uid: cards.card-1
+-   uid: cards-body.card-1
     body: true
     width: 300
--   uid: cards.card-2
+-   uid: cards-body.card-2
     body: true
     width: 300
 ```

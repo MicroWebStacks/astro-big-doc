@@ -1,5 +1,6 @@
 ---
 import {getEntry} from 'content-structure'
+import CardMeta from './CardsMeta.astro'
 import AstroMarkdown from '@/components/markdown/AstroMarkdown.astro'
 import yaml from 'js-yaml'
 
@@ -20,7 +21,7 @@ const entries = await Promise.all(promises);
     {
         entries.map((entry,index)=>(
             <div class="card">
-                <h1 class="title">{entry.data.title}</h1>
+                <CardMeta data={entry.data} dirpath={dirpath} />
                 {cards[index].body&&
                     <AstroMarkdown node={entry.tree} data={entry.data} />
                 }
@@ -36,6 +37,7 @@ const entries = await Promise.all(promises);
     
 }
 .cards.container{
+    padding-top: 10px;
     display:flex;
     flex-wrap:wrap;
     gap:20px;
@@ -44,7 +46,7 @@ const entries = await Promise.all(promises);
     background-color: #222;
     box-shadow: 2px 2px 3px 3px #333;
     border-radius:10px;
-    max-width:300px;
+    width:15rem;
     padding:10px;
 }
 

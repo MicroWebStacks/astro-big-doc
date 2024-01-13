@@ -20,9 +20,12 @@ const entries = await Promise.all(promises);
 <div class="cards container">
     {
         entries.map((entry,index)=>(
-            <div class="card">
-                <CardMeta data={entry.data} dirpath={dirpath} />
+            <div class="card" style={`width:${cards[index].width_rem}rem`}>
+                {!cards[index].body&&
+                    <CardMeta data={entry.data} dirpath={dirpath} />
+                }
                 {cards[index].body&&
+                    <h1 class="title">{entry.data.title}</h1>
                     <AstroMarkdown node={entry.tree} data={entry.data} />
                 }
             </div>
@@ -49,5 +52,7 @@ const entries = await Promise.all(promises);
     width:15rem;
     padding:10px;
 }
-
+.card :global(.paragraph:has(>img)) {
+    text-align: center;
+}
 </style>

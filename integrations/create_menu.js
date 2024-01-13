@@ -45,7 +45,16 @@ async function get_section_menu(section,raw_menu,base){
             }
         ))
         const menu_tree = await pages_list_to_tree(items)
-        result_items = menu_tree
+        if(dir != "."){
+            result_items = []
+            for(const entry of menu_tree){
+                if(Object.hasOwn(entry,"items")){
+                    result_items.push(...entry["items"])
+                }
+            }
+        }else{
+            result_items = menu_tree
+        }
     }else if(Object.hasOwn(section_menu,"items")){
         result_items = section_menu.items
     }

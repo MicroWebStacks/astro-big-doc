@@ -6,6 +6,7 @@ import Code from './code/Code.astro'
 import Tag from './Tag.astro'
 import Link from './Link.astro'
 import Directive from './directive/Directive.astro'
+import ContainerDirective from './directive/ContainerDirective.astro';
 import {toHast} from 'mdast-util-to-hast'
 import {toHtml} from 'hast-util-to-html'
 import {dirname} from 'path'
@@ -17,7 +18,8 @@ export interface Props {
 const {node, data} = Astro.props;
 const handled_types = [ "root","heading","table","paragraph",
                         "image","code","tag","link",
-                        "list", "listItem","textDirective"
+                        "list", "listItem","textDirective",
+                        "containerDirective"
                     ]
 const other_type = !handled_types.includes(node.type)
 data.dirpath = dirname(data.path)
@@ -35,6 +37,13 @@ data.dirpath = dirname(data.path)
         <Astro.self node={node} data={data}/>
     ))}
 </div>
+}
+{(node.type == "containerDirective") &&
+<ContainerDirective name={node.name}>
+    {node.children.map((node)=>(
+        <Astro.self node={node} data={data}/>
+    ))}
+</ContainerDirective>
 }
 {(node.type == "list") &&
 <ul>

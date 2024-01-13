@@ -72,7 +72,7 @@ async function pages_list_to_tree(entries){
             }
         })
     
-    //adjust parents fields 
+    //adjust parents fields
     for(let element of entries){
         if (element.items.length == 0){
             element.parent = false
@@ -80,7 +80,12 @@ async function pages_list_to_tree(entries){
             delete element.expanded
         }
     }
-    //TODO sort with element.order
+    //sort with element.order
+    for(let element of entries){
+        if (element.parent){
+            element.items.sort((a,b)=> a.order-b.order)
+        }
+    }
     return tree
 
 }

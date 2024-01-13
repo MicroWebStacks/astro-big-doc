@@ -17,36 +17,40 @@ if(data.image){
     isSvg = data.image.endsWith(".svg")
     isImg = !isSvg
 }
-const url = "/blog/"+data.url
+const url = Object.hasOwn(data,"link")?data.link:`/${data.url}`
 let hasFeatures = Object.hasOwn(data,"features") && (data.features.length > 0)
 let hasTags = Object.hasOwn(data,"tags") && (data.tags.length > 0)
 
 ---
 <div class="card meta container">
-    <div class="itemimage">
-        {isSvg&&
-            <object data={asseturl} name={data.title} data-alt={data.title} />
+    <div class="content">
+        {hasTags&&
+            <div class="tags container">
+                {data.tags.map((tag)=>(
+                    <div class="tag">{tag}</div>
+                ))}
+            </div>
         }
-        {isImg&&
-            <img src={asseturl} title={data.title} alt={data.title} />
+        <h1 class="title">{data.title}</h1>
+        <div class="itemimage">
+            {isSvg&&
+                <object data={asseturl} name={data.title} data-alt={data.title} />
+            }
+            {isImg&&
+                <img src={asseturl} title={data.title} alt={data.title} />
+            }
+        </div>
+        {hasFeatures&&
+            <ul>
+                {data.features.map((feature)=>(
+                    <li><div class="check" /><div>{feature}</div></li>
+                ))}
+            </ul>
         }
     </div>
-    <h1 class="title">{data.title}</h1>
-    {hasFeatures&&
-        <ul>
-            {data.features.map((feature)=>(
-                <li><div class="check" /><div>{feature}</div></li>
-            ))}
-        </ul>
-    }
-    <Button label="Details..." link={url} />
-    {hasTags&&
-    <div class="tags container">
-        {data.tags.map((tag)=>(
-            <div class="tag">{tag}</div>
-        ))}
+    <div class="bottom">
+        <Button label="Details..." link={url} />
     </div>
-    }
 </div>
 
 <style>
@@ -54,9 +58,23 @@ let hasTags = Object.hasOwn(data,"tags") && (data.tags.length > 0)
     display:flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    height:100%;
+}
+.content{
+    width:100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.bottom{
+    margin-top: auto;
+    width:100%;
 }
 .title{
     width:100%;
+    text-align: center;
 }
 .itemimage{
     width:90%;
@@ -74,6 +92,7 @@ img{
 ul{
     width:100%;
     margin: 0px;
+    margin-top: 10px;
     padding: 0px;
 }
 li{

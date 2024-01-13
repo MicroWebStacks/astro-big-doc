@@ -1,0 +1,24 @@
+---
+export interface Props {
+    name: string;
+}
+
+const {name} = Astro.props as Props;
+---
+<div class={`aside ${name}`}>
+  <slot/>
+</div>
+
+<style>
+.aside{
+  margin-top: 1.5rem;
+  border-width:0;
+  border-left: 0.25rem;
+  border-style: solid;
+  padding:1rem;
+}  
+.note{
+  background-color: #66687a;
+  border-color: rgb(197, 197, 232);
+}
+</style>

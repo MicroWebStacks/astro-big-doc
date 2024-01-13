@@ -86,6 +86,7 @@ async function pages_list_to_tree(entries){
             element.items.sort((a,b)=> a.order-b.order)
         }
     }
+    tree.sort((a,b)=> a.order-b.order)
     return tree
 
 }

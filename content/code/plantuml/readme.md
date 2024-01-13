@@ -1,6 +1,6 @@
 ---
 title: Plantuml
-order: 3
+order: 10
 ---
 # Plantuml Static integrations
 These integrations use a markdown code block with specific languages

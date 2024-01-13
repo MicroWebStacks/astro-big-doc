@@ -41,7 +41,7 @@ async function get_section_menu(section,raw_menu,base){
                 link:`${base}/${entry.url}`,
                 level:content_entry_to_level(entry),
                 format: entry.format,
-                order: Object.hasOwn(entry,"order")?entry.order:1
+                order: Object.hasOwn(entry,"order")?entry.order:100
             }
         ))
         const menu_tree = await pages_list_to_tree(items)

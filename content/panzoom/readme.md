@@ -1,6 +1,6 @@
 ---
 title: Panzoom
-order: 2
+order: 3
 ---
 
 # Panzoom

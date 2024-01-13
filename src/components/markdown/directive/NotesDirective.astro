@@ -1,0 +1,82 @@
+---
+import Svgicons from '@/components/svgicons.astro';
+export interface Props {
+  name: string; //note, tip, caution, danger
+  attributes: object;
+}
+
+const {name, attributes} = Astro.props as Props;
+const title = Object.hasOwn(attributes,"title")?attributes.title:name
+const className = name.toLowerCase()
+---
+<aside aria-label="Note" class={`aside ${className}`}>
+  <p class={`icon ${className}`}><Svgicons filename='info'/>{title}</p>
+  <section>
+    <slot/>
+  </section>
+</aside>
+
+<style>
+.aside{
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-width:0;
+  border-left: 0.25rem;
+  border-style: solid;
+  padding:1rem;
+}  
+.icon :global(svg){
+    width:16px;
+    margin-right: 10px;
+}
+.icon{
+  font-size: large;
+  margin-top: 0;
+}
+/* Note */
+.note{
+  background-color: #444551;
+  border-color: #c5c5e8;
+}
+.icon.note :global(svg){
+    fill:#c5c5e8;
+}
+.icon.note{
+  color: #c5c5e8;
+}
+/* Tip */
+.tip{
+  background-color: #465144;
+  border-color: #c9e8c5;
+}
+.icon.tip :global(svg){
+    fill:#b6eaaf;
+}
+.icon.tip{
+  color: #b6eaaf;
+}
+
+/* Caution */
+.caution{
+  background-color: #515144;
+  border-color: #e8e5c5;
+}
+.icon.caution :global(svg){
+    fill:#e8d7a9;
+}
+.icon.caution{
+  color: #e8d7a9;
+}
+
+/* Danger */
+.danger{
+  background-color: #514844;
+  border-color: #e8d0c5;
+}
+.icon.danger :global(svg){
+    fill:#e8c1ae;
+}
+.icon.danger{
+  color: #e8c1ae;
+}
+</style>

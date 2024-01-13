@@ -1,6 +1,6 @@
 ---
 title: Gallery
-order: 1
+order: 2
 ---
 # Gallery
 

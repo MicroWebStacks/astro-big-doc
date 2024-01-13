@@ -1,0 +1,43 @@
+---
+export interface Props {
+  attributes: object;
+}
+
+const {attributes} = Astro.props as Props;
+const summary = Object.hasOwn(attributes,"summary")?attributes.summary:"Details..."
+
+---
+<details class="directive">
+  <summary>{summary}</summary>
+  <slot/>
+</details>
+
+<style>
+.aside{
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-width:0;
+  border-left: 0.25rem;
+  border-style: solid;
+  padding:1rem;
+}  
+.icon :global(svg){
+    width:16px;
+    margin-right: 10px;
+}
+.icon{
+  font-size: large;
+  margin-top: 0;
+}
+/* Note */
+.note{
+  background-color: #444551;
+  border-color: #c5c5e8;
+}
+.icon.note :global(svg){
+    fill:#c5c5e8;
+}
+.icon.note{
+  color: #c5c5e8;
+}
+</style>

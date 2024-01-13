@@ -169,6 +169,48 @@ will generate this data table
 
 [Table1](./Table1.xlsx)
 
+# Notes
+A note can be created like this and can have markdown inside
+
+```markdown
+:::Note
+## Detail title
+This is a note
+:::
+```
+will produce this
+:::Note
+## Detail title
+This is a note
+:::
+There are multiple types : Note, Tip, Caution, Danger
+
+it can also have a custom title
+```markdown
+:::Tip{title="How to solve this"}
+This is very easy
+:::
+```
+
+:::Tip{title="How to solve this"}
+This is very easy
+:::
+
+Caution
+
+:::Caution
+Be very careful
+:::
+
+Danger
+
+:::Danger
+There is a big risk here
+* The build could fail
+* The error could persist
+* The design could be wrong
+:::
+
 # Code block
 
 The code block offers a `copy` button visible on hover over the code.

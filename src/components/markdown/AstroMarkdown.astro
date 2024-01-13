@@ -39,7 +39,7 @@ data.dirpath = dirname(data.path)
 </div>
 }
 {(node.type == "containerDirective") &&
-<ContainerDirective name={node.name}>
+<ContainerDirective name={node.name} attributes={node.attributes}>
     {node.children.map((node)=>(
         <Astro.self node={node} data={data}/>
     ))}

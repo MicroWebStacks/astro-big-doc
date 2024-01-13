@@ -3,6 +3,6 @@ title: Details
 order: 6
 ---
 
-:::details
+:::details{summary="Summary of the details..."}
 Detail to hide
 :::

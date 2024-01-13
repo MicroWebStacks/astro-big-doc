@@ -174,13 +174,13 @@ A note can be created like this and can have markdown inside
 
 ```markdown
 :::Note
-## Detail title
+## Note title
 This is a note
 :::
 ```
 will produce this
 :::Note
-## Detail title
+## Note title
 This is a note
 :::
 There are multiple types : Note, Tip, Caution, Danger
@@ -209,6 +209,20 @@ There is a big risk here
 * The build could fail
 * The error could persist
 * The design could be wrong
+:::
+
+# Details
+It is possible to hide details inside an open close block like this
+
+```markdown
+:::details{summary="Summary of the details..."}
+Detail to hide
+:::
+```
+Will produce this Details block
+
+:::details{summary="Summary of the details..."}
+Detail to hide
 :::
 
 # Code block

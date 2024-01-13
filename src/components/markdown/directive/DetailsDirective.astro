@@ -1,4 +1,5 @@
 ---
+import Svgicons from '@/components/svgicons.astro';
 export interface Props {
   attributes: object;
 }
@@ -8,36 +9,46 @@ const summary = Object.hasOwn(attributes,"summary")?attributes.summary:"Details.
 
 ---
 <details class="directive">
-  <summary>{summary}</summary>
-  <slot/>
+  <summary>
+    <span>{summary}</span>
+    <span class="arrow"><Svgicons filename='rightarrow'/></span>
+  </summary>
+  <article>
+    <slot/>
+  </article>
 </details>
 
 <style>
-.aside{
+details{
+  background-color: #444;
+  border-radius: 5px;
+  padding:0.5rem;
   margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-  border-width:0;
-  border-left: 0.25rem;
-  border-style: solid;
-  padding:1rem;
-}  
-.icon :global(svg){
-    width:16px;
-    margin-right: 10px;
+  margin-bottom: 0.5rem;
 }
-.icon{
-  font-size: large;
-  margin-top: 0;
+details[open] summary {border-radius: 5px 5px 0 0;}
+
+summary{
+  border-radius: 5px;
+  cursor: pointer;
+  padding:0.5rem;
+  list-style: none;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
 }
-/* Note */
-.note{
-  background-color: #444551;
-  border-color: #c5c5e8;
+article{
+  background-color: #222;
+  padding: 10px; 
 }
-.icon.note :global(svg){
-    fill:#c5c5e8;
+.arrow :global(svg){
+  width:16px;
+  height:16px;
+  rotate: 90deg;
+  transition: rotate .4s ease-in-out;
 }
-.icon.note{
-  color: #c5c5e8;
+details[open] summary :global(svg){
+  rotate: -90deg;
+  transition: rotate .4s ease-in-out;
 }
 </style>

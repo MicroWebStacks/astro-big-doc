@@ -22,8 +22,13 @@ const {hash,html} = await codeToHtml(code, { lang: language, theme:'dark-plus' }
 <style>
 .highlighter.container {
     position: relative;
-    border: 1px solid #ccc;
+    margin-top: 10px;
     margin-bottom: 20px;
+    width: fit-content;
+    min-width: 98%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #666;
 }
 .copy-btn {
     position: absolute;

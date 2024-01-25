@@ -13,13 +13,15 @@ const { code, dirpath, expanded=true } = Astro.props as Props;
 const relImages = yaml.load(code)
 
 let imagesUrls = []
-for(const relFile of relImages){
-    const url = await relAssetToUrl(relFile,dirpath)
-    imagesUrls.push({
-        url:url,
-        isSVG:url.endsWith(".svg"),
-        name:relFile
-    })
+if(Array.isArray(relImages)){
+    for(const relFile of relImages){
+        const url = await relAssetToUrl(relFile,dirpath)
+        imagesUrls.push({
+            url:url,
+            isSVG:url.endsWith(".svg"),
+            name:relFile
+        })
+    }
 }
 
 ---

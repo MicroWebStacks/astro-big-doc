@@ -10,7 +10,7 @@ const title = Object.hasOwn(attributes,"title")?attributes.title:name
 const className = name.toLowerCase()
 ---
 <aside aria-label="Note" class={`aside ${className}`}>
-  <p class={`icon ${className}`}><Svgicons filename='info'/>{title}</p>
+  <p class={`icon ${className}`}><Svgicons filename={`notes-${className}`}/>{title}</p>
   <section>
     <slot/>
   </section>
@@ -27,6 +27,7 @@ const className = name.toLowerCase()
 }  
 .icon :global(svg){
     width:16px;
+    height:16px;
     margin-right: 10px;
 }
 .icon{

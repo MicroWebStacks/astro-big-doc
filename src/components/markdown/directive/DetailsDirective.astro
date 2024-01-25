@@ -20,11 +20,13 @@ const summary = Object.hasOwn(attributes,"summary")?attributes.summary:"Details.
 
 <style>
 details{
-  background-color: #444;
+  background-color: #333;
   border-radius: 5px;
   padding:0.5rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  min-width: 98%;
+  width: fit-content;
 }
 details[open] summary {border-radius: 5px 5px 0 0;}
 
@@ -38,8 +40,8 @@ summary{
   justify-content: space-between;
 }
 article{
-  background-color: #222;
-  padding: 10px; 
+  background-color: #1e1e1e;
+  padding: 10px;
 }
 .arrow :global(svg){
   width:16px;

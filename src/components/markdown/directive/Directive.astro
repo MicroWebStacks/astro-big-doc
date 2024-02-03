@@ -19,9 +19,6 @@ const is_image = (node.name == "image")
 const is_button = (node.name == "button")
 const is_other = !(is_image || is_button)
 
-if(is_button){
-  console.log(node)
-}
 ---
 {is_image &&
   <ImageDirective node={node} dirpath={dirpath}/>

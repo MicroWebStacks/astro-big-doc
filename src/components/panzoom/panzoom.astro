@@ -37,11 +37,10 @@ const isImg = !isSvg
 .container{
   border-radius: 5px;
   display:flex;
-  
   justify-content: flex-start;
   gap:0px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding:10px;
   padding-top:20px;
   width:fit-content;
@@ -57,9 +56,9 @@ const isImg = !isSvg
   display:none;
   flex-direction: row;
   justify-content: center;
-  background:#555;
+  background:#777;
   align-items: stretch;
-  width:98%;/* not clear why right side padding is ignored */
+  width:5em;/* not clear why right side padding is ignored */
   padding: 2px;
   border-radius: 5px;
 }
@@ -75,10 +74,8 @@ const isImg = !isSvg
 .figure{
   display: flex;
 }
-
 object{
   max-width: 100%;
-  background-color: white;
 }
 img{
   max-width: 100%;
@@ -90,6 +87,7 @@ img{
   padding:2px;
 }
 </style>
+
 
 <script src="./panzoom.js" />
 

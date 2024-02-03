@@ -19,5 +19,18 @@ if(node.attributes.width){
 if(node.attributes.height){
   style += `height:${node.attributes.height}px;`
 }
+
+let add_class = ""
+if(Object.hasOwn(node.attributes,"center")){
+  add_class = "center"
+}
 ---
-<img src={asseturl} title={title} alt={alt} style={style}/>
+<img class={add_class} src={asseturl} title={title} alt={alt} style={style}/>
+
+<style>
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

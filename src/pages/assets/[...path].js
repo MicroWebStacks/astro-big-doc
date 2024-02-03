@@ -8,8 +8,10 @@ export async function GET({params}){
     if(config.copy_assets){
         return new Response('Not supported and not needed with copy_assets = true', { status: 404 });
     }
-
     let imagePath = resolve(join(config.content_path,params.path));
+    if(params.path.startsWith("/")){
+        imagePath = resolve(join(config.rootdir,"public",params.path));
+    }
     console.log(`assets> serving '${imagePath}'`)
     try {
         const stream = createReadStream(imagePath);

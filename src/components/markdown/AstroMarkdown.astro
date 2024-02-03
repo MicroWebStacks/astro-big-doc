@@ -10,6 +10,7 @@ import ContainerDirective from './directive/ContainerDirective.astro';
 import {toHast} from 'mdast-util-to-hast'
 import {toHtml} from 'hast-util-to-html'
 import {dirname} from 'path'
+import {text_only_children,has_image} from './node_check.js'
 export interface Props {
     node: object;
     data: object;
@@ -23,6 +24,15 @@ const handled_types = [ "root","heading","table","paragraph",
                     ]
 const other_type = !handled_types.includes(node.type)
 data.dirpath = dirname(data.path)
+let paragraph_style = "paragraph"
+if(node.type == "paragraph"){
+    if(text_only_children(node)){
+        paragraph_style = "paragraph text"
+    }
+    if(has_image(node)){
+        paragraph_style = "paragraph image"
+    }
+}
 ---
 {(node.type == "root") &&
     <>
@@ -32,7 +42,7 @@ data.dirpath = dirname(data.path)
     </>
 }
 {(node.type == "paragraph") &&
-<div class="paragraph">
+<div class={paragraph_style}>
     {node.children.map((node)=>(
         <Astro.self node={node} data={data}/>
     ))}

@@ -81,7 +81,10 @@ const generated_menu = await load_json(config.collect_content.out_menu)
 
 async function get_generated_section_menu(pathname){
     const section = section_from_pathname(pathname);
-    const section_menu = generated_menu.sections[section]
+    let section_menu = generated_menu.sections[section]
+    if(!Object.hasOwn(generated_menu.sections,section)){
+        section_menu = []
+    }
     return get_active_submenu(section_menu,section,pathname)
 }
 

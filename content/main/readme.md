@@ -21,12 +21,12 @@ will generate this image
 In order to give more options, using the image directive allows to pass more arguments from markdown
 
 ```markdown
-:image[]{src=./astro-markdown-render-small.png alt="Astro Markdown Render" height=200}
+:image[]{src=./astro-markdown-render-small.png alt="Astro Markdown Render" height=200 center}
 ```
 
-will generate this image height adjusted image with respect to the aspect ratio
+will generate this image height adjusted size. Aspect ratio is conserved even when giving either of width or height. It is also possible to center the image.
 
-:image[]{src=./astro-markdown-render-small.png alt="Astro Markdown Render" height=200}
+:image[]{src=./astro-markdown-render-small.png alt="Astro Markdown Render" height=200 center}
 
 ## SVG Image
 

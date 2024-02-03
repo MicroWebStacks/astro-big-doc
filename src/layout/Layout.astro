@@ -201,12 +201,16 @@ footer p{
 
 }
 
-</style>
+.article-slot :global(a){
+	color:var(--article-anchor-color);
+}
 
-<style is:inline>
-	.article-slot * > a{
-			color:var(--article-anchor-color);
-	}
+.article-slot :global(.paragraph.text){
+	max-width: 80ch;
+	margin-bottom: 1em;
+	line-height: 120%;
+}
+
 </style>
 
 <script src="./menu_interactions_activation.js" />

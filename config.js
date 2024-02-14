@@ -1,18 +1,19 @@
 //in DEV Mode process.env does not have .env content
 import * as dotenv from 'dotenv'
-import {join} from 'path'
 
 dotenv.config()
 const rootdir = process.cwd()
 
 const outdir = (process.env.OUT_DIR==null)?"dist":process.env.OUT_DIR
+const base = (process.env.PUBLIC_BASE==null)?"":process.env.PUBLIC_BASE
 const contentdir = "content"
 
 const config = {
     rootdir: rootdir,
     outDir: outdir,
-    content_path: join(rootdir,contentdir),
-    code_path: join(rootdir,outdir,"codes"),
+    base: base,
+    content_path: `${rootdir}/${contentdir}`,
+    code_path: `${rootdir}/${outdir}/codes`,
     plantuml_server: "https://www.plantuml.com/plantuml/svg",
     kroki_server: "https://kroki.io",
     client_menu:true,

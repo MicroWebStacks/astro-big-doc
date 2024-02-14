@@ -7,5 +7,6 @@ export default defineConfig({
   integrations: [collect_content(config.collect_content)],
   output: "static",
   outDir: config.outDir,
+  base: config.base,
   trailingSlash: 'ignore'
 });

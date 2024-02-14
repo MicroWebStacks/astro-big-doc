@@ -3,8 +3,12 @@ import './colors.css';
 import Icon from "@/components/icon.astro"
 import { load_yaml } from '@/libs/utils';
 import { get_active_appbar_menu } from './layout_utils.js';
+import { add_base } from '@/libs/assets.js';
 
-const raw_menu = await load_yaml("menu.yaml")
+let raw_menu = await load_yaml("menu.yaml")
+for(const menu_entry of raw_menu){
+        menu_entry.link = add_base(menu_entry.link)
+    }
 const menu = get_active_appbar_menu(raw_menu,Astro.url.pathname)
 const left_side  = menu.filter((item)=>(!Object.hasOwn(item,"align") || !(item.align=="right")))
 const right_side = menu.filter((item)=>(Object.hasOwn(item,"align") && (item.align=="right")))

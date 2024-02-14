@@ -65,23 +65,23 @@ async function relAssetToUrlCopy(relativepath,dirpath){
 
 async function relAssetToUrl(relativepath,dirpath){
     if(config.copy_assets){
-        return relAssetToUrlCopy(relativepath,dirpath)
+        return config.base+relAssetToUrlCopy(relativepath,dirpath)
     }
     if(relativepath.startsWith("/")){
-        return relativepath
+        return config.base+relativepath
     }
     //handled by /assets/[...path].js to config.rootdir / config.content_path
     const newurl = join("assets",dirpath,relativepath)
-    return "/"+newurl.replaceAll('\\','/')
+    return config.base+"/"+newurl.replaceAll('\\','/')
 }
 
 async function assetToUrl(path,dirpath){
-    let src = path
+    let src = config.base+path
     const external = path.startsWith('http')
     if(!external){
-    if(!path.startsWith("/")){
-        src = await relAssetToUrl(path,dirpath)
-    }
+        if(!path.startsWith("/")){
+            src = await relAssetToUrl(path,dirpath)
+        }
     }
     return src
 }
@@ -102,7 +102,21 @@ function shortMD5(text) {
     return hash.substring(0, 8);
 }
 
+function add_base(url){
+    if(!url.startsWith("http")){
+        url = config.base + url
+    }
+    return url
+}
+
+function remove_base(pathname){
+    if(pathname.startsWith(config.base)){
+        pathname = pathname.substring(config.base.length)
+    }
+    return pathname
+}
 function section_from_pathname(pathname){
+    pathname = remove_base(pathname)
     if(pathname.startsWith('http')){
         return 'external'
     }
@@ -146,5 +160,7 @@ export{
   exists,
   contentPathToStaticPath,
   section_from_pathname,
-  file_mime
+  file_mime,
+  add_base,
+  remove_base
 }

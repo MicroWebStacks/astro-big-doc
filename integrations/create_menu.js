@@ -1,9 +1,10 @@
 import {dirname, join} from 'path'
 import { load_yaml, save_json } from '../src/libs/utils.js';
-import { section_from_pathname } from '../src/libs/assets.js';
+import { section_from_pathname,add_base } from '../src/libs/assets.js';
 import {pages_list_to_tree} from './process_menu.js'
 import {getDocuments} from 'content-structure'
 import {createHash} from 'crypto'
+import { config } from '../config.js';
 
 function content_entry_to_level(entry){
     const base_level = 1
@@ -22,7 +23,7 @@ function content_entry_to_level(entry){
     return level
 }
 
-async function get_section_menu(section,raw_menu,base){
+async function get_section_menu(section,raw_menu){
     let result_items = []
     const section_menu = raw_menu.find((item)=>(section_from_pathname(item.link) == section))
 
@@ -38,7 +39,7 @@ async function get_section_menu(section,raw_menu,base){
                 path:       entry.path,
                 url:        entry.url,
                 url_type:   entry.url_type,
-                link:`${base}/${entry.url}`,
+                link:`${config.base}/${section}/${entry.url}`,
                 level:content_entry_to_level(entry),
                 format: entry.format,
                 order: Object.hasOwn(entry,"order")?entry.order:100
@@ -62,15 +63,17 @@ async function get_section_menu(section,raw_menu,base){
 }
 
 async function create_menu(collect_config){
-    const raw_menu = await load_yaml(collect_config.raw_menu)
+    let raw_menu = await load_yaml(collect_config.raw_menu)
+    for(const menu_entry of raw_menu){
+        menu_entry.link = add_base(menu_entry.link)
+    }
     let menu = {
         raw_menu:raw_menu,
         sections:{}
     }
     for(const menu_entry of raw_menu){
         const section = section_from_pathname(menu_entry.link);
-        const base = Object.hasOwn(menu_entry,"base")?menu_entry.base:""
-        menu.sections[section] = await get_section_menu(section,raw_menu,base)
+        menu.sections[section] = await get_section_menu(section,raw_menu)
     }
     
     const menu_text = JSON.stringify(menu)

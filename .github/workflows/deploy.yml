@@ -17,6 +17,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_BASE: astro-big-doc
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3

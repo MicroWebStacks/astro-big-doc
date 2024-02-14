@@ -3,6 +3,7 @@ import {resolve,join} from 'path'
 import { config } from "@/config";
 import {load_json} from '@/libs/utils.js'
 import {file_mime} from '@/libs/assets.js'
+import {remove_base} from '@/libs/assets.js'
 
 export async function GET({params}){
     if(config.copy_assets){
@@ -12,6 +13,7 @@ export async function GET({params}){
     if(params.path.startsWith("/")){
         imagePath = resolve(join(config.rootdir,"public",params.path));
     }
+    imagePath = remove_base(imagePath)
     console.log(`assets> serving '${imagePath}'`)
     try {
         const stream = createReadStream(imagePath);

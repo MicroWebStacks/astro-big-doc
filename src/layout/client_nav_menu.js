@@ -59,7 +59,6 @@ function expand_toggle_save(section_name,href){
 }
 
 function set_open_state(section_name){
-    console.log(`section name : ${section_name}`)
     const left_open = menu.sections_open[section_name]
     console.log(`left_open = ${left_open}`)
     const menu_nav = document.querySelector("nav.pages_menu")

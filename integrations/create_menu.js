@@ -39,7 +39,7 @@ async function get_section_menu(section,raw_menu){
                 path:       entry.path,
                 url:        entry.url,
                 url_type:   entry.url_type,
-                link:`${config.base}/${section}/${entry.url}`,
+                link:(dir != ".")?`${config.base}/${entry.url}`:`${config.base}/${section}/${entry.url}`,
                 level:content_entry_to_level(entry),
                 format: entry.format,
                 order: Object.hasOwn(entry,"order")?entry.order:100

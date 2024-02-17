@@ -4,6 +4,7 @@ public/menu.json
 
 # dependencies
 node_modules/
+pnpm-lock.yaml
 
 # logs
 npm-debug.log*

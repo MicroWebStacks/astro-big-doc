@@ -24,7 +24,7 @@ const is_other = !(is_image || is_button)
   <ImageDirective node={node} dirpath={dirpath}/>
 }
 {is_button &&
-  <ButtonDirective label={node.attributes.label} link={node.attributes.link} />
+  <ButtonDirective label={node.attributes.label} link={node.attributes.link} icon={node.attributes.icon} />
 }
 {is_other &&
   <div>{node.name}

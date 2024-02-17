@@ -1,17 +1,31 @@
 ---
+import Svgicons from '@/components/svgicons.astro';
+import {extname} from 'path'
+
 export interface Props {
   label: string;
   link: string;
+  icon: string;
 }
 
-const { label, link } = Astro.props as Props;
-console.log(link)
+const { label, link, icon=null } = Astro.props as Props;
 const external = link.startsWith('http')
+let used_icon = icon
 
+if(icon == null){
+  if(external){
+    used_icon = "new"
+  }else if([".zip",".hex"].includes(extname(link))){
+    used_icon = "download"
+  }
+}
 ---
 <div class="container">
   <a href={link} class={`link ${external?"external":""}`} target={external?"_blank":"_self"}>
     <span class="button text">{label}</span>
+    {used_icon&&
+      <span class="icon"><Svgicons filename={used_icon}/></span>
+    }
   </a>
 </div>
 
@@ -30,11 +44,22 @@ a{
   padding: 10px;
   border-radius: 5px;
   margin:10px;
+  display: flex;
+  align-items: center;
+  gap:7px;
 }
 a:hover{
   box-shadow: 2px 2px 3px 3px #333;
 }
 .button.text{
   color: #729ef7;
+}
+.icon{
+  height:1rem;
+}
+.icon :global(svg){
+  fill: #729ef7;
+  width:1rem;
+  height:1rem;
 }
 </style>

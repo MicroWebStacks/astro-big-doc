@@ -35,14 +35,12 @@ const slug = headings.find((entry)=>(entry.line == heading_line)).slug
 .link:hover{
   text-decoration: underline;
 }
-</style>
-<style is:inline>
-.icon > svg{
-    width:16px;
+.icon :global(svg){
+  width:16px;
     fill:rgb(101, 96, 96);
 }
-.heading.bar > a{
-    text-decoration: none;
-    color: inherit;
-  }
+.heading.bar :global(a){
+  text-decoration: none;
+  color: inherit;
+}
 </style>

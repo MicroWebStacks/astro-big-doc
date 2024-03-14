@@ -38,9 +38,19 @@ pnpm run build
   - markdown_card format : for rendering markdown with body
 - Details
 - Gallery
-  - svg, images with panzoom
-  - lightbox integration
-  - slides presentation
+  - Expand open close with images inside
+  - images as masonry, with close to real size factors
+  - dynamic adjust on container resize
+  - scale items
+  - can use thumbnails, no search to avoid double hit
+  - click to open panzoom with images mini thumbs
+  - examples usage
+    - lightbox integration
+    - slides presentation
+  - libraries
+    - https://github.com/desandro/masonry
+    - https://github.com/dimsemenov/photoswipe
+    - https://github.com/haltu/muuri
 - menus
   - store menu scroll position
   - store menus width

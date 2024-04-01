@@ -36,8 +36,6 @@ runs:
       run: |
         cd astro-big-doc
         pnpm run build
-      env:
-        CONTENT: ${{ inputs.path }}
       shell: bash
     - name: Upload the site to GitHub Pages
       uses: actions/deploy-pages@v4

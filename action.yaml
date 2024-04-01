@@ -9,15 +9,17 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Checkout user repository
-      uses: actions/checkout@v4
-      with:
-        path: ${{ inputs.path }}
     - name: Checkout Astro Big Doc builder
       uses: actions/checkout@v4
       with:
         repository: MicroWebStacks/astro-big-doc
-        path: 'astro-big-doc'
+    - name: Clear existing content
+      run: rm -rf astro-big-doc/content/*
+      shell: bash
+    - name: Checkout user repository
+      uses: actions/checkout@v4
+      with:
+        path: astro-big-doc/content
     - name: Setup Node.js environment
       uses: actions/setup-node@v3
       with:

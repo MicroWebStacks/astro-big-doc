@@ -1,6 +1,7 @@
 ---
 import {relAssetToUrl} from '@/libs/assets.js'
 import Button from '@/components/markdown/directive/ButtonDirective.astro'
+import {dirname} from 'path'
 export interface Props {
   data: object;
   dirpath: string;
@@ -13,7 +14,7 @@ let isSvg = false
 let isImg = false
 let asseturl = ""
 if(data.image){
-    asseturl = await relAssetToUrl(data.image, dirpath)
+    asseturl = await relAssetToUrl(data.image, dirname(data.path))
     isSvg = data.image.endsWith(".svg")
     isImg = !isSvg
 }

@@ -11,10 +11,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@google/model-viewer": "^3.3.0",
+    "@google/model-viewer": "^3.4.0",
     "@svgdotjs/svg.js": "^3.1.2",
-    "astro": "^4.3.7",
-    "content-structure": "^1.0.5",
+    "astro": "^4.5.10",
+    "content-structure": "^1.0.7",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "datatables.net-dt": "^1.13.7",
@@ -29,12 +29,13 @@
     "panzoom": "^9.4.3",
     "passport": "^0.6.0",
     "passport-github": "^1.1.0",
+    "photoswipe": "^5.4.3",
     "plantuml-encoder": "^1.4.0",
     "remark": "^15.0.1",
     "sharp": "^0.33.0",
     "shikiji": "^0.6.10",
     "swiper": "^11.0.5",
-    "three": "0.157.0",
+    "three": "^0.160.0",
     "unist-util-visit": "^4.1.1",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz"
   },

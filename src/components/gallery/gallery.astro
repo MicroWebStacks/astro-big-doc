@@ -1,5 +1,6 @@
 ---
 import {relAssetToUrl} from '@/libs/assets.js'
+import {get_dir_files} from '@/libs/utils.js'
 import PanZoomModal from '../panzoom/panzoommodal.astro'
 import yaml from 'js-yaml'
 
@@ -10,20 +11,26 @@ export interface Props {
 }
 
 const { code, dirpath, expanded=true } = Astro.props as Props;
-const relImages = yaml.load(code)
 
-let imagesUrls = []
-if(Array.isArray(relImages)){
-    for(const relFile of relImages){
-        const url = await relAssetToUrl(relFile,dirpath)
-        imagesUrls.push({
-            url:url,
-            isSVG:url.endsWith(".svg"),
-            name:relFile
-        })
+let relImages
+const data = yaml.load(code)
+if(Array.isArray(data)){
+    relImages = data
+}else{
+    if(Object.hasOwn(data,"dir")){
+        relImages = await get_dir_files(dirpath,data.dir)
     }
 }
 
+let imagesUrls = []
+for(const relFile of relImages){
+    const url = await relAssetToUrl(relFile,dirpath)
+    imagesUrls.push({
+        url:url,
+        isSVG:url.endsWith(".svg"),
+        name:relFile
+    })
+}
 ---
 
 <div class="container gallery" data-state="init">
@@ -42,7 +49,6 @@ if(Array.isArray(relImages)){
                             <img src={image.url} />
                         }
                     </div>
-                    <div class="overlay">{image.file}</div>
                     <PanZoomModal url={image.url} />
                 </div>
             ))}

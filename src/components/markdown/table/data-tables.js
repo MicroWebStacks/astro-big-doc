@@ -1,5 +1,4 @@
 import 'datatables.net-dt/css/jquery.dataTables.css'
-import DataTable from 'datatables.net-dt';
 
 function checkEntries(table, tableElement) {
     const info = table.page.info();
@@ -13,11 +12,14 @@ function checkEntries(table, tableElement) {
     }
 }
 
-function init(){
+async function init(){
     const containers_els = document.querySelectorAll(".data-table")
     if(containers_els.length === 0){//prevent irrelvant page execution
       return
     }
+
+    const DataTable = (await import('datatables.net-dt')).default;
+
     containers_els.forEach(table_element => {
         const data_table_text = table_element.getAttribute("data-table")
         const data_table = JSON.parse(data_table_text)

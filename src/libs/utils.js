@@ -1,8 +1,9 @@
 import {constants, access, mkdir, readFile, writeFile} from 'fs/promises'
-import {dirname,join} from 'path'
+import { relative, resolve, join, sep, dirname } from 'path';
 import {config} from '../../config.js'
-import {createHash} from 'crypto';
-import yaml from 'js-yaml';
+import {createHash} from 'crypto'
+import yaml from 'js-yaml'
+import {glob} from 'glob'
 
 async function load_json(rel_path){
   const path = join(config.rootdir,rel_path)
@@ -50,6 +51,16 @@ async function load_yaml(rel_path){
 }
 
 
+async function get_dir_files(dirpath,rel_dir){
+  const content_dir = join(config.content_path,dirpath,rel_dir)
+  const originalDirectory = process.cwd();
+  process.chdir(content_dir)
+  const results = await glob(content_dir+"/**/*.*")
+  const files = results.map((file)=>(relative(content_dir,resolve(content_dir,file)).split(sep).join('/')))
+  process.chdir(originalDirectory)
+  return files.map(file=>join(rel_dir,file)).sort()
+}
+
 export{
   shortMD5,
   exists,
@@ -57,5 +68,6 @@ export{
   load_json_abs,
   load_yaml,
   save_json,
-  save_file
+  save_file,
+  get_dir_files
 }

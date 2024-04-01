@@ -1,6 +1,5 @@
 ---
-import {relAssetToUrl} from '@/libs/assets.js'
-import yaml from 'js-yaml'
+import {yaml_to_grid_images} from '../gallery/grid_utils.js'
 
 export interface Props {
   code: string;
@@ -8,17 +7,7 @@ export interface Props {
 }
 
 const { code, dirpath } = Astro.props as Props;
-const relImages = yaml.load(code)
-
-let imagesUrls = []
-for(const relFile of relImages){
-    const url = await relAssetToUrl(relFile,dirpath)
-    imagesUrls.push({
-        url:url,
-        isSVG:url.endsWith(".svg"),
-        name:relFile
-    })
-}
+const imagesUrls = await yaml_to_grid_images(code,dirpath)
 
 ---
 

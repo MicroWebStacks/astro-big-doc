@@ -1,4 +1,3 @@
-import panzoom from 'panzoom'
 
 let pzref = null
 const zoomOptions = {
@@ -50,7 +49,7 @@ function window_url_remove_modal(){
     window.history.pushState({},"",new_href)
 }
 
-function initModal(event){
+async function initModal(event){
 
   const modal = event.target
   const close = modal.querySelector(".close")
@@ -60,6 +59,7 @@ function initModal(event){
   if(pzref){
     pzref.dispose()
   }
+  const { default: panzoom } = await import('panzoom');
   pzref = panzoom(svg_img,zoomOptions)
 
   close.onclick = ()=>{

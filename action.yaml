@@ -24,16 +24,19 @@ runs:
         node-version: '20'
     - name: Setup PNPM
       run: npm install -g pnpm
+      shell: bash
     - name: Install dependencies
       run: |
         cd astro-big-doc
         pnpm install
+      shell: bash
     - name: Build the site
       run: |
         cd astro-big-doc
         pnpm run build
       env:
         CONTENT: ${{ inputs.path }}
+      shell: bash
     - name: Upload the site to GitHub Pages
       uses: actions/deploy-pages@v4
       with:

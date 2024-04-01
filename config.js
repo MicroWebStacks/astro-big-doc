@@ -6,7 +6,7 @@ const rootdir = process.cwd()
 
 const outdir = (process.env.OUT_DIR==null)?"dist":process.env.OUT_DIR
 const base = (process.env.PUBLIC_BASE==null)?"":process.env.PUBLIC_BASE
-const contentdir = "content"
+const contentdir = (process.env.CONTENT==null)?"content":process.env.CONTENT
 
 const config = {
     rootdir: rootdir,

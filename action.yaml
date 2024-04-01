@@ -1,0 +1,40 @@
+name: Astro Big Doc Deploy
+description: deploy your markdown content using Astro Big Doc Theme
+inputs:
+  path:
+    description: path to your markdown content 
+    required: false
+    default: "."
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout user repository
+      uses: actions/checkout@v4
+      with:
+        path: ${{ inputs.path }}
+    - name: Checkout Astro Big Doc builder
+      uses: actions/checkout@v4
+      with:
+        repository: MicroWebStacks/astro-big-doc
+        path: 'astro-big-doc'
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+    - name: Setup PNPM
+      run: npm install -g pnpm
+    - name: Install dependencies
+      run: |
+        cd astro-big-doc
+        pnpm install
+    - name: Build the site
+      run: |
+        cd astro-big-doc
+        pnpm run build
+      env:
+        CONTENT: ${{ inputs.path }}
+    - name: Upload the site to GitHub Pages
+      uses: actions/deploy-pages@v4
+      with:
+        path: astro-big-doc/dist

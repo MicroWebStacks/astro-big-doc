@@ -41,6 +41,6 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: github-pages  # This name is used to identify the artifact
-        path: astro-big-doc/dist/**  # Adjust this to match your build output directory
+        path: dist/**  # Adjust this to match your build output directory
     - name: Upload the site to GitHub Pages
       uses: actions/deploy-pages@v4

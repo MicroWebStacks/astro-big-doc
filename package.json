@@ -21,6 +21,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "glob": "^10.3.10",
     "gray-matter": "^4.0.3",
     "hast-util-to-html": "^9.0.0",
     "js-yaml": "^4.1.0",

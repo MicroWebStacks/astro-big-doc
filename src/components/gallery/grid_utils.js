@@ -45,7 +45,7 @@ async function yaml_to_grid_images(code,dirpath){
         } else if(aspectRatio < 1) { // Taller image
             spanHeight = Math.round(1 / aspectRatio) // Adjust this logic as per your grid layout needs
         }
-        console.log(`${relFile} : width ${width} ; height ${height}; ratio ${aspectRatio} ; span ${spanWidth} / ${spanHeight}`)
+        //console.log(`${relFile} : width ${width} ; height ${height}; ratio ${aspectRatio} ; span ${spanWidth} / ${spanHeight}`)
         const url = await relAssetToUrl(relFile,dirpath)
         imagesUrls.push({
             url,

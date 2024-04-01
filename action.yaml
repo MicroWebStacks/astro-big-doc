@@ -37,8 +37,7 @@ runs:
         cd astro-big-doc
         pnpm run build
       shell: bash
-    - name: Upload build output as artifact
-      uses: actions/upload-artifact@v4
+    - name: Upload Pages Artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        name: github-pages  # This name is used to identify the artifact
-        path: dist/**  # Adjust this to match your build output directory
+        path: dist

@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const outdir = (process.env.OUT_DIR==null)?"dist":process.env.OUT_DIR
 const protocol = (process.env.PROTOCOL==null)?"http":process.env.PROTOCOL
-const host = (process.env.HOST==null)?"127.0.0.1":process.env.HOST
+const host = (process.env.HOST==null)?"0.0.0.0":process.env.HOST
 const port = (process.env.PORT==null)?"3001":process.env.PORT
 
 const app = express();

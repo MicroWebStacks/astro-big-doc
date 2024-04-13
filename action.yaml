@@ -46,13 +46,13 @@ runs:
         cd astro-big-doc
         pnpm install
       shell: bash
-     - name: Build the site
-       run: |
-         cd astro-big-doc
-         REPO_NAME="${GITHUB_REPOSITORY##*/}"
-         export PUBLIC_BASE="/$REPO_NAME"
-         pnpm run build
-       shell: bash
+    - name: Build the site
+      run: |
+        cd astro-big-doc
+        REPO_NAME="${GITHUB_REPOSITORY##*/}"
+        export PUBLIC_BASE="/$REPO_NAME"
+        pnpm run build
+      shell: bash
 
       - name: Upload Pages Artifact
       uses: actions/upload-pages-artifact@v3

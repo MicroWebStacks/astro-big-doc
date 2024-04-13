@@ -54,7 +54,7 @@ runs:
         pnpm run build
       shell: bash
 
-      - name: Upload Pages Artifact
+    - name: Upload Pages Artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: astro-big-doc/dist

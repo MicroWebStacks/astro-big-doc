@@ -49,8 +49,8 @@ runs:
     - name: Build the site
       run: |
         cd astro-big-doc
-        REPO_NAME="${GITHUB_REPOSITORY##*/}"
-        export PUBLIC_BASE="/$REPO_NAME"
+        #REPO_NAME="${GITHUB_REPOSITORY##*/}"
+        #export PUBLIC_BASE="/$REPO_NAME"
         pnpm run build
       shell: bash
 

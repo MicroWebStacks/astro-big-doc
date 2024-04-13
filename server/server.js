@@ -34,15 +34,16 @@ app.use((req, res, next) => {
     res.status(404).send("Sorry can't find that!")
   })
 
-
-
-console.log(`listening on ${protocol}://${host}:${port}`)
-
+  
 if(protocol == "https"){
-    const key = readFileSync(join(__dirname, process.env.KEY_FILE),'utf8')
-    const cert = readFileSync(join(__dirname, process.env.CERT_FILE),'utf8')
-    const httpsServer = https.createServer({key,cert},app)
-    httpsServer.listen(port);//443 for clear url
+      const key = readFileSync(join(__dirname, process.env.KEY_FILE),'utf8')
+      const cert = readFileSync(join(__dirname, process.env.CERT_FILE),'utf8')
+      const httpsServer = https.createServer({key,cert},app)
+      httpsServer.listen(port,host,()=>{
+        console.log(`listening on ${protocol}://${host}:${port}`)
+    });
 }else{
-    app.listen(port);
+    app.listen(port,host,()=>{
+        console.log(`listening on ${protocol}://${host}:${port}`)
+    });
 }

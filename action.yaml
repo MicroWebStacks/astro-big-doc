@@ -50,6 +50,8 @@ runs:
       run: |
         cd astro-big-doc
         pnpm run build
+      env:
+        PUBLIC_BASE: /${{ github.repository }}
       shell: bash
     - name: Upload Pages Artifact
       uses: actions/upload-pages-artifact@v3

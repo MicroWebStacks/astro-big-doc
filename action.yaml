@@ -1,8 +1,8 @@
 name: Astro Big Doc Deploy
-description: deploy your markdown content using Astro Big Doc Theme
+description: Deploy your markdown content using Astro Big Doc Theme
 inputs:
   path:
-    description: path to your markdown content 
+    description: Path to your markdown content 
     required: false
     default: "."
 
@@ -13,13 +13,26 @@ runs:
       uses: actions/checkout@v4
       with:
         repository: MicroWebStacks/astro-big-doc
-    - name: Clear existing content
-      run: rm -rf astro-big-doc/content/*
-      shell: bash
+
     - name: Checkout user repository
       uses: actions/checkout@v4
       with:
-        path: astro-big-doc/content
+        path: user_repo
+
+    - name: Copy specific directories and file
+      run: |
+        # Remove and copy content directory
+        rm -rf astro-big-doc/content
+        cp -R user_repo/content astro-big-doc/content
+
+        # Remove and copy public directory
+        rm -rf astro-big-doc/public
+        cp -R user_repo/public astro-big-doc/public
+
+        # Copy menu.yaml file
+        cp user_repo/menu.yaml astro-big-doc/menu.yaml
+      shell: bash
+
     - name: Setup Node.js environment
       uses: actions/setup-node@v3
       with:

@@ -28,6 +28,9 @@ pnpm run dev
 pnpm run build
 ```
 
+## github action usage
+- test locally with https://nektosact.com/installation/index.html
+
 # Ideas
 - light and dark mode toggle
 - check potential replacement of scrollspy with intersection Observer API
@@ -38,6 +41,7 @@ pnpm run build
   - markdown_card format : for rendering markdown with body
 - Details
 - Gallery
+  - support two galleries types from code config: svgs and slides
   - Expand open close with images inside
   - images as masonry, with close to real size factors
   - dynamic adjust on container resize

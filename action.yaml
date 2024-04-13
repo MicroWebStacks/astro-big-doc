@@ -46,14 +46,15 @@ runs:
         cd astro-big-doc
         pnpm install
       shell: bash
-    - name: Build the site
+     - name: Build the site
       run: |
         cd astro-big-doc
+        REPO_NAME="${GITHUB_REPOSITORY##*/}"
+        export PUBLIC_BASE="/$REPO_NAME"
         pnpm run build
-      env:
-        PUBLIC_BASE: /${{ github.repository }}
       shell: bash
-    - name: Upload Pages Artifact
+
+      - name: Upload Pages Artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: astro-big-doc/dist

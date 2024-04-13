@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "server": "node server/server.js"
   },
   "dependencies": {
     "@google/model-viewer": "^3.4.0",

@@ -32,6 +32,10 @@ pnpm run build
 - test locally with https://nektosact.com/installation/index.html
 
 # Ideas
+- auto generate menu from markdown titles
+  - icon file with link in config
+- refactor all config in config.yaml, all config must be optional
+
 - light and dark mode toggle
 - check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration

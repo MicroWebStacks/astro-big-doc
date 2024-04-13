@@ -1,8 +1,7 @@
 ---
 import Layout from "@/layout/Layout.astro"
 import AstroMarkdown from '@/components/markdown/AstroMarkdown.astro'
-import {getEntry} from 'content-structure'
-import { get_section_pages } from "@/integrations/get_menu.js";
+import {getDocuments, getEntry} from 'content-structure'
 import {remove_base} from '@/libs/assets.js'
 
 let {url} = Astro.params;
@@ -11,8 +10,9 @@ console.log(`in [...path] > path = ${url}`)
 const entry = await getEntry({url:url})
 
 export async function getStaticPaths(){
-	const urls = await get_section_pages("blog")
-	return urls.map((url)=>({params:{url}}))
+	const documents = await getDocuments({format:"markdown"})
+	const pages = documents.map((entry)=>({params:{url:entry.url}}))
+	return pages
 }
 const headings = (Object.hasOwn(entry.data,"toc")&&entry.data.toc == false)?[]:entry.data.headings
 ---

@@ -23,12 +23,12 @@ runs:
     - name: Copy specific directories and file
       run: |
         # Remove and copy content directory
-        rm -rf astro-big-doc/content/*
-        cp -R user_repo/content astro-big-doc/content
+        rm -rf astro-big-doc/content
+        cp -R user_repo/content astro-big-doc
 
         # Remove and copy public directory
-        rm -rf astro-big-doc/public/*
-        cp -R user_repo/public astro-big-doc/public
+        rm -rf astro-big-doc/public
+        cp -R user_repo/public astro-big-doc
 
         # Copy menu.yaml file
         cp user_repo/menu.yaml astro-big-doc/menu.yaml

@@ -1,14 +1,13 @@
 - label: Home
   link: /
-- label: Blog
-  link: /blog/gallery
+- label: Examples
+  link: /examples
   autogenerate:
-    directory: "."
+    directory: examples
 - label: About
-  link: /about/
-- icon: search
-  align: right
-  link: /search/
+  link: /about
+  autogenerate:
+    directory: about
 - icon: github
   align: right
   link: https://github.com/MicroWebStacks/astro-big-doc

@@ -1,5 +1,6 @@
 ---
 title: About
+order: 3
 ---
 Astro Big Doc is an Astro Theme for big documentation websites. Hierarchical pages menu from files structure, table of content, Markdown rendered as CMS with Astro components for panzoom, 3D, links, interactive tables and more.
 

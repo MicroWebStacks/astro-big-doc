@@ -101,9 +101,14 @@ function get_menu_hash(){
     return generated_menu.hash
 }
 
+function get_base_menu(){
+    return generated_menu.base_menu
+}
+
 export{
     process_toc_list,
     get_generated_section_menu,
     get_menu_hash,
+    get_base_menu,
     get_active_appbar_menu
 }

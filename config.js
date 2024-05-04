@@ -32,7 +32,6 @@ config.collect_content = {
     content_ext:["md"],
     assets_ext:["svg","webp","png","jpeg","jpg","xlsx","glb","hdr","ico"],
     rel_outdir:".structure",//dist does not persist before build
-    raw_menu:"menu.yaml",
     out_menu:"public/menu.json",//used by src\layout\client_nav_menu.js
     debug:false
 }

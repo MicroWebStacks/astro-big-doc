@@ -43,6 +43,12 @@ async function save_json(data,file_path){
   await writeFile(file_abs,JSON.stringify(data,undefined, 2))
 }
 
+async function load_yaml_abs(abs_path){
+  const fileContent = await readFile(abs_path,'utf-8')
+  const data = yaml.load(fileContent);
+  return data;
+}
+
 async function load_yaml(rel_path){
   const path = join(config.rootdir,rel_path)
   const fileContent = await readFile(path,'utf-8')
@@ -67,6 +73,7 @@ export{
   load_json,
   load_json_abs,
   load_yaml,
+  load_yaml_abs,
   save_json,
   save_file,
   get_dir_files

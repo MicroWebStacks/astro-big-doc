@@ -5,9 +5,12 @@ import {getEntry} from 'content-structure'
 
 console.log(`index> home page`)
 const entry = await getEntry({path:"home/readme.md"})
+const not_empty = !(Object.keys(entry.tree).length == 0)
 
 const headings = (Object.hasOwn(entry.data,"toc")&&entry.data.toc == false)?[]:entry.data.headings
 ---
 <Layout title={entry.title} headings={headings} >
-    <AstroMarkdown node={entry.tree} data={entry.data} />
+    {not_empty&&
+        <AstroMarkdown node={entry.tree} data={entry.data} />
+    }
 </Layout>

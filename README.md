@@ -91,7 +91,7 @@ pnpm run build
 ## assets management
 * User content can be placed in a configurable relative path to the repo root usually `./content` set in these variables
   * config.content_path
-  * config.collect_content.rel_contentdir
+  * config.collect_content.contentdir
 * Zerop copy assets management
   * during dev, an API endpoint exposes `./content/*` under `/assets/*`
 * Generated content by pages frontmatter (e.g. svg diagrams from code and text code for highlighter client copy) :

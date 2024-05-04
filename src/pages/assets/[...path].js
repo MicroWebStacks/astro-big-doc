@@ -1,7 +1,7 @@
 import { createReadStream } from 'fs';
 import {resolve,join} from 'path'
 import { config } from "@/config";
-import {load_json} from '@/libs/utils.js'
+import {load_json_abs} from '@/libs/utils.js'
 import {file_mime} from '@/libs/assets.js'
 import {remove_base} from '@/libs/assets.js'
 
@@ -32,7 +32,7 @@ export async function getStaticPaths(){
         return []
     }
 
-    const asset_list = await load_json(join(config.collect_content.rel_outdir,'asset_list.json'))
+    const asset_list = await load_json_abs(join(config.collect_content.outdir,'asset_list.json'))
     const paths = asset_list.filter((asset)=>(Object.hasOwn(asset,"path"))).map((entry)=>(entry.path))
     console.log(`serving API endpoit ${paths.length} assets`)
     return paths.map((path)=>({params:{path:path}}))

@@ -103,12 +103,12 @@ async function create_raw_menu(content_path){
 }
 
 async function create_menu(collect_config){
-    const menu_file = join(collect_config.rootdir,collect_config.rel_contentdir,"menu.yaml")
+    const menu_file = join(collect_config.contentdir,"menu.yaml")
     let raw_menu
     if(await exists(menu_file)){
         raw_menu = await load_yaml_abs(menu_file)
     }else{
-        raw_menu = await create_raw_menu(join(collect_config.rootdir,collect_config.rel_contentdir))
+        raw_menu = await create_raw_menu(join(collect_config.contentdir))
     }
     const base_menu = JSON.parse(JSON.stringify(raw_menu))
     for(let menu_entry of base_menu){

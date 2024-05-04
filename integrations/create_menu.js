@@ -115,7 +115,6 @@ async function create_menu(collect_config){
         menu_entry.link = add_base(menu_entry.link)
     }
     let menu = {
-        raw_menu:raw_menu,
         base_menu:base_menu,
         sections:{}
     }

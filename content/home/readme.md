@@ -1,6 +1,6 @@
 ---
-title: Main Examples
-slug: main
+title: Home
+slug: home
 order: 1
 ---
 **Astro Big Doc** uses Markdown as CMS rendered with Astro components

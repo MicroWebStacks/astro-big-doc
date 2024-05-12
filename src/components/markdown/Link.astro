@@ -1,9 +1,11 @@
 ---
-import {relAssetToUrl} from '@/libs/assets.js'
+import {relAssetToUrl, file_ext} from '@/libs/assets.js'
 import {toHast} from 'mdast-util-to-hast'
 import {toHtml} from 'hast-util-to-html'
 import ModelViewer from './model/ModelViewer.astro';
 import TableXLSX from './table/TableXLSX.astro';
+import LinkCode from './code/LinkCode.astro';
+import kroki from './code/kroki.yaml'
 
 export interface Props {
     node: object;
@@ -20,9 +22,15 @@ if(!external){
     src = await relAssetToUrl(node.url,dirpath)
   }
 }
-const is_model3d = node.url.endsWith(".glb")
-const is_table = node.url.endsWith(".xlsx")
-const is_link = !is_model3d && !is_table
+
+const ext = file_ext(node.url)
+console.log("-----------------------")
+console.log(ext)
+
+const is_model3d = (ext === "glb")
+const is_table = (ext === "xlsx")
+const is_diagram = Object.keys(kroki.formats).includes(ext)
+const is_link = !is_model3d && !is_table && !is_diagram
 let title = ""
 if((node.children.length>0)&&(node.children[0].type == "text")){
   title = node.children[0].value
@@ -42,7 +50,9 @@ if((node.children.length>0)&&(node.children[0].type == "text")){
         ))}
   </a>
 }
-
+{is_diagram &&
+  <LinkCode ext={ext} url={node.url} dirpath={dirpath} />
+}
 <style>
 a{
     color:rgb(38, 102, 166)

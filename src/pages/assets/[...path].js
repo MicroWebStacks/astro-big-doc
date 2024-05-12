@@ -33,7 +33,10 @@ export async function getStaticPaths(){
     }
 
     const asset_list = await load_json_abs(join(config.collect_content.outdir,'asset_list.json'))
-    const paths = asset_list.filter((asset)=>(Object.hasOwn(asset,"path"))).map((entry)=>(entry.path))
+    const paths = asset_list.filter((asset)=>(
+        ((asset.type != "link") && (Object.hasOwn(asset,"path"))) ||
+        ((asset.type == "link") && (!asset.external) && asset.filter_ext))
+    ).map((entry)=>(entry.path))
     console.log(`serving API endpoit ${paths.length} assets`)
     return paths.map((path)=>({params:{path:path}}))
 }

@@ -198,3 +198,6 @@ Express authentication variables
 
 # Issues
 - title conflicting with path, url and slug in `create_raw_menu()`
+- diagrams
+  - generate diagrams from image url and extension
+  - graph properties through code block arguments

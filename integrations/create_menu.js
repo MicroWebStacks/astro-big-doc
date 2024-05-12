@@ -58,7 +58,6 @@ async function create_raw_menu(content_path,document_list){
     }));
 
     const home_items = sorted_items.map(item => item.link === '/home' ? { ...item, link: '/' } : item);
-    console.log(home_items)
     const icons_file = join(content_path,"icons.yaml")
     if(await exists(icons_file)){
         const icons_list = await load_yaml_abs(icons_file)

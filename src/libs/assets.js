@@ -1,8 +1,9 @@
 import {copyFileSync} from 'fs'
-import {constants, access, stat, mkdir} from 'fs/promises'
+import {constants, access, stat, mkdir, readFile} from 'fs/promises'
 import {dirname,join, basename, extname} from 'path'
 import {config} from '../../config.js'
 import {createHash} from 'crypto';
+
 
 async function exists(filePath) {
     try {
@@ -39,6 +40,12 @@ function hashed_filename(filename,hash_text){
     //console.log(`file: ${filename}`)
     //console.log(`hashedfile: ${hashed_file}`)
     return hashed_file
+}
+
+async function hashed_path_content(abs_path){
+    const text = await readFile(abs_path,'utf-8')
+    const hash = shortMD5(text)
+    return hash
 }
 
 async function relAssetToUrlCopy(relativepath,dirpath){
@@ -152,6 +159,13 @@ function file_mime(path){
     }
 }
 
+function file_ext(url){
+    url = url.split('?')[0].split('#')[0];
+    const filename = url.substring(url.lastIndexOf('/') + 1);
+    const lastDotIndex = filename.lastIndexOf('.');
+    return (lastDotIndex === -1) ? '' : filename.substring(lastDotIndex + 1)
+}
+
 export{
   assetToUrl,
   relAssetToUrl,
@@ -161,6 +175,8 @@ export{
   contentPathToStaticPath,
   section_from_pathname,
   file_mime,
+  file_ext,
   add_base,
-  remove_base
+  remove_base,
+  hashed_path_content
 }

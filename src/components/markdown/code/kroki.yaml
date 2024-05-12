@@ -1,0 +1,20 @@
+languages:
+  - graphviz
+  - nwdiag
+  - packetdiag
+  - bytefield
+  - wavedrom
+  - rackdiag
+  - wireviz
+  - vegalite
+  - mermaid
+  - blockdiag
+  - seqdiag
+  - actdiag
+  - pikchr
+  - pikchr
+  - erd
+  - nomnoml
+  - plantuml
+formats:
+  puml: plantuml

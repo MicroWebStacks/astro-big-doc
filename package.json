@@ -15,7 +15,7 @@
     "@google/model-viewer": "^3.4.0",
     "@svgdotjs/svg.js": "^3.1.2",
     "astro": "^4.5.10",
-    "content-structure": "^1.1.4",
+    "content-structure": "^1.1.7",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "datatables.net-dt": "^1.13.7",
@@ -32,7 +32,6 @@
     "passport": "^0.6.0",
     "passport-github": "^1.1.0",
     "photoswipe": "^5.4.3",
-    "plantuml-encoder": "^1.4.0",
     "remark": "^15.0.1",
     "sharp": "^0.33.0",
     "shikiji": "^0.6.10",
@@ -43,5 +42,8 @@
   },
   "engines": {
     "pnpm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-yaml": "^4.1.2"
   }
 }

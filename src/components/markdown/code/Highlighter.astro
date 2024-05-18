@@ -76,6 +76,7 @@ pre{
 </style>
 
 <script>
+import {config} from '@/client_config.js'
 const buttons = document.querySelectorAll('button.copy-btn');
 buttons.forEach(button => {
     button.addEventListener('click', async () => {
@@ -83,7 +84,7 @@ buttons.forEach(button => {
         const message = document.querySelector(`.copy-message[data-hash="${hash}"]`);
         
         try {
-            const response = await fetch(`/codes/${hash}/code.txt`);
+            const response = await fetch(`${config.base}/codes/${hash}/code.txt`);
             if (response.ok) {
                 const codeText = await response.text();
                 await navigator.clipboard.writeText(codeText);

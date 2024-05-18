@@ -5,7 +5,6 @@ import {pages_list_to_tree} from './process_menu.js'
 import {getDocuments} from 'content-structure'
 import {createHash} from 'crypto'
 import { config } from '../config.js';
-import { readdir } from 'fs/promises';
 import {dirname} from 'path';
 
 async function get_section_menu(section,raw_menu){

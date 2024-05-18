@@ -1,14 +1,9 @@
 ---
-import Highlighter from './Highlighter.astro'
 import Kroki from './Kroki.astro'
-import ModelViewerCode from '../model/ModelViewerCode.astro';
-import Cards from '../cards/Cards.astro'
-import Gallery from '../../gallery/gallery.astro';
-import Swiper from '../../swiper/swiper.astro'
 import kroki from './kroki.yaml'
-import {join,dirname} from 'path'
+import {join} from 'path'
 import {config} from '@/config.js'
-import {constants, access, mkdir, readFile, writeFile} from 'fs/promises'
+import {readFile} from 'fs/promises'
 
 export interface Props {
     ext: string;

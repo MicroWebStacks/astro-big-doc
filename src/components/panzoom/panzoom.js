@@ -13,9 +13,14 @@ function fixSvgSize(svg){
 
         svg.setAttribute('width', width);
         svg.setAttribute('height', height);
+        console.log("fixed SVG width and heigh")
+      }else{
+        console.log("no viewBox")
       }
     }
-  }    
+  }else{
+    console.log("failed to fix svg size as svg is invalid")
+  }
 }
 
 async function add_links(svg,url_map){
@@ -52,6 +57,15 @@ function checkModal(){
   }
 }
 
+function processSVG(svg,container){
+  fixSvgSize(svg);
+  const url_map_string = container.getAttribute("data-url-map");
+  if(url_map_string){
+    const url_map = JSON.parse(url_map_string);
+    add_links(svg, url_map);
+  }
+}
+
 function init(){
   const containers_els = document.querySelectorAll(".container.panzoom")
   if(containers_els.length == 0){//prevent irrelvant page execution
@@ -63,15 +77,16 @@ function init(){
     const eltype = container.getAttribute("data-type")
     if(eltype == "svg"){
       const obj = container.querySelector("object")
-      const svg = obj.contentDocument.querySelector("svg")
-      fixSvgSize(svg)
-      const url_map_string = container.getAttribute("data-url-map")
-      if(url_map_string){
-        const url_map = JSON.parse(url_map_string)
-        add_links(svg,url_map)
+      const svg = obj.contentDocument.querySelector("svg");
+      if(svg){
+        processSVG(svg,container)
+      }else{
+        obj.addEventListener("load", () => {
+          const svg = obj.contentDocument.querySelector("svg");
+          processSVG(svg,container)
+        });
       }
     }
-
     const open = container.querySelector(".open")
     open.onclick = ()=>{
       const modal = container.querySelector(".modal-background")

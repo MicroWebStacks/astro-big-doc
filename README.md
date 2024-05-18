@@ -31,6 +31,12 @@ pnpm run build
 ## github action usage
 - test locally with https://nektosact.com/installation/index.html
 
+# content-structure Development
+for development of content-structure it is possible to replace the registry version with the submodule version
+```json
+  "content-structure": "file:packages/content-structure",
+```
+
 # Ideas
 - auto generate menu from markdown titles
   - icon file with link in config

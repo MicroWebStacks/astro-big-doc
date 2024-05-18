@@ -22,8 +22,6 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-      - name: Use registry version
-        run: sed -i 's|"file:packages/content-structure"|"^1.1.8"|' package.json
       - name: Install, build, and upload your site
         uses: withastro/action@v2
         with:

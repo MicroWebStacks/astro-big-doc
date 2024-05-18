@@ -16,6 +16,6 @@ export async function getStaticPaths(){
 }
 const headings = (Object.hasOwn(entry.data,"toc")&&entry.data.toc == false)?[]:entry.data.headings
 ---
-<Layout title={entry.title} headings={headings} >
+<Layout title={entry.data.title} headings={headings} >
     <AstroMarkdown node={entry.tree} data={entry.data} />
 </Layout>

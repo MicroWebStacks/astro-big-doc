@@ -268,12 +268,12 @@ this is how you can reference a page
 
 ```markdown
 Link to page::<page-uid>
-Link to page::panzoom
+Link to page::examples.panzoom
 ```
 will produce this
 
 
-Link to page::panzoom
+Link to page::examples.panzoom
 
 ## deep path reference
 A slug is only unique within a content type, therefore in case of multiple files with the same folder name and title, it is possible to use the automatically generated unique identifier available in the `index.json`

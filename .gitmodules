@@ -1,0 +1,3 @@
+[submodule "packages/content-structure"]
+	path = packages/content-structure
+	url = git@github.com:MicroWebStacks/content-structure.git

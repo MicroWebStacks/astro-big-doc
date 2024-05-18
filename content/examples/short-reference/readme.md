@@ -6,15 +6,15 @@ The SID is unique and fixed, as a hash, only changes if the UID change, and is n
 
 * Reference to a page
 
-Link to page::panzoom
+Link to page::examples.panzoom
 
 * Short Reference to the same page
 
-Link to sid::981cd4a3
+Link to sid::2491a5c3
 
 It is also possible to reference assets, which produce a deep link within the page containing the asset, and also a back link to all references from within the asset itself
 
 * Short reference to an image
 
-Link to sid::5d43a9e7
+Link to sid::2d2a0446
 

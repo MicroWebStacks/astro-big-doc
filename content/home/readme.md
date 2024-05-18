@@ -6,6 +6,7 @@ order: 1
 **Astro Big Doc** uses Markdown as CMS rendered with Astro components
 
 # Images
+link to [svg image](#svg-image)
 ## Simple Image link
 Images are encapsulated inside a component that can open them in a Modal full view for Pan and zoom function
 

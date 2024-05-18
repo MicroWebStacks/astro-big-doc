@@ -3,6 +3,7 @@ import Highlighter from './Highlighter.astro'
 import Kroki from './Kroki.astro'
 import ModelViewerCode from '../model/ModelViewerCode.astro';
 import Cards from '../cards/Cards.astro'
+import GalleryPz from '../../gallery/gallery_pz.astro';
 import Gallery from '../../gallery/gallery.astro';
 import Swiper from '../../swiper/swiper.astro'
 import kroki from './kroki.yaml'
@@ -20,11 +21,12 @@ const params = node.meta?node.meta.split(' '):[]
 
 const yaml_glb      = ((language == "yaml") && (node.meta?.startsWith("glb")))
 const yaml_cards    = ((language == "yaml") && (node.meta?.startsWith("cards")))
+const yaml_gallery_pz  = ((language == "yaml") && (node.meta?.startsWith("pz_gallery")))
 const yaml_gallery  = ((language == "yaml") && (node.meta?.startsWith("gallery")))
 const yaml_swiper  = ((language == "yaml") && (node.meta?.startsWith("swiper")))
 
 const is_diagram = kroki.languages.includes(language)
-const custom_yaml = yaml_glb || yaml_cards || yaml_gallery || yaml_swiper
+const custom_yaml = yaml_glb || yaml_cards || yaml_gallery || yaml_gallery_pz || yaml_swiper
 
 const other_language = (!is_diagram && !custom_yaml)
 ---
@@ -39,6 +41,9 @@ const other_language = (!is_diagram && !custom_yaml)
 }
 {yaml_gallery &&
     <Gallery code={code} dirpath={dirpath}/>
+}
+{yaml_gallery_pz &&
+    <GalleryPz code={code} dirpath={dirpath}/>
 }
 {yaml_swiper &&
     <Swiper code={code} dirpath={dirpath}/>

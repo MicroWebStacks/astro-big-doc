@@ -1,0 +1,132 @@
+---
+import {relAssetToUrl} from '@/libs/assets.js'
+import {get_dir_files} from '@/libs/utils.js'
+import PanZoomModal from '../panzoom/panzoommodal.astro'
+import yaml from 'js-yaml'
+
+export interface Props {
+  code: string;
+  dirpath: string;
+  expanded: boolean;
+}
+
+const { code, dirpath, expanded=true } = Astro.props as Props;
+
+let relImages
+const data = yaml.load(code)
+if(Array.isArray(data)){
+    relImages = data
+}else{
+    if(Object.hasOwn(data,"dir")){
+        relImages = await get_dir_files(dirpath,data.dir)
+    }
+}
+
+let imagesUrls = []
+for(const relFile of relImages){
+    const url = await relAssetToUrl(relFile,dirpath)
+    imagesUrls.push({
+        url:url,
+        isSVG:url.endsWith(".svg"),
+        name:relFile
+    })
+}
+---
+
+<div class="container gallery" data-state="init">
+    <button class="collapsible">
+        {expanded?"Click to close":"Click to expand"}
+    </button>
+    <div class={`content ${expanded?"expanded":""}`}>
+        <div class="itemscontainer">
+            {imagesUrls.map((image)=>(
+                <div class="item" data-name={image.name}>
+                    <div class="itemimage">
+                        {image.isSVG&&
+                            <object data={image.url} />
+                        }
+                        {(!image.isSVG)&&
+                            <img src={image.url} />
+                        }
+                    </div>
+                    <PanZoomModal url={image.url} />
+                </div>
+            ))}
+        </div>
+    </div>
+</div>
+
+<style>
+.container{
+    background:rgb(134, 134, 134);
+    padding:5px;
+    border-radius: 5px;
+}
+.collapsible{
+    color:white;
+    text-align: left;
+    background: #333333;
+    border: none;
+    cursor: pointer;
+    width:100%;
+    padding: 10px;
+}
+.collapsible:hover{
+    background-color: #545454;
+    transition: background-color 0.3s;
+}
+.content{
+    background:rgb(43, 43, 43);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.content.expanded{
+    max-height: 600px;
+}
+.itemscontainer{
+    padding:10px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px 10px;
+}
+.item{
+    cursor:pointer;
+}
+.itemimage:hover{
+    scale: 1.1;
+    transition: scale 0.5s;
+}
+.item:hover > .overlay{
+    display: block;
+}
+.item:hover > .itemimage{
+    filter:brightness(100%);
+}
+.itemimage{
+    filter:brightness(80%);
+    width:150px;
+    height:150px;
+}
+
+.overlay{
+    padding:5px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    color:white;
+    max-width: 150px;
+}
+object{
+    pointer-events: none;
+    max-height: 100%;
+    max-width: 100%;
+}
+img{
+    pointer-events: none;
+    max-height: 100%;
+    max-width: 100%;
+}
+</style>
+
+<script src="./gallery_pz.js" />

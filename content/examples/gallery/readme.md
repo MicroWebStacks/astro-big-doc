@@ -1,5 +1,5 @@
 ---
-title: Gallery
+title: Gallery PhotoSwipe
 order: 3
 ---
 # Gallery
@@ -8,11 +8,10 @@ This is a Gallery Astro component, a yaml Code block with metadata 'gallery' is 
 
 ``````
 ```yaml gallery
-- tree.svg
-- gallery-tiger.svg
-- gallery-long_diag.svg
-- gallery-Linux_kernel_map.svg
-- gallery-tiger.svg
+- 01 Abstract Mix.png
+- 01a fail mix.png
+- 12 Aqara Fan button hold.png
+- 17 Retro light cable management.png
 - github-dark.png
 ```
 ``````
@@ -20,10 +19,9 @@ This is a Gallery Astro component, a yaml Code block with metadata 'gallery' is 
 will generate this gallery
 
 ```yaml gallery
-- tree.svg
-- gallery-tiger.svg
-- gallery-long_diag.svg
-- gallery-Linux_kernel_map.svg
-- gallery-tiger.svg
+- 01 Abstract Mix.png
+- 01a fail mix.png
+- 12 Aqara Fan button hold.png
+- 17 Retro light cable management.png
 - github-dark.png
 ```

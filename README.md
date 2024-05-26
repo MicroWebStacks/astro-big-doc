@@ -1,6 +1,6 @@
 # astro big doc
 
-Live demo : https://astro-big-doc.netlify.app
+Live demo : https://microwebstacks.github.io/astro-big-doc/
 
 Astro Theme for big documentation websites. Hierarchical pages menu from files structure and table of content, Markdown rendered as CMS with Astro components for panzoom, 3D, links, interactive tables, diagrams from code, VSCode like highlighter.
 

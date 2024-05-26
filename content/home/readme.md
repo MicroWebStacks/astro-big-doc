@@ -39,7 +39,7 @@ will generate this image height adjusted size. Aspect ratio is conserved even wh
 This is a Gallery Astro component, a yaml Code block with metadata 'gallery' is provided with a list of images like this
 
 ``````
-```yaml gallery
+```yaml pz_gallery
 - tree.svg
 - gallery-tiger.svg
 - gallery-long_diag.svg
@@ -51,7 +51,7 @@ This is a Gallery Astro component, a yaml Code block with metadata 'gallery' is 
 
 will generate this gallery
 
-```yaml gallery
+```yaml pz_gallery
 - tree.svg
 - images/gallery-tiger.svg
 - images/gallery-long_diag.svg

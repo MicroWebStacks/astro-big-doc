@@ -38,33 +38,33 @@ for development of content-structure it is possible to replace the registry vers
 ```
 
 # Ideas
-- auto generate menu from markdown titles
-  - icon file with link in config
-- refactor all config in config.yaml, all config must be optional
+- support different icon types (.svg, .ico, .png) and allow it in content root
+- top readme.md in content used as home
+- public folder inside content and ignored by content structure
+- .structureignore to allow e.g. .git/workflow/deploy.yaml
+- test mixture of readme page with filenames and folders
+- fix consistency of top menu folder name different than slug
+- Code
+  - keep separate plantuml and kroki (due to perf reason)
+- SVG
+  - meta data from filename.yaml or (code meta).yaml
+  - list of links : label, link
+  - list of dependencies : map, highlight list on key hover
+- PanZoom
+  - URL params, zoom on text, multiple hits counter
+  - update pan zoom status in url on mouse up
+- check potential replacement of scrollspy with intersection Observer API
+  - enhance intersection to cover a path of all visible sections from the page in the toc : start heading, stop heading
 
 - light and dark mode toggle
-- check potential replacement of scrollspy with intersection Observer API
 - sync with Astro utilities for url resolution and astro image integration
 
-- Cards as a yaml code
-  - markdown format : for referencing existing pages through their front matter
-  - markdown_card format : for rendering markdown with body
-- Details
 - Gallery
-  - support two galleries types from code config: svgs and slides
   - Expand open close with images inside
-  - images as masonry, with close to real size factors
   - dynamic adjust on container resize
   - scale items
   - can use thumbnails, no search to avoid double hit
   - click to open panzoom with images mini thumbs
-  - examples usage
-    - lightbox integration
-    - slides presentation
-  - libraries
-    - https://github.com/desandro/masonry
-    - https://github.com/dimsemenov/photoswipe
-    - https://github.com/haltu/muuri
 - menus
   - store menu scroll position
   - store menus width
@@ -74,27 +74,14 @@ for development of content-structure it is possible to replace the registry vers
 - caching
   - SSR render on page hash condition, using ETag
   - page hash with depndencies hashes, include assets hash as attribute
-
-
-- use declarative shadow dom to be able to retrieve data from it and reuse it
-- Markdown
-  - add more code formats, e.g. mermaid, D2, ...
 - menus
   - ToC auto-expand : open scroll spy, close all others
   - Left and right : min (disabled) or expand to level slider or selector
   - Left and right : auto expand depth adjust to available vertical space (all level or nothing)
-  - Structure : generation of left nav menu from src/pages
-  - Structure : Update menu from getStaticPatsh() [slug] for a hierarchy of files
   - pages types and icons
   - open close on nav-resize click
   - Issue: Menu height transition MUI example is working
-  - minor issue : Expand arrow rotates for nothing on page reload
-
-- tried to serve different directories on different bas without modifying website build base path
-  - used referrer to differentiate requests, and created a middleware preceesing the static use that redirects to base
-  - failed due to some fetches still fail, not clear why as not reported without referer
-
-## assets management
+# assets management
 * User content can be placed in a configurable relative path to the repo root usually `./content` set in these variables
   * config.content_path
   * config.collect_content.contentdir
@@ -111,7 +98,7 @@ for development of content-structure it is possible to replace the registry vers
 
 # Notes
 - SVGs
-  - missing viewbox canot be resized
+  - if missing viewbox canot be resized
   - should not have `preserveAspectRatio="none"`
 - menu config allows index pages but do not use them to keep consistent nav menu of folders/items
 - adding interactive SVGs that can be styled with css is challenging

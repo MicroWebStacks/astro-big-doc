@@ -47,7 +47,11 @@ async function get_section_menu(section,raw_menu){
 }
 
 async function create_raw_menu(content_path,document_list){
-    const top_items = document_list.filter((item)=> item.level === 2).sort((a,b)=> a.order-b.order)
+    let top_items = document_list.filter((item)=> item.level === 2).sort((a,b)=> a.order-b.order)
+    const home_item = document_list.find((item)=> item.level === 1)
+    if(home_item){
+        top_items = [home_item,...top_items]
+    }
     const sorted_items = top_items.map(entry => ({
         label: entry.title,
         link: `/${entry.url}`,
@@ -56,13 +60,12 @@ async function create_raw_menu(content_path,document_list){
         }
     }));
 
-    const home_items = sorted_items.map(item => item.link === '/home' ? { ...item, link: '/' } : item);
     const icons_file = join(content_path,"icons.yaml")
     if(await exists(icons_file)){
         const icons_list = await load_yaml_abs(icons_file)
-        home_items.push(...icons_list)
+        sorted_items.push(...icons_list)
     }
-    return home_items;
+    return sorted_items;
 }
 
 async function create_menu(collect_config){
@@ -84,7 +87,9 @@ async function create_menu(collect_config){
     }
     for(const menu_entry of base_menu){
         const section = section_from_pathname(menu_entry.link);
-        menu.sections[section] = await get_section_menu(section,base_menu)
+        if(section != "home"){
+            menu.sections[section] = await get_section_menu(section,base_menu)
+        }
     }
     
     const menu_text = JSON.stringify(menu)

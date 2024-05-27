@@ -39,10 +39,8 @@ for development of content-structure it is possible to replace the registry vers
 
 # Ideas
 - support different icon types (.svg, .ico, .png) and allow it in content root
-- top readme.md in content used as home
 - public folder inside content and ignored by content structure
 - .structureignore to allow e.g. .git/workflow/deploy.yaml
-- test mixture of readme page with filenames and folders
 - fix consistency of top menu folder name different than slug
 - Code
   - keep separate plantuml and kroki (due to perf reason)
@@ -53,6 +51,7 @@ for development of content-structure it is possible to replace the registry vers
 - PanZoom
   - URL params, zoom on text, multiple hits counter
   - update pan zoom status in url on mouse up
+- watch and regenrate .structure on save for modified files only
 - check potential replacement of scrollspy with intersection Observer API
   - enhance intersection to cover a path of all visible sections from the page in the toc : start heading, stop heading
 

@@ -11,27 +11,27 @@ link to [svg image](#svg-image)
 Images are encapsulated inside a component that can open them in a Modal full view for Pan and zoom function
 
 ```markdown
-![astro markdown render](./astro-markdown-render-small.png)
+![astro markdown render](./home/astro-markdown-render-small.png)
 ```
 
 will generate this image
 
-![astro markdown render](./astro-markdown-render-small.png)
+![astro markdown render](./home/astro-markdown-render-small.png)
 
 ## Advanced Image Directive
 In order to give more options, using the image directive allows to pass more arguments from markdown
 
 ```markdown
-:image[]{src=./astro-markdown-render-small.png alt="Astro Markdown Render" height=200 center}
+:image[]{src=./home/astro-markdown-render-small.png alt="Astro Markdown Render" height=200 center}
 ```
 
 will generate this image height adjusted size. Aspect ratio is conserved even when giving either of width or height. It is also possible to center the image.
 
-:image[]{src=./astro-markdown-render-small.png alt="Astro Markdown Render" height=200 center}
+:image[]{src=./home/astro-markdown-render-small.png alt="Astro Markdown Render" height=200 center}
 
 ## SVG Image
 
-![Tree](./tree.svg)
+![Tree](./home/tree.svg)
 
 
 ## Gallery
@@ -52,12 +52,12 @@ This is a Gallery Astro component, a yaml Code block with metadata 'gallery' is 
 will generate this gallery
 
 ```yaml pz_gallery
-- tree.svg
-- images/gallery-tiger.svg
-- images/gallery-long_diag.svg
-- images/gallery-Linux_kernel_map.svg
-- images/gallery-tiger.svg
-- images/github-dark.png
+- home/tree.svg
+- home/images/gallery-tiger.svg
+- home/images/gallery-long_diag.svg
+- home/images/gallery-Linux_kernel_map.svg
+- home/images/gallery-tiger.svg
+- home/images/github-dark.png
 ```
 
 ## Cards
@@ -95,18 +95,18 @@ models from https://modelviewer.dev/editor/
 just by inserting a link to a .glb file
 
 ```markdown
-[Astronaut](./Astronaut.glb)
+[Astronaut](./home/Astronaut.glb)
 ```
 will generate this 3D model
 
-[Astronaut](./Astronaut.glb)
+[Astronaut](./home/Astronaut.glb)
 
 
 ## From code
 This piece of code using as code language `yaml` and code meta-data : `glb` as follows
 
 
-![Code](./code.png)
+![Code](./home/code.png)
 
 will generate this 3D model with the provided files.
 * poster : allows fast page load, by loading the image only first.
@@ -115,7 +115,7 @@ will generate this 3D model with the provided files.
 ```yaml glb
 src: Lantern.glb
 title: Lantern
-poster: Lantern.webp
+poster: home/Lantern.webp
 environment-image: spruit_sunrise_1k_HDR.hdr
 ```
 
@@ -164,11 +164,11 @@ A table with a high number of lines gets a [data-table](https://datatables.net/)
 It is also possible to create tables in xlsx format. This link of `.xlsx` extension
 
 ```markdown
-[Table1](./Table1.xlsx)
+[Table1](./home/Table1.xlsx)
 ```
 will generate this data table
 
-[Table1](./Table1.xlsx)
+[Table1](./home/Table1.xlsx)
 
 # Notes
 A note can be created like this and can have markdown inside

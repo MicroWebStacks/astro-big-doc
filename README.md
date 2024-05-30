@@ -29,8 +29,12 @@ User friendly side menus collapsible and width adjustable with the mouse.
 - Markdown Details collapse block
 - Markdown external links identification and rendering with an arrow
 - Markdown relative assets with zero copy in dev
-- Add meta data to SVG by placing a yaml file with the same name e.g. for `diagram.svg` a `diagram.yaml`
+- Meta data can be provided in a yaml file to make the SVG interactive with
   - links : a list of `{label,link}` to add links to SVG text matches
+- Meta data yaml file can be added to
+  - An SVG diagram by placing a yaml file with the same name e.g. for `diagram.svg` a `diagram.yaml`
+  - A code link and then simply the same as the code filename e.g. for `diagram.puml` a `diagram.yaml`
+  - A code block by using the code block first param e.g. for ```` ```plantuml filename```` a `filename.yaml`
 
 # User guide
 ```

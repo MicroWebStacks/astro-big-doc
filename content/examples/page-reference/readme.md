@@ -1,6 +1,6 @@
 ## simple reference
 
-Link to page::examples.panzoom
+Link to page::examples.svg-panzoom
 
 ## deep path reference
 

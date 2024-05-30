@@ -4,6 +4,7 @@ import kroki from './kroki.yaml'
 import {join} from 'path'
 import {config} from '@/config.js'
 import {readFile} from 'fs/promises'
+import {getMetaData} from '@/libs/assets.js'
 
 export interface Props {
     ext: string;
@@ -16,14 +17,16 @@ const { ext, url, dirpath } = Astro.props as Props;
 let language = ""
 let code = ""
 const params = []
+let meta = {}
 
 const is_kroki = Object.keys(kroki.formats).includes(ext)
 if(is_kroki){
     language = kroki.formats[ext]
     const abs_file = join(config.content_path,dirpath,url)
     code = await readFile(abs_file,'utf-8')
+    meta = await getMetaData(url, dirpath)
 }
 ---
 {(is_kroki)&&
-    <Kroki language={language} code={code} params={params} />
+    <Kroki language={language} code={code} params={params} meta={meta}/>
 }

@@ -1,5 +1,6 @@
 ---
 title: Table Data
+order: 8
 ---
 
 | Name   | Age | City         |

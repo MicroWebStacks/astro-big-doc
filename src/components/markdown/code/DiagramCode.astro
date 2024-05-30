@@ -7,9 +7,10 @@ export interface Props {
     hash:string;
     code: string;
     params: object;
+    meta: object;
 }
 
-const {hash, code, params} = Astro.props as Props;
+const {hash, code, params, meta} = Astro.props as Props;
 const diagram_url = `${config.base}/codes/${hash}/diagram.svg`
 let alt = ""
 let title = ""
@@ -21,7 +22,7 @@ if(params && (params.length > 0)){
 ---
 <button class="toggler" data-hash={hash}>code/diagram</button>
 <div class="diagram visible" data-hash={hash}>
-    <Panzoom src={diagram_url} alt={alt} title={title} />
+    <Panzoom src={diagram_url} alt={alt} title={title} meta={meta}/>
 </div>
 <div class="code hidden" data-hash={hash}>
     <Highlighter code={code} language={"javascript"} params={params} />

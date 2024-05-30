@@ -6,7 +6,7 @@ The SID is unique and fixed, as a hash, only changes if the UID change, and is n
 
 * Reference to a page
 
-Link to page::examples.panzoom
+Link to page::examples.svg-panzoom
 
 * Short Reference to the same page
 

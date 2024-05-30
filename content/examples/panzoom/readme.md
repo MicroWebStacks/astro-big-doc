@@ -1,5 +1,5 @@
 ---
-title: Panzoom
+title: SVG Panzoom
 order: 3
 ---
 

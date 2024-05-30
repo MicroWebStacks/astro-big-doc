@@ -171,7 +171,12 @@ async function getMetaData(url, dirpath){
     const dir_abs = join(config.content_path,dirpath)
     const file_abs = join(dir_abs,url)
     const lastDotIndex = file_abs.lastIndexOf('.');
-    const meta_file = file_abs.substring(0,lastDotIndex)+".yaml"
+    let meta_file
+    if(lastDotIndex == -1){
+        meta_file = file_abs+".yaml"
+    }else{
+        meta_file = file_abs.substring(0,lastDotIndex)+".yaml"
+    }
     if(await exists(meta_file)){
         console.log(` * MarkdownImage> found meta file ${meta_file}`)
         return await load_yaml_abs(meta_file)

@@ -7,6 +7,7 @@ import GalleryPz from '../../gallery/gallery_pz.astro';
 import Gallery from '../../gallery/gallery.astro';
 import Swiper from '../../swiper/swiper.astro'
 import kroki from './kroki.yaml'
+import {getMetaData} from '@/libs/assets.js'
 
 export interface Props {
     node: object;
@@ -29,9 +30,14 @@ const is_diagram = kroki.languages.includes(language)
 const custom_yaml = yaml_glb || yaml_cards || yaml_gallery || yaml_gallery_pz || yaml_swiper
 
 const other_language = (!is_diagram && !custom_yaml)
+
+let meta = {}
+if((is_diagram)&(params.length > 0)){
+    meta = await getMetaData(params[0], dirpath)
+}
 ---
 {(is_diagram)&&
-    <Kroki language={language} code={code} params={params} />
+    <Kroki language={language} code={code} params={params} meta={meta}/>
 }
 {yaml_glb &&
     <ModelViewerCode code={code} dirpath={dirpath}/>

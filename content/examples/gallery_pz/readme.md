@@ -1,6 +1,6 @@
 ---
 title: Gallery Panzoom
-order: 3
+order: 12
 ---
 # Gallery
 

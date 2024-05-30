@@ -1,6 +1,6 @@
 ---
 title: Gallery PhotoSwipe
-order: 3
+order: 11
 ---
 # Gallery
 

@@ -1,6 +1,6 @@
 ---
 title: Swiper
-order: 4
+order: 13
 ---
 # Swiper
 

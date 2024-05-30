@@ -8,36 +8,67 @@ Enhances native markdown '.md' files with Astro components, enables parsing of c
 
 User friendly side menus collapsible and width adjustable with the mouse.
 
-## Features list
-- enhance images with panzoom function
-- image directive for images size defintion in markdown
-- use relative assets in markdown
-- Active data tables with [DataTables](https://datatables.net/)
+## Features
+- Render standard markdown .md with custom Astro components
+- Markdown images enhanced with Modal and panzoom function
+- Markdown image directive for centering and image size defintion
+- Markdown tables become interactive with data tables with [DataTables](https://datatables.net/)
   - from Markdown table
   - from xlsx file link
-- 3D Model viewer
+- Markdown Code blocks
+  - VSCode like highlighting using [Shikiji](https://github.com/antfu/shikiji)
+  - code copy button
+- Markdown diagrams rendering
+  - from code block
+  - from code file link
+  - swap between diagram and highlighted code
+- Markdown 3D Model viewer
   - from .glb link
-  - from yaml parameters
-- external links identification and rendering with an arrow
-- VSCode like highlighting using [Shikiji](https://github.com/antfu/shikiji)
+  - from yaml code block parameters
+- Markdown Note aside (Note, Tip, Caution, Danger)
+- Markdown Details collapse block
+- Markdown external links identification and rendering with an arrow
+- Markdown relative assets with zero copy in dev
 
-# Usage
+# User guide
 ```
 pnpm install
 pnpm run dev
 pnpm run build
 ```
+## Environment variables
+This project uses unified environment variables that can be configured in a `.env` file, see `.env.example`. All variables will be captured in a `config` structure exported from `config.js` and then used in `astro.config.mjs`, in the express `server.js` and can be imported from any file. A `client_config.js` exports variables that can be used by client code e.g. `PUBLIC_BASE`.
 
-## github action usage
-- test locally with https://nektosact.com/installation/index.html
+* `OUT_DIR` : directory where the build will be genrated, defaults to `dist`
+* `PUBLIC_BASE` : base url for the website, defaults to ""
+* `CONTENT` : input directory for the markdown content, defaults to `content`
+* `STRUCTURE` : output directory markdown parser content-structure, defaults to `.structure`
 
-# content-structure Development
-for development of content-structure it is possible to replace the registry version with the submodule version
-```json
-  "content-structure": "file:packages/content-structure",
-```
+## Markdown content
+* `icons.yaml` can contain an icon with a link to be placed on the App bar right side
+* `url_type` will be automatically defined to `dir` or `file` so that e.g. `./example/readme.md` as type `dir` will be served on `/example`
+* `readme.md` or `REAMDME.md` on the content root will be considered as home page served on url root `/`
+* markdown front-matter
+  * `title` : will be used for the menu as well as a browser page title. For url_type file, the title can also derive the slug, but not for url_type folder.
+  *  `slug` : if not available, a slug can be derived from the title of file name. Slug is unused in url_type folder to keep child pages paths similar in file system and url.
+  * `order` : defines the menu order of the pages
 
-# Ideas
+## Express js Server
+Express js server in `server\server.js` can optionally be used to serve the generated static site. It adds an authentication layer on top using Express js passport.
+
+* `PORT` : used for the express server and also needed by the auth callback when auth is enabled, defaults to `3001`
+* `HOST` : used for the express server and also needed by the auth callback when auth is enabled, defaults to `0.0.0.0` to listen on all interfaces when no auth is enabled
+* `PROTOCOL` : either of http or https, defaults to `http`
+* `ENABLE_AUTH` : activates the express atuhentication router, not enabled when not defined
+* `ENABLE_CORS` : allows cross origns resource sharing, if you want other websites to use your APIs, not allowed when not defined
+* `CERT_FILE` : ssl certificate file path, required when https is used
+* `KEY_FILE` : key file for the ssl certificate, required when https is used
+* `GITHUB_CLIENT_ID`      : Express passport Github strategy configuration
+* `GITHUB_CLIENT_SECRET`  : Express passport Github strategy configuration
+* `SESSION_SECRET`        : used by 'express-session' handler
+
+# Developper guide
+## Ideas
 - support different icon types (.svg, .ico, .png) and allow it in content root
 - public folder inside content and ignored by content structure
 - .structureignore to allow e.g. .git/workflow/deploy.yaml
@@ -80,7 +111,7 @@ for development of content-structure it is possible to replace the registry vers
   - pages types and icons
   - open close on nav-resize click
   - Issue: Menu height transition MUI example is working
-# assets management
+## assets management
 * User content can be placed in a configurable relative path to the repo root usually `./content` set in these variables
   * config.content_path
   * config.collect_content.contentdir
@@ -95,7 +126,7 @@ for development of content-structure it is possible to replace the registry vers
   * the menu needed by the client gets generated in config.collect_content.out_menu `./public/menu.json` for both dev and build served on `/menu.json`
     * Note : integrations cannot directly generate on `dist` because they cannot persist there before start of build
 
-# Notes
+## Notes
 - SVGs
   - if missing viewbox canot be resized
   - should not have `preserveAspectRatio="none"`
@@ -112,49 +143,14 @@ for development of content-structure it is possible to replace the registry vers
     - clip also needs defined start stop
     - flex can also animate but then the flex container height must be set explicitely
 
-- express subdomain usage
-instead of
-```javascript
-app.use(express.static(outdir))
+## local github action
+- test locally with https://nektosact.com/installation/index.html
+
+# content-structure Development
+for development of content-structure it is possible to replace the registry version with the submodule version
+```json
+  "content-structure": "file:packages/content-structure",
 ```
-use
-```javascript
-app.use(testRouter)
-app.set('subdomain offset', 1); // Adjust based on your domain structure
-app.use((req, res, next) => {
-  const subdomain = req.subdomains[0]; // Get the first subdomain
-  switch (subdomain) {
-    case 'website1':
-      express.static(outdir)(req, res, next);
-      break;
-    default:
-      next(); // Continue to other routes if no subdomain matches
-  }
-});
-```
-# Express Server guide
-Express server in `server\server.js` can optionally be used to serve the generated static site. It adds an authentication layer on top using Express passport.
-
-## .env config
-This project uses environment variables as unified config to astro.config.mjs and to the express server. The environment variabels are also loaded by a `config.js` to allow their usage from any file in astro including .js
-
-It is possible to build with zero config, the default mode is 'STATIC' See also an example in [.env.example](.env.example).
-
-Astro variables
-* `OUT_DIR` : directory where the build will be genrated
-* `PORT` : maps to astro.config.mjs [server.port](https://docs.astro.build/en/reference/configuration-reference/#serverport)
-
-Express general variables
-* `PROTOCOL` : either of htp or https for express server usage
-* `CERT_FILE` : required when https is used
-* `KEY_FILE` : required when https is used
-
-Express authentication variables
-* `HOST` : Express passport callbackURL
-* `PORT` : Express passport callbackURL
-* `GITHUB_CLIENT_ID`      : Express passport Github strategy configuration
-* `GITHUB_CLIENT_SECRET`  : Express passport Github strategy configuration
-* `SESSION_SECRET`        : used by 'express-session' handler
 
 ## authentication doc
 - Github OAuth : https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
@@ -170,7 +166,6 @@ Express authentication variables
 - using self signed keys with `server/create.sh` result in browser warning 'your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID)
 - for 'Let's Encrypt' certificates, ownership has to be proven by visibility of the host from the public internet which makes it not usable for internal domains and local network hosts
 
-
 # References
 * https://github.com/syntax-tree/mdast
 * https://github.com/syntax-tree/mdast#code
@@ -179,8 +174,6 @@ Express authentication variables
 * https://github.com/syntax-tree/unist-util-visit
 * https://github.com/akebifiky/remark-simple-plantuml
 
-# License
-- MIT
 ## images
 - https://www.svgrepo.com/svg/19947/folders
 - https://www.svgrepo.com/svg/400563/openfilefolder
@@ -188,8 +181,6 @@ Express authentication variables
 - https://www.svgrepo.com/svg/75085/full-screen
 - https://uxwing.com/text-file-icon/
 
-# Issues
-- title conflicting with path, url and slug in `create_raw_menu()`
-- diagrams
-  - generate diagrams from image url and extension
-  - graph properties through code block arguments
+# License
+- MIT
+

@@ -23,7 +23,7 @@ function fixSvgSize(svg){
   }
 }
 
-async function add_links(svg,url_map){
+async function add_links(svg,link_list){
   const SVGjsModule = await import('@svgdotjs/svg.js');
   const SVGjs = SVGjsModule.SVG;
 
@@ -31,21 +31,23 @@ async function add_links(svg,url_map){
   let text_nodes = draw.find('text')
   let text_array = [ ...text_nodes ];
   text_array.forEach((text)=>{
-    const key = text.node.innerHTML
-    if(key in url_map){
-      var isAbs = new RegExp('^(?:[a-z+]+:)?//', 'i');//isAbsolute https://stackoverflow.com/questions/10687099/how-to-test-if-a-url-string-is-absolute-or-relative
-      if(isAbs.test(url_map[key])){
-        text.linkTo((link)=>{link.to(url_map[key]).target('_blank')})//link in new page
-      }else{
-        text.linkTo((link)=>{link.to(url_map[key]).target('_top')})//link outside the shadow DOM
+    const html_text = text.node.innerHTML
+    link_list.forEach((entry)=>{
+      if(html_text == entry.label){
+        var isAbs = new RegExp('^(?:[a-z+]+:)?//', 'i');//isAbsolute https://stackoverflow.com/questions/10687099/how-to-test-if-a-url-string-is-absolute-or-relative
+        if(isAbs.test(entry.link)){
+          text.linkTo((link)=>{link.to(entry.link).target('_blank')})//link in new page
+        }else{
+          text.linkTo((link)=>{link.to(entry.link).target('_top')})//link outside the shadow DOM
+        }
+        text.css({'text-decoration': 'underline'})  
+        //text.fill('#f06')
       }
-      text.css({'text-decoration': 'underline'})  
-      //text.fill('#f06')
-    }
+    })
   })
 }
 
-function checkModal(){
+function checkURLModal(){
   //check if any modal needs to be opened
   const params = new URL(location.href).searchParams;
   const modal_name = params.get('modal');
@@ -53,16 +55,18 @@ function checkModal(){
     console.log(`opening modal for ${modal_name}`)
     const container = document.querySelector(`.container.panzoom[data-name="${modal_name}"]`)
     const modal = container.querySelector(".modal-background")
-    event(modal,"init")
+    event(modal,"open")
   }
 }
 
 function processSVG(svg,container){
   fixSvgSize(svg);
-  const url_map_string = container.getAttribute("data-url-map");
-  if(url_map_string){
-    const url_map = JSON.parse(url_map_string);
-    add_links(svg, url_map);
+  const meta_string = container.getAttribute("data-meta");
+  if(meta_string){
+    const meta = JSON.parse(meta_string);
+    if(Object.hasOwn(meta,"links")){
+      add_links(svg, meta.links);
+    }
   }
 }
 
@@ -90,11 +94,11 @@ function init(){
     const open = container.querySelector(".open")
     open.onclick = ()=>{
       const modal = container.querySelector(".modal-background")
-      event(modal,"init")
+      event(modal,"open")
     }
   }
   //allow the modal to init and register its listener before throwing the open event
-  setTimeout(checkModal,10)
+  setTimeout(checkURLModal,10)
 }
 
 document.addEventListener('DOMContentLoaded', init, false);

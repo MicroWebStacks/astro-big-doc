@@ -6,9 +6,10 @@ export interface Props {
   src: string;
   alt: string;
   title: string;
+  meta: object;
 }
 
-const { src, alt, title } = Astro.props as Props;
+const { src, alt, title, meta } = Astro.props as Props;
 const asseturl = src;
 const assetname = asseturl.substring(asseturl.lastIndexOf('/') + 1)
 console.log(` * panzoom : '${src}' : '${asseturl}'`)
@@ -18,7 +19,7 @@ const isImg = !isSvg
 
 //<img src={asseturl} title={title} alt={alt} />
 ---
-<div class="container panzoom" data-type={isSvg?"svg":"img"} data-name={assetname} data-url-map={}>
+<div class="container panzoom" data-type={isSvg?"svg":"img"} data-name={assetname} data-meta={JSON.stringify(meta)}>
   <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>

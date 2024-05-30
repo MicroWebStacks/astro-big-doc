@@ -135,6 +135,9 @@ function create_ul_from_items(items,root,expanded){
 }
 
 function set_active_expanded(items,section_name,pathname){
+    if(!Array.isArray(items)){
+        return
+    }
     for(let item of items){
         if(Object.hasOwn(menu.sections_expand[section_name],item.url)){
             item.expanded = menu.sections_expand[section_name][item.url]

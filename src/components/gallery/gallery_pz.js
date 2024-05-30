@@ -25,7 +25,7 @@ function init_container(container){
     for(let el in items){
         items[el].onclick = (e)=>{
             const modal = e.target.parentElement.querySelector(".modal-background")
-            event(modal,"init")
+            event(modal,"open")
         }
     }
 
@@ -40,7 +40,7 @@ function checkModal(){
         const container = document.querySelector(".container.gallery")
         const item = container.querySelector(`[data-name="${modal_name}"]`)
         const modal = item.querySelector(".modal-background")
-        event(modal,"init")
+        event(modal,"open")
     }
 }
   

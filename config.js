@@ -31,7 +31,7 @@ config.collect_content = {
     rootdir:config.rootdir,
     contentdir:contentdir,
     content_ext:["md"],
-    assets_ext:["svg","webp","png","jpeg","jpg","xlsx","glb","hdr","ico","puml"],
+    assets_ext:["svg","webp","png","jpeg","jpg","xlsx","glb","hdr","ico","puml","yaml"],
     outdir:structuredir,//dist does not persist before build
     out_menu:"public/menu.json",//used by src\layout\client_nav_menu.js
     debug:false

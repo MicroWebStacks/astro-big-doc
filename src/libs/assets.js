@@ -3,6 +3,7 @@ import {constants, access, stat, mkdir, readFile} from 'fs/promises'
 import {dirname,join, basename, extname} from 'path'
 import {config} from '../../config.js'
 import {createHash} from 'crypto';
+import {load_yaml_abs} from './utils.js'
 
 
 async function exists(filePath) {
@@ -166,6 +167,18 @@ function file_ext(url){
     return (lastDotIndex === -1) ? '' : filename.substring(lastDotIndex + 1)
 }
 
+async function getMetaData(url, dirpath){
+    const dir_abs = join(config.content_path,dirpath)
+    const file_abs = join(dir_abs,url)
+    const lastDotIndex = file_abs.lastIndexOf('.');
+    const meta_file = file_abs.substring(0,lastDotIndex)+".yaml"
+    if(await exists(meta_file)){
+        console.log(` * MarkdownImage> found meta file ${meta_file}`)
+        return await load_yaml_abs(meta_file)
+    }
+    return {}
+}
+
 export{
   assetToUrl,
   relAssetToUrl,
@@ -178,5 +191,6 @@ export{
   file_ext,
   add_base,
   remove_base,
-  hashed_path_content
+  hashed_path_content,
+  getMetaData
 }

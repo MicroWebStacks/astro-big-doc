@@ -48,8 +48,23 @@ function window_url_remove_modal(){
     const new_href = window.location.origin+window.location.pathname
     window.history.pushState({},"",new_href)
 }
+function is_url_modal(center){
+  const params = new URL(location.href).searchParams;
+  const modal_name = params.get('modal');
+  if(modal_name){
+    const container = center.parentElement.parentElement.parentElement.parentElement
+    const pz_name = container.getAttribute("data-name")
+    return (modal_name == pz_name)
+  }
+  return false
+}
 
-async function initModal(event){
+function handle_url_modal(){
+  const params = new URL(location.href).searchParams;
+  //TODO check text highlight params
+}
+
+async function openModal(event){
 
   const modal = event.target
   const close = modal.querySelector(".close")
@@ -76,7 +91,11 @@ async function initModal(event){
     }
     window_url_remove_modal()
   }
-  window_url_add_modal(center)
+  if(is_url_modal(center)){
+    handle_url_modal()
+  }else{
+    window_url_add_modal(center)
+  }
   modal.classList.add("visible")
 }
 
@@ -89,7 +108,7 @@ function init(){
     for(let el in modals){
       const modal = modals[el]
       if(modal.getAttribute("data-state") == "init"){
-        modal.addEventListener("init",initModal  ,false)
+        modal.addEventListener("open",openModal  ,false)
         modal.setAttribute("data-state","run")
       }
     }

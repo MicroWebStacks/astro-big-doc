@@ -1,4 +1,4 @@
-import { svg_text_focus } from './lib_svg_utils';
+import { svg_text_focus,svg_check } from './lib_svg_utils';
 
 let pzref = null
 const zoomOptions = {
@@ -7,7 +7,7 @@ const zoomOptions = {
   //autocenter:true
 }
 
-function appendShadowSVG(center,svg){
+async function appendShadowSVG(center,svg){
   //cannot detatch a shadow root, so check existing before creation
   let shadowRoot = center.shadowRoot
   if(!shadowRoot){
@@ -15,28 +15,46 @@ function appendShadowSVG(center,svg){
   }
   const div = document.createElement("div")//needed for the panzoom as it takes the parent
   shadowRoot.appendChild(div)
-  const new_svg = svg.cloneNode(true)
+  let new_svg
+  const clone_fails_with_SVGjs = true
+  if(clone_fails_with_SVGjs){
+    new_svg = serializeAndDeserializeSVG(svg);
+  }else{
+    new_svg = svg.cloneNode(true)
+  }
   div.appendChild(new_svg)
   const oldstyle = new_svg.getAttribute("style")
   new_svg.setAttribute("style",`${oldstyle};user-select: none; cursor:grab;`)
-  new_svg.querySelectorAll('tspan,text').forEach((el)=>{
-      el.style.cursor = "pointer";
-  });
+  //new_svg.querySelectorAll('tspan,text').forEach((el)=>{
+  //    el.style.cursor = "pointer";
+  //});
   return new_svg
 }
 
-function cloneAsset(center){
+function serializeAndDeserializeSVG(svg) {
+  const serializer = new XMLSerializer();
+  const svgStr = serializer.serializeToString(svg);
+  const parser = new DOMParser();
+  const new_svg = parser.parseFromString(svgStr, "image/svg+xml").documentElement;
+  return new_svg;
+}
+
+async function cloneAsset(center){
     const container = center.parentElement.parentElement.parentElement.parentElement
     const obj = container.querySelector("object")
+    let is_svg = false
+    let svg
+    let svg_img
     if(obj){
-      const svg = obj.contentDocument.querySelector("svg")
-      return appendShadowSVG(center,svg)
+      is_svg = true
+      svg = obj.contentDocument.querySelector("svg")
+      svg_img = await appendShadowSVG(center,svg)
     }else{
       const img = container.querySelector("img")
-      const new_img = img.cloneNode(true)
-      center.appendChild(new_img)
-      return new_img
+      svg_img = img.cloneNode(true)
+      center.appendChild(svg_img)
     }
+    return {is_svg,svg_img}
 }
 
 function window_url_add_modal(center){
@@ -60,18 +78,13 @@ function is_url_modal(center){
   return false
 }
 
-async function handle_url_modal(center){
+async function handle_url_modal(is_svg,svg,pzref){
   const params = new URL(location.href).searchParams;
   const text = params.get('text')
   if(text){
-    const img = center.querySelector("img")
-    if(img){
-      return
+    if(is_svg){
+      await svg_text_focus(svg,text,pzref)
     }
-    //else SVG
-    const shadowRoot = center.shadowRoot
-    const svg = shadowRoot.querySelector("svg")
-    await svg_text_focus(svg,text)
   }
 }
 
@@ -81,7 +94,7 @@ async function openModal(event){
   const close = modal.querySelector(".close")
   const center = modal.querySelector(".modal-center")
 
-  const svg_img = cloneAsset(center)
+  const {is_svg,svg_img} = await cloneAsset(center)
   if(pzref){
     pzref.dispose()
   }
@@ -102,12 +115,12 @@ async function openModal(event){
     }
     window_url_remove_modal()
   }
+  modal.classList.add("visible")
   if(is_url_modal(center)){
-    handle_url_modal(center)
+    handle_url_modal(is_svg,svg_img,pzref)
   }else{
     window_url_add_modal(center)
   }
-  modal.classList.add("visible")
 }
 
 function initModalEvents(){

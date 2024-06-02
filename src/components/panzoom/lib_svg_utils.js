@@ -1,3 +1,6 @@
+const SVGjsModule = await import('@svgdotjs/svg.js');
+const SVGjs = SVGjsModule.SVG;
+
 function svg_fix_size(svg){
     if (svg) {
       // Check if 'width' and 'height' attributes are missing
@@ -49,12 +52,34 @@ async function svg_add_links(svg,link_list){
     }
 }
 
-async function svg_text_focus(svg,text){
-    console.log(`SVG> focus on '${text}'`)
+async function svg_check(svg){
+  SVGjs(svg)
+  let draw = SVGjs(svg)
+  let text_nodes = draw.find('text');
+  console.log(text_nodes[0].node.innerHTML)
+}
+
+async function svg_text_focus(svg,text,pzref){
+  let draw = SVGjs(svg)
+  let text_nodes = draw.find('text');
+  let text_array = [ ...text_nodes ];
+  let text_hits = text_array.filter(node => node.node.innerHTML == text);
+  if(text_hits.length > 0){
+    const targetText = text_hits[0]
+    let bbox = targetText.bbox();
+    let x = bbox.x + bbox.width / 2;
+    let y = bbox.y + bbox.height / 2-100;
+    console.log(`SVG> focus on '${text}' (${x.toFixed(2)},${y.toFixed(2)})`)
+    const cx = svg.getAttribute("width")/2
+    const cy = svg.getAttribute("height")/2
+    setTimeout(()=>{pzref.smoothMoveTo(x, y)}, 500)
+    setTimeout(()=>{pzref.smoothZoom(cx, cy, 2)}, 1500)
+  }
 }
 
 export{
     svg_fix_size,
     svg_add_links,
-    svg_text_focus
+    svg_text_focus,
+    svg_check
 }

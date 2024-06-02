@@ -1,6 +1,6 @@
 import {event} from '../panzoom/client_utils'
 
-function init_container(container){
+function init_gallery_clicks(container){
     if(container.getAttribute("data-state") != "init"){
         return
     }
@@ -31,31 +31,11 @@ function init_container(container){
 
 }
 
-function checkModal(){
-    //check if any modal needs to be opened
-    const params = new URL(location.href).searchParams;
-    const modal_name = params.get('modal');
-    if(modal_name){
-        console.log(`opening modal for ${modal_name}`)
-        const container = document.querySelector(".container.gallery")
-        const item = container.querySelector(`[data-name="${modal_name}"]`)
-        const modal = item.querySelector(".modal-background")
-        event(modal,"open")
-    }
-}
-  
 function init(){
-    const containers_els = document.querySelectorAll(".container.gallery")
-    if(containers_els.length == 0){//prevent irrelvant paeg execution
-        return
-    }
-
-    const containers = [...containers_els]
-    for(let el in containers){
-        init_container(containers[el])
-    }
-  //allow the modal to init and register its listener before throwing the open event
-  setTimeout(checkModal,10)
+    const containers = document.querySelectorAll(".container.gallery")
+    containers.forEach(container => {
+        init_gallery_clicks(container)
+    })
 }
 
 document.addEventListener('DOMContentLoaded', init, false);

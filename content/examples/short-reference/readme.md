@@ -16,5 +16,5 @@ It is also possible to reference assets, which produce a deep link within the pa
 
 * Short reference to an image
 
-Link to sid::2d2a0446
+Link to sid::4c6b5d04
 

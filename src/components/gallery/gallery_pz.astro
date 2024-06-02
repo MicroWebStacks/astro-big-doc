@@ -40,7 +40,7 @@ for(const relFile of relImages){
     <div class={`content ${expanded?"expanded":""}`}>
         <div class="itemscontainer">
             {imagesUrls.map((image)=>(
-                <div class="item" data-name={image.name}>
+                <div class="item container panzoom" data-name={image.name}>
                     <div class="itemimage">
                         {image.isSVG&&
                             <object data={image.url} />
@@ -57,7 +57,7 @@ for(const relFile of relImages){
 </div>
 
 <style>
-.container{
+.container.gallery{
     background:rgb(134, 134, 134);
     padding:5px;
     border-radius: 5px;
@@ -130,3 +130,4 @@ img{
 </style>
 
 <script src="./gallery_pz.js" />
+<script src="../panzoom/panzoom_common.js" />

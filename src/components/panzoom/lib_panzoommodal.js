@@ -1,3 +1,4 @@
+import { svg_text_focus } from './lib_svg_utils';
 
 let pzref = null
 const zoomOptions = {
@@ -59,6 +60,21 @@ function is_url_modal(center){
   return false
 }
 
+async function handle_url_modal(center){
+  const params = new URL(location.href).searchParams;
+  const text = params.get('text')
+  if(text){
+    const img = center.querySelector("img")
+    if(img){
+      return
+    }
+    //else SVG
+    const shadowRoot = center.shadowRoot
+    const svg = shadowRoot.querySelector("svg")
+    await svg_text_focus(svg,text)
+  }
+}
+
 async function openModal(event){
 
   const modal = event.target
@@ -86,7 +102,9 @@ async function openModal(event){
     }
     window_url_remove_modal()
   }
-  if(!is_url_modal(center)){
+  if(is_url_modal(center)){
+    handle_url_modal(center)
+  }else{
     window_url_add_modal(center)
   }
   modal.classList.add("visible")

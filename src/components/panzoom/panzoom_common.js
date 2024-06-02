@@ -28,7 +28,7 @@ function fixSvgSize(svg){
 async function add_links(svg,link_list){
   const SVGjsModule = await import('@svgdotjs/svg.js');
   const SVGjs = SVGjsModule.SVG;
-
+  let added_links = false
   let draw = SVGjs(svg)
   let text_nodes = draw.find('text')
   let text_array = [ ...text_nodes ];
@@ -44,9 +44,13 @@ async function add_links(svg,link_list){
         }
         text.css({'text-decoration': 'underline'})  
         //text.fill('#f06')
+        added_links = true
       }
     })
   })
+  if(added_links){
+    console.log("added links")
+  }
 }
 
 function checkURLModal(){
@@ -69,39 +73,47 @@ function checkURLModal(){
   }
 }
 
-function processSVG(svg,container){
+async function processSVG(svg,container){
   fixSvgSize(svg);
   const meta_string = container.getAttribute("data-meta");
   if(meta_string){
     const meta = JSON.parse(meta_string);
     if(Object.hasOwn(meta,"links")){
-      add_links(svg, meta.links);
+      await add_links(svg, meta.links);
     }
   }
 }
 
-function init_svgs(){
-  const containers = document.querySelectorAll(".container.panzoom")
-  containers.forEach(container => {
-    const eltype = container.getAttribute("data-type")
-    if(eltype == "svg"){
-      const obj = container.querySelector("object")
-      const svg = obj.contentDocument.querySelector("svg");
-      if(svg){
-        processSVG(svg,container)
-      }else{
-        obj.addEventListener("load", () => {
-          const svg = obj.contentDocument.querySelector("svg");
-          processSVG(svg,container)
-        });
+async function init_svgs() {
+  const containers = document.querySelectorAll(".container.panzoom");
+  await Promise.all(Array.from(containers).map(container => {
+    return new Promise(async (resolve) => {  // Using async here
+      const eltype = container.getAttribute("data-type");
+      if (eltype === "svg") {
+        const obj = container.querySelector("object");
+        const svg = obj.contentDocument?.querySelector("svg");
+        if (svg) {
+          await processSVG(svg, container);  // Await the processing of the SVG
+          resolve();
+        } else {
+          obj.addEventListener("load", async () => {  // Async event handler
+            const svg = obj.contentDocument.querySelector("svg");
+            if (svg) {
+              await processSVG(svg, container);  // Await the processing of the SVG
+            }
+            resolve();
+          });
+        }
+      } else {
+        resolve();
       }
-    }
-  })
+    });
+  }));
 }
 
-function init(){
+async function init(){
   initModalEvents() //needed to be before handling url to open
-  init_svgs()       //needed before cloning the svg in modal
+  await init_svgs() //needed before cloning the svg in modal
   checkURLModal()   //only first match will open, starting with SIDs
 }
 

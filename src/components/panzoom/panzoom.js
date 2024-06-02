@@ -13,4 +13,8 @@ function init_clicks(){
   })
 }
 
-document.addEventListener('DOMContentLoaded', init_clicks, false);
+if(document.readyState == "loading"){
+  document.addEventListener('DOMContentLoaded', init_clicks, false);
+}else{
+  init_clicks()
+}

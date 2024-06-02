@@ -9,6 +9,7 @@ const outdir = (process.env.OUT_DIR==null)?"dist":process.env.OUT_DIR
 const base = (process.env.PUBLIC_BASE==null)?"":process.env.PUBLIC_BASE
 const structuredir = (process.env.STRUCTURE==null)?join(rootdir,".structure"):process.env.STRUCTURE
 const contentdir = (process.env.CONTENT==null)?join(rootdir,"content"):process.env.CONTENT
+const kroki_server = (process.env.KROKI_SERVER==null)?"https://kroki.io":process.env.CONTENT
 
 const config = {
     rootdir: rootdir,
@@ -16,7 +17,7 @@ const config = {
     base: base,
     content_path: contentdir,
     code_path: `${rootdir}/${outdir}/codes`,
-    kroki_server: "https://kroki.io",
+    kroki_server: kroki_server,
     client_menu:true,
     highlighter:{
         theme:"dark-plus",

@@ -61,9 +61,14 @@ async function init_svgs() {
 }
 
 async function init(){
+  console.log("panzoom_common> init()")
   initModalEvents() //needed to be before handling url to open
   await init_svgs() //needed before cloning the svg in modal
   checkURLModal()   //only first match will open, starting with SIDs
 }
 
-document.addEventListener('DOMContentLoaded', init, false);
+if(document.readyState == "loading"){
+  document.addEventListener('DOMContentLoaded', init, false);
+}else{
+  init()
+}

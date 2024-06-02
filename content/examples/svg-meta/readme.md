@@ -19,3 +19,5 @@ links:
 Will generate an SVG diagram with links
 
 ![diag](./test-diag-link.svg)
+
+link to zoom text [singelton](/examples/svg-meta?modal=test-diag-link.svg&text=singleton)

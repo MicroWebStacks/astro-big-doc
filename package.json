@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@google/model-viewer": "^3.4.0",
+    "@svgdotjs/svg.filter.js": "^3.0.8",
     "@svgdotjs/svg.js": "^3.1.2",
     "astro": "^4.5.10",
     "content-structure": "^1.1.8",

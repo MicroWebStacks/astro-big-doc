@@ -59,6 +59,16 @@ async function svg_check(svg){
   console.log(text_nodes[0].node.innerHTML)
 }
 
+function animateTextColor(element, color1, color2, duration) {
+  // Animate to the first color
+  element.animate(duration, '-', 0).attr({ fill: color1 })
+    .after(function() {
+      // After the first animation completes, animate back to the second color
+      this.animate(duration, '-', 0).attr({ fill: color2 });
+    });
+}
+
+
 async function svg_text_focus(svg,text,pzref){
   let draw = SVGjs(svg)
   let text_nodes = draw.find('text');
@@ -68,12 +78,13 @@ async function svg_text_focus(svg,text,pzref){
     const targetText = text_hits[0]
     let bbox = targetText.bbox();
     let x = bbox.x + bbox.width / 2;
-    let y = bbox.y + bbox.height / 2-100;
+    let y = bbox.y + bbox.height / 2;
     console.log(`SVG> focus on '${text}' (${x.toFixed(2)},${y.toFixed(2)})`)
     const cx = svg.getAttribute("width")/2
     const cy = svg.getAttribute("height")/2
-    setTimeout(()=>{pzref.smoothMoveTo(x, y)}, 500)
-    setTimeout(()=>{pzref.smoothZoom(cx, cy, 2)}, 1500)
+    setTimeout(()=>{pzref.smoothMoveTo(x, y)}, 400)
+    setTimeout(()=>{pzref.smoothZoom(cx, cy, 1.5)}, 800)
+    setTimeout(()=>{animateTextColor(targetText, '#0f0', '#000', 400);},1000)
   }
 }
 

@@ -69,7 +69,7 @@ async function svg_text_focus(svg,text,pzref){
     const cy = svg.getAttribute("height")/2
     setTimeout(()=>{pzref.smoothMoveTo(x, y)}, 400)
     setTimeout(()=>{pzref.smoothZoom(cx, cy, 1.5)}, 800)
-    setTimeout(()=>{glow(svg, targetText.node.parentElement, '#0f0');},1500)
+    setTimeout(()=>{glow(svg, targetText.node, '#0f0');},1500)
   }
 }
 

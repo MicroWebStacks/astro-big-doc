@@ -1,3 +1,5 @@
+import { glow } from './lib_svg_filters';
+
 const SVGjsModule = await import('@svgdotjs/svg.js');
 const SVGjs = SVGjsModule.SVG;
 
@@ -52,23 +54,6 @@ async function svg_add_links(svg,link_list){
     }
 }
 
-async function svg_check(svg){
-  SVGjs(svg)
-  let draw = SVGjs(svg)
-  let text_nodes = draw.find('text');
-  console.log(text_nodes[0].node.innerHTML)
-}
-
-function animateTextColor(element, color1, color2, duration) {
-  // Animate to the first color
-  element.animate(duration, '-', 0).attr({ fill: color1 })
-    .after(function() {
-      // After the first animation completes, animate back to the second color
-      this.animate(duration, '-', 0).attr({ fill: color2 });
-    });
-}
-
-
 async function svg_text_focus(svg,text,pzref){
   let draw = SVGjs(svg)
   let text_nodes = draw.find('text');
@@ -84,13 +69,12 @@ async function svg_text_focus(svg,text,pzref){
     const cy = svg.getAttribute("height")/2
     setTimeout(()=>{pzref.smoothMoveTo(x, y)}, 400)
     setTimeout(()=>{pzref.smoothZoom(cx, cy, 1.5)}, 800)
-    setTimeout(()=>{animateTextColor(targetText, '#0f0', '#000', 400);},1000)
+    setTimeout(()=>{glow(svg, targetText.node.parentElement, '#0f0');},1500)
   }
 }
 
 export{
     svg_fix_size,
     svg_add_links,
-    svg_text_focus,
-    svg_check
+    svg_text_focus
 }

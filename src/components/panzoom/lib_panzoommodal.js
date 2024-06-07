@@ -1,4 +1,4 @@
-import { svg_text_focus,svg_check } from './lib_svg_utils';
+import { svg_text_focus } from './lib_svg_utils';
 
 let pzref = null
 const zoomOptions = {

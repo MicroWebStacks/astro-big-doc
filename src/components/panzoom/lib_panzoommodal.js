@@ -71,8 +71,28 @@ async function cloneAsset(center){
     return {is_svg,svg_img}
 }
 
+function window_url_add_pan(x,y){
+  // Convert to integers to remove fractions and ensure the format "&pan=x33_y48"
+  const intX = Math.floor(x);
+  const intY = Math.floor(y);
+  console.log(`Pan finished at (${intX},${intY})`);
+  
+  const currentUrl = new URL(window.location.href);
+  currentUrl.searchParams.set('pan', `x${intX}_y${intY}`);
+  window.history.pushState({}, "", currentUrl.toString());
+}
+
+function window_url_add_zoom(zoom){
+  // Round to two decimal places to ensure the format "&zoom=1.27"
+  const roundedZoom = Math.round(zoom * 100) / 100;
+  console.log(`Zoom done at (${roundedZoom})`);
+  
+  const currentUrl = new URL(window.location.href);
+  currentUrl.searchParams.set('zoom', roundedZoom.toString());
+  window.history.pushState({}, "", currentUrl.toString());
+}
 function window_url_add_modal(center){
-    const container = center.parentElement.parentElement.parentElement.parentElement
+      const container = center.parentElement.parentElement.parentElement.parentElement
     let modal_name
     const data_name = container.getAttribute("data-name")
     if(data_name != "diagram.svg"){
@@ -100,11 +120,40 @@ function is_url_modal(center){
 
 async function handle_url_modal(modal,is_svg,svg,pzref){
   const params = new URL(location.href).searchParams;
+  
+  // Handling text focus if applicable
   const text = params.get('text')
   if(text){
     if(is_svg){
       await svg_text_focus(modal,svg,text,pzref)
     }
+  }
+
+  // Handling pan parameter
+  const pan = params.get('pan');
+  if (pan) {
+    const matches = pan.match(/x(-?\d+)_y(-?\d+)/i);  // Adjusted regex to include negative numbers
+    console.log(matches)
+    if (matches) {
+      const x = parseInt(matches[1], 10);
+      const y = parseInt(matches[2], 10);
+      setTimeout(()=>{pzref.smoothMoveTo(x, y)}, 400)
+      console.log(`Moving to x: ${x}, y: ${y}`);
+    }
+  }
+
+  // Handling zoom parameter
+  const zoom = params.get('zoom');
+  if (zoom) {
+    const scale = parseFloat(zoom);
+    let delay = 400
+    if(pan){
+      delay = 0
+    }
+    const svg_cx = svg.getAttribute("width").replace(/px$/, '')/2
+    const svg_cy = svg.getAttribute("height").replace(/px$/, '')/2
+    setTimeout(()=>{pzref.smoothZoom(svg_cx, svg_cy, zoom)}, delay)
+    console.log(`Zooming to scale: ${scale}`);
   }
 }
 
@@ -120,6 +169,13 @@ async function openModal(event){
   }
   const { default: panzoom } = await import('panzoom');
   pzref = panzoom(svg_img,zoomOptions)
+  pzref.on('panend', () => {
+    const t = pzref.getTransform()
+    window_url_add_pan(t.x,t.y)
+  });
+  pzref.on('zoom', function() {
+    window_url_add_zoom(pzref.getTransform().scale)
+  });
 
   close.onclick = ()=>{
     //console.log("closed click")

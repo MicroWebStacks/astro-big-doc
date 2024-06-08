@@ -11,6 +11,9 @@ User friendly side menus collapsible and width adjustable with the mouse.
 ## Features
 - Render standard markdown .md with custom Astro components
 - Markdown images enhanced with Modal and panzoom function
+  - URL parameters auto open Modal
+  - URL parameters text focus pan, zoom and highlight
+  - URL parameters text focus SVG foreign objects fallback on pan, zoom and font weight blink
 - Markdown image directive for centering and image size defintion
 - Markdown tables become interactive with data tables with [DataTables](https://datatables.net/)
   - from Markdown table
@@ -83,7 +86,7 @@ Express js server in `server\server.js` can optionally be used to serve the gene
 - SVG
   - list of dependencies : map, highlight list on key hover
 - PanZoom
-  - URL params, zoom on text, multiple hits counter
+  - URL params, multiple hits counter
   - update pan zoom status in url on mouse up
 - watch and regenerate .structure on save for modified files only
 - check potential replacement of scrollspy with intersection Observer API

@@ -12,8 +12,7 @@ User friendly side menus collapsible and width adjustable with the mouse.
 - Render standard markdown .md with custom Astro components
 - Markdown images enhanced with Modal and panzoom function
   - URL parameters auto open Modal
-  - URL parameters text focus pan, zoom and highlight
-  - URL parameters text focus SVG foreign objects fallback on pan, zoom and font weight blink
+  - URL parameters text focus move to, zoom, then animate glow text (supports xhtml SVG foreign objects)
 - Markdown image directive for centering and image size defintion
 - Markdown tables become interactive with data tables with [DataTables](https://datatables.net/)
   - from Markdown table
@@ -52,7 +51,7 @@ This project uses unified environment variables that can be configured in a `.en
 * `PUBLIC_BASE` : base url for the website, defaults to ""
 * `CONTENT` : input directory for the markdown content, defaults to `content`
 * `STRUCTURE` : output directory markdown parser content-structure, defaults to `.structure`
-
+* `KROKI_SERVER` : supports local kroki server, defaults to https://kroki.io
 ## Markdown content
 * `icons.yaml` can contain an icon with a link to be placed on the App bar right side
 * `url_type` will be automatically defined to `dir` or `file` so that e.g. `./example/readme.md` as type `dir` will be served on `/example`

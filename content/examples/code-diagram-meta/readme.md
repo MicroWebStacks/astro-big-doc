@@ -8,7 +8,7 @@ This code block has language `blockdiag` and first code-block param of `astro-is
 ````
 ```blockdiag astro-is-awesome
 blockdiag {
-  astro -> is -> Awesome;
+  Astro -> is -> Awesome;
 }
 ```
 ````

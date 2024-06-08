@@ -54,7 +54,8 @@ async function svg_add_links(svg,link_list){
     }
 }
 
-async function svg_text_focus(svg,text,pzref){
+async function svg_text_focus(modal_content,svg,text,pzref){
+  console.log(`modal_content (w:${modal_content.offsetWidth},h:${modal_content.offsetHeight})`)
   let draw = SVGjs(svg)
   let text_nodes = draw.find('text');
   let text_array = [ ...text_nodes ];
@@ -62,14 +63,15 @@ async function svg_text_focus(svg,text,pzref){
   if(text_hits.length > 0){
     const targetText = text_hits[0]
     let bbox = targetText.bbox();
-    let x = bbox.x + bbox.width / 2;
-    let y = bbox.y + bbox.height / 2;
-    console.log(`SVG> focus on '${text}' (${x.toFixed(2)},${y.toFixed(2)})`)
-    const cx = svg.getAttribute("width")/2
-    const cy = svg.getAttribute("height")/2
-    setTimeout(()=>{pzref.smoothMoveTo(x, y)}, 400)
-    setTimeout(()=>{pzref.smoothZoom(cx, cy, 1.5)}, 800)
-    setTimeout(()=>{glow(svg, targetText.node.parentElement, '#0f0');},1500)
+    let box_center_x = bbox.x + bbox.width / 2;
+    let box_center_y = bbox.y + bbox.height / 2;
+    const svg_cx = svg.getAttribute("width")/2
+    const svg_cy = svg.getAttribute("height")/2
+    const shift_x = svg_cx - box_center_x
+    const shift_y = svg_cy - box_center_y
+    setTimeout(()=>{pzref.smoothMoveTo(shift_x, shift_y)}, 400)
+    setTimeout(()=>{pzref.smoothZoom(svg_cx, svg_cy, 1.4)}, 800)
+    setTimeout(()=>{glow(svg, targetText.node, '#0f0');},1500)
   }
 }
 

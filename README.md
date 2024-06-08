@@ -85,7 +85,7 @@ Express js server in `server\server.js` can optionally be used to serve the gene
 - PanZoom
   - URL params, zoom on text, multiple hits counter
   - update pan zoom status in url on mouse up
-- watch and regenrate .structure on save for modified files only
+- watch and regenerate .structure on save for modified files only
 - check potential replacement of scrollspy with intersection Observer API
   - enhance intersection to cover a path of all visible sections from the page in the toc : start heading, stop heading
 

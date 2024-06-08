@@ -7,19 +7,33 @@ export interface Props {
   alt: string;
   title: string;
   meta: object;
+  hash: string;
 }
 
-const { src, alt, title, meta } = Astro.props as Props;
+const { src, alt, title, meta, hash="" } = Astro.props as Props;
 const asseturl = src;
 const assetname = asseturl.substring(asseturl.lastIndexOf('/') + 1)
-console.log(` * panzoom : '${src}' : '${asseturl}'`)
+let data_name: string;
+if(title){
+  data_name = title
+}else if(assetname != "diagram.svg"){
+  data_name = assetname
+}else if(hash){
+  data_name = hash
+}else{
+  data_name = "diagram.svg"
+}
 
+console.log(` * panzoom : '${data_name}' : '${src}'`)
 const isSvg = asseturl.endsWith(".svg")
 const isImg = !isSvg
 
-//<img src={asseturl} title={title} alt={alt} />
 ---
-<div class="container panzoom" data-type={isSvg?"svg":"img"} data-name={assetname} data-meta={JSON.stringify(meta)}>
+<div class="container panzoom" 
+      data-type={isSvg?"svg":"img"}
+      data-name={data_name}
+      data-meta={JSON.stringify(meta)}
+      >
   <div class="header open">
     <SvgIcons filename="full-screen"/>
   </div>

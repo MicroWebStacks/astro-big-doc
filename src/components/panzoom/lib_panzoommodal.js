@@ -59,8 +59,14 @@ async function cloneAsset(center){
 
 function window_url_add_modal(center){
     const container = center.parentElement.parentElement.parentElement.parentElement
-    const pz_name = container.getAttribute("data-name")
-    const new_href = window.location.origin+window.location.pathname+`?modal=${pz_name}`
+    let modal_name
+    const data_name = container.getAttribute("data-name")
+    if(data_name != "diagram.svg"){
+      modal_name = data_name
+    }else{
+      modal_name = container.getAttribute("data-sid")
+    }
+    const new_href = window.location.origin+window.location.pathname+`?modal=${modal_name}`
     window.history.pushState({},"",new_href)
 }
 function window_url_remove_modal(){
@@ -78,12 +84,12 @@ function is_url_modal(center){
   return false
 }
 
-async function handle_url_modal(is_svg,svg,pzref){
+async function handle_url_modal(modal,is_svg,svg,pzref){
   const params = new URL(location.href).searchParams;
   const text = params.get('text')
   if(text){
     if(is_svg){
-      await svg_text_focus(svg,text,pzref)
+      await svg_text_focus(modal,svg,text,pzref)
     }
   }
 }
@@ -117,7 +123,7 @@ async function openModal(event){
   }
   modal.classList.add("visible")
   if(is_url_modal(center)){
-    handle_url_modal(is_svg,svg_img,pzref)
+    handle_url_modal(modal.querySelector(".modal-content"),is_svg,svg_img,pzref)
   }else{
     window_url_add_modal(center)
   }

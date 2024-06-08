@@ -22,7 +22,7 @@ if(params && (params.length > 0)){
 ---
 <button class="toggler" data-hash={hash}>code/diagram</button>
 <div class="diagram visible" data-hash={hash}>
-    <Panzoom src={diagram_url} alt={alt} title={title} meta={meta}/>
+    <Panzoom src={diagram_url} alt={alt} title={title} meta={meta} hash={hash}/>
 </div>
 <div class="code hidden" data-hash={hash}>
     <Highlighter code={code} language={"javascript"} params={params} />

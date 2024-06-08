@@ -8,16 +8,10 @@ function checkURLModal(){
   const modal = params.get('modal');
   if(modal){
     console.log(`opening modal ${modal}`)
-    const sid = document.querySelector(`.container.panzoom[data-sid="${modal}"]`)
-    if(sid){
-      const modal = sid.querySelector(".modal-background")
+    const container = document.querySelector(`.container.panzoom[data-name="${modal}"]`)
+    if(container){
+      const modal = container.querySelector(".modal-background")
       event(modal,"open")
-    }else{
-      const name = document.querySelector(`.container.panzoom[data-name="${modal}"]`)
-      if(name){
-        const modal = name.querySelector(".modal-background")
-        event(modal,"open")
-      }
     }
   }
 }

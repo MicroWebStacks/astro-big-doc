@@ -109,7 +109,6 @@ function startAnimation(svg,element,filter){
     anim.beginElement();
     if(!(anim.getAttribute("repeatDur") == "indefinite")){
         const duration_ms = dur_to_ms(anim.getAttribute("dur"));
-        console.log(`will detach after ${duration_ms} ms`);
         setTimeout(()=>{
             detachFilter(element,filter);
         },duration_ms);
@@ -118,6 +117,7 @@ function startAnimation(svg,element,filter){
 
 function glow(svg, element, color, dur = 500){
     const glow = createGlowFilter(svg,color,dur)
+    console.log(`playing glow animation for ${dur} ms`);
     startAnimation(svg,element,glow)
     setTimeout(()=>removeFilter(svg,glow),dur+100)
 }

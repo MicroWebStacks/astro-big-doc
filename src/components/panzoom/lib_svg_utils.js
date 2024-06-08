@@ -63,25 +63,40 @@ async function svg_text_focus(modal_content,svg,text,pzref){
   let text_hits = text_array.filter(obj => obj.node.innerHTML == text);
   if(text_hits.length > 0){
     let targetText = text_hits[0]
-    if(typeof targetText.bbox === "function"){
-      const bbox = targetText.bbox();
-      let box_center_x = bbox.x + bbox.width / 2;
-      let box_center_y = bbox.y + bbox.height / 2;
-      const svg_cx = svg.getAttribute("width").replace(/px$/, '')/2
-      const svg_cy = svg.getAttribute("height").replace(/px$/, '')/2
-      //console.log(`svg center (${svg_cx},${svg_cy})`)
-      const shift_x = svg_cx - box_center_x
-      const shift_y = svg_cy - box_center_y
-      //console.log(`moveTo (${shift_x},${shift_y})`)
-      setTimeout(()=>{pzref.smoothMoveTo(shift_x, shift_y)}, 400)
-      setTimeout(()=>{pzref.smoothZoom(svg_cx, svg_cy, 1.4)}, 800)
+    let bbox
+    if(targetText.node.namespaceURI == "http://www.w3.org/2000/svg"){
+      bbox = targetText.bbox()
+    }else if(targetText.node.namespaceURI == "http://www.w3.org/1999/xhtml"){
+      const node_bbox = targetText.node.getBoundingClientRect()
+      // Adjust coordinates to SVG coordinate space
+      let svgRect = svg.getBoundingClientRect();
+      bbox = {
+          x: node_bbox.left - svgRect.left,
+          y: node_bbox.top - svgRect.top,
+          width: node_bbox.width,
+          height: node_bbox.height
+      };
+    }else{
+      console.warn(`not handled namespaceURI ${targetText.node.namespaceURI}`)
+      return
+    }
+    console.log(bbox)
+    let box_center_x = bbox.x + bbox.width / 2;
+    let box_center_y = bbox.y + bbox.height / 2;
+    const svg_cx = svg.getAttribute("width").replace(/px$/, '')/2
+    const svg_cy = svg.getAttribute("height").replace(/px$/, '')/2
+    console.log(`svg center (${svg_cx},${svg_cy})`)
+    const shift_x = svg_cx - box_center_x
+    const shift_y = svg_cy - box_center_y
+    console.log(`moveTo (${shift_x},${shift_y})`)
+    setTimeout(()=>{pzref.smoothMoveTo(shift_x, shift_y)}, 400)
+    setTimeout(()=>{pzref.smoothZoom(svg_cx, svg_cy, 1.4)}, 800)
+    if(targetText.node.namespaceURI == "http://www.w3.org/2000/svg"){
       setTimeout(()=>{glow(svg, targetText.node, '#0f0');},1500)
+    }else{
+      setTimeout(()=>{targetText.node.classList.add("focus-effect");},1500)
+      setTimeout(()=>{targetText.node.classList.remove("focus-effect");},2000)
     }
-    else{
-      console.warn(`targetText not an SVG element has no bbox function`)
-      console.log(targetText)
-    }
-
   }
 }
 

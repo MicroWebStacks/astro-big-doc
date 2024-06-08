@@ -7,6 +7,19 @@ const zoomOptions = {
   //autocenter:true
 }
 
+function addFocusStyles(shadowRoot) {
+  if (!shadowRoot.getElementById('glowStyles')) {
+      const style = document.createElement('style');
+      style.id = 'focusStyles';
+      style.textContent = `
+          .focus-effect {
+              font-weight: bold;
+          }
+      `;
+      shadowRoot.appendChild(style);
+  }
+}
+
 async function appendShadowSVG(center,svg){
   //cannot detatch a shadow root, so check existing before creation
   let shadowRoot = center.shadowRoot
@@ -15,6 +28,7 @@ async function appendShadowSVG(center,svg){
   }
   const div = document.createElement("div")//needed for the panzoom as it takes the parent
   shadowRoot.appendChild(div)
+  addFocusStyles(shadowRoot)
   let new_svg
   const clone_fails_with_SVGjs = true
   if(clone_fails_with_SVGjs){

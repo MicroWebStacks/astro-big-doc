@@ -58,20 +58,30 @@ async function svg_text_focus(modal_content,svg,text,pzref){
   console.log(`modal_content (w:${modal_content.offsetWidth},h:${modal_content.offsetHeight})`)
   let draw = SVGjs(svg)
   let text_nodes = draw.find('text');
-  let text_array = [ ...text_nodes ];
+  let span_nodes = draw.find('span');
+  let text_array = [ ...text_nodes,...span_nodes ];
   let text_hits = text_array.filter(node => node.node.innerHTML == text);
   if(text_hits.length > 0){
-    const targetText = text_hits[0]
-    let bbox = targetText.bbox();
-    let box_center_x = bbox.x + bbox.width / 2;
-    let box_center_y = bbox.y + bbox.height / 2;
-    const svg_cx = svg.getAttribute("width")/2
-    const svg_cy = svg.getAttribute("height")/2
-    const shift_x = svg_cx - box_center_x
-    const shift_y = svg_cy - box_center_y
-    setTimeout(()=>{pzref.smoothMoveTo(shift_x, shift_y)}, 400)
-    setTimeout(()=>{pzref.smoothZoom(svg_cx, svg_cy, 1.4)}, 800)
-    setTimeout(()=>{glow(svg, targetText.node, '#0f0');},1500)
+    let targetText = text_hits[0]
+    if(targetText.bbox === "function"){
+      const bbox = targetText.bbox();
+      let box_center_x = bbox.x + bbox.width / 2;
+      let box_center_y = bbox.y + bbox.height / 2;
+      const svg_cx = svg.getAttribute("width").replace(/px$/, '')/2
+      const svg_cy = svg.getAttribute("height").replace(/px$/, '')/2
+      //console.log(`svg center (${svg_cx},${svg_cy})`)
+      const shift_x = svg_cx - box_center_x
+      const shift_y = svg_cy - box_center_y
+      //console.log(`moveTo (${shift_x},${shift_y})`)
+      setTimeout(()=>{pzref.smoothMoveTo(shift_x, shift_y)}, 400)
+      setTimeout(()=>{pzref.smoothZoom(svg_cx, svg_cy, 1.4)}, 800)
+      setTimeout(()=>{glow(svg, targetText.node, '#0f0');},1500)
+    }
+    else{
+      console.warn(`targetText not an SVG element has no bbox function`)
+      console.log(targetText)
+    }
+
   }
 }
 

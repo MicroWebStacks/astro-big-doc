@@ -166,6 +166,10 @@ function recursive_update_element(element,menu_entry_items,root,expanded){
 }
 
 function section_from_pathname(pathname){
+    pathname = remove_base(pathname)
+    if(pathname.startsWith('http')){
+        return 'external'
+    }
     const sections = pathname.split('/')
     if(sections.length < 2){
         return "home"
@@ -174,10 +178,6 @@ function section_from_pathname(pathname){
     }else{
         return sections[1]
     }
-}
-  
-function inject_menu_elements(section_items){
-    //console.log(section)
 }
 
 function enable_clicks(){

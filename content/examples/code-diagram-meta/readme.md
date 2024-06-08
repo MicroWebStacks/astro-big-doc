@@ -4,27 +4,27 @@ order: 5
 ---
 
 # Code block meta data
-This code block has language `blockdiag` and first code-block param of `kroki-is-awesome`
+This code block has language `blockdiag` and first code-block param of `astro-is-awesome`
 ````
-```blockdiag kroki-is-awesome
+```blockdiag astro-is-awesome
 blockdiag {
-  Kroki -> is -> Awesome;
+  astro -> is -> Awesome;
 }
 ```
 ````
 
-when adding a meta data file `kroki-is-awesome.yaml` with this content
+when adding a meta data file `astro-is-awesome.yaml` with this content
 ```yaml
 links:
-  - label: Kroki
-    link: https://kroki.io/
+  - label: Astro
+    link: https://docs.astro.build/
 ```
 
 will generates an SVG diagram with links
 
-```blockdiag kroki-is-awesome
+```blockdiag astro-is-awesome
 blockdiag {
-  Kroki -> is -> Awesome;
+  Astro -> is -> Awesome;
 }
 ```
 

@@ -60,10 +60,10 @@ async function svg_text_focus(modal_content,svg,text,pzref){
   let text_nodes = draw.find('text');
   let span_nodes = draw.find('span');
   let text_array = [ ...text_nodes,...span_nodes ];
-  let text_hits = text_array.filter(node => node.node.innerHTML == text);
+  let text_hits = text_array.filter(obj => obj.node.innerHTML == text);
   if(text_hits.length > 0){
     let targetText = text_hits[0]
-    if(targetText.bbox === "function"){
+    if(typeof targetText.bbox === "function"){
       const bbox = targetText.bbox();
       let box_center_x = bbox.x + bbox.width / 2;
       let box_center_y = bbox.y + bbox.height / 2;

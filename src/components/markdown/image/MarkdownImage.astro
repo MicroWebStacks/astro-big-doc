@@ -1,5 +1,5 @@
 ---
-import {relAssetToUrl, getMetaData} from '@/libs/assets.js'
+import {assetToUrl, getMetaData} from '@/libs/assets.js'
 import Panzoom from '@/components/panzoom/panzoom.astro'
 
 export interface Props {
@@ -11,7 +11,7 @@ const { node, dirpath} = Astro.props as Props;
 const {title, url, alt} = node;
 
 console.log(`url / dirpath = ${url} / ${dirpath}`)
-const asseturl = await relAssetToUrl(url, dirpath)
+const asseturl = await assetToUrl(url, dirpath)
 const meta = await getMetaData(url, dirpath)
 console.log(`asseturl = ${asseturl}`)
 ---

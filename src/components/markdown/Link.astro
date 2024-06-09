@@ -1,5 +1,5 @@
 ---
-import {relAssetToUrl, file_ext} from '@/libs/assets.js'
+import {assetToUrl, file_ext} from '@/libs/assets.js'
 import {toHast} from 'mdast-util-to-hast'
 import {toHtml} from 'hast-util-to-html'
 import ModelViewer from './model/ModelViewer.astro';
@@ -19,7 +19,7 @@ console.log(`* link '${node.url}' (external:${external}) `)
 let src = node.url
 if(!external){
   if(!node.url.startsWith("/")){
-    src = await relAssetToUrl(node.url,dirpath)
+    src = await assetToUrl(node.url,dirpath)
   }
 }
 

@@ -1,4 +1,4 @@
-import {relAssetToUrl} from '@/libs/assets.js'
+import {assetToUrl} from '@/libs/assets.js'
 import {get_dir_files} from '@/libs/utils.js'
 import yaml from 'js-yaml'
 import {extname,join} from 'path'
@@ -46,7 +46,7 @@ async function yaml_to_grid_images(code,dirpath){
             spanHeight = Math.round(1 / aspectRatio) // Adjust this logic as per your grid layout needs
         }
         //console.log(`${relFile} : width ${width} ; height ${height}; ratio ${aspectRatio} ; span ${spanWidth} / ${spanHeight}`)
-        const url = await relAssetToUrl(relFile,dirpath)
+        const url = await assetToUrl(relFile,dirpath)
         imagesUrls.push({
             url,
             ext:extname(url).toLowerCase(),

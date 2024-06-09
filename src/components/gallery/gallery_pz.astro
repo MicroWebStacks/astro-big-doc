@@ -1,5 +1,5 @@
 ---
-import {relAssetToUrl} from '@/libs/assets.js'
+import {assetToUrl} from '@/libs/assets.js'
 import {get_dir_files} from '@/libs/utils.js'
 import PanZoomModal from '../panzoom/panzoommodal.astro'
 import yaml from 'js-yaml'
@@ -24,7 +24,7 @@ if(Array.isArray(data)){
 
 let imagesUrls = []
 for(const relFile of relImages){
-    const url = await relAssetToUrl(relFile,dirpath)
+    const url = await assetToUrl(relFile,dirpath)
     imagesUrls.push({
         url:url,
         isSVG:url.endsWith(".svg"),

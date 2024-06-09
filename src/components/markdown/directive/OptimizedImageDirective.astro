@@ -1,5 +1,5 @@
 ---
-import {relAssetToUrl} from '@/libs/assets.js'
+import {assetToUrl} from '@/libs/assets.js'
 import { Image } from "astro:assets"
 import sharp from 'sharp';
 import {relAssetToPath} from '@/libs/assets.js'
@@ -11,7 +11,7 @@ export interface Props {
 
 const { node, dirpath } = Astro.props as Props;
 
-const asseturl = await relAssetToUrl(node.attributes.src, dirpath)
+const asseturl = await assetToUrl(node.attributes.src, dirpath)
 
 const alt = node.attributes.alt?node.attributes.alt:node.attributes.src
 

@@ -1,10 +1,9 @@
-import {copyFileSync} from 'fs'
+import {copyFileSync,accessSync} from 'fs'
 import {constants, access, stat, mkdir, readFile} from 'fs/promises'
 import {dirname,join, basename, extname} from 'path'
 import {config} from '../../config.js'
 import {createHash} from 'crypto';
 import {load_yaml_abs} from './utils.js'
-
 
 async function exists(filePath) {
     try {
@@ -12,6 +11,15 @@ async function exists(filePath) {
       return true;
     } catch (error) {
       return false;
+    }
+}
+
+function existsSync(filePath) {
+    try {
+        accessSync(filePath, constants.F_OK);
+        return true;
+    } catch (error) {
+        return false;
     }
 }
   
@@ -73,23 +81,29 @@ async function relAssetToUrlCopy(relativepath,dirpath){
 
 async function relAssetToUrl(relativepath,dirpath){
     if(config.copy_assets){
-        return config.base+relAssetToUrlCopy(relativepath,dirpath)
-    }
-    if(relativepath.startsWith("/")){
-        return config.base+relativepath
+        return await config.base+relAssetToUrlCopy(relativepath,dirpath)
     }
     //handled by /assets/[...path].js to config.rootdir / config.content_path
     const newurl = join("assets",dirpath,relativepath)
     return config.base+"/"+newurl.replaceAll('\\','/')
 }
 
+async function absAssetToUrl(path){
+    return await relAssetToUrl(path,"")
+}
+
 async function assetToUrl(path,dirpath){
     let src = config.base+path
-    const external = path.startsWith('http')
-    if(!external){
-        if(!path.startsWith("/")){
-            src = await relAssetToUrl(path,dirpath)
-        }
+    if(path.startsWith('http')){
+        return src
+    }
+    if(path.startsWith("/")){
+        if(!await exists(join(config.rootdir,"public",path))){
+            //managed as relatve to the content dir
+            src = await absAssetToUrl(path)
+        }//else unmanaged
+    }else{
+        src = await relAssetToUrl(path,dirpath)
     }
     return src
 }
@@ -190,6 +204,7 @@ export{
   relAssetToPath,
   shortMD5,
   exists,
+  existsSync,
   contentPathToStaticPath,
   section_from_pathname,
   file_mime,

@@ -15,11 +15,7 @@ export async function GET({params,props}){
     if(params.path.startsWith("/")){
         const asset = props.asset
         if(asset.exists){
-            //only if it exists in public do this :
             imagePath = asset.abs_path
-            //let public_path = resolve(join(config.rootdir,"public",params.path));
-            //public_path = remove_base(public_path)
-            //console.log(`assets> checking if path exists ${public_path}`)
         }
     }
     console.log(`assets> serving '${imagePath}'`)

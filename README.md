@@ -2,7 +2,9 @@
 
 Live demo : https://microwebstacks.github.io/astro-big-doc/
 
-Astro Theme for big documentation websites. Hierarchical pages menu from files structure and table of content, Markdown rendered as CMS with Astro components for panzoom, 3D, links, interactive tables, diagrams from code, VSCode like highlighter.
+Astro Theme for big documentation websites. A pure standard Markdown renderer with zero config. 
+
+Hierarchical pages menu from files structure and table of content, Markdown rendered as CMS with Astro components for panzoom, 3D, links, interactive tables, diagrams from code, VSCode like highlighter.
 
 Enhances native markdown '.md' files with Astro components, enables parsing of content from a configurable directory in the file system, and allows relative assets paths usage.
 
@@ -15,6 +17,9 @@ User friendly side menus collapsible and width adjustable with the mouse.
   - URL params text focus : move to, zoom, then animate glow text (supports xhtml SVG foreign objects)
   - URL params updated with pan/zoom and restored from the URL
 - Markdown image directive for centering and image size defintion
+- Markdown image galleries
+  - SVG images gallery with open close expand
+  - Photoswipe gallery with transition open
 - Markdown tables become interactive with data tables with [DataTables](https://datatables.net/)
   - from Markdown table
   - from xlsx file link
@@ -25,19 +30,23 @@ User friendly side menus collapsible and width adjustable with the mouse.
   - from code block
   - from code file link
   - swap between diagram and highlighted code
+  - support text to diagram with plantuml, and all formats supported by [kroki](https://kroki.io/)
 - Markdown 3D Model viewer
   - from .glb link
   - from yaml code block parameters
 - Markdown Note aside (Note, Tip, Caution, Danger)
 - Markdown Details collapse block
+- Markdown assets 
+  - relative assets referencing with zero copy in dev
+  - absolute assets referencing from content root and from a public folder (with auto detection)
 - Markdown external links identification and rendering with an arrow
-- Markdown relative assets with zero copy in dev
 - Meta data can be provided in a yaml file to make the SVG interactive with
   - links : a list of `{label,link}` to add links to SVG text matches
 - Meta data yaml file can be added to
   - An SVG diagram by placing a yaml file with the same name e.g. for `diagram.svg` a `diagram.yaml`
   - A code link and then simply the same as the code filename e.g. for `diagram.puml` a `diagram.yaml`
   - A code block by using the code block first param e.g. for ```` ```plantuml filename```` a `filename.yaml`
+- 
 
 # User guide
 ```
@@ -78,44 +87,41 @@ Express js server in `server\server.js` can optionally be used to serve the gene
 
 # Developper guide
 ## Ideas
-- support different icon types (.svg, .ico, .png) and allow it in content root
-- public folder inside content and ignored by content structure
-- .structureignore to allow e.g. .git/workflow/deploy.yaml
-- Code
-  - keep separate plantuml and kroki (due to perf reason)
 - SVG
   - list of dependencies : map, highlight list on key hover
 - PanZoom
   - URL params, multiple hits counter
+- favicon support different icon types (.svg, .ico, .png) and allow it in content root
 - watch and regenerate .structure on save for modified files only
-- check potential replacement of scrollspy with intersection Observer API
-  - enhance intersection to cover a path of all visible sections from the page in the toc : start heading, stop heading
-
-- light and dark mode toggle
-- sync with Astro utilities for url resolution and astro image integration
-
-- Gallery
-  - Expand open close with images inside
-  - dynamic adjust on container resize
-  - scale items
-  - can use thumbnails, no search to avoid double hit
-  - click to open panzoom with images mini thumbs
 - menus
+  - ToC with content type icons (table, diagram, code,...) with filter
+  - pages types and icons
   - store menu scroll position
   - store menus width
   - use view transition to give menu persistence impression on page navigation
+  - ToC auto-expand : open scroll spy, close all others
+  - Left and right : min (disabled) or expand to level slider or selector
+  - Left and right : auto expand depth adjust to available vertical space (all level or nothing)
+  - open close side on nav-resize click
+
+- Code
+  - keep separate plantuml and kroki (due to perf reason)
+- check potential replacement of scrollspy with intersection Observer API
+  - enhance intersection to cover a path of all visible sections from the page in the toc : start heading, stop heading
+
+- sync with Astro utilities for url resolution and astro image integration
+- light and dark mode toggle
+
+- Gallery
+  - dynamic adjust on container resize
+  - scale items
+  - for SVG table of images, use thumbnails to avoid double hits on search
+  - click opens original SVG for pan zoom in Modal
 - content Structure
   - parse yaml tags and orgnaize menu with tags order hierarchy
 - caching
   - SSR render on page hash condition, using ETag
   - page hash with depndencies hashes, include assets hash as attribute
-- menus
-  - ToC auto-expand : open scroll spy, close all others
-  - Left and right : min (disabled) or expand to level slider or selector
-  - Left and right : auto expand depth adjust to available vertical space (all level or nothing)
-  - pages types and icons
-  - open close on nav-resize click
-  - Issue: Menu height transition MUI example is working
 ## assets management
 * User content can be placed in a configurable relative path to the repo root usually `./content` set in these variables
   * config.content_path

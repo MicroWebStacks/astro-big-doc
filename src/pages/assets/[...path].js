@@ -13,9 +13,10 @@ export async function GET({params,props}){
     let imagePath = resolve(join(config.content_path,params.path));
     imagePath = remove_base(imagePath)
     if(params.path.startsWith("/")){
-        if(props.exists_in_public == "true"){
+        const asset = props.asset
+        if(asset.exists){
             //only if it exists in public do this :
-            imagePath = props.abs_path
+            imagePath = asset.abs_path
             //let public_path = resolve(join(config.rootdir,"public",params.path));
             //public_path = remove_base(public_path)
             //console.log(`assets> checking if path exists ${public_path}`)
@@ -47,9 +48,6 @@ export async function getStaticPaths(){
     console.log(`serving API endpoit ${assets.length} assets`)
     return assets.map((asset)=>({
         params:{path:asset.path},
-        props:{
-            exists_in_public:asset.exists?"true":"false",
-            abs_path:Object.hasOwn(asset,"abs_path")?asset.abs_path:""
-        }
+        props:{asset}
     }))
 }

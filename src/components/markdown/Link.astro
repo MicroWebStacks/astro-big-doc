@@ -25,9 +25,9 @@ if(!external){
 
 const ext = file_ext(node.url)
 
-const is_model3d = (ext === "glb")
-const is_table = (ext === "xlsx")
-const is_diagram = Object.keys(kroki.formats).includes(ext)
+const is_model3d = (ext === "glb") && !external
+const is_table = (ext === "xlsx") && !external
+const is_diagram = Object.keys(kroki.formats).includes(ext) && !external
 const is_link = !is_model3d && !is_table && !is_diagram
 let title = ""
 if((node.children.length>0)&&(node.children[0].type == "text")){

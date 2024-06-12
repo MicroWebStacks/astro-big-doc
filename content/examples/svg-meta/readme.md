@@ -21,3 +21,11 @@ Will generate an SVG diagram with links
 ![diag](./test-diag-link.svg)
 
 link to zoom text [singelton](/astro-big-doc/examples/svg-meta?modal=test-diag-link.svg&text=singleton)
+
+# Highlight on hover
+
+```blockdiag highlight-hover
+blockdiag {
+  Kroki -> is -> Awesome;
+}
+```

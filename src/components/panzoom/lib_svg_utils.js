@@ -54,6 +54,46 @@ async function svg_add_links(svg,link_list){
     }
 }
 
+async function svg_highlight(svg, highlights){
+  const SVGjsModule = await import('@svgdotjs/svg.js');
+  const SVGjs = SVGjsModule.SVG;
+  let draw = SVGjs(svg)
+  let text_nodes = draw.find('text')
+  let text_array = [...text_nodes];
+
+  // Loop through each entry object
+  highlights.forEach((entry) => {
+    text_array.forEach((text) => {
+      const html_text = text.node.innerHTML;
+
+      // Check if current text matches the label
+      if (html_text === entry.label) {
+        // Hover effect for the main label
+        text.on('mouseover', () => {
+          text_array.forEach((t) => {
+            // Highlight all texts that match the 'highlights' list
+            if (entry.highlights.includes(t.node.innerHTML)) {
+              t.fill({color: '#292'}); // Change the fill color on hover
+              t.css({'font-weight': '900'}); // Make text bold
+            }
+          });
+        });
+
+        // Reset on mouseout
+        text.on('mouseout', () => {
+          text_array.forEach((t) => {
+            if (entry.highlights.includes(t.node.innerHTML)) {
+              t.fill({color: '#000'}); // Reset the fill color
+              t.css({'font-weight': 'normal'}); // Reset the text style
+            }
+          });
+        });
+      }
+    });
+
+    console.log(` => Highlighting '${entry.label}'`);
+  });
+}
 async function svg_text_focus(modal_content,svg,text,pzref){
   console.log(`modal_content (w:${modal_content.offsetWidth},h:${modal_content.offsetHeight})`)
   let draw = SVGjs(svg)
@@ -103,5 +143,6 @@ async function svg_text_focus(modal_content,svg,text,pzref){
 export{
     svg_fix_size,
     svg_add_links,
+    svg_highlight,
     svg_text_focus
 }

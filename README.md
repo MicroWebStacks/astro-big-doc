@@ -42,6 +42,7 @@ User friendly side menus collapsible and width adjustable with the mouse.
 - Markdown external links identification and rendering with an arrow
 - Meta data can be provided in a yaml file to make the SVG interactive with
   - links : a list of `{label,link}` to add links to SVG text matches
+  - highlights : a list of `{label,highlights[]}`, for each label hover, a corresponding list of text gets highlighted with font color and weight
 - Meta data yaml file can be added to
   - An SVG diagram by placing a yaml file with the same name e.g. for `diagram.svg` a `diagram.yaml`
   - A code link and then simply the same as the code filename e.g. for `diagram.puml` a `diagram.yaml`
@@ -87,8 +88,6 @@ Express js server in `server\server.js` can optionally be used to serve the gene
 
 # Developper guide
 ## Ideas
-- SVG
-  - list of dependencies : map, highlight list on key hover
 - PanZoom
   - URL params, multiple hits counter
 - favicon support different icon types (.svg, .ico, .png) and allow it in content root

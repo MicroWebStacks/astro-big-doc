@@ -1,6 +1,6 @@
 import {event} from './client_utils.js'
 import {initModalEvents} from './lib_panzoommodal.js'
-import { svg_fix_size, svg_add_links } from './lib_svg_utils.js';
+import { svg_fix_size, svg_add_links, svg_highlight } from './lib_svg_utils.js';
 
 function checkURLModal(){
   //check if any modal needs to be opened
@@ -23,6 +23,9 @@ async function processSVG(svg,container){
     const meta = JSON.parse(meta_string);
     if(Object.hasOwn(meta,"links")){
       await svg_add_links(svg, meta.links);
+    }
+    if(Object.hasOwn(meta,"highlights")){
+      await svg_highlight(svg, meta.highlights);
     }
   }
 }

@@ -37,6 +37,7 @@ export async function getStaticPaths(){
     }
 
     const asset_list = await load_json_abs(join(config.collect_content.outdir,'asset_list.json'))
+    console.log(asset_list.map(entry=>entry.path))
     const assets = asset_list.filter((asset)=>(
         ((asset.type != "link") && (Object.hasOwn(asset,"path"))) ||
         ((asset.type == "link") && (!asset.external) && asset.filter_ext))

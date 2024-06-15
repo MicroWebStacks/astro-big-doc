@@ -9,7 +9,8 @@ export async function GET({params,props}){
     if(config.copy_assets){
         return new Response('Not supported and not needed with copy_assets = true', { status: 404 });
     }
-    console.log(`assets> params.path '${params.path}'`)
+    console.log(`\nassets> params.path '${params.path}'`)
+    console.log(`assets> props.asset.path '${props.asset.path}'`)
     let imagePath = resolve(join(config.content_path,params.path));
     imagePath = remove_base(imagePath)
     if(params.path.startsWith("/")){
@@ -37,12 +38,12 @@ export async function getStaticPaths(){
     }
 
     const asset_list = await load_json_abs(join(config.collect_content.outdir,'asset_list.json'))
-    console.log(asset_list.map(entry=>entry.path))
     const assets = asset_list.filter((asset)=>(
         ((asset.type != "link") && (Object.hasOwn(asset,"path"))) ||
         ((asset.type == "link") && (!asset.external) && asset.filter_ext))
     ).map((entry)=>(entry))
     console.log(`serving API endpoit ${assets.length} assets`)
+    console.log(assets.map(entry=>entry.path))
     return assets.map((asset)=>({
         params:{path:asset.path},
         props:{asset}

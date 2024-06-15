@@ -20,15 +20,9 @@ runs:
       with:
         path: user_repo
 
-    - name: Copy specific directories and file
+    - name: Set Environment Variables
       run: |
-        # Remove and copy content directory
-        rm -rf astro-big-doc/content
-        cp -R user_repo/content astro-big-doc
-
-        # Remove and copy public directory
-        rm -rf astro-big-doc/public
-        cp -R user_repo/public astro-big-doc
+        echo "CONTENT=user_repo" >> $GITHUB_ENV
       shell: bash
 
     - name: Setup Node.js environment
@@ -47,7 +41,7 @@ runs:
       run: |
         cd astro-big-doc
         REPO_NAME="${GITHUB_REPOSITORY##*/}"
-        export PUBLIC_BASE="/$REPO_NAME"
+        echo "PUBLIC_BASE=/$REPO_NAME" >> $GITHUB_ENV
         pnpm run build
       shell: bash
 

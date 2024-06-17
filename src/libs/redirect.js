@@ -1,4 +1,5 @@
 import {config} from '@/client_config.js'
+import { remove_base } from './client_utils'
 
 export async function redirectToFullUrl() {
     if(document.title == "not found"){
@@ -9,7 +10,10 @@ export async function redirectToFullUrl() {
 
     const response = await fetch(`${config.base}/api/redirect`)
     const redirects = await response.json()
-    let pathname = window.location.pathname.substring(1)
+    let pathname = remove_base(window.location.pathname)
+    if(pathname.startsWith("/")){
+        pathname = pathname.substring(1)
+    }
     if (pathname in redirects) {
         const new_url = redirects[pathname]
         if(new_url){

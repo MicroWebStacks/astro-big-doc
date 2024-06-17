@@ -1,6 +1,6 @@
-import { createReadStream } from 'fs';
+import { createReadStream } from 'fs'
 import {resolve,join} from 'path'
-import { config } from "@/config";
+import { config } from '@/config'
 import {load_json_abs} from '@/libs/utils.js'
 import {file_mime} from '@/libs/assets.js'
 import {remove_base} from '@/libs/assets.js'

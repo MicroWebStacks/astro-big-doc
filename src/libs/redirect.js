@@ -1,6 +1,9 @@
 import {config} from '@/client_config.js'
 
 export async function redirectToFullUrl() {
+    if(document.title == "not found"){
+        return
+    }
     const message_el = document.getElementById("message_404")
     message_el.innerText = "Redirecting"
 
@@ -8,8 +11,17 @@ export async function redirectToFullUrl() {
     const redirects = await response.json()
     let pathname = window.location.pathname.substring(1)
     if (pathname in redirects) {
-            window.location.href = redirects[pathname];
+        const new_url = redirects[pathname]
+        if(new_url){
+            console.log(`${pathname} => "${new_url}"`)
+            window.location.href = new_url;
+        }else
+        {
+            window.location.href = "/";
+        }
     }else{
+        console.log(`${pathname} => not found`)
+        document.title = "not found"
         message_el.innerText = "Page not found"
     }
 }

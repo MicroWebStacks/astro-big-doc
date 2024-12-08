@@ -113,10 +113,10 @@ will generate this 3D model with the provided files.
 * environment-image : for lighting effect
 
 ```yaml glb
-src: Lantern.glb
+src: ./home/Lantern.glb
 title: Lantern
-poster: home/Lantern.webp
-environment-image: spruit_sunrise_1k_HDR.hdr
+poster: ./home/Lantern.webp
+environment-image: ./home/spruit_sunrise_1k_HDR.hdr
 ```
 
 

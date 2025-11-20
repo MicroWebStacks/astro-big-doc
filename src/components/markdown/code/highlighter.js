@@ -1,9 +1,9 @@
 import {config} from '@/config.js'
 import {join} from 'path'
-import {bundledLanguages, getHighlighter} from 'shikiji';
+import {bundledLanguages, createHighlighter} from 'shiki';
 import { exists,save_file, shortMD5 } from '@/libs/utils.js';
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
     themes:[config.highlighter.theme],
     langs:config.highlighter.langs,
 })

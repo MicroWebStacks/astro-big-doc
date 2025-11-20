@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "astro": "^5.0.3",
-    "@google/model-viewer": "^3.4.0",
+    "@google/model-viewer": "^4.1.0",
     "@svgdotjs/svg.js": "^3.2.4",
-    "content-structure": "2.0.0",
+    "content-structure": "2.0.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "datatables.net-dt": "^1.13.7",
@@ -35,9 +35,9 @@
     "photoswipe": "^5.4.4",
     "remark": "^15.0.1",
     "sharp": "^0.33.5",
-    "shikiji": "^0.10.2",
+    "shiki": "^3.15.0",
     "swiper": "^11.1.15",
-    "three": "^0.171.0",
+    "three": "^0.172.0",
     "unist-util-visit": "^5.0.0",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },

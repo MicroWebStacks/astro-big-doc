@@ -26,7 +26,7 @@ Deepwiki : https://deepwiki.com/MicroWebStacks/astro-big-doc
   - from Markdown table
   - from xlsx file link
 - Markdown Code blocks
-  - VSCode like highlighting using [Shikiji](https://github.com/antfu/shikiji)
+  - VSCode like highlighting using [Shiki](https://github.com/shikijs/shiki)
   - code copy button
 - Markdown diagrams rendering
   - from code block
@@ -195,4 +195,3 @@ for development of content-structure it is possible to replace the registry vers
 
 # License
 - MIT
-

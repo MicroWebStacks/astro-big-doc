@@ -93,6 +93,9 @@ async function absAssetToUrl(path){
 }
 
 async function assetToUrl(path,dirpath){
+    if(path.startsWith('data:')){
+        return path
+    }
     let src = config.base+path
     if(path.startsWith('http')){
         return src

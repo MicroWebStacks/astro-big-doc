@@ -1,5 +1,5 @@
 ---
-import {getEntry} from 'content-structure'
+import {getEntry} from '@/libs/structure-db.js'
 
 export interface Props {
     node: object;
@@ -8,11 +8,16 @@ export interface Props {
 const {node} = Astro.props;
 
 const entry = await getEntry({uid:node.tag_value})
-const url = "/blog/"+entry.data.url
+const url = entry ? `/${entry.data.url}` : null
 
 ---
 {(node.tag_type == "page")&&
-    <a href={url}>{node.tag_value}</a>
+    <>
+        {url
+            ? <a href={url}>{node.tag_value}</a>
+            : <span>{node.tag_value}</span>
+        }
+    </>
 }
 
 <style>

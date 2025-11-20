@@ -1,10 +1,13 @@
 ---
 import Layout from "@/layout/Layout.astro"
 import AstroMarkdown from '@/components/markdown/AstroMarkdown.astro'
-import {getEntry} from 'content-structure'
+import {getEntry} from '@/libs/structure-db.js'
 
 console.log(`index> home page`)
 let entry = await getEntry({url:""})
+if(!entry){
+    throw new Error("entry not found for home page")
+}
 let empty = (Object.keys(entry.tree).length == 0)
 const headings = (Object.hasOwn(entry.data,"toc")&&entry.data.toc == false)?[]:entry.data.headings
 

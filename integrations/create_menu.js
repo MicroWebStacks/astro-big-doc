@@ -1,11 +1,10 @@
-import {join} from 'path'
-import { exists, load_json_abs, load_yaml_abs,save_json } from '../src/libs/utils.js';
-import { section_from_pathname,add_base } from '../src/libs/assets.js';
+import {join, dirname} from 'path'
+import { exists, load_yaml_abs, save_json } from '../src/libs/utils.js';
+import { section_from_pathname, add_base } from '../src/libs/assets.js';
 import {pages_list_to_tree} from './process_menu.js'
-import {getDocuments} from 'content-structure'
+import {getDocuments}from '../src/libs/structure-db.js'
 import {createHash} from 'crypto'
 import { config } from '../config.js';
-import {dirname} from 'path';
 
 async function get_section_menu(section,raw_menu){
     let result_items = []
@@ -74,7 +73,7 @@ async function create_menu(collect_config){
     if(await exists(menu_file)){
         raw_menu = await load_yaml_abs(menu_file)
     }else{
-        const document_list = await load_json_abs(join(collect_config.outdir,"document_list.json"))
+        const document_list = await getDocuments()
         raw_menu = await create_raw_menu(collect_config.contentdir,document_list)
     }
     const base_menu = JSON.parse(JSON.stringify(raw_menu))

@@ -23,7 +23,8 @@ const handled_types = [ "root","heading","table","paragraph",
                         "containerDirective"
                     ]
 const other_type = !handled_types.includes(node.type)
-data.dirpath = dirname(data.path)
+const dirpath = dirname(data.path)
+data.dirpath = (dirpath === ".")?"":dirpath
 let paragraph_style = "paragraph"
 if(node.type == "paragraph"){
     if(text_only_children(node)){

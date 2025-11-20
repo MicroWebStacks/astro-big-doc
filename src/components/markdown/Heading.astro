@@ -9,21 +9,32 @@ export interface Props {
 
 const { node, headings } = Astro.props as Props;
 
-const HeadingLevel = `h${node.depth}`
-const heading_line = node.position.start.line
+const HeadingLevel = `h${node.depth ?? 1}`
+const heading_line = node?.position?.start?.line
 const entry = headings.find((entry)=>(entry.line == heading_line))
+
+function slugify(value){
+  return String(value ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'') || 'heading'
+}
+
+const fallbackSlug = slugify(toHtml(toHast(node)).replace(/<[^>]*>/g,' '))
+const safeSlug = entry?.slug ?? fallbackSlug
+const safeSid = entry?.sid ?? ''
 ---
-<HeadingLevel id={entry.slug} class="heading bar">
+<HeadingLevel id={safeSlug} class="heading bar">
   <div class="text">
     {node.children.map((node)=>(
       <Fragment set:html={toHtml(toHast(node))}></Fragment>
       ))}
   </div>
   <div class="icon link">
-      <a href={`#${entry.slug}`} class="link">
+      <a href={`#${safeSlug}`} class="link">
         <Svgicons filename="link"/>
       </a>
-      <div class="icon copy" title="copy short link" data-sid={entry.sid}>
+      <div class="icon copy" title="copy short link" data-sid={safeSid}>
         <Svgicons filename="copy"/>
       </div>
     </div>

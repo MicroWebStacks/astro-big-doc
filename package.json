@@ -9,13 +9,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "server": "node server/server.js"
+    "server": "node server/server.js",
+    "structure": "node integrations/run-structure.js"
   },
   "dependencies": {
     "astro": "^5.0.3",
     "@google/model-viewer": "^3.4.0",
     "@svgdotjs/svg.js": "^3.2.4",
-    "content-structure": "1.1.10",
+    "content-structure": "2.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "datatables.net-dt": "^1.13.7",

@@ -1,0 +1,60 @@
+---
+export interface Props {
+  node: object;
+  dirpath: string;
+}
+
+const { node, dirpath } = Astro.props as Props;
+
+// Get the src attribute
+let src = node.attributes.src || "";
+
+// Convert YouTube URLs to embed format
+if (src.includes("youtu.be/")) {
+  // Format: https://youtu.be/VIDEO_ID?si=XXXX
+  const match = src.match(/youtu\.be\/([^?]+)/);
+  if (match) {
+    src = `https://www.youtube.com/embed/${match[1]}`;
+  }
+} else if (src.includes("youtube.com/watch")) {
+  // Format: https://www.youtube.com/watch?v=VIDEO_ID
+  const match = src.match(/[?&]v=([^&]+)/);
+  if (match) {
+    src = `https://www.youtube.com/embed/${match[1]}`;
+  }
+}
+
+const title = node.attributes.title || "";
+const width = node.attributes.width || "560";
+const height = node.attributes.height || "315";
+
+let containerClass = "iframe-container";
+if (Object.hasOwn(node.attributes, "center")) {
+  containerClass += " center";
+}
+---
+
+<div class={containerClass}>
+  <iframe
+    src={src}
+    title={title}
+    width={width}
+    height={height}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<style>
+  .iframe-container {
+    margin-bottom: 1em;
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+  iframe {
+    border: none;
+    max-width: 100%;
+  }
+</style>

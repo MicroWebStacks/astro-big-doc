@@ -12,7 +12,6 @@ User friendly side menus collapsible and width adjustable with the mouse.
 
 Deepwiki : https://deepwiki.com/MicroWebStacks/astro-big-doc
 
-
 ## Features
 - Render standard markdown .md with custom Astro components
 - Panzoom and Modal on Markdown images

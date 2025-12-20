@@ -7,6 +7,7 @@
 import ImageDirective from './ImageDirective.astro';
 //import ImageDirective from './OptimizedImageDirective.astro';
 import ButtonDirective from './ButtonDirective.astro'
+import IframeDirective from './IframeDirective.astro'
 
 export interface Props {
     node: object;
@@ -17,7 +18,8 @@ const { node, dirpath} = Astro.props as Props;
 
 const is_image = (node.name == "image")
 const is_button = (node.name == "button")
-const is_other = !(is_image || is_button)
+const is_iframe = (node.name == "iframe")
+const is_other = !(is_image || is_button || is_iframe)
 
 ---
 {is_image &&
@@ -25,6 +27,9 @@ const is_other = !(is_image || is_button)
 }
 {is_button &&
   <ButtonDirective label={node.attributes.label} link={node.attributes.link} icon={node.attributes.icon} />
+}
+{is_iframe &&
+  <IframeDirective node={node} dirpath={dirpath} />
 }
 {is_other &&
   <div>{node.name}
